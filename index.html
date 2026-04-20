@@ -2278,15 +2278,19 @@
 </script>
 
 <script src="yalla-kids-data.js"></script>
+<script src="yalla-supabase.js"></script>
 <script>
 /* ============================================================
    Live render — replaces every former hardcoded sample card.
    Pulls from window.YALLA_DATA (40 places + 66 classes from the
    directory spreadsheet). No more invented names or counts.
    ============================================================ */
-(function () {
+(async function () {
   if (!window.YALLA_DATA) return;
   var DATA = window.YALLA_DATA;
+  // Pull live places from Supabase before reading DATA.places. Falls back
+  // to static data if the fetch fails.
+  if (window.YallaDB) await window.YallaDB.loadPlaces(DATA);
   var PLACES = DATA.places || [];
   var CLASSES = DATA.classes || [];
 

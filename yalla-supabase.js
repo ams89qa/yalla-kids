@@ -30,9 +30,39 @@
     return rows.map(function (p) { p.kind = 'place'; return p; });
   }
 
+  // Replace D.places with the given rows and rebuild derived structures
+  // (D.all and D.bySlug) so every page sees consistent live data.
+  function applyPlaces(D, rows) {
+    if (!D || !Array.isArray(rows)) return;
+    D.places = rows;
+    if (Array.isArray(D.classes)) {
+      D.all = rows.concat(D.classes);
+    } else {
+      D.all = rows.slice();
+    }
+    D.bySlug = {};
+    D.all.forEach(function (it) { D.bySlug[it.slug] = it; });
+  }
+
+  // Convenience: fetch + apply in one call. On failure, logs a warning
+  // and leaves the static data in place so the page still renders.
+  async function loadPlaces(D) {
+    try {
+      var rows = await fetchPlaces();
+      applyPlaces(D, rows);
+      console.log('[yalla] loaded ' + rows.length + ' places from Supabase');
+      return rows;
+    } catch (e) {
+      console.warn('[yalla] Supabase fetch failed, using static data:', e);
+      return null;
+    }
+  }
+
   window.YallaDB = {
     url: SUPA_URL,
     key: SUPA_KEY,
-    fetchPlaces: fetchPlaces
+    fetchPlaces: fetchPlaces,
+    applyPlaces: applyPlaces,
+    loadPlaces: loadPlaces
   };
 })();

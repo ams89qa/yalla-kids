@@ -202,6 +202,7 @@
 </footer>
 
 <script src="yalla-kids-data.js"></script>
+<script src="yalla-supabase.js"></script>
 <script src="yalla-kids-shared.js"></script>
 <script>
 function toggleLang() {
@@ -210,10 +211,14 @@ function toggleLang() {
   html.setAttribute('dir', isRTL ? 'ltr' : 'rtl');
   html.setAttribute('lang', isRTL ? 'en' : 'ar');
 }
-(function () {
+(async function () {
   var D = window.YALLA_DATA;
   var root = document.getElementById('detail-root');
   if (!D) return;
+
+  // Pull live places from Supabase (rebuilds D.bySlug). Falls back to
+  // static data if the fetch fails.
+  if (window.YallaDB) await window.YallaDB.loadPlaces(D);
 
   var slug = new URLSearchParams(location.search).get('slug') || '';
   var it = D.bySlug[slug];

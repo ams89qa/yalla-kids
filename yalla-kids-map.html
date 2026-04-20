@@ -395,8 +395,14 @@
 </div>
 
 <script src="yalla-kids-data.js"></script>
+<script src="yalla-supabase.js"></script>
 <script>
   function toggleLang() { const h = document.documentElement; if (h.dir === 'rtl') { h.dir='ltr'; h.lang='en'; } else { h.dir='rtl'; h.lang='ar'; } }
+
+  (async function () {
+  // Pull live places from Supabase before reading D.places. Falls back to
+  // static data if the fetch fails.
+  if (window.YALLA_DATA && window.YallaDB) await window.YallaDB.loadPlaces(window.YALLA_DATA);
 
   /* ---- PLACES DATA (live, sourced from yalla-kids-data.js) ---- */
   // Map of normalized area name → approximate coords. Markers cluster around the
@@ -685,6 +691,7 @@
 
   // Initial filter apply
   applyFilters();
+  })();
 </script>
 <footer class="site">
   <div class="container">

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#8A1538">
+  <title>Kids things to do in The Pearl — Yalla Kids</title>
+<meta name="description" content="The best kids classes, places, and activities in The Pearl, Qatar. 34 listings updated weekly.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,600;1,9..144,700&family=Inter:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="yalla-kids-shared.css">
+<style>
+  .area-hero {
+    max-width: 1280px;
+    margin: 24px auto 0;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 28px;
+    align-items: center;
+  }
+  .area-hero-text h1 {
+    font-size: 52px;
+    line-height: 1.05;
+    margin-bottom: 16px;
+  }
+  .area-hero-text .dek {
+    font-size: 17px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+  }
+  .area-stats {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .area-stat {
+    padding: 8px 16px;
+    border: 2px solid var(--ink);
+    border-radius: 99px;
+    background: var(--butter-soft);
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .area-map {
+    height: 340px;
+    border: 2px solid var(--ink);
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow-hard-lg);
+    background: linear-gradient(135deg, var(--sky-soft), var(--mint-soft));
+    position: relative;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 80px;
+  }
+  .map-pin {
+    position: absolute;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: var(--maroon);
+    border: 2px solid var(--ink);
+    color: #fff;
+    font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    box-shadow: var(--shadow-hard);
+  }
+
+  /* Filter strip */
+  .filter-strip {
+    max-width: 1280px;
+    margin: 32px auto 0;
+    padding: 0 24px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .filter-chip {
+    padding: 8px 14px;
+    border: 2px solid var(--ink);
+    border-radius: 99px;
+    background: var(--card-bg);
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--shadow-hard);
+  }
+  .filter-chip.active { background: var(--maroon); color: #fff; }
+
+  /* Section grids */
+  .sect {
+    max-width: 1280px;
+    margin: 48px auto 0;
+    padding: 0 24px;
+  }
+  .sect h2 {
+    font-size: 32px;
+    margin-bottom: 18px;
+    display: flex; justify-content: space-between; align-items: baseline;
+  }
+  .sect h2 a {
+    font-size: 14px;
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+    color: var(--maroon);
+    text-decoration: underline;
+  }
+  .grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+  .item-card {
+    background: var(--card-bg);
+    border: 2px solid var(--ink);
+    border-radius: var(--r);
+    box-shadow: var(--shadow-hard);
+    overflow: hidden;
+    display: block;
+    transition: transform 0.15s ease;
+  }
+  .item-card:hover { transform: translate(-2px, -2px); box-shadow: var(--shadow-hard-lg); }
+  .item-thumb {
+    height: 150px;
+    border-bottom: 2px solid var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 48px;
+    position: relative;
+  }
+  .item-thumb .chip {
+    position: absolute;
+    top: 10px; left: 10px;
+    font-size: 11px;
+    padding: 3px 10px;
+  }
+  .item-body { padding: 12px 14px; }
+  .item-body h3 { font-size: 16px; margin-bottom: 3px; font-family: "Fraunces", serif; }
+  .item-body .m { font-size: 12px; color: var(--ink-mute); }
+  .item-price { margin-top: 8px; color: var(--maroon); font-weight: 700; font-size: 14px; }
+
+  /* Local tips (editorial) */
+  .editorial {
+    max-width: 1280px;
+    margin: 60px auto 0;
+    padding: 36px;
+    background: var(--butter-soft);
+    border: 2px solid var(--ink);
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow-hard-lg);
+  }
+  .editorial h2 { font-size: 28px; margin-bottom: 14px; }
+  .editorial p { font-size: 16px; color: var(--ink-soft); line-height: 1.65; margin-bottom: 12px; }
+  .editorial .byline { display: flex; gap: 10px; align-items: center; margin-top: 16px; font-size: 13px; color: var(--ink-mute); }
+  .editorial .by-av { width: 32px; height: 32px; border-radius: 50%; background: var(--coral-soft); border: 2px solid var(--ink); display: flex; align-items: center; justify-content: center; font-weight: 800; }
+
+  /* FAQ */
+  .faq-area {
+    max-width: 860px;
+    margin: 48px auto 0;
+    padding: 0 24px;
+  }
+  .faq-area h2 { font-size: 30px; margin-bottom: 16px; text-align: center; }
+  .faq-area details {
+    border: 2px solid var(--ink);
+    border-radius: var(--r);
+    background: var(--card-bg);
+    margin-bottom: 10px;
+    box-shadow: var(--shadow-hard);
+    overflow: hidden;
+  }
+  .faq-area summary {
+    padding: 14px 18px;
+    font-weight: 700;
+    font-family: "Fraunces", serif;
+    font-size: 16px;
+    cursor: pointer;
+    list-style: none;
+    display: flex; justify-content: space-between;
+  }
+  .faq-area summary::after { content: "+"; color: var(--maroon); font-size: 22px; }
+  .faq-area details[open] summary::after { content: "−"; }
+  .faq-area details[open] { background: var(--butter-soft); }
+  .faq-area .faq-body { padding: 0 18px 14px; font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+
+  /* Nearby areas */
+  .nearby {
+    max-width: 1280px;
+    margin: 48px auto 0;
+    padding: 0 24px;
+  }
+
+  @media (max-width: 980px) {
+    .area-hero { grid-template-columns: 1fr; }
+    .grid-4 { grid-template-columns: repeat(2, 1fr); }
+    .area-hero-text h1 { font-size: 38px; }
+  }
+  @media (max-width: 560px) {
+    .grid-4 { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site">
+  <div class="nav-wrap container">
+    <a href="yalla-kids-home-wireframe.html" class="logo">
+      <span class="en-only inline">Yalla Kids</span>
+      <span class="ar-only inline">يلا كيدز</span>
+    </a>
+    <nav class="nav-links">
+      <a href="yalla-kids-classes-directory.html"><span class="en-only inline">Classes</span><span class="ar-only inline">الصفوف</span></a>
+      <a href="yalla-kids-places-directory.html"><span class="en-only inline">Places to go</span><span class="ar-only inline">أماكن للزيارة</span></a>
+      <a href="yalla-kids-camps.html"><span class="en-only inline">Camps</span><span class="ar-only inline">المعسكرات</span></a>
+      <a href="yalla-kids-guides-hub.html"><span class="en-only inline">Guides</span><span class="ar-only inline">الأدلة</span></a>
+      <a href="yalla-kids-for-providers.html"><span class="en-only inline">For providers</span><span class="ar-only inline">للموفرين</span></a>    </nav>
+    <div class="nav-actions">
+      <button class="lang-toggle" onclick="toggleLang()">
+        <span class="en-only inline">العربية</span>
+        <span class="ar-only inline">English</span>
+      </button>
+      <a href="yalla-kids-login.html" class="btn btn-ghost"><span class="en-only inline">Log in</span><span class="ar-only inline">تسجيل الدخول</span></a>
+      <a href="yalla-kids-signup.html" class="btn btn-primary"><span class="en-only inline">Sign up</span><span class="ar-only inline">إنشاء حساب</span></a>
+    </div>
+  </div>
+</header>
+
+<!-- Breadcrumb -->
+<div style="max-width:1280px;margin:0 auto;padding:16px 24px 0;">
+  <nav style="font-size:13px;color:var(--ink-mute);">
+    <a href="yalla-kids-home-sunny.html">Home</a> ›
+    <a href="yalla-kids-places-directory.html">Qatar</a> ›
+    <a href="yalla-kids-places-directory.html">Doha</a> ›
+    <strong style="color:var(--ink);">The Pearl</strong>
+  </nav>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="area-hero">
+  <div class="area-hero-text">
+    <div style="font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:var(--maroon);font-weight:800;margin-bottom:8px;">Area guide · Updated weekly</div>
+    <h1>
+      <span class="en-only">Kids' things to do on <span class="pop">The Pearl</span></span>
+      <span class="ar-only">أنشطة الأطفال في <span class="pop">اللؤلؤة</span></span>
+    </h1>
+    <p class="dek">The Pearl's clean waterfront promenades, kid-friendly cafés, and splash pads make it one of Doha's best family afternoons — if you know where to park and when to go.</p>
+    <div class="area-stats">
+      <span class="area-stat" id="stat-classes">🎨 — classes</span>
+      <span class="area-stat" id="stat-places">📍 — places</span>
+      <span class="area-stat">☕ Family cafés</span>
+      <span class="area-stat">🅿️ Free parking</span>
+    </div>
+    <div style="display:flex;gap:10px;">
+      <a href="yalla-kids-places-directory.html" class="btn primary">Browse places</a>
+      <a href="#editorial" class="btn outline">Read local tips</a>
+    </div>
+  </div>
+  <div class="area-map">
+    🗺️
+    <div class="map-pin" style="top:30%;left:28%;">1</div>
+    <div class="map-pin" style="top:55%;left:52%;">2</div>
+    <div class="map-pin" style="top:40%;left:70%;">3</div>
+    <div class="map-pin" style="top:70%;left:38%;">4</div>
+  </div>
+</section>
+
+<!-- Filter strip -->
+<div class="filter-strip">
+  <span class="filter-chip active">All</span>
+  <span class="filter-chip">Free &amp; low-cost</span>
+  <span class="filter-chip">Indoor</span>
+  <span class="filter-chip">Outdoor</span>
+  <span class="filter-chip">Under 5</span>
+  <span class="filter-chip">5–10</span>
+  <span class="filter-chip">10+</span>
+  <span class="filter-chip">AC ❄️</span>
+  <span class="filter-chip">Stroller friendly</span>
+</div>
+
+<!-- ============ TOP PICKS ============ -->
+<section class="sect">
+  <h2>
+    <span>Top <span class="pop">picks</span> on The Pearl</span>
+    <a href="yalla-kids-places-directory.html" id="area-top-link">See all →</a>
+  </h2>
+  <div class="grid-4" id="area-top-picks"></div>
+</section>
+
+<!-- ============ CLASSES ============ -->
+<section class="sect">
+  <h2>
+    <span>Classes <span class="pop">on The Pearl</span></span>
+    <a href="yalla-kids-classes-directory.html" id="area-cls-link">See all →</a>
+  </h2>
+  <div class="grid-4" id="area-classes"></div>
+</section>
+
+<!-- ============ LOCAL TIPS EDITORIAL ============ -->
+<section class="editorial" id="editorial">
+  <div style="font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:var(--maroon);font-weight:800;margin-bottom:6px;">Local tips</div>
+  <h2>What parents wish they knew before visiting The Pearl</h2>
+  <p><strong>Park at Medina Centrale, not Porto Arabia.</strong> Weekend traffic around Porto Arabia bottlenecks after 4pm. Medina's underground garage is free for 3 hours with any café purchase and the walk to the playground is shorter than it looks.</p>
+  <p><strong>The splash pad runs Oct–May.</strong> It's turned off in peak summer to conserve water. In July–September, come before 9am for the shaded play area or head inside to the Medina Centrale kids' zone.</p>
+  <p><strong>Stroller-friendly? Mostly.</strong> Qanat Quartier has wide flat promenades. Porto Arabia has cobblestones — bring the sturdy stroller, not the umbrella one.</p>
+  <div class="byline">
+    <div class="by-av">YK</div>
+    <div>
+      <strong>Yalla Kids Editorial</strong> · Updated Apr 12, 2026
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="faq-area">
+  <h2><span class="en-only"><span class="pop">FAQs</span> about The Pearl with kids</span><span class="ar-only"><span class="pop">أسئلة شائعة</span> عن اللؤلؤة مع الأطفال</span></h2>
+  <details open>
+    <summary>Is The Pearl walkable with a stroller?</summary>
+    <div class="faq-body">Yes for Qanat Quartier and Medina Centrale. Porto Arabia has cobblestone sections. The whole promenade loop is about 4km.</div>
+  </details>
+  <details>
+    <summary>Where do I park for free?</summary>
+    <div class="faq-body">Medina Centrale underground, Giardino Mall, and two public lots near the Carrefour exit are all free or validated. Avoid the valet unless you enjoy waiting.</div>
+  </details>
+  <details>
+    <summary>Is the water safe to swim in?</summary>
+    <div class="faq-body">Porto Arabia is a harbor — not swimming water. For actual beach swimming, head to Katara or Simaisma.</div>
+  </details>
+  <details>
+    <summary>What's open on a Friday morning?</summary>
+    <div class="faq-body">Most shops open after 2pm, but parks and cafés are open by 9am. Perfect window for quiet playground time.</div>
+  </details>
+</section>
+
+<!-- ============ NEARBY AREAS ============ -->
+<section class="nearby">
+  <h2 style="font-size:28px;margin-bottom:18px;"><span class="en-only">Nearby <span class="pop">areas</span></span><span class="ar-only">مناطق <span class="pop">قريبة</span></span></h2>
+  <div class="mini-rail">
+    <a href="yalla-kids-area-landing.html" class="mini-card">
+      <div class="mini-thumb" style="background:var(--teal-soft);">🏢</div>
+      <div class="mini-body"><h4>West Bay</h4><div class="mini-meta">18 listings</div></div>
+    </a>
+    <a href="yalla-kids-area-landing.html" class="mini-card">
+      <div class="mini-thumb" style="background:var(--coral-soft);">🕌</div>
+      <div class="mini-body"><h4>Katara</h4><div class="mini-meta">14 listings</div></div>
+    </a>
+    <a href="yalla-kids-area-landing.html" class="mini-card">
+      <div class="mini-thumb" style="background:var(--butter-soft);">🏙</div>
+      <div class="mini-body"><h4>Lusail</h4><div class="mini-meta">26 listings</div></div>
+    </a>
+    <a href="yalla-kids-area-landing.html" class="mini-card">
+      <div class="mini-thumb" style="background:var(--lavender-soft);">🌳</div>
+      <div class="mini-body"><h4>Aspire Zone</h4><div class="mini-meta">21 listings</div></div>
+    </a>
+  </div>
+</section>
+
+<div style="height:60px;"></div>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="logo">
+          <span class="en-only inline">Yalla Kids</span>
+          <span class="ar-only inline">يلا كيدز</span>
+        </div>
+        <p class="foot-about">
+          <span class="en-only inline">Qatar's kids' classes and places, one place to book. Bilingual, built in Doha.</span>
+          <span class="ar-only inline">صفوف وأماكن للأطفال في قطر في مكان واحد. بلغتين، صُنعت في الدوحة.</span>
+        </p>
+        <div class="foot-social">
+          <a href="#" aria-label="Instagram">📷</a>
+          <a href="#" aria-label="WhatsApp">💬</a>
+          <a href="#" aria-label="TikTok">🎵</a>
+          <a href="#" aria-label="Email">✉</a>
+        </div>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Classes</span><span class="ar-only inline">الصفوف</span></h5>
+        <a href="yalla-kids-classes-directory.html"><span class="en-only inline">All classes</span><span class="ar-only inline">كل الصفوف</span></a>
+        <a href="yalla-kids-classes-directory.html?cat=art"><span class="en-only inline">Art &amp; crafts</span><span class="ar-only inline">فن وحرف</span></a>
+        <a href="yalla-kids-classes-directory.html?cat=swimming"><span class="en-only inline">Swimming</span><span class="ar-only inline">سباحة</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Places</span><span class="ar-only inline">الأماكن</span></h5>
+        <a href="yalla-kids-places-directory.html"><span class="en-only inline">All places</span><span class="ar-only inline">كل الأماكن</span></a>
+        <a href="yalla-kids-places-directory.html#softplay"><span class="en-only inline">Soft plays</span><span class="ar-only inline">صالات اللعب</span></a>
+        <a href="yalla-kids-map.html"><span class="en-only inline">Map</span><span class="ar-only inline">خريطة</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">For providers</span><span class="ar-only inline">للموفرين</span></h5>
+        <a href="yalla-kids-for-providers.html"><span class="en-only inline">List a class</span><span class="ar-only inline">أدرج صفاً</span></a>
+        <a href="yalla-kids-how-it-works.html"><span class="en-only inline">How it works</span><span class="ar-only inline">كيف نعمل</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Company</span><span class="ar-only inline">الشركة</span></h5>
+        <a href="yalla-kids-about.html"><span class="en-only inline">About</span><span class="ar-only inline">من نحن</span></a>
+        <a href="yalla-kids-contact.html"><span class="en-only inline">Contact</span><span class="ar-only inline">تواصل</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Legal</span><span class="ar-only inline">قانوني</span></h5>
+        <a href="yalla-kids-terms.html"><span class="en-only inline">Terms</span><span class="ar-only inline">الشروط</span></a>
+        <a href="yalla-kids-privacy.html"><span class="en-only inline">Privacy</span><span class="ar-only inline">الخصوصية</span></a>
+        <a href="yalla-kids-faq.html"><span class="en-only inline">FAQ</span><span class="ar-only inline">الأسئلة الشائعة</span></a>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>© 2026 Yalla Kids WLL · Doha, Qatar · CR #XXXXXX 🇶🇦</span>
+      <span><span class="en-only inline">Made with 💛 for Doha families</span><span class="ar-only inline">صُنعت بـ 💛 لعائلات الدوحة</span></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleLang() {
+    const html = document.documentElement;
+    if (html.dir === 'rtl') { html.dir = 'ltr'; html.lang = 'en'; }
+    else { html.dir = 'rtl'; html.lang = 'ar'; }
+  }
+  document.querySelectorAll('.filter-chip').forEach(c => {
+    c.addEventListener('click', () => {
+      document.querySelectorAll('.filter-chip').forEach(x => x.classList.remove('active'));
+      c.classList.add('active');
+    });
+  });
+</script>
+<script src="yalla-kids-shared.js"></script>
+
+<script src="yalla-kids-data.js"></script>
+<script>
+(function () {
+  var D = window.YALLA_DATA;
+  if (!D) return;
+  var params = new URLSearchParams(location.search);
+  // Default area — use the most populated area in the dataset if no param
+  var area = params.get('area');
+  if (!area) {
+    var counts = {};
+    D.all.forEach(function (it) { if (it.area) counts[it.area] = (counts[it.area] || 0) + 1; });
+    var best = '', bn = 0;
+    Object.keys(counts).forEach(function (k) { if (counts[k] > bn) { best = k; bn = counts[k]; } });
+    area = best || 'Doha';
+  }
+
+  var places = D.places.filter(function (p) { return p.area === area; });
+  var classes = D.classes.filter(function (c) { return c.area === area; });
+
+  // If too few places in that exact area, widen to "anything"
+  if (places.length < 4) places = places.concat(D.places.slice(0, 8));
+  if (classes.length < 4) classes = classes.concat(D.classes.slice(0, 8));
+
+  // De-dup by slug
+  function uniq(arr) { var s = {}, o = []; arr.forEach(function (it) { if (!s[it.slug]) { s[it.slug] = 1; o.push(it); } }); return o; }
+  places = uniq(places).slice(0, 4);
+  classes = uniq(classes).slice(0, 4);
+
+  function render(rootId, items) {
+    var r = document.getElementById(rootId);
+    if (!r) return;
+    r.innerHTML = items.map(function (it) { return D.cardHTML(it); }).join('');
+  }
+  render('area-top-picks', places);
+  render('area-classes', classes);
+
+  // Stats
+  var totalP = D.places.filter(function (p) { return p.area === area; }).length;
+  var totalC = D.classes.filter(function (c) { return c.area === area; }).length;
+  var p = document.getElementById('stat-places'); if (p) p.textContent = '📍 ' + totalP + ' places';
+  var c = document.getElementById('stat-classes'); if (c) c.textContent = '🎨 ' + totalC + ' classes';
+  var l1 = document.getElementById('area-top-link');
+  if (l1) l1.href = 'yalla-kids-places-directory.html';
+  var l2 = document.getElementById('area-cls-link');
+  if (l2) l2.href = 'yalla-kids-classes-directory.html';
+
+  // Page title
+  var h1Pop = document.querySelector('.area-hero-text h1 .pop');
+  if (h1Pop && area) h1Pop.textContent = area;
+  var h1 = document.querySelector('.area-hero-text h1');
+  if (h1) {
+    document.title = 'Kids things to do in ' + area + ' — Yalla Kids';
+  }
+})();
+</script>
+
+</body>
+</html>

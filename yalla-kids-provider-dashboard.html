@@ -1,0 +1,2051 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#8A1538">
+<title>Provider dashboard | Yalla Kids</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,600;1,9..144,700;1,9..144,800&family=Inter:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --maroon: #8A1538; --maroon-dark: #6B0F2B;
+    --gold: #F4B942; --gold-dark: #D99A1F;
+    --coral: #FF8A65; --coral-soft: #FFDCC9;
+    --lavender: #B388FF; --lavender-soft: #E8DCFF;
+    --teal: #4ECDC4; --teal-soft: #CEEDEB;
+    --lime: #9AC23C; --lime-soft: #E5F3C4;
+    --pink: #FF6B9D; --pink-soft: #FFD1E0;
+    --sky: #59C3F2; --sky-soft: #CDE8F7;
+    --mint: #5EE2A6; --mint-soft: #C7F0DC;
+    --peach: #FFB582; --peach-soft: #FFE4CC;
+    --butter: #FFD66B; --butter-soft: #FFF1C2;
+    --cream: #FFF6E8; --warm-white: #FFFCF6;
+    --parchment: #FDF1DC; --ink: #2A1810;
+    --ink-soft: #5A463A; --ink-mute: #8A7765;
+    --danger: #C23B5B;
+    --shadow-hard: 4px 4px 0 var(--ink);
+    --shadow-hard-sm: 3px 3px 0 var(--ink);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Inter", -apple-system, sans-serif;
+    color: var(--ink); background: var(--warm-white);
+    background-image:
+      radial-gradient(circle at 6% 8%, var(--butter-soft) 0%, transparent 22%),
+      radial-gradient(circle at 94% 6%, var(--sky-soft) 0%, transparent 22%);
+    background-attachment: fixed;
+    line-height: 1.55;
+  }
+  [dir="rtl"] body { font-family: "Tajawal", "Inter", sans-serif; }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3, h4 { font-family: "Fraunces", Georgia, serif; letter-spacing: -0.02em; }
+  [dir="rtl"] h1, [dir="rtl"] h2, [dir="rtl"] h3, [dir="rtl"] h4 { font-family: "Tajawal", "Inter", sans-serif; }
+
+  /* ============ HEADER ============ */
+  header.site {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255, 252, 246, 0.95);
+    backdrop-filter: saturate(180%) blur(10px);
+    border-bottom: 2px solid var(--ink);
+  }
+  .nav-wrap { max-width: 1360px; margin: 0 auto; padding: 12px 24px; display: flex; align-items: center; gap: 20px; }
+  .logo {
+    font-family: "Fraunces", Georgia, serif; font-weight: 800; font-size: 24px;
+    color: var(--maroon); letter-spacing: -0.02em;
+    display: inline-flex; align-items: center; gap: 4px;
+  }
+  .logo span { color: var(--gold-dark); }
+  .logo::after { content: "✨"; font-size: 13px; animation: twinkle 2.4s ease-in-out infinite; }
+  @keyframes twinkle { 0%, 100% { transform: scale(1) rotate(0); opacity: 0.85; } 50% { transform: scale(1.2) rotate(15deg); opacity: 1; } }
+  .provider-chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--butter-soft); border: 2px solid var(--ink);
+    padding: 5px 12px 5px 5px; border-radius: 999px;
+    font-size: 12px; font-weight: 700;
+  }
+  .provider-chip .pa { width: 26px; height: 26px; border-radius: 50%; background: var(--maroon); color: #fff; display: grid; place-items: center; font-size: 12px; font-weight: 700; font-family: "Fraunces", serif; }
+  .provider-chip .tag { background: var(--mint-soft); padding: 2px 7px; border-radius: 999px; border: 1.5px solid var(--ink); font-size: 10px; letter-spacing: 0.03em; text-transform: uppercase; }
+  .nav-actions { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+  [dir="rtl"] .nav-actions { margin-left: 0; margin-right: auto; }
+  .icon-btn {
+    position: relative; width: 38px; height: 38px; border-radius: 50%;
+    border: 2px solid var(--ink); background: #fff; cursor: pointer;
+    display: grid; place-items: center; font-size: 16px;
+  }
+  .icon-btn:hover { background: var(--butter-soft); }
+  .icon-btn .bump { position: absolute; top: -4px; right: -4px; min-width: 18px; height: 18px; padding: 0 4px; background: var(--maroon); color: #fff; border: 1.5px solid var(--ink); border-radius: 999px; font-size: 10px; font-weight: 800; display: grid; place-items: center; }
+  .lang-toggle { border: 2px solid var(--ink); background: var(--butter-soft); padding: 7px 14px; border-radius: 999px; font-size: 13px; cursor: pointer; font-weight: 700; color: var(--ink); }
+  .btn { padding: 9px 18px; border-radius: 999px; font-size: 13px; font-weight: 700; cursor: pointer; border: 2px solid var(--ink); display: inline-flex; align-items: center; gap: 6px; font-family: inherit; transition: transform 0.12s, box-shadow 0.12s; background: transparent; color: var(--ink); }
+  .btn:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--ink); }
+  .btn-ghost { border-color: transparent; }
+  .btn-ghost:hover { background: var(--butter-soft); border-color: var(--ink); }
+  .btn-primary { background: var(--maroon); color: #fff; }
+  .btn-primary:hover { background: var(--maroon-dark); }
+  .btn-outline { background: #fff; }
+  .btn-gold { background: var(--gold); color: #3a2c07; }
+  .btn-sm { padding: 6px 12px; font-size: 12px; }
+  .btn-xs { padding: 4px 10px; font-size: 11px; border-width: 1.5px; }
+
+  /* ============ SUB-NAV / TABS ============ */
+  .sub-nav {
+    background: var(--parchment);
+    border-bottom: 2px solid var(--ink);
+    position: sticky; top: 63px; z-index: 40;
+  }
+  .sub-wrap { max-width: 1360px; margin: 0 auto; padding: 0 24px; display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; }
+  .sub-wrap::-webkit-scrollbar { display: none; }
+  .tab {
+    padding: 14px 18px; font-size: 14px; font-weight: 700;
+    color: var(--ink-soft); cursor: pointer;
+    border: 0; background: transparent;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap; display: inline-flex; align-items: center; gap: 8px;
+    font-family: inherit;
+  }
+  .tab:hover { color: var(--ink); }
+  .tab.active { color: var(--maroon); border-bottom-color: var(--maroon); }
+  .tab .tab-ico { font-size: 16px; }
+  .tab .pill {
+    background: var(--maroon); color: #fff; border-radius: 999px;
+    padding: 1px 7px; font-size: 10px; font-weight: 800;
+  }
+
+  .container { max-width: 1360px; margin: 0 auto; padding: 0 24px; }
+
+  /* ============ TAB PANELS ============ */
+  .panel { display: none; padding: 28px 0 80px; animation: fadeIn 0.25s ease-out; }
+  .panel.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ============ TODAY: GREETING ============ */
+  .greet {
+    display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: end;
+    margin-bottom: 22px;
+  }
+  .greet h1 {
+    font-size: 36px; font-weight: 700; line-height: 1.1;
+  }
+  .greet h1 .pop { font-style: italic; color: var(--maroon); position: relative; }
+  .greet h1 .pop::after {
+    content: ""; position: absolute; left: -4px; right: -4px; bottom: -4px; height: 10px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'><path d='M2 8 Q 50 2, 100 6 T 198 6' stroke='%23F4B942' stroke-width='4' fill='none' stroke-linecap='round'/></svg>");
+    background-size: 100% 100%; z-index: -1;
+  }
+  .greet .sub { color: var(--ink-soft); margin-top: 6px; font-size: 14px; }
+  .greet-cta {
+    display: flex; gap: 8px; flex-wrap: wrap;
+  }
+
+  /* ============ KPI ROW ============ */
+  .kpi-row {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+    margin-bottom: 26px;
+  }
+  .kpi {
+    background: #fff; border: 2px solid var(--ink); border-radius: 18px;
+    padding: 16px 18px; box-shadow: var(--shadow-hard);
+    position: relative; overflow: hidden;
+  }
+  .kpi .lbl { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-mute); }
+  .kpi .val { font-family: "Fraunces", Georgia, serif; font-size: 28px; font-weight: 700; margin-top: 2px; line-height: 1.15; }
+  .kpi .val .cur { font-size: 14px; color: var(--ink-mute); margin-right: 4px; font-family: "Inter", sans-serif; font-weight: 600; }
+  .kpi .delta { font-size: 11px; font-weight: 700; margin-top: 6px; color: var(--ink-soft); }
+  .kpi .delta.up { color: #0a7c42; }
+  .kpi .delta.dn { color: var(--danger); }
+  .kpi .bar {
+    position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  }
+  .kpi.earnings .bar { background: var(--mint); }
+  .kpi.sessions .bar { background: var(--sky); }
+  .kpi.bookings .bar { background: var(--butter); }
+  .kpi.messages .bar { background: var(--coral); }
+  .kpi.earnings .lbl::before { content: "💰 "; }
+  .kpi.sessions .lbl::before { content: "🗓 "; }
+  .kpi.bookings .lbl::before { content: "🎟 "; }
+  .kpi.messages .lbl::before { content: "💬 "; }
+
+  /* ============ TODAY GRID ============ */
+  .today-grid {
+    display: grid; grid-template-columns: 1fr 340px; gap: 22px;
+  }
+
+  /* ============ CARD BASE ============ */
+  .card {
+    background: #fff; border: 2px solid var(--ink); border-radius: 20px;
+    box-shadow: var(--shadow-hard); overflow: hidden;
+  }
+  .card-head {
+    padding: 14px 18px; border-bottom: 2px solid var(--ink);
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--butter-soft);
+  }
+  .card-head h3 { font-size: 18px; font-weight: 700; }
+  .card-head .meta { font-size: 12px; color: var(--ink-soft); font-weight: 600; }
+  .card-body { padding: 18px; }
+  .card-body.p0 { padding: 0; }
+
+  /* ============ TODAY: TIMELINE ============ */
+  .day-row {
+    display: grid; grid-template-columns: 92px 1fr auto; gap: 14px;
+    align-items: center; padding: 14px 18px;
+    border-bottom: 1px solid rgba(42,24,16,0.1);
+  }
+  .day-row:last-child { border-bottom: 0; }
+  .day-row.now { background: var(--mint-soft); }
+  .day-row .time {
+    font-family: "Fraunces", serif; font-weight: 700; line-height: 1.1;
+  }
+  .day-row .time .hr { font-size: 20px; }
+  .day-row .time .dur { font-size: 11px; color: var(--ink-mute); font-family: "Inter", sans-serif; font-weight: 600; display: block; margin-top: 2px; }
+  .day-row .ses h4 { font-size: 15px; font-weight: 700; font-family: "Inter", sans-serif; }
+  .day-row .ses .loc { font-size: 12px; color: var(--ink-soft); margin-top: 2px; }
+  .day-row .ses .loc .dot { margin: 0 6px; opacity: 0.5; }
+  .capsule-row { display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap; }
+  .capsule {
+    font-size: 10.5px; font-weight: 700; padding: 2.5px 8px; border-radius: 999px;
+    border: 1.5px solid var(--ink); background: #fff; text-transform: uppercase; letter-spacing: 0.04em;
+  }
+  .capsule.full { background: var(--mint-soft); }
+  .capsule.open { background: var(--butter-soft); }
+  .capsule.low { background: var(--coral-soft); }
+  .capsule.live { background: var(--maroon); color: #fff; border-color: var(--ink); }
+  .day-row .act { display: flex; gap: 6px; }
+
+  /* ============ TODAY: ALERTS ============ */
+  .alert-list { display: flex; flex-direction: column; }
+  .alert {
+    padding: 14px 18px; border-bottom: 1px solid rgba(42,24,16,0.1);
+    display: grid; grid-template-columns: 36px 1fr auto; gap: 12px; align-items: center;
+  }
+  .alert:last-child { border-bottom: 0; }
+  .alert .ico {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: var(--coral-soft); border: 2px solid var(--ink);
+    display: grid; place-items: center; font-size: 16px;
+  }
+  .alert.refund .ico { background: var(--coral-soft); }
+  .alert.low .ico { background: var(--butter-soft); }
+  .alert.doc .ico { background: var(--lavender-soft); }
+  .alert .txt { font-size: 13px; font-weight: 600; line-height: 1.35; }
+  .alert .txt small { display: block; color: var(--ink-mute); font-weight: 500; margin-top: 2px; font-size: 11.5px; }
+
+  /* ============ TODAY SIDE: MINI LISTS ============ */
+  .mini-row {
+    padding: 12px 18px; display: grid; grid-template-columns: 34px 1fr auto; gap: 10px;
+    border-bottom: 1px solid rgba(42,24,16,0.1); align-items: center;
+  }
+  .mini-row:last-child { border-bottom: 0; }
+  .mini-row .av {
+    width: 34px; height: 34px; border-radius: 50%; border: 2px solid var(--ink);
+    display: grid; place-items: center; font-size: 13px; font-weight: 700; font-family: "Fraunces", serif;
+    color: var(--ink);
+  }
+  .av.c1 { background: var(--peach-soft); }
+  .av.c2 { background: var(--lavender-soft); }
+  .av.c3 { background: var(--teal-soft); }
+  .av.c4 { background: var(--butter-soft); }
+  .av.c5 { background: var(--pink-soft); }
+  .av.c6 { background: var(--mint-soft); }
+  .av.c7 { background: var(--coral-soft); }
+  .av.c8 { background: var(--sky-soft); }
+  .mini-row .mi { min-width: 0; }
+  .mini-row .mi .nm { font-size: 13px; font-weight: 700; }
+  .mini-row .mi .sn { font-size: 11.5px; color: var(--ink-mute); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .mini-row .when { font-size: 11px; color: var(--ink-mute); text-align: right; font-weight: 600; }
+  .mini-row.unread .nm::after { content: "●"; color: var(--maroon); margin-inline-start: 6px; font-size: 14px; }
+
+  /* ============ SECTION HEADERS ============ */
+  .sec-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin: 6px 0 14px;
+  }
+  .sec-head h2 { font-size: 24px; font-weight: 700; }
+  .sec-head a.more { font-size: 13px; font-weight: 700; color: var(--maroon); }
+  .sec-head a.more:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  /* ============ FILTER BAR ============ */
+  .filterbar {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+  .filterbar .seg {
+    display: inline-flex; border: 2px solid var(--ink); border-radius: 999px;
+    background: #fff; overflow: hidden;
+  }
+  .filterbar .seg button {
+    border: 0; background: transparent; padding: 8px 14px;
+    font-size: 13px; font-weight: 700; cursor: pointer; font-family: inherit;
+    color: var(--ink-soft); border-right: 2px solid var(--ink);
+  }
+  .filterbar .seg button:last-child { border-right: 0; }
+  .filterbar .seg button.on { background: var(--maroon); color: #fff; }
+  .filterbar .search {
+    flex: 1; min-width: 200px; max-width: 320px;
+    border: 2px solid var(--ink); border-radius: 999px; padding: 8px 14px;
+    background: #fff; font-size: 13px; font-family: inherit;
+  }
+
+  /* ============ SESSIONS TABLE ============ */
+  .tbl-card { overflow: auto; }
+  table.tbl {
+    width: 100%; border-collapse: collapse; font-size: 13.5px;
+  }
+  .tbl thead th {
+    text-align: left; padding: 12px 16px; font-size: 11px;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--ink-mute); background: var(--butter-soft);
+    border-bottom: 2px solid var(--ink); font-weight: 800;
+  }
+  [dir="rtl"] .tbl thead th { text-align: right; }
+  .tbl tbody td { padding: 14px 16px; border-bottom: 1px solid rgba(42,24,16,0.1); vertical-align: middle; }
+  .tbl tbody tr:last-child td { border-bottom: 0; }
+  .tbl tbody tr:hover { background: var(--warm-white); }
+  .tbl .when { font-weight: 700; }
+  .tbl .when small { display: block; color: var(--ink-mute); font-weight: 500; font-size: 11.5px; margin-top: 2px; }
+  .tbl .cap-bar { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; }
+  .tbl .cap-bar .tube {
+    width: 70px; height: 8px; background: var(--cream); border: 1.5px solid var(--ink); border-radius: 999px; overflow: hidden;
+  }
+  .tbl .cap-bar .fill { height: 100%; background: var(--mint); }
+  .tbl .cap-bar .fill.low { background: var(--coral); }
+  .tbl .cap-bar .fill.mid { background: var(--butter); }
+  .tbl .act-cell { display: flex; gap: 6px; flex-wrap: wrap; }
+
+  /* ============ ROSTER ============ */
+  .roster-switcher {
+    display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+  .roster-switcher label { font-size: 12px; font-weight: 700; color: var(--ink-mute); text-transform: uppercase; letter-spacing: 0.06em; }
+  .roster-switcher select {
+    border: 2px solid var(--ink); background: #fff; padding: 8px 14px;
+    border-radius: 999px; font-size: 13px; font-weight: 700; font-family: inherit;
+    cursor: pointer; box-shadow: var(--shadow-hard-sm);
+  }
+  .roster-bulk { margin-left: auto; display: flex; gap: 8px; }
+  [dir="rtl"] .roster-bulk { margin-left: 0; margin-right: auto; }
+  .attend-toggle {
+    display: inline-flex; border: 2px solid var(--ink); border-radius: 999px; overflow: hidden;
+    background: #fff;
+  }
+  .attend-toggle button {
+    border: 0; background: transparent; font-family: inherit; cursor: pointer;
+    font-size: 11px; font-weight: 700; padding: 4px 10px;
+    color: var(--ink-mute);
+  }
+  .attend-toggle button.yes.on { background: var(--mint); color: var(--ink); }
+  .attend-toggle button.no.on { background: var(--coral-soft); color: var(--maroon); }
+  .attend-toggle button:first-child { border-right: 2px solid var(--ink); }
+  .paid-pill { font-size: 11px; font-weight: 700; padding: 2.5px 8px; border-radius: 999px; border: 1.5px solid var(--ink); background: var(--mint-soft); }
+  .paid-pill.unpaid { background: var(--coral-soft); }
+  .note { font-size: 11.5px; color: var(--ink-soft); line-height: 1.4; }
+  .note-chip { display: inline-block; background: var(--butter-soft); border: 1.5px solid var(--ink); padding: 1px 7px; border-radius: 999px; font-size: 10px; font-weight: 700; margin-right: 4px; text-transform: uppercase; letter-spacing: 0.04em; }
+  .note-chip.allergy { background: var(--coral-soft); }
+  .note-chip.special { background: var(--lavender-soft); }
+
+  /* ============ MESSAGES ============ */
+  .msg-grid {
+    display: grid; grid-template-columns: 340px 1fr;
+    background: #fff; border: 2px solid var(--ink); border-radius: 20px;
+    box-shadow: var(--shadow-hard); overflow: hidden;
+    min-height: 620px;
+  }
+  .thread-list {
+    border-right: 2px solid var(--ink);
+    max-height: 780px; overflow-y: auto;
+  }
+  [dir="rtl"] .thread-list { border-right: 0; border-left: 2px solid var(--ink); }
+  .thread-list .tl-head {
+    padding: 12px 14px; border-bottom: 2px solid var(--ink); background: var(--butter-soft);
+    position: sticky; top: 0; z-index: 2;
+  }
+  .tl-head input {
+    width: 100%; border: 2px solid var(--ink); background: #fff; border-radius: 999px;
+    padding: 7px 12px; font-size: 12.5px; font-family: inherit;
+  }
+  .thread {
+    padding: 12px 14px; border-bottom: 1px solid rgba(42,24,16,0.1);
+    display: grid; grid-template-columns: 40px 1fr auto; gap: 10px; cursor: pointer;
+  }
+  .thread:hover { background: var(--warm-white); }
+  .thread.active { background: var(--butter-soft); }
+  .thread .av { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--ink); display: grid; place-items: center; font-size: 14px; font-weight: 700; font-family: "Fraunces", serif; }
+  .thread .line1 { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
+  .thread .nm { font-size: 13px; font-weight: 700; }
+  .thread .tm { font-size: 10.5px; color: var(--ink-mute); font-weight: 600; white-space: nowrap; }
+  .thread .snip { font-size: 12px; color: var(--ink-soft); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .thread .ctx { font-size: 10.5px; color: var(--ink-mute); margin-top: 2px; font-weight: 600; }
+  .thread .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--maroon); align-self: center; }
+  .thread .dot.hidden { background: transparent; }
+
+  .conv { display: flex; flex-direction: column; }
+  .conv-head {
+    padding: 14px 18px; border-bottom: 2px solid var(--ink);
+    display: grid; grid-template-columns: 40px 1fr auto; gap: 12px; align-items: center;
+    background: var(--warm-white);
+  }
+  .conv-head .av { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--ink); display: grid; place-items: center; font-size: 14px; font-weight: 700; font-family: "Fraunces", serif; background: var(--mint-soft); }
+  .conv-head h3 { font-size: 16px; font-weight: 700; }
+  .conv-head .who-sub { font-size: 11.5px; color: var(--ink-mute); margin-top: 1px; }
+  .conv-head .who-actions { display: flex; gap: 6px; }
+  .conv-body {
+    flex: 1; padding: 18px; overflow-y: auto;
+    display: flex; flex-direction: column; gap: 14px;
+    background: var(--parchment);
+  }
+  .bubble {
+    max-width: 68%; padding: 10px 14px; font-size: 13.5px; line-height: 1.5;
+    border: 2px solid var(--ink); border-radius: 14px; position: relative;
+  }
+  .bubble.in { background: #fff; border-bottom-left-radius: 4px; align-self: flex-start; }
+  .bubble.out { background: var(--butter-soft); border-bottom-right-radius: 4px; align-self: flex-end; }
+  .bubble .when { font-size: 10.5px; color: var(--ink-mute); margin-top: 4px; font-weight: 600; }
+  .day-div {
+    text-align: center; font-size: 11px; color: var(--ink-mute); font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em; margin: 4px 0;
+    position: relative;
+  }
+  .day-div::before, .day-div::after {
+    content: ""; display: inline-block; width: 60px; height: 1px;
+    background: rgba(42,24,16,0.2); vertical-align: middle; margin: 0 10px;
+  }
+  .conv-input {
+    border-top: 2px solid var(--ink); padding: 12px 14px;
+    background: #fff;
+    display: grid; grid-template-columns: 1fr auto; gap: 10px;
+  }
+  .conv-input textarea {
+    resize: none; border: 2px solid var(--ink); border-radius: 14px;
+    padding: 10px 14px; font-size: 13.5px; font-family: inherit;
+    min-height: 44px; max-height: 120px;
+  }
+  .quick-chips {
+    display: flex; gap: 6px; padding: 6px 14px 0; flex-wrap: wrap;
+    background: #fff; border-top: 1px solid rgba(42,24,16,0.1);
+  }
+  .chip {
+    border: 1.5px solid var(--ink); background: var(--butter-soft);
+    border-radius: 999px; padding: 4px 10px; font-size: 11.5px; font-weight: 700;
+    cursor: pointer; font-family: inherit;
+  }
+  .chip:hover { background: var(--butter); }
+
+  /* ============ LISTINGS ============ */
+  .list-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+  }
+  .listing {
+    background: #fff; border: 2px solid var(--ink); border-radius: 20px;
+    box-shadow: var(--shadow-hard); overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+  .listing .ph {
+    height: 140px; border-bottom: 2px solid var(--ink); position: relative;
+    display: grid; place-items: center; font-size: 56px;
+  }
+  .listing .ph.c1 { background: linear-gradient(135deg, var(--peach-soft), var(--butter-soft)); }
+  .listing .ph.c2 { background: linear-gradient(135deg, var(--mint-soft), var(--sky-soft)); }
+  .listing .ph.c3 { background: linear-gradient(135deg, var(--lavender-soft), var(--pink-soft)); }
+  .listing .ph.c4 { background: linear-gradient(135deg, var(--butter-soft), var(--coral-soft)); }
+  .listing .ph.c5 { background: linear-gradient(135deg, var(--sky-soft), var(--lavender-soft)); }
+  .listing .ph.c6 { background: linear-gradient(135deg, var(--teal-soft), var(--mint-soft)); }
+  .status-pill {
+    position: absolute; top: 10px; left: 10px;
+    background: #fff; border: 2px solid var(--ink); border-radius: 999px;
+    padding: 3px 10px; font-size: 10.5px; font-weight: 800;
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .status-pill.active { background: var(--mint); }
+  .status-pill.paused { background: var(--butter-soft); }
+  .status-pill.draft { background: var(--lavender-soft); }
+  [dir="rtl"] .status-pill { left: auto; right: 10px; }
+  .menu-btn {
+    position: absolute; top: 10px; right: 10px;
+    width: 30px; height: 30px; border-radius: 50%;
+    background: #fff; border: 2px solid var(--ink); cursor: pointer;
+    display: grid; place-items: center; font-size: 18px; line-height: 0;
+  }
+  [dir="rtl"] .menu-btn { right: auto; left: 10px; }
+  .listing .lb { padding: 14px 16px; flex: 1; display: flex; flex-direction: column; gap: 8px; }
+  .listing h4 { font-family: "Fraunces", Georgia, serif; font-size: 17px; font-weight: 700; line-height: 1.2; }
+  .listing .meta { font-size: 12px; color: var(--ink-soft); }
+  .listing .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: auto; padding-top: 8px; }
+  .listing .stat {
+    background: var(--warm-white); border: 1.5px solid var(--ink); border-radius: 10px;
+    padding: 6px 8px; text-align: center;
+  }
+  .listing .stat .n { font-family: "Fraunces", serif; font-weight: 700; font-size: 15px; line-height: 1.1; }
+  .listing .stat .l { font-size: 9.5px; color: var(--ink-mute); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-top: 1px; }
+  .listing .ftr {
+    border-top: 1.5px solid rgba(42,24,16,0.15);
+    padding: 10px 14px; display: flex; gap: 6px; flex-wrap: wrap;
+  }
+
+  /* ============ PAYOUTS ============ */
+  .payout-top {
+    display: grid; grid-template-columns: 1.2fr 1fr; gap: 18px;
+    margin-bottom: 22px;
+  }
+  .payout-next {
+    background: var(--maroon); color: #fff;
+    border: 2px solid var(--ink); border-radius: 22px;
+    padding: 22px 24px; box-shadow: var(--shadow-hard);
+    position: relative; overflow: hidden;
+  }
+  .payout-next::after {
+    content: "💰"; position: absolute; bottom: -18px; right: -6px; font-size: 140px; opacity: 0.12;
+  }
+  [dir="rtl"] .payout-next::after { right: auto; left: -6px; }
+  .payout-next .eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.85; font-weight: 700; }
+  .payout-next .amt { font-family: "Fraunces", Georgia, serif; font-size: 44px; font-weight: 800; line-height: 1.05; margin-top: 4px; }
+  .payout-next .amt .cur { font-size: 18px; opacity: 0.8; font-family: "Inter", sans-serif; font-weight: 700; margin-right: 6px; }
+  .payout-next .sub { margin-top: 6px; font-size: 13.5px; opacity: 0.9; }
+  .payout-next .progress {
+    margin-top: 18px; background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 999px; height: 10px; overflow: hidden;
+  }
+  .payout-next .progress .fill { height: 100%; background: var(--gold); border-radius: 999px; }
+  .payout-next .legend { display: flex; justify-content: space-between; font-size: 11px; opacity: 0.85; margin-top: 6px; font-weight: 600; }
+  .payout-next .cta { margin-top: 14px; display: flex; gap: 8px; }
+  .payout-next .btn { background: var(--gold); border-color: #fff; color: #3a2c07; }
+  .payout-next .btn.ghost { background: transparent; color: #fff; border-color: rgba(255,255,255,0.6); }
+  .payout-next .btn.ghost:hover { background: rgba(255,255,255,0.15); box-shadow: none; transform: none; }
+
+  .bank-card {
+    background: #fff; border: 2px solid var(--ink); border-radius: 22px;
+    box-shadow: var(--shadow-hard); padding: 20px 22px;
+  }
+  .bank-card h3 { font-size: 16px; margin-bottom: 12px; }
+  .bank-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(42,24,16,0.08); font-size: 13.5px; }
+  .bank-row:last-child { border: 0; }
+  .bank-row .k { color: var(--ink-mute); font-weight: 600; }
+  .bank-row .v { font-weight: 700; font-family: "Fraunces", serif; }
+  .bank-card .cta { margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap; }
+
+  .earn-toolbar {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+  .earn-toolbar .tot { margin-left: auto; font-size: 13px; color: var(--ink-soft); }
+  [dir="rtl"] .earn-toolbar .tot { margin-left: 0; margin-right: auto; }
+  .earn-toolbar .tot b { font-family: "Fraunces", serif; color: var(--ink); }
+
+  .status-chip {
+    font-size: 10.5px; font-weight: 800; padding: 2px 8px; border-radius: 999px;
+    border: 1.5px solid var(--ink); text-transform: uppercase; letter-spacing: 0.05em;
+    background: var(--mint-soft);
+  }
+  .status-chip.paid { background: var(--mint-soft); }
+  .status-chip.pending { background: var(--butter-soft); }
+  .status-chip.hold { background: var(--coral-soft); }
+
+  .money { font-family: "Fraunces", serif; font-weight: 700; }
+  .money.neg { color: var(--danger); }
+
+  /* ============ INSIGHTS (light) ============ */
+  .insight-row {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    margin-bottom: 20px;
+  }
+  .ins-card {
+    background: #fff; border: 2px solid var(--ink); border-radius: 20px;
+    box-shadow: var(--shadow-hard); padding: 18px 20px;
+  }
+  .ins-card h4 { font-size: 14px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-mute); font-family: "Inter", sans-serif; font-weight: 700; }
+  .ins-card .big { font-family: "Fraunces", serif; font-size: 34px; font-weight: 700; margin-top: 4px; line-height: 1.1; }
+  .ins-card .sub { font-size: 12.5px; color: var(--ink-soft); margin-top: 4px; }
+  .spark {
+    margin-top: 14px; display: grid; grid-template-columns: repeat(12, 1fr); gap: 3px; height: 48px;
+    align-items: end;
+  }
+  .spark span { background: var(--maroon); border-radius: 3px 3px 0 0; opacity: 0.85; }
+  .spark span.dim { background: var(--ink-mute); opacity: 0.35; }
+
+  /* ============ FOOTER ============ */
+  footer.site {
+    border-top: 2px solid var(--ink); background: var(--parchment);
+    margin-top: 30px; padding: 22px 0;
+    font-size: 12px; color: var(--ink-soft);
+  }
+  .foot-wrap { max-width: 1360px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .foot-links { display: flex; gap: 14px; flex-wrap: wrap; }
+  .foot-links a:hover { color: var(--maroon); }
+
+  /* ============ EN/AR ============ */
+  .ar-only { display: none; }
+  [dir="rtl"] .en-only { display: none; }
+  [dir="rtl"] .ar-only { display: inline; }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 1100px) {
+    .today-grid { grid-template-columns: 1fr; }
+    .kpi-row { grid-template-columns: repeat(2, 1fr); }
+    .list-grid { grid-template-columns: repeat(2, 1fr); }
+    .payout-top { grid-template-columns: 1fr; }
+    .insight-row { grid-template-columns: 1fr 1fr; }
+    .msg-grid { grid-template-columns: 280px 1fr; }
+  }
+  @media (max-width: 820px) {
+    .nav-wrap { gap: 10px; padding: 10px 18px; }
+    .provider-chip { display: none; }
+    .icon-btn { width: 34px; height: 34px; font-size: 14px; }
+    .sub-wrap { gap: 0; }
+    .tab { padding: 12px 14px; font-size: 13px; }
+    .tab .tab-ico { font-size: 14px; }
+    .greet { grid-template-columns: 1fr; align-items: start; }
+    .greet h1 { font-size: 28px; }
+    .greet-cta { width: 100%; }
+    .list-grid { grid-template-columns: 1fr; }
+    .insight-row { grid-template-columns: 1fr; }
+    .msg-grid { grid-template-columns: 1fr; min-height: auto; }
+    .thread-list { max-height: 280px; border-right: 0; border-bottom: 2px solid var(--ink); }
+    [dir="rtl"] .thread-list { border-left: 0; }
+    .conv-body { min-height: 320px; }
+    .roster-bulk { margin-left: 0; width: 100%; }
+    [dir="rtl"] .roster-bulk { margin-right: 0; }
+    .tbl { font-size: 12.5px; }
+    .tbl thead th, .tbl tbody td { padding: 10px 12px; }
+    .day-row { grid-template-columns: 72px 1fr; gap: 10px; padding: 12px 14px; }
+    .day-row .act { grid-column: 1 / -1; margin-top: 4px; }
+    .page-head h1 { font-size: 30px; }
+  }
+  @media (max-width: 480px) {
+    .kpi-row { grid-template-columns: 1fr; }
+    .kpi .val { font-size: 24px; }
+    .nav-actions .btn { display: none; }
+    .container { padding: 0 16px; }
+    .nav-wrap { padding: 10px 16px; }
+  }
+
+  /* ============ UTIL ============ */
+  .hstack { display: flex; gap: 8px; align-items: center; }
+  .vstack { display: flex; flex-direction: column; gap: 8px; }
+  .mt-12 { margin-top: 12px; }
+  .mt-16 { margin-top: 16px; }
+  .mt-20 { margin-top: 20px; }
+  .mb-14 { margin-bottom: 14px; }
+  .muted { color: var(--ink-mute); }
+  .sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+</style>
+  <link rel="stylesheet" href="yalla-kids-shared.css">
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site">
+  <div class="nav-wrap">
+    <a class="logo" href="yalla-kids-home-sunny.html">
+      Yalla <span>Kids</span>
+    </a>
+    <div class="provider-chip">
+      <span class="pa">NA</span>
+      <span class="en-only">Noura's Studio</span>
+      <span class="ar-only">استوديو نورة</span>
+      <span class="tag">Provider</span>
+    </div>
+    <div class="nav-actions">
+      <a href="yalla-kids-sitemap.html" class="btn btn-outline btn-sm" title="Site map" data-en-title="Site map" data-ar-title="خريطة الموقع">
+        <span class="en-only">🗺 Site map</span>
+        <span class="ar-only">🗺 خريطة</span>
+      </a>
+      <a href="yalla-kids-messages.html" class="btn btn-outline btn-sm">
+        <span class="en-only">💬 Full inbox</span>
+        <span class="ar-only">💬 الرسائل</span>
+      </a>
+      <button class="icon-btn" aria-label="Help">?</button>
+      <button class="icon-btn" aria-label="Notifications">
+        🔔<span class="bump">4</span>
+      </button>
+      <button class="lang-toggle" id="langBtn">
+        <span class="en-only">عربي</span>
+        <span class="ar-only">English</span>
+      </button>
+      <a href="yalla-kids-provider-profile.html" class="btn btn-outline btn-sm">
+        <span class="en-only">View public profile</span>
+        <span class="ar-only">عرض الملف العام</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ============ SUB NAV ============ -->
+  <nav class="sub-nav">
+    <div class="sub-wrap">
+      <button class="tab active" data-tab="today">
+        <span class="tab-ico">☀️</span>
+        <span class="en-only">Today</span><span class="ar-only">اليوم</span>
+      </button>
+      <button class="tab" data-tab="sessions">
+        <span class="tab-ico">🗓</span>
+        <span class="en-only">Sessions</span><span class="ar-only">الجلسات</span>
+      </button>
+      <button class="tab" data-tab="roster">
+        <span class="tab-ico">📋</span>
+        <span class="en-only">Roster</span><span class="ar-only">الحضور</span>
+      </button>
+      <button class="tab" data-tab="messages">
+        <span class="tab-ico">💬</span>
+        <span class="en-only">Messages</span><span class="ar-only">الرسائل</span>
+        <span class="pill">3</span>
+      </button>
+      <button class="tab" data-tab="listings">
+        <span class="tab-ico">📚</span>
+        <span class="en-only">Listings</span><span class="ar-only">الإعلانات</span>
+      </button>
+      <button class="tab" data-tab="payouts">
+        <span class="tab-ico">💰</span>
+        <span class="en-only">Payouts</span><span class="ar-only">المدفوعات</span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- ============ TODAY ============ -->
+<section class="panel active" id="panel-today">
+  <div class="container">
+
+    <!-- Demo banner: all parent/student names on this dashboard are illustrative
+         placeholders for UI preview only. The public-facing catalogue (places,
+         classes, camps) uses only real Qatar venue data. -->
+    <div style="background:#FAF5EA;border:1px solid #E4DCC9;border-radius:8px;padding:8px 12px;margin:0 0 16px;font-size:13px;display:flex;gap:10px;align-items:flex-start;">
+      <span style="font-size:18px;line-height:1;">🪧</span>
+      <div>
+        <strong style="display:block;margin-bottom:2px;">
+          <span class="en-only">Dashboard preview &mdash; sample data</span>
+          <span class="ar-only">معاينة لوحة التحكم &mdash; بيانات عيّنة</span>
+        </strong>
+        <span class="en-only">Parent and student names shown below are placeholders so providers can see the UI. Once you&rsquo;re onboarded, your real bookings and messages replace them. Our public catalogue (places, classes, camps) uses only real Qatar venue data.</span>
+        <span class="ar-only">أسماء الأهالي والطلاب أدناه عيّنات لعرض الواجهة فقط. بعد انضمامك ستظهر حجوزاتك ورسائلك الحقيقية. دليلنا العام (الأماكن والصفوف والمخيمات) يستخدم بيانات قطرية حقيقية فقط.</span>
+      </div>
+    </div>
+
+    <div class="greet">
+      <div>
+        <h1>
+          <span class="en-only">Good morning, <span class="pop">[Provider name]</span> 👋</span>
+          <span class="ar-only">صباح الخير يا <span class="pop">[اسم المزوّد]</span> 👋</span>
+        </h1>
+        <div class="sub">
+          <span class="en-only">Today is Saturday, April 18 · 3 sessions scheduled · next in <b>42 min</b></span>
+          <span class="ar-only">اليوم السبت، 18 أبريل · 3 جلسات اليوم · القادمة بعد <b>42 دقيقة</b></span>
+        </div>
+      </div>
+      <div class="greet-cta">
+        <a href="yalla-kids-class-builder.html" class="btn btn-outline btn-sm">
+          <span class="en-only">+ New session</span><span class="ar-only">+ جلسة جديدة</span>
+        </a>
+        <a href="yalla-kids-class-builder.html" class="btn btn-primary btn-sm">
+          <span class="en-only">+ New listing</span><span class="ar-only">+ إعلان جديد</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- KPI ROW -->
+    <div class="kpi-row">
+      <div class="kpi earnings">
+        <div class="bar"></div>
+        <div class="lbl"><span class="en-only">Earnings this week</span><span class="ar-only">أرباح هذا الأسبوع</span></div>
+        <div class="val"><span class="cur">QAR</span>1,880</div>
+        <div class="delta up">
+          <span class="en-only">↑ 12% vs last week</span>
+          <span class="ar-only">↑ 12٪ عن الأسبوع الماضي</span>
+        </div>
+      </div>
+      <div class="kpi sessions">
+        <div class="bar"></div>
+        <div class="lbl"><span class="en-only">Upcoming sessions</span><span class="ar-only">الجلسات القادمة</span></div>
+        <div class="val">9</div>
+        <div class="delta">
+          <span class="en-only">across next 7 days</span>
+          <span class="ar-only">خلال الأيام السبعة القادمة</span>
+        </div>
+      </div>
+      <div class="kpi bookings">
+        <div class="bar"></div>
+        <div class="lbl"><span class="en-only">New bookings</span><span class="ar-only">حجوزات جديدة</span></div>
+        <div class="val">6</div>
+        <div class="delta up">
+          <span class="en-only">last 7 days · 2 first-time families</span>
+          <span class="ar-only">آخر 7 أيام · عائلتان جديدتان</span>
+        </div>
+      </div>
+      <div class="kpi messages">
+        <div class="bar"></div>
+        <div class="lbl"><span class="en-only">Unread messages</span><span class="ar-only">رسائل غير مقروءة</span></div>
+        <div class="val">3</div>
+        <div class="delta dn">
+          <span class="en-only">1 marked urgent</span>
+          <span class="ar-only">واحدة عاجلة</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="today-grid">
+
+      <!-- LEFT: HAPPENING TODAY + ALERTS -->
+      <div class="vstack" style="gap: 18px;">
+
+        <div class="card">
+          <div class="card-head">
+            <h3><span class="en-only">Happening today</span><span class="ar-only">جلسات اليوم</span></h3>
+            <span class="meta"><span class="en-only">3 sessions · 34 kids expected</span><span class="ar-only">3 جلسات · 34 طفلاً متوقعاً</span></span>
+          </div>
+          <div class="card-body p0">
+            <div class="day-row">
+              <div class="time"><span class="hr">10:00</span><span class="dur">60 min</span></div>
+              <div class="ses">
+                <h4><span class="en-only">Mini Picasso · Ages 4–6</span><span class="ar-only">ميني بيكاسو · 4–6 سنوات</span></h4>
+                <div class="loc">
+                  <span class="en-only">Studio A, West Bay</span>
+                  <span class="ar-only">استوديو أ، الخليج الغربي</span>
+                  <span class="dot">·</span>
+                  <span class="en-only">10 / 12 booked</span>
+                  <span class="ar-only">10 / 12</span>
+                </div>
+                <div class="capsule-row">
+                  <span class="capsule full">✓ <span class="en-only">Nearly full</span><span class="ar-only">ممتلئة</span></span>
+                  <span class="capsule"><span class="en-only">2 allergies</span><span class="ar-only">حساسيتان</span></span>
+                </div>
+              </div>
+              <div class="act">
+                <a href="#" class="btn btn-outline btn-xs"><span class="en-only">Roster</span><span class="ar-only">الحضور</span></a>
+                <a href="#" class="btn btn-primary btn-xs"><span class="en-only">Check-in</span><span class="ar-only">تسجيل الحضور</span></a>
+              </div>
+            </div>
+            <div class="day-row now">
+              <div class="time"><span class="hr">11:30</span><span class="dur">75 min</span></div>
+              <div class="ses">
+                <h4><span class="en-only">Messy Play · Ages 2–3</span><span class="ar-only">اللعب الحسي · 2–3 سنوات</span></h4>
+                <div class="loc">
+                  <span class="en-only">Studio B, West Bay</span>
+                  <span class="ar-only">استوديو ب، الخليج الغربي</span>
+                  <span class="dot">·</span>
+                  <span class="en-only">8 / 10 booked</span>
+                  <span class="ar-only">8 / 10</span>
+                </div>
+                <div class="capsule-row">
+                  <span class="capsule live">🔴 <span class="en-only">Starts in 42 min</span><span class="ar-only">تبدأ بعد 42 دقيقة</span></span>
+                  <span class="capsule open"><span class="en-only">2 seats open</span><span class="ar-only">مقعدان متاحان</span></span>
+                </div>
+              </div>
+              <div class="act">
+                <a href="#" class="btn btn-outline btn-xs"><span class="en-only">Roster</span><span class="ar-only">الحضور</span></a>
+                <a href="#" class="btn btn-gold btn-xs"><span class="en-only">Start check-in</span><span class="ar-only">ابدأ التسجيل</span></a>
+              </div>
+            </div>
+            <div class="day-row">
+              <div class="time"><span class="hr">16:00</span><span class="dur">90 min</span></div>
+              <div class="ses">
+                <h4><span class="en-only">Saturday Studio · Ages 7–10</span><span class="ar-only">استوديو السبت · 7–10 سنوات</span></h4>
+                <div class="loc">
+                  <span class="en-only">Studio A, West Bay</span>
+                  <span class="ar-only">استوديو أ، الخليج الغربي</span>
+                  <span class="dot">·</span>
+                  <span class="en-only">6 / 14 booked</span>
+                  <span class="ar-only">6 / 14</span>
+                </div>
+                <div class="capsule-row">
+                  <span class="capsule low">⚠ <span class="en-only">Low — 8 seats left</span><span class="ar-only">منخفضة — 8 مقاعد متبقية</span></span>
+                  <span class="capsule"><span class="en-only">1 no materials fee</span><span class="ar-only">بدون رسوم مواد</span></span>
+                </div>
+              </div>
+              <div class="act">
+                <a href="#" class="btn btn-outline btn-xs"><span class="en-only">Roster</span><span class="ar-only">الحضور</span></a>
+                <a href="#" class="btn btn-outline btn-xs"><span class="en-only">Promote</span><span class="ar-only">ترويج</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <h3><span class="en-only">Needs your attention</span><span class="ar-only">يحتاج انتباهك</span></h3>
+            <span class="meta"><span class="en-only">3 items</span><span class="ar-only">3 عناصر</span></span>
+          </div>
+          <div class="card-body p0 alert-list">
+            <div class="alert refund">
+              <div class="ico">💸</div>
+              <div class="txt">
+                <span class="en-only">Refund request — Fatima Al-Kuwari (Mini Picasso, Apr 11)</span>
+                <span class="ar-only">طلب استرداد — فاطمة الكواري (ميني بيكاسو، 11 أبريل)</span>
+                <small>
+                  <span class="en-only">Child was sick · parent asked to reschedule · 3 days ago</span>
+                  <span class="ar-only">الطفل مريض · طلبت إعادة الجدولة · منذ 3 أيام</span>
+                </small>
+              </div>
+              <div class="hstack">
+                <a href="#" class="btn btn-outline btn-xs"><span class="en-only">Reschedule</span><span class="ar-only">إعادة جدولة</span></a>
+                <a href="#" class="btn btn-primary btn-xs"><span class="en-only">Refund</span><span class="ar-only">استرداد</span></a>
+              </div>
+            </div>
+            <div class="alert low">
+              <div class="ico">⚠</div>
+              <div class="txt">
+                <span class="en-only">Saturday Studio (today, 4pm) is 43% booked — send a reminder?</span>
+                <span class="ar-only">استوديو السبت (اليوم 4م) 43٪ محجوز — أرسل تذكيراً؟</span>
+                <small>
+                  <span class="en-only">Repeat students and 3 trial families are waitlisted on other classes.</span>
+                  <span class="ar-only">طلاب متكررون و3 عائلات على قائمة انتظار لصفوف أخرى.</span>
+                </small>
+              </div>
+              <div class="hstack">
+                <a href="#" class="btn btn-outline btn-xs"><span class="en-only">Dismiss</span><span class="ar-only">تجاهل</span></a>
+                <a href="#" class="btn btn-primary btn-xs"><span class="en-only">Send WhatsApp blast</span><span class="ar-only">إرسال عبر واتساب</span></a>
+              </div>
+            </div>
+            <div class="alert doc">
+              <div class="ico">📄</div>
+              <div class="txt">
+                <span class="en-only">Your insurance certificate expires May 30, 2026</span>
+                <span class="ar-only">تنتهي شهادة التأمين في 30 مايو 2026</span>
+                <small>
+                  <span class="en-only">Upload the renewal before May 20 to stay listed as Verified.</span>
+                  <span class="ar-only">ارفع التجديد قبل 20 مايو للحفاظ على حالة "موثّق".</span>
+                </small>
+              </div>
+              <div class="hstack">
+                <a href="#" class="btn btn-primary btn-xs"><span class="en-only">Upload</span><span class="ar-only">رفع</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT: SIDE RAIL -->
+      <div class="vstack" style="gap: 18px;">
+
+        <div class="card">
+          <div class="card-head">
+            <h3><span class="en-only">Recent messages</span><span class="ar-only">آخر الرسائل</span></h3>
+            <a href="#" class="more" style="font-size: 12px;" onclick="showTab('messages'); return false;"><span class="en-only">All →</span><span class="ar-only">← الكل</span></a>
+          </div>
+          <div class="card-body p0">
+            <div class="mini-row unread">
+              <div class="av c1">MA</div>
+              <div class="mi">
+                <div class="nm"><span class="en-only">Maryam A.</span><span class="ar-only">مريم ع.</span></div>
+                <div class="sn"><span class="en-only">Can Yara bring her own apron on Sat?</span><span class="ar-only">هل يمكن أن تحضر يارا مريلتها؟</span></div>
+              </div>
+              <div class="when">14m</div>
+            </div>
+            <div class="mini-row unread">
+              <div class="av c3">OH</div>
+              <div class="mi">
+                <div class="nm"><span class="en-only">Omar H.</span><span class="ar-only">عمر ح.</span></div>
+                <div class="sn"><span class="en-only">Question about the summer camp pricing</span><span class="ar-only">سؤال عن أسعار المخيم الصيفي</span></div>
+              </div>
+              <div class="when">1h</div>
+            </div>
+            <div class="mini-row unread">
+              <div class="av c5">LN</div>
+              <div class="mi">
+                <div class="nm"><span class="en-only">Layla N.</span><span class="ar-only">ليلى ن.</span></div>
+                <div class="sn"><span class="en-only">Thanks — Zain loved today 💛</span><span class="ar-only">شكراً — زين استمتع اليوم 💛</span></div>
+              </div>
+              <div class="when">3h</div>
+            </div>
+            <div class="mini-row">
+              <div class="av c2">HS</div>
+              <div class="mi">
+                <div class="nm"><span class="en-only">Hana S.</span><span class="ar-only">هنا س.</span></div>
+                <div class="sn"><span class="en-only">Switched to Thursday slot, thanks!</span><span class="ar-only">غيّرت إلى الخميس، شكراً!</span></div>
+              </div>
+              <div class="when">Yday</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <h3><span class="en-only">New bookings</span><span class="ar-only">حجوزات جديدة</span></h3>
+            <span class="meta"><span class="en-only">last 7 days</span><span class="ar-only">آخر 7 أيام</span></span>
+          </div>
+          <div class="card-body p0">
+            <div class="mini-row">
+              <div class="av c4">RK</div>
+              <div class="mi">
+                <div class="nm"><span class="en-only">Rashid K. — Mini Picasso</span><span class="ar-only">راشد ك. — ميني بيكاسو</span></div>
+                <div class="sn"><span class="en-only">4 sessions · QAR 480 · first-time</span><span class="ar-only">4 جلسات · 480 ر.ق · جديد</span></div>
+              </div>
+              <div class="when">2h</div>
+            </div>
+            <div class="mini-row">
+              <div class="av c6">AM</div>
+              <div class="mi">
+                <div class="nm"><span class="en-only">Aisha M. — Messy Play</span><span class="ar-only">عائشة م. — اللعب الحسي</span></div>
+                <div class="sn"><span class="en-only">2 kids · drop-in · QAR 240</span><span class="ar-only">طفلان · جلسة واحدة · 240 ر.ق</span></div>
+              </div>
+              <div class="when">5h</div>
+            </div>
+            <div class="mini-row">
+              <div class="av c7">YB</div>
+              <div class="mi">
+                <div class="nm"><span class="en-only">Youssef B. — Saturday Studio</span><span class="ar-only">يوسف ب. — استوديو السبت</span></div>
+                <div class="sn"><span class="en-only">Term pass · QAR 960</span><span class="ar-only">اشتراك فصلي · 960 ر.ق</span></div>
+              </div>
+              <div class="when">Yday</div>
+            </div>
+            <div class="mini-row">
+              <div class="av c8">SD</div>
+              <div class="mi">
+                <div class="nm"><span class="en-only">Sara D. — Spring Camp</span><span class="ar-only">سارة د. — مخيم الربيع</span></div>
+                <div class="sn"><span class="en-only">Week 1 · sibling pair · QAR 1,275</span><span class="ar-only">الأسبوع 1 · أخوان · 1,275 ر.ق</span></div>
+              </div>
+              <div class="when">Yday</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <h3><span class="en-only">Quick actions</span><span class="ar-only">إجراءات سريعة</span></h3>
+          </div>
+          <div class="card-body" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+            <a href="yalla-kids-class-builder.html" class="btn btn-outline btn-sm" style="justify-content: center;">
+              <span class="en-only">➕ New listing</span><span class="ar-only">➕ إعلان جديد</span>
+            </a>
+            <a href="yalla-kids-messages.html" class="btn btn-outline btn-sm" style="justify-content: center;">
+              <span class="en-only">💬 Open inbox</span><span class="ar-only">💬 الرسائل</span>
+            </a>
+            <a href="yalla-kids-class-detail.html" class="btn btn-outline btn-sm" style="justify-content: center;">
+              <span class="en-only">👀 Preview my page</span><span class="ar-only">👀 معاينة الصفحة</span>
+            </a>
+            <a href="yalla-kids-classes-directory.html" class="btn btn-outline btn-sm" style="justify-content: center;">
+              <span class="en-only">↗ See directory</span><span class="ar-only">↗ الدليل</span>
+            </a>
+            <a href="#" class="btn btn-outline btn-sm" style="justify-content: center;">
+              <span class="en-only">📢 Announce to parents</span><span class="ar-only">📢 إعلان للجميع</span>
+            </a>
+            <a href="#" class="btn btn-outline btn-sm" style="justify-content: center;">
+              <span class="en-only">🎟 Create discount code</span><span class="ar-only">🎟 كود خصم</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SESSIONS ============ -->
+<section class="panel" id="panel-sessions">
+  <div class="container">
+    <div class="sec-head">
+      <h2><span class="en-only">Sessions <span class="pop">schedule</span></span><span class="ar-only">جدول <span class="pop">الجلسات</span></span></h2>
+      <a href="#" class="btn btn-primary btn-sm">+ <span class="en-only">New session</span><span class="ar-only">جلسة جديدة</span></a>
+    </div>
+
+    <div class="filterbar">
+      <div class="seg">
+        <button class="on" onclick="segClick(this)"><span class="en-only">This week</span><span class="ar-only">هذا الأسبوع</span></button>
+        <button onclick="segClick(this)"><span class="en-only">Next week</span><span class="ar-only">الأسبوع القادم</span></button>
+        <button onclick="segClick(this)"><span class="en-only">All upcoming</span><span class="ar-only">كل القادم</span></button>
+        <button onclick="segClick(this)"><span class="en-only">Past</span><span class="ar-only">السابقة</span></button>
+      </div>
+      <div class="seg">
+        <button class="on" onclick="segClick(this)"><span class="en-only">All listings</span><span class="ar-only">كل القوائم</span></button>
+        <button onclick="segClick(this)"><span class="en-only">Classes</span><span class="ar-only">الصفوف</span></button>
+        <button onclick="segClick(this)"><span class="en-only">Camps</span><span class="ar-only">المخيمات</span></button>
+        <button onclick="segClick(this)"><span class="en-only">Parties</span><span class="ar-only">الحفلات</span></button>
+      </div>
+      <input class="search" placeholder="Search listing, venue, date…" data-en-placeholder="Search listing, venue, date…" data-ar-placeholder="ابحث عن الإعلان أو المكان أو التاريخ…">
+    </div>
+
+    <div class="card tbl-card">
+      <table class="tbl">
+        <thead>
+          <tr>
+            <th style="width: 130px;"><span class="en-only">When</span><span class="ar-only">الموعد</span></th>
+            <th><span class="en-only">Listing</span><span class="ar-only">الإعلان</span></th>
+            <th><span class="en-only">Venue</span><span class="ar-only">المكان</span></th>
+            <th style="width: 160px;"><span class="en-only">Capacity</span><span class="ar-only">السعة</span></th>
+            <th style="width: 110px;"><span class="en-only">Status</span><span class="ar-only">الحالة</span></th>
+            <th style="width: 220px;"><span class="en-only">Actions</span><span class="ar-only">إجراءات</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="when">Sat Apr 18 · 10:00<small><span class="en-only">Today · 60 min</span><span class="ar-only">اليوم · 60 دقيقة</span></small></td>
+            <td><b><span class="en-only">Mini Picasso</span><span class="ar-only">ميني بيكاسو</span></b> · <span class="muted">4–6y</span></td>
+            <td><span class="en-only">Studio A, West Bay</span><span class="ar-only">استوديو أ، الخليج الغربي</span></td>
+            <td><div class="cap-bar">10/12 <div class="tube"><div class="fill" style="width: 83%;"></div></div></div></td>
+            <td><span class="status-chip paid"><span class="en-only">Confirmed</span><span class="ar-only">مؤكد</span></span></td>
+            <td class="act-cell">
+              <a href="#" class="btn btn-outline btn-xs"><span class="en-only">Roster</span><span class="ar-only">الحضور</span></a>
+              <a href="#" class="btn btn-outline btn-xs"><span class="en-only">Message</span><span class="ar-only">رسالة</span></a>
+              <a href="#" class="btn btn-primary btn-xs"><span class="en-only">Check-in</span><span class="ar-only">تسجيل</span></a>
+            </td>
+          </tr>
+          <tr>
+            <td class="when">Sat Apr 18 · 11:30<small><span class="en-only">Today · 75 min</span><span class="ar-only">اليوم · 75 دقيقة</span></small></td>
+            <td><b><span class="en-only">Messy Play</span><span class="ar-only">اللعب الحسي</span></b> · <span class="muted">2–3y</span></td>
+            <td><span class="en-only">Studio B, West Bay</span><span class="ar-only">استوديو ب، الخليج الغربي</span></td>
+            <td><div class="cap-bar">8/10 <div class="tube"><div class="fill" style="width: 80%;"></div></div></div></td>
+            <td><span class="status-chip paid"><span class="en-only">Confirmed</span><span class="ar-only">مؤكد</span></span></td>
+            <td class="act-cell">
+              <a href="#" class="btn btn-outline btn-xs"><span class="en-only">Roster</span><span class="ar-only">الحضور</span></a>
+              <a href="#" class="btn btn-gold btn-xs"><span class="en-only">Start check-in</span><span class="ar-only">ابدأ التسجيل</span></a>
+            </td>
+          </tr>
+          <tr>
+            <td class="when">Sat Apr 18 · 16:00<small><span class="en-only">Today · 90 min</span><span class="ar-only">اليوم · 90 دقيقة</span></small></td>
+            <td><b><span class="en-only">Saturday Studio</span><span class="ar-only">استوديو السبت</span></b> · <span class="muted">7–10y</span></td>
+            <td><span class="en-only">Studio A, West Bay</span><span class="ar-only">استوديو أ، الخليج الغربي</span></td>
+            <td><div class="cap-bar">6/14 <div class="tube"><div class="fill low" style="width: 43%;"></div></div></div></td>
+            <td><span class="status-chip pending"><span class="en-only">Low roster</span><span class="ar-only">منخفض</span></span></td>
+            <td class="act-cell">
+              <a href="#" class="btn btn-outline btn-xs"><span class="en-only">Roster</span><span class="ar-only">الحضور</span></a>
+              <a href="#" class="btn btn-outline btn-xs"><span class="en-only">Promote</span><span class="ar-only">ترويج</span></a>
+            </td>
+          </tr>
+          <tr>
+            <td class="when">Sun Apr 19 · 10:00<small><span class="en-only">Tomorrow · 60 min</span><span class="ar-only">غداً · 60 دقيقة</span></small></td>
+            <td><b><span class="en-only">Mini Picasso</span><span class="ar-only">ميني بيكاسو</span></b> · <span class="muted">4–6y</span></td>
+            <td><span class="en-only">Studio A, West Bay</span><span class="ar-only">استوديو أ، الخليج الغربي</span></td>
+            <td><div class="cap-bar">12/12 <div class="tube"><div class="fill" style="width: 100%;"></div></div></div></td>
+            <td><span class="status-chip paid"><span class="en-only">Full</span><span class="ar-only">ممتلئة</span></span></td>
+            <td class="act-cell">
+              <a href="#" class="btn btn-outline btn-xs"><span class="en-only">Roster</span><span class="ar-only">الحضور</span></a>
+              <a href="#" class="btn btn-outline btn-xs"><span class="en-only">Waitlist (2)</span><span class="ar-only">قائمة انتظار (2)</span></a>
+            </td>
+          </tr>
+          <tr>
+            <td class="when">Mon Apr 20 · 16:30<small><span class="en-only">90 min</span><span class="ar-only">90 دقيقة</span></small></td>
+            <td><b><span class="en-only">Clay & Chat</span><span class="ar-only">طين ودردشة</span></b> · <span class="muted">6–9y</span></td>
+            <td><span class="en-only">Studio A, West Bay</span><span class="ar-only">استوديو أ، الخليج الغربي</span></td>
+            <td><div class="cap-bar">9/12 <div class="tube"><div class="fill mid" style="width: 75%;"></div></div></div></td>
+            <td><span class="status-chip paid"><span class="en-only">Confirmed</span><span class="ar-only">مؤكد</span></span></td>
+            <td class="act-cell">
+              <a href="#" class="btn btn-outline btn-xs"><span class="en-only">Roster</span><span class="ar-only">الحضور</span></a>
+              <a href="#" class="btn btn-outline btn-xs"><span class="en-only">Edit</span><span class="ar-only">تحرير</span></a>
+            </td>
+          </tr>
+          <tr>
+            <td class="when">Tue Apr 21 · 10:30<small><span class="en-only">45 min · trial</span><span class="ar-only">45 دقيقة · تجريبي</span></small></td>
+            <td><b><span class="en-only">Toddler Tunes</span><span class="ar-only">ألحان الصغار</span></b> · <span class="muted">1–3y</span></td>
+            <td><span class="en-only">Studio C, West Bay</span><span class="ar-only">استوديو ج، الخليج الغربي</span></td>
+            <td><div class="cap-bar">4/8 <div class="tube"><div class="fill mid" style="width: 50%;"></div></div></div></td>
+            <td><span class="status-chip pending"><span class="en-only">Trial open</span><span class="ar-only">تجريبي مفتوح</span></span></td>
+            <td class="act-cell">
+              <a href="#" class="btn btn-outline btn-xs"><span class="en-only">Roster</span><span class="ar-only">الحضور</span></a>
+              <a href="#" class="btn btn-outline btn-xs"><span class="en-only">Boost</span><span class="ar-only">ترويج</span></a>
+            </td>
+          </tr>
+          <tr>
+            <td class="when">Wed Apr 22 · 17:00<small><span class="en-only">60 min</span><span class="ar-only">60 دقيقة</span></small></td>
+            <td><b><span class="en-only">Mini Picasso</span><span class="ar-only">ميني بيكاسو</span></b> · <span class="muted">4–6y</span></td>
+            <td><span class="en-only">Studio A, West Bay</span><span class="ar-only">استوديو أ، الخليج الغربي</span></td>
+            <td><div class="cap-bar">11/12 <div class="tube"><div class="fill" style="width: 92%;"></div></div></div></td>
+            <td><span class="status-chip paid"><span class="en-only">Confirmed</span><span class="ar-only">مؤكد</span></span></td>
+            <td class="act-cell">
+              <a href="#" class="btn btn-outline btn-xs"><span class="en-only">Roster</span><span class="ar-only">الحضور</span></a>
+              <a href="#" class="btn btn-outline btn-xs"><span class="en-only">Edit</span><span class="ar-only">تحرير</span></a>
+            </td>
+          </tr>
+          <tr>
+            <td class="when">Thu Apr 23 · 16:30<small><span class="en-only">90 min</span><span class="ar-only">90 دقيقة</span></small></td>
+            <td><b><span class="en-only">Clay & Chat</span><span class="ar-only">طين ودردشة</span></b> · <span class="muted">6–9y</span></td>
+            <td><span class="en-only">Studio A, West Bay</span><span class="ar-only">استوديو أ، الخليج الغربي</span></td>
+            <td><div class="cap-bar">7/12 <div class="tube"><div class="fill mid" style="width: 58%;"></div></div></div></td>
+            <td><span class="status-chip paid"><span class="en-only">Confirmed</span><span class="ar-only">مؤكد</span></span></td>
+            <td class="act-cell">
+              <a href="#" class="btn btn-outline btn-xs"><span class="en-only">Roster</span><span class="ar-only">الحضور</span></a>
+              <a href="#" class="btn btn-outline btn-xs"><span class="en-only">Edit</span><span class="ar-only">تحرير</span></a>
+            </td>
+          </tr>
+          <tr>
+            <td class="when">Fri Apr 24 · 09:30<small><span class="en-only">60 min · ladies only</span><span class="ar-only">60 دقيقة · للسيدات فقط</span></small></td>
+            <td><b><span class="en-only">Weekend Workshop</span><span class="ar-only">ورشة نهاية الأسبوع</span></b> · <span class="muted">Moms+kids</span></td>
+            <td><span class="en-only">Katara Cultural Village</span><span class="ar-only">كتارا الثقافية</span></td>
+            <td><div class="cap-bar">6/10 <div class="tube"><div class="fill mid" style="width: 60%;"></div></div></div></td>
+            <td><span class="status-chip paid"><span class="en-only">Confirmed</span><span class="ar-only">مؤكد</span></span></td>
+            <td class="act-cell">
+              <a href="#" class="btn btn-outline btn-xs"><span class="en-only">Roster</span><span class="ar-only">الحضور</span></a>
+              <a href="#" class="btn btn-outline btn-xs"><span class="en-only">Message all</span><span class="ar-only">رسالة للكل</span></a>
+            </td>
+          </tr>
+          <tr>
+            <td class="when">Sat Apr 25 · 10:00<small><span class="en-only">60 min</span><span class="ar-only">60 دقيقة</span></small></td>
+            <td><b><span class="en-only">Mini Picasso</span><span class="ar-only">ميني بيكاسو</span></b> · <span class="muted">4–6y</span></td>
+            <td><span class="en-only">Studio A, West Bay</span><span class="ar-only">استوديو أ، الخليج الغربي</span></td>
+            <td><div class="cap-bar">5/12 <div class="tube"><div class="fill low" style="width: 42%;"></div></div></div></td>
+            <td><span class="status-chip hold"><span class="en-only">At risk</span><span class="ar-only">معرضة</span></span></td>
+            <td class="act-cell">
+              <a href="#" class="btn btn-outline btn-xs"><span class="en-only">Roster</span><span class="ar-only">الحضور</span></a>
+              <a href="#" class="btn btn-primary btn-xs"><span class="en-only">Promote</span><span class="ar-only">ترويج</span></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="muted" style="margin-top: 12px; font-size: 12px;">
+      <span class="en-only">Showing 10 sessions · Drag-drop a session to duplicate · Sessions auto-archive 90 days after check-out.</span>
+      <span class="ar-only">عرض 10 جلسات · اسحب جلسة لتكرارها · تُؤرشف الجلسات تلقائياً بعد 90 يوماً.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ROSTER ============ -->
+<section class="panel" id="panel-roster">
+  <div class="container">
+    <div class="sec-head">
+      <h2><span class="en-only">Today's <span class="pop">roster</span></span><span class="ar-only">قائمة <span class="pop">الحضور</span></span></h2>
+    </div>
+
+    <div class="roster-switcher">
+      <label><span class="en-only">Session</span><span class="ar-only">الجلسة</span></label>
+      <select>
+        <option>Sat Apr 18 · 11:30 · Messy Play (Ages 2–3) · Studio B — 8/10</option>
+        <option>Sat Apr 18 · 10:00 · Mini Picasso (Ages 4–6) · Studio A — 10/12</option>
+        <option>Sat Apr 18 · 16:00 · Saturday Studio (Ages 7–10) · Studio A — 6/14</option>
+        <option>Sun Apr 19 · 10:00 · Mini Picasso (Ages 4–6) · Studio A — 12/12</option>
+      </select>
+      <div class="roster-bulk">
+        <a href="#" class="btn btn-outline btn-sm">📥 <span class="en-only">Export CSV</span><span class="ar-only">تصدير</span></a>
+        <a href="#" class="btn btn-outline btn-sm">📢 <span class="en-only">Message all parents</span><span class="ar-only">رسالة للأولياء</span></a>
+        <a href="#" class="btn btn-primary btn-sm">✓ <span class="en-only">Mark all present</span><span class="ar-only">الكل حاضر</span></a>
+      </div>
+    </div>
+
+    <div class="card tbl-card">
+      <table class="tbl">
+        <thead>
+          <tr>
+            <th style="width: 220px;"><span class="en-only">Child</span><span class="ar-only">الطفل</span></th>
+            <th style="width: 70px;"><span class="en-only">Age</span><span class="ar-only">العمر</span></th>
+            <th><span class="en-only">Parent</span><span class="ar-only">ولي الأمر</span></th>
+            <th><span class="en-only">Notes</span><span class="ar-only">ملاحظات</span></th>
+            <th style="width: 90px;"><span class="en-only">Paid</span><span class="ar-only">الدفع</span></th>
+            <th style="width: 140px;"><span class="en-only">Attendance</span><span class="ar-only">الحضور</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="hstack"><div class="av c1" style="width: 32px; height: 32px; border: 2px solid var(--ink); border-radius: 50%; display: grid; place-items: center; font-family: Fraunces; font-weight: 700; font-size: 12px;">YA</div><div><b><span class="en-only">Yara Al-Kuwari</span><span class="ar-only">يارا الكواري</span></b><div class="muted" style="font-size: 11px;">3rd visit</div></div></div></td>
+            <td>2.5</td>
+            <td><b><span class="en-only">Maryam A.</span><span class="ar-only">مريم ع.</span></b><div class="muted" style="font-size: 11px;">+974 5501 ****</div></td>
+            <td class="note"><span class="note-chip allergy"><span class="en-only">Dairy</span><span class="ar-only">ألبان</span></span><span class="en-only">Bringing own apron.</span><span class="ar-only">تحضر مريلتها.</span></td>
+            <td><span class="paid-pill">✓ QAR 120</span></td>
+            <td><div class="attend-toggle"><button class="yes on">✓ <span class="en-only">Here</span><span class="ar-only">حاضر</span></button><button class="no">—</button></div></td>
+          </tr>
+          <tr>
+            <td><div class="hstack"><div class="av c3" style="width: 32px; height: 32px; border: 2px solid var(--ink); border-radius: 50%; display: grid; place-items: center; font-family: Fraunces; font-weight: 700; font-size: 12px;">ZA</div><div><b><span class="en-only">Zayd Al-Mansouri</span><span class="ar-only">زيد المنصوري</span></b><div class="muted" style="font-size: 11px;">1st visit</div></div></div></td>
+            <td>2</td>
+            <td><b><span class="en-only">Noor Al-Mansouri</span><span class="ar-only">نور المنصوري</span></b><div class="muted" style="font-size: 11px;">+974 5502 ****</div></td>
+            <td class="note"><span class="note-chip special"><span class="en-only">Shy at first</span><span class="ar-only">خجول في البداية</span></span></td>
+            <td><span class="paid-pill">✓ QAR 120</span></td>
+            <td><div class="attend-toggle"><button class="yes on">✓ <span class="en-only">Here</span><span class="ar-only">حاضر</span></button><button class="no">—</button></div></td>
+          </tr>
+          <tr>
+            <td><div class="hstack"><div class="av c5" style="width: 32px; height: 32px; border: 2px solid var(--ink); border-radius: 50%; display: grid; place-items: center; font-family: Fraunces; font-weight: 700; font-size: 12px;">AH</div><div><b><span class="en-only">Amira Hassan</span><span class="ar-only">أميرة حسن</span></b><div class="muted" style="font-size: 11px;">Term pass</div></div></div></td>
+            <td>3</td>
+            <td><b><span class="en-only">Rana H.</span><span class="ar-only">رنا ح.</span></b><div class="muted" style="font-size: 11px;">+974 5503 ****</div></td>
+            <td class="note"><span class="note-chip"><span class="en-only">Loves blue</span><span class="ar-only">تحب الأزرق</span></span></td>
+            <td><span class="paid-pill">✓ term</span></td>
+            <td><div class="attend-toggle"><button class="yes on">✓ <span class="en-only">Here</span><span class="ar-only">حاضر</span></button><button class="no">—</button></div></td>
+          </tr>
+          <tr>
+            <td><div class="hstack"><div class="av c7" style="width: 32px; height: 32px; border: 2px solid var(--ink); border-radius: 50%; display: grid; place-items: center; font-family: Fraunces; font-weight: 700; font-size: 12px;">KS</div><div><b><span class="en-only">Khalid Safar</span><span class="ar-only">خالد سفر</span></b><div class="muted" style="font-size: 11px;">2nd visit</div></div></div></td>
+            <td>2.5</td>
+            <td><b><span class="en-only">Tariq S.</span><span class="ar-only">طارق س.</span></b><div class="muted" style="font-size: 11px;">+974 5504 ****</div></td>
+            <td class="note"><span class="en-only">Drop-off OK — dad at cafe next door.</span><span class="ar-only">يُترك وحده — الأب في المقهى المجاور.</span></td>
+            <td><span class="paid-pill">✓ QAR 120</span></td>
+            <td><div class="attend-toggle"><button class="yes">✓</button><button class="no on">✗ <span class="en-only">Absent</span><span class="ar-only">غائب</span></button></div></td>
+          </tr>
+          <tr>
+            <td><div class="hstack"><div class="av c2" style="width: 32px; height: 32px; border: 2px solid var(--ink); border-radius: 50%; display: grid; place-items: center; font-family: Fraunces; font-weight: 700; font-size: 12px;">LE</div><div><b><span class="en-only">Leena Ebrahim</span><span class="ar-only">لينا إبراهيم</span></b><div class="muted" style="font-size: 11px;">Trial</div></div></div></td>
+            <td>2</td>
+            <td><b><span class="en-only">Hana E.</span><span class="ar-only">هنا إ.</span></b><div class="muted" style="font-size: 11px;">+974 5505 ****</div></td>
+            <td class="note"><span class="note-chip allergy"><span class="en-only">Nuts</span><span class="ar-only">مكسرات</span></span><span class="note-chip special"><span class="en-only">EpiPen in bag</span><span class="ar-only">EpiPen في الحقيبة</span></span></td>
+            <td><span class="paid-pill">✓ trial</span></td>
+            <td><div class="attend-toggle"><button class="yes on">✓ <span class="en-only">Here</span><span class="ar-only">حاضر</span></button><button class="no">—</button></div></td>
+          </tr>
+          <tr>
+            <td><div class="hstack"><div class="av c4" style="width: 32px; height: 32px; border: 2px solid var(--ink); border-radius: 50%; display: grid; place-items: center; font-family: Fraunces; font-weight: 700; font-size: 12px;">SD</div><div><b><span class="en-only">Sami Darwish</span><span class="ar-only">سامي درويش</span></b><div class="muted" style="font-size: 11px;">4th visit</div></div></div></td>
+            <td>3</td>
+            <td><b><span class="en-only">Reem D.</span><span class="ar-only">ريم د.</span></b><div class="muted" style="font-size: 11px;">+974 5506 ****</div></td>
+            <td class="note"><span class="en-only">Arabic preferred.</span><span class="ar-only">يفضل العربية.</span></td>
+            <td><span class="paid-pill">✓ QAR 120</span></td>
+            <td><div class="attend-toggle"><button class="yes on">✓ <span class="en-only">Here</span><span class="ar-only">حاضر</span></button><button class="no">—</button></div></td>
+          </tr>
+          <tr>
+            <td><div class="hstack"><div class="av c6" style="width: 32px; height: 32px; border: 2px solid var(--ink); border-radius: 50%; display: grid; place-items: center; font-family: Fraunces; font-weight: 700; font-size: 12px;">LA</div><div><b><span class="en-only">Lana Al-Khater</span><span class="ar-only">لانا الخاطر</span></b><div class="muted" style="font-size: 11px;">6th visit</div></div></div></td>
+            <td>2.5</td>
+            <td><b><span class="en-only">Fatima K.</span><span class="ar-only">فاطمة خ.</span></b><div class="muted" style="font-size: 11px;">+974 5507 ****</div></td>
+            <td class="note"><span class="note-chip"><span class="en-only">Nap by 1pm</span><span class="ar-only">قيلولة الواحدة</span></span></td>
+            <td><span class="paid-pill">✓ term</span></td>
+            <td><div class="attend-toggle"><button class="yes on">✓ <span class="en-only">Here</span><span class="ar-only">حاضر</span></button><button class="no">—</button></div></td>
+          </tr>
+          <tr>
+            <td><div class="hstack"><div class="av c8" style="width: 32px; height: 32px; border: 2px solid var(--ink); border-radius: 50%; display: grid; place-items: center; font-family: Fraunces; font-weight: 700; font-size: 12px;">RN</div><div><b><span class="en-only">Rashid Nasr</span><span class="ar-only">راشد نصر</span></b><div class="muted" style="font-size: 11px;">1st visit</div></div></div></td>
+            <td>3</td>
+            <td><b><span class="en-only">Omar N.</span><span class="ar-only">عمر ن.</span></b><div class="muted" style="font-size: 11px;">+974 5508 ****</div></td>
+            <td class="note"><span class="note-chip"><span class="en-only">Dad attending</span><span class="ar-only">الأب مرافق</span></span></td>
+            <td><span class="paid-pill unpaid"><span class="en-only">Pay at door</span><span class="ar-only">دفع عند الباب</span></span></td>
+            <td><div class="attend-toggle"><button class="yes">✓</button><button class="no">—</button></div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card" style="margin-top: 16px;">
+      <div class="card-head">
+        <h3><span class="en-only">Allergies & emergency summary</span><span class="ar-only">الحساسيات والطوارئ</span></h3>
+        <span class="meta">2 <span class="en-only">of 8 kids</span><span class="ar-only">من 8 أطفال</span></span>
+      </div>
+      <div class="card-body">
+        <div class="hstack" style="margin-bottom: 10px;">
+          <span class="note-chip allergy"><span class="en-only">Dairy</span><span class="ar-only">ألبان</span></span>
+          <b><span class="en-only">Yara Al-Kuwari</span><span class="ar-only">يارا الكواري</span></b> —
+          <span class="en-only">no dairy snacks in room; parent packs own.</span>
+          <span class="ar-only">لا وجبات ألبان في الغرفة؛ يحضر ولي الأمر الخاصة به.</span>
+        </div>
+        <div class="hstack">
+          <span class="note-chip allergy"><span class="en-only">Nuts</span><span class="ar-only">مكسرات</span></span>
+          <b><span class="en-only">Leena Ebrahim</span><span class="ar-only">لينا إبراهيم</span></b> —
+          <span class="en-only">EpiPen in her bag, mom's number on speed dial.</span>
+          <span class="ar-only">EpiPen في حقيبتها، رقم الأم في الاتصال السريع.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MESSAGES ============ -->
+<section class="panel" id="panel-messages">
+  <div class="container">
+    <div class="sec-head">
+      <h2><span class="en-only">Messages <span class="pop">with parents</span></span><span class="ar-only">الرسائل <span class="pop">مع الأهل</span></span></h2>
+      <div class="hstack" style="gap: 8px;">
+        <a href="yalla-kids-messages.html" class="btn btn-outline btn-sm">💬 <span class="en-only">Open full inbox</span><span class="ar-only">فتح الرسائل</span></a>
+        <a href="#" class="btn btn-outline btn-sm">📢 <span class="en-only">Broadcast</span><span class="ar-only">إعلان</span></a>
+      </div>
+    </div>
+
+    <div class="msg-grid">
+      <div class="thread-list">
+        <div class="tl-head">
+          <input placeholder="Search parent, class, keyword…" data-en-placeholder="Search parent, class, keyword…" data-ar-placeholder="ابحث عن ولي الأمر أو الصف أو كلمة…">
+        </div>
+        <div class="thread active">
+          <div class="av c1">MA</div>
+          <div>
+            <div class="line1"><span class="nm"><span class="en-only">Maryam A.</span><span class="ar-only">مريم ع.</span></span><span class="tm">14m</span></div>
+            <div class="snip"><span class="en-only">Can Yara bring her own apron on Sat?</span><span class="ar-only">هل يمكن أن تحضر يارا مريلتها؟</span></div>
+            <div class="ctx"><span class="en-only">Re: Messy Play · Apr 18</span><span class="ar-only">بخصوص: اللعب الحسي · 18 أبريل</span></div>
+          </div>
+          <div class="dot"></div>
+        </div>
+        <div class="thread">
+          <div class="av c3">OH</div>
+          <div>
+            <div class="line1"><span class="nm"><span class="en-only">Omar H.</span><span class="ar-only">عمر ح.</span></span><span class="tm">1h</span></div>
+            <div class="snip"><span class="en-only">Question about the summer camp pricing…</span><span class="ar-only">سؤال عن أسعار المخيم الصيفي…</span></div>
+            <div class="ctx"><span class="en-only">Re: Summer Camp · inquiry</span><span class="ar-only">بخصوص: المخيم الصيفي</span></div>
+          </div>
+          <div class="dot"></div>
+        </div>
+        <div class="thread">
+          <div class="av c5">LN</div>
+          <div>
+            <div class="line1"><span class="nm"><span class="en-only">Layla N.</span><span class="ar-only">ليلى ن.</span></span><span class="tm">3h</span></div>
+            <div class="snip"><span class="en-only">Thanks — Zain loved today 💛</span><span class="ar-only">شكراً — زين استمتع اليوم 💛</span></div>
+            <div class="ctx"><span class="en-only">Re: Mini Picasso · Apr 18</span><span class="ar-only">بخصوص: ميني بيكاسو</span></div>
+          </div>
+          <div class="dot"></div>
+        </div>
+        <div class="thread">
+          <div class="av c2">HS</div>
+          <div>
+            <div class="line1"><span class="nm"><span class="en-only">Hana S.</span><span class="ar-only">هنا س.</span></span><span class="tm">Yday</span></div>
+            <div class="snip"><span class="en-only">Switched to Thursday slot, thanks!</span><span class="ar-only">غيّرت إلى الخميس، شكراً!</span></div>
+            <div class="ctx"><span class="en-only">Re: Clay & Chat</span><span class="ar-only">بخصوص: طين ودردشة</span></div>
+          </div>
+          <div class="dot hidden"></div>
+        </div>
+        <div class="thread">
+          <div class="av c4">RK</div>
+          <div>
+            <div class="line1"><span class="nm"><span class="en-only">Rashid K.</span><span class="ar-only">راشد ك.</span></span><span class="tm">Yday</span></div>
+            <div class="snip"><span class="en-only">Is there a makeup class available next week?</span><span class="ar-only">هل هناك صف تعويضي الأسبوع القادم؟</span></div>
+            <div class="ctx"><span class="en-only">Re: Mini Picasso</span><span class="ar-only">بخصوص: ميني بيكاسو</span></div>
+          </div>
+          <div class="dot hidden"></div>
+        </div>
+        <div class="thread">
+          <div class="av c6">AM</div>
+          <div>
+            <div class="line1"><span class="nm"><span class="en-only">Aisha M.</span><span class="ar-only">عائشة م.</span></span><span class="tm">2d</span></div>
+            <div class="snip"><span class="en-only">Confirmed! See you Saturday 🎨</span><span class="ar-only">مؤكد! نراكم السبت 🎨</span></div>
+            <div class="ctx"><span class="en-only">Re: Messy Play</span><span class="ar-only">بخصوص: اللعب الحسي</span></div>
+          </div>
+          <div class="dot hidden"></div>
+        </div>
+        <div class="thread">
+          <div class="av c7">YB</div>
+          <div>
+            <div class="line1"><span class="nm"><span class="en-only">Youssef B.</span><span class="ar-only">يوسف ب.</span></span><span class="tm">3d</span></div>
+            <div class="snip"><span class="en-only">Thanks for the invoice — tax copy please?</span><span class="ar-only">شكراً على الفاتورة — نسخة ضريبية؟</span></div>
+            <div class="ctx"><span class="en-only">Re: Saturday Studio</span><span class="ar-only">بخصوص: استوديو السبت</span></div>
+          </div>
+          <div class="dot hidden"></div>
+        </div>
+        <div class="thread">
+          <div class="av c8">SD</div>
+          <div>
+            <div class="line1"><span class="nm"><span class="en-only">Sara D.</span><span class="ar-only">سارة د.</span></span><span class="tm">4d</span></div>
+            <div class="snip"><span class="en-only">Do siblings get a discount for camp?</span><span class="ar-only">هل هناك خصم للإخوة؟</span></div>
+            <div class="ctx"><span class="en-only">Re: Spring Camp</span><span class="ar-only">بخصوص: مخيم الربيع</span></div>
+          </div>
+          <div class="dot hidden"></div>
+        </div>
+      </div>
+
+      <div class="conv">
+        <div class="conv-head">
+          <div class="av">MA</div>
+          <div>
+            <h3><span class="en-only">Maryam Al-Kuwari</span><span class="ar-only">مريم الكواري</span></h3>
+            <div class="who-sub">
+              <span class="en-only">Parent of Yara (2.5) · 3 bookings · joined Jan 2026</span>
+              <span class="ar-only">ولية أمر يارا (2.5) · 3 حجوزات · انضمت يناير 2026</span>
+            </div>
+          </div>
+          <div class="who-actions">
+            <a href="#" class="icon-btn" title="WhatsApp">💬</a>
+            <a href="#" class="icon-btn" title="Call">📞</a>
+            <a href="#" class="icon-btn" title="More">⋯</a>
+          </div>
+        </div>
+
+        <div class="conv-body">
+          <div class="day-div"><span class="en-only">Yesterday</span><span class="ar-only">أمس</span></div>
+          <div class="bubble in">
+            <span class="en-only">Hi Noura! Yara is coming Saturday for Messy Play 🎨 Just wanted to double-check the drop-off time.</span>
+            <span class="ar-only">أهلاً نورة! يارا ستأتي السبت للّعب الحسي 🎨 أردت التأكد من موعد الوصول.</span>
+            <div class="when">16:22</div>
+          </div>
+          <div class="bubble out">
+            <span class="en-only">Hi Maryam! Doors open 15 min before — so 11:15 for the 11:30 class. See you Saturday 💛</span>
+            <span class="ar-only">أهلاً مريم! الأبواب مفتوحة قبل 15 دقيقة — الساعة 11:15. نراكم السبت 💛</span>
+            <div class="when">16:24 · <span class="en-only">Seen</span><span class="ar-only">تم الاطلاع</span></div>
+          </div>
+          <div class="bubble in">
+            <span class="en-only">Perfect, thanks 🙏</span>
+            <span class="ar-only">ممتاز، شكراً 🙏</span>
+            <div class="when">16:28</div>
+          </div>
+
+          <div class="day-div"><span class="en-only">Today</span><span class="ar-only">اليوم</span></div>
+          <div class="bubble in">
+            <span class="en-only">One more thing — Yara has a favorite apron from nursery. Can she bring her own? She's sensitive about fit 😅</span>
+            <span class="ar-only">شيء أخير — يارا لديها مريلة مفضلة. هل يمكن أن تحضرها؟ حساسة من ناحية المقاس 😅</span>
+            <div class="when">10:32</div>
+          </div>
+        </div>
+
+        <div class="quick-chips">
+          <button class="chip"><span class="en-only">Yes, no problem 👍</span><span class="ar-only">نعم، لا مشكلة 👍</span></button>
+          <button class="chip"><span class="en-only">Send address pin</span><span class="ar-only">أرسل الموقع</span></button>
+          <button class="chip"><span class="en-only">Send waiver link</span><span class="ar-only">رابط الإقرار</span></button>
+          <button class="chip"><span class="en-only">Price list</span><span class="ar-only">قائمة الأسعار</span></button>
+          <button class="chip"><span class="en-only">Thanks! 💛</span><span class="ar-only">شكراً! 💛</span></button>
+        </div>
+
+        <div class="conv-input">
+          <textarea placeholder="Type a message…" data-en-placeholder="Type a message…" data-ar-placeholder="اكتب رسالة…"></textarea>
+          <div class="vstack" style="gap: 4px;">
+            <button class="btn btn-primary btn-sm"><span class="en-only">Send</span><span class="ar-only">إرسال</span></button>
+            <button class="btn btn-outline btn-xs" style="justify-content: center;">📎</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LISTINGS ============ -->
+<section class="panel" id="panel-listings">
+  <div class="container">
+    <div class="sec-head">
+      <h2><span class="en-only">My <span class="pop">listings</span></span><span class="ar-only">إعلاناتي</span></h2>
+      <div class="hstack" style="gap: 8px;">
+        <a href="yalla-kids-classes-directory.html" class="btn btn-outline btn-sm"><span class="en-only">↗ See public directory</span><span class="ar-only">↗ الدليل العام</span></a>
+        <a href="yalla-kids-class-builder.html" class="btn btn-primary btn-sm">+ <span class="en-only">New listing</span><span class="ar-only">إعلان جديد</span></a>
+      </div>
+    </div>
+
+    <div class="filterbar">
+      <div class="seg">
+        <button class="on" onclick="segClick(this)"><span class="en-only">All (6)</span><span class="ar-only">الكل (6)</span></button>
+        <button onclick="segClick(this)"><span class="en-only">Active (4)</span><span class="ar-only">نشطة (4)</span></button>
+        <button onclick="segClick(this)"><span class="en-only">Paused (1)</span><span class="ar-only">متوقفة (1)</span></button>
+        <button onclick="segClick(this)"><span class="en-only">Draft (1)</span><span class="ar-only">مسودة (1)</span></button>
+      </div>
+      <div class="seg">
+        <button class="on" onclick="segClick(this)"><span class="en-only">All types</span><span class="ar-only">كل الأنواع</span></button>
+        <button onclick="segClick(this)"><span class="en-only">Weekly class</span><span class="ar-only">صف أسبوعي</span></button>
+        <button onclick="segClick(this)"><span class="en-only">Camp</span><span class="ar-only">مخيم</span></button>
+        <button onclick="segClick(this)"><span class="en-only">Party venue</span><span class="ar-only">حفلات</span></button>
+      </div>
+      <input class="search" placeholder="Search title, age, category…" data-en-placeholder="Search title, age, category…" data-ar-placeholder="ابحث في العنوان أو العمر أو الفئة…">
+    </div>
+
+    <div class="list-grid">
+
+      <!-- LISTING 1 -->
+      <div class="listing">
+        <div class="ph c1">🎨<div class="status-pill active"><span class="en-only">Active</span><span class="ar-only">نشط</span></div><button class="menu-btn">⋯</button></div>
+        <div class="lb">
+          <h4><span class="en-only">Mini Picasso</span><span class="ar-only">ميني بيكاسو</span></h4>
+          <div class="meta">
+            <span class="en-only">Weekly class · Ages 4–6 · QAR 120</span>
+            <span class="ar-only">صف أسبوعي · 4–6 سنوات · 120 ر.ق</span>
+          </div>
+          <div class="meta">
+            <span class="en-only">Sat 10am · Wed 5pm · Studio A, West Bay</span>
+            <span class="ar-only">السبت 10ص · الأربعاء 5م · استوديو أ</span>
+          </div>
+          <div class="stats">
+            <div class="stat"><div class="n">38</div><div class="l"><span class="en-only">Bookings</span><span class="ar-only">حجوزات</span></div></div>
+            <div class="stat"><div class="n">4.9</div><div class="l"><span class="en-only">Rating</span><span class="ar-only">تقييم</span></div></div>
+            <div class="stat"><div class="n">92%</div><div class="l"><span class="en-only">Fill rate</span><span class="ar-only">امتلاء</span></div></div>
+          </div>
+        </div>
+        <div class="ftr">
+          <a href="yalla-kids-class-detail.html" class="btn btn-outline btn-xs"><span class="en-only">View</span><span class="ar-only">عرض</span></a>
+          <a href="#" class="btn btn-outline btn-xs"><span class="en-only">Edit</span><span class="ar-only">تحرير</span></a>
+          <a href="#" class="btn btn-outline btn-xs"><span class="en-only">Duplicate</span><span class="ar-only">نسخ</span></a>
+          <a href="#" class="btn btn-outline btn-xs"><span class="en-only">Pause</span><span class="ar-only">إيقاف</span></a>
+        </div>
+      </div>
+
+      <!-- LISTING 2 -->
+      <div class="listing">
+        <div class="ph c2">🎭<div class="status-pill active"><span class="en-only">Active</span><span class="ar-only">نشط</span></div><button class="menu-btn">⋯</button></div>
+        <div class="lb">
+          <h4><span class="en-only">Messy Play</span><span class="ar-only">اللعب الحسي</span></h4>
+          <div class="meta">
+            <span class="en-only">Weekly class · Ages 2–3 · QAR 120</span>
+            <span class="ar-only">صف أسبوعي · 2–3 سنوات · 120 ر.ق</span>
+          </div>
+          <div class="meta">
+            <span class="en-only">Sat 11:30am · Studio B, West Bay</span>
+            <span class="ar-only">السبت 11:30ص · استوديو ب</span>
+          </div>
+          <div class="stats">
+            <div class="stat"><div class="n">24</div><div class="l"><span class="en-only">Bookings</span><span class="ar-only">حجوزات</span></div></div>
+            <div class="stat"><div class="n">4.8</div><div class="l"><span class="en-only">Rating</span><span class="ar-only">تقييم</span></div></div>
+            <div class="stat"><div class="n">80%</div><div class="l"><span class="en-only">Fill rate</span><span class="ar-only">امتلاء</span></div></div>
+          </div>
+        </div>
+        <div class="ftr">
+          <a href="#" class="btn btn-outline btn-xs"><span class="en-only">View</span><span class="ar-only">عرض</span></a>
+          <a href="#" class="btn btn-outline btn-xs"><span class="en-only">Edit</span><span class="ar-only">تحرير</span></a>
+          <a href="#" class="btn btn-outline btn-xs"><span class="en-only">Duplicate</span><span class="ar-only">نسخ</span></a>
+          <a href="#" class="btn btn-outline btn-xs"><span class="en-only">Pause</span><span class="ar-only">إيقاف</span></a>
+        </div>
+      </div>
+
+      <!-- LISTING 3 -->
+      <div class="listing">
+        <div class="ph c3">🖌<div class="status-pill active"><span class="en-only">Active</span><span class="ar-only">نشط</span></div><button class="menu-btn">⋯</button></div>
+        <div class="lb">
+          <h4><span class="en-only">Saturday Studio</span><span class="ar-only">استوديو السبت</span></h4>
+          <div class="meta">
+            <span class="en-only">Weekly class · Ages 7–10 · QAR 160</span>
+            <span class="ar-only">صف أسبوعي · 7–10 سنوات · 160 ر.ق</span>
+          </div>
+          <div class="meta">
+            <span class="en-only">Sat 4pm · Studio A, West Bay</span>
+            <span class="ar-only">السبت 4م · استوديو أ</span>
+          </div>
+          <div class="stats">
+            <div class="stat"><div class="n">19</div><div class="l"><span class="en-only">Bookings</span><span class="ar-only">حجوزات</span></div></div>
+            <div class="stat"><div class="n">4.7</div><div class="l"><span class="en-only">Rating</span><span class="ar-only">تقييم</span></div></div>
+            <div class="stat"><div class="n">58%</div><div class="l"><span class="en-only">Fill rate</span><span class="ar-only">امتلاء</span></div></div>
+          </div>
+        </div>
+        <div class="ftr">
+          <a href="#" class="btn btn-outline btn-xs"><span class="en-only">View</span><span class="ar-only">عرض</span></a>
+          <a href="#" class="btn btn-outline btn-xs"><span class="en-only">Edit</span><span class="ar-only">تحرير</span></a>
+          <a href="#" class="btn btn-primary btn-xs"><span class="en-only">Boost</span><span class="ar-only">ترويج</span></a>
+        </div>
+      </div>
+
+      <!-- LISTING 4 -->
+      <div class="listing">
+        <div class="ph c4">🏕<div class="status-pill active"><span class="en-only">Active</span><span class="ar-only">نشط</span></div><button class="menu-btn">⋯</button></div>
+        <div class="lb">
+          <h4><span class="en-only">Spring Break Art Camp</span><span class="ar-only">مخيم الربيع للفنون</span></h4>
+          <div class="meta">
+            <span class="en-only">Camp · 5 days · Ages 5–9 · QAR 1,275</span>
+            <span class="ar-only">مخيم · 5 أيام · 5–9 سنوات · 1,275 ر.ق</span>
+          </div>
+          <div class="meta">
+            <span class="en-only">Apr 20–24 · 9am–1pm · Studio A</span>
+            <span class="ar-only">20–24 أبريل · 9ص–1م · استوديو أ</span>
+          </div>
+          <div class="stats">
+            <div class="stat"><div class="n">14</div><div class="l"><span class="en-only">Bookings</span><span class="ar-only">حجوزات</span></div></div>
+            <div class="stat"><div class="n">—</div><div class="l"><span class="en-only">Rating</span><span class="ar-only">تقييم</span></div></div>
+            <div class="stat"><div class="n">88%</div><div class="l"><span class="en-only">Fill rate</span><span class="ar-only">امتلاء</span></div></div>
+          </div>
+        </div>
+        <div class="ftr">
+          <a href="#" class="btn btn-outline btn-xs"><span class="en-only">View</span><span class="ar-only">عرض</span></a>
+          <a href="#" class="btn btn-outline btn-xs"><span class="en-only">Edit</span><span class="ar-only">تحرير</span></a>
+          <a href="#" class="btn btn-outline btn-xs"><span class="en-only">Duplicate</span><span class="ar-only">نسخ</span></a>
+        </div>
+      </div>
+
+      <!-- LISTING 5 -->
+      <div class="listing">
+        <div class="ph c5">🎂<div class="status-pill paused"><span class="en-only">Paused</span><span class="ar-only">متوقف</span></div><button class="menu-btn">⋯</button></div>
+        <div class="lb">
+          <h4><span class="en-only">Art Party Venue</span><span class="ar-only">قاعة حفلات فنية</span></h4>
+          <div class="meta">
+            <span class="en-only">Party venue · up to 15 kids · QAR 1,200</span>
+            <span class="ar-only">قاعة حفلات · حتى 15 طفلاً · 1,200 ر.ق</span>
+          </div>
+          <div class="meta">
+            <span class="en-only">On-demand · 2-hour slots · Studio A</span>
+            <span class="ar-only">حسب الطلب · ساعتان · استوديو أ</span>
+          </div>
+          <div class="stats">
+            <div class="stat"><div class="n">6</div><div class="l"><span class="en-only">Bookings</span><span class="ar-only">حجوزات</span></div></div>
+            <div class="stat"><div class="n">5.0</div><div class="l"><span class="en-only">Rating</span><span class="ar-only">تقييم</span></div></div>
+            <div class="stat"><div class="n">—</div><div class="l"><span class="en-only">Fill rate</span><span class="ar-only">امتلاء</span></div></div>
+          </div>
+          <div class="meta" style="background: var(--butter-soft); border: 1.5px solid var(--ink); border-radius: 10px; padding: 6px 10px; font-size: 11px;">
+            <span class="en-only">⏸ Paused until Eid Al-Fitr ends</span>
+            <span class="ar-only">⏸ متوقف حتى انتهاء العيد</span>
+          </div>
+        </div>
+        <div class="ftr">
+          <a href="#" class="btn btn-outline btn-xs"><span class="en-only">View</span><span class="ar-only">عرض</span></a>
+          <a href="#" class="btn btn-primary btn-xs"><span class="en-only">Resume</span><span class="ar-only">استئناف</span></a>
+        </div>
+      </div>
+
+      <!-- LISTING 6 -->
+      <div class="listing">
+        <div class="ph c6">✨<div class="status-pill draft"><span class="en-only">Draft</span><span class="ar-only">مسودة</span></div><button class="menu-btn">⋯</button></div>
+        <div class="lb">
+          <h4><span class="en-only">Summer Studio (9 weeks)</span><span class="ar-only">استوديو الصيف (9 أسابيع)</span></h4>
+          <div class="meta">
+            <span class="en-only">Camp · Ages 5–12 · QAR 1,400/week</span>
+            <span class="ar-only">مخيم · 5–12 سنة · 1,400/أسبوع</span>
+          </div>
+          <div class="meta">
+            <span class="en-only">Draft · not published · 4 steps remaining</span>
+            <span class="ar-only">مسودة · لم تُنشر · 4 خطوات متبقية</span>
+          </div>
+          <div class="stats">
+            <div class="stat"><div class="n">—</div><div class="l"><span class="en-only">Bookings</span><span class="ar-only">حجوزات</span></div></div>
+            <div class="stat"><div class="n">—</div><div class="l"><span class="en-only">Rating</span><span class="ar-only">تقييم</span></div></div>
+            <div class="stat"><div class="n">60%</div><div class="l"><span class="en-only">Complete</span><span class="ar-only">مكتمل</span></div></div>
+          </div>
+        </div>
+        <div class="ftr">
+          <a href="yalla-kids-provider-onboarding.html" class="btn btn-primary btn-xs"><span class="en-only">Continue setup</span><span class="ar-only">أكمل الإعداد</span></a>
+          <a href="#" class="btn btn-outline btn-xs"><span class="en-only">Discard</span><span class="ar-only">حذف</span></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ PAYOUTS ============ -->
+<section class="panel" id="panel-payouts">
+  <div class="container">
+    <div class="sec-head">
+      <h2><span class="en-only">Payouts &amp; <span class="pop">earnings</span></span><span class="ar-only">المدفوعات <span class="pop">والأرباح</span></span></h2>
+      <a href="#" class="btn btn-outline btn-sm">📥 <span class="en-only">Download statement</span><span class="ar-only">تنزيل الكشف</span></a>
+    </div>
+
+    <div class="payout-top">
+      <div class="payout-next">
+        <div class="eyebrow"><span class="en-only">Next payout</span><span class="ar-only">الدفعة القادمة</span></div>
+        <div class="amt"><span class="cur">QAR</span>1,692.00</div>
+        <div class="sub">
+          <span class="en-only">Sent to QNB ••5321 on <b>Sunday, April 26</b> — typically lands within 24 hrs</span>
+          <span class="ar-only">تُحوّل إلى QNB ••5321 يوم <b>الأحد 26 أبريل</b> — تصل خلال 24 ساعة عادةً</span>
+        </div>
+        <div class="progress"><div class="fill" style="width: 68%;"></div></div>
+        <div class="legend">
+          <span><span class="en-only">Cycle started Apr 12</span><span class="ar-only">بدأت 12 أبريل</span></span>
+          <span><span class="en-only">8 of 12 days</span><span class="ar-only">8 من 12 يوم</span></span>
+          <span><span class="en-only">Closes Apr 25</span><span class="ar-only">تُغلق 25 أبريل</span></span>
+        </div>
+        <div class="cta">
+          <a href="#" class="btn"><span class="en-only">View breakdown</span><span class="ar-only">عرض التفاصيل</span></a>
+          <a href="#" class="btn ghost"><span class="en-only">Change frequency</span><span class="ar-only">تغيير التكرار</span></a>
+        </div>
+      </div>
+
+      <div class="bank-card">
+        <h3><span class="en-only">Bank on file</span><span class="ar-only">الحساب البنكي</span></h3>
+        <div class="bank-row">
+          <span class="k"><span class="en-only">Provider</span><span class="ar-only">المزود</span></span>
+          <span class="v">🔒 MyFatoorah Suppliers</span>
+        </div>
+        <div class="bank-row">
+          <span class="k"><span class="en-only">Account holder</span><span class="ar-only">صاحب الحساب</span></span>
+          <span class="v"><span class="en-only">Noura's Studio W.L.L.</span><span class="ar-only">استوديو نورة ذ.م.م.</span></span>
+        </div>
+        <div class="bank-row">
+          <span class="k"><span class="en-only">Bank</span><span class="ar-only">البنك</span></span>
+          <span class="v">Qatar National Bank (QNB)</span>
+        </div>
+        <div class="bank-row">
+          <span class="k">IBAN</span>
+          <span class="v">QA58 QNBA ••••••••••••• 5321</span>
+        </div>
+        <div class="bank-row">
+          <span class="k"><span class="en-only">Frequency</span><span class="ar-only">التكرار</span></span>
+          <span class="v"><span class="en-only">Weekly (Sundays)</span><span class="ar-only">أسبوعي (الأحد)</span></span>
+        </div>
+        <div class="bank-row">
+          <span class="k"><span class="en-only">Commission</span><span class="ar-only">العمولة</span></span>
+          <span class="v">10%</span>
+        </div>
+        <div class="cta">
+          <a href="#" class="btn btn-outline btn-sm"><span class="en-only">Edit details</span><span class="ar-only">تعديل</span></a>
+          <a href="#" class="btn btn-outline btn-sm"><span class="en-only">Tax info</span><span class="ar-only">المعلومات الضريبية</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="earn-toolbar">
+      <div class="seg">
+        <button class="on" onclick="segClick(this)"><span class="en-only">Last 30 days</span><span class="ar-only">آخر 30 يوم</span></button>
+        <button onclick="segClick(this)"><span class="en-only">This year</span><span class="ar-only">هذه السنة</span></button>
+        <button onclick="segClick(this)"><span class="en-only">All time</span><span class="ar-only">كل الوقت</span></button>
+      </div>
+      <div class="tot">
+        <span class="en-only">30-day net earnings:</span>
+        <span class="ar-only">الأرباح الصافية (30 يوم):</span>
+        <b>QAR 6,728.40</b>
+      </div>
+    </div>
+
+    <div class="card tbl-card">
+      <table class="tbl">
+        <thead>
+          <tr>
+            <th><span class="en-only">Period</span><span class="ar-only">الفترة</span></th>
+            <th><span class="en-only">Sessions</span><span class="ar-only">جلسات</span></th>
+            <th><span class="en-only">Gross</span><span class="ar-only">الإجمالي</span></th>
+            <th><span class="en-only">Commission (10%)</span><span class="ar-only">العمولة (10٪)</span></th>
+            <th><span class="en-only">Refunds</span><span class="ar-only">استردادات</span></th>
+            <th><span class="en-only">Net paid</span><span class="ar-only">الصافي المحوّل</span></th>
+            <th><span class="en-only">Status</span><span class="ar-only">الحالة</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>Apr 12 – Apr 25</b> <div class="muted" style="font-size: 11px;"><span class="en-only">In progress</span><span class="ar-only">جارية</span></div></td>
+            <td>12</td>
+            <td class="money">QAR 1,880.00</td>
+            <td class="money neg">− QAR 188.00</td>
+            <td class="money">QAR 0.00</td>
+            <td class="money">QAR 1,692.00</td>
+            <td><span class="status-chip pending"><span class="en-only">Pending</span><span class="ar-only">قيد الإنتظار</span></span></td>
+          </tr>
+          <tr>
+            <td><b>Apr 5 – Apr 11</b></td>
+            <td>9</td>
+            <td class="money">QAR 1,680.00</td>
+            <td class="money neg">− QAR 168.00</td>
+            <td class="money">QAR 0.00</td>
+            <td class="money">QAR 1,512.00</td>
+            <td><span class="status-chip paid"><span class="en-only">Paid Apr 12</span><span class="ar-only">مدفوعة 12 أبريل</span></span></td>
+          </tr>
+          <tr>
+            <td><b>Mar 29 – Apr 4</b></td>
+            <td>11</td>
+            <td class="money">QAR 1,960.00</td>
+            <td class="money neg">− QAR 196.00</td>
+            <td class="money neg">− QAR 240.00</td>
+            <td class="money">QAR 1,524.00</td>
+            <td><span class="status-chip paid"><span class="en-only">Paid Apr 5</span><span class="ar-only">مدفوعة 5 أبريل</span></span></td>
+          </tr>
+          <tr>
+            <td><b>Mar 22 – Mar 28</b></td>
+            <td>10</td>
+            <td class="money">QAR 1,760.00</td>
+            <td class="money neg">− QAR 176.00</td>
+            <td class="money">QAR 0.00</td>
+            <td class="money">QAR 1,584.00</td>
+            <td><span class="status-chip paid"><span class="en-only">Paid Mar 29</span><span class="ar-only">مدفوعة 29 مارس</span></span></td>
+          </tr>
+          <tr>
+            <td><b>Mar 15 – Mar 21</b></td>
+            <td>12</td>
+            <td class="money">QAR 2,100.00</td>
+            <td class="money neg">− QAR 210.00</td>
+            <td class="money">QAR 0.00</td>
+            <td class="money">QAR 1,890.00</td>
+            <td><span class="status-chip paid"><span class="en-only">Paid Mar 22</span><span class="ar-only">مدفوعة 22 مارس</span></span></td>
+          </tr>
+          <tr>
+            <td><b>Mar 8 – Mar 14</b> <div class="muted" style="font-size: 11px;"><span class="en-only">Ramadan — reduced schedule</span><span class="ar-only">رمضان — جدول مخفف</span></div></td>
+            <td>6</td>
+            <td class="money">QAR 1,080.00</td>
+            <td class="money neg">− QAR 108.00</td>
+            <td class="money">QAR 0.00</td>
+            <td class="money">QAR 972.00</td>
+            <td><span class="status-chip paid"><span class="en-only">Paid Mar 15</span><span class="ar-only">مدفوعة 15 مارس</span></span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card" style="margin-top: 18px;">
+      <div class="card-head">
+        <h3><span class="en-only">Refunds &amp; adjustments</span><span class="ar-only">الاستردادات والتعديلات</span></h3>
+        <span class="meta">2 <span class="en-only">in last 90 days</span><span class="ar-only">آخر 90 يوم</span></span>
+      </div>
+      <div class="card-body p0">
+        <div class="alert refund">
+          <div class="ico">💸</div>
+          <div class="txt">
+            <span class="en-only">QAR 240 refunded to Omar H. — 2 missed Mini Picasso sessions (illness)</span>
+            <span class="ar-only">استرداد 240 ر.ق إلى عمر ح. — جلستان فائتتان (مرض)</span>
+            <small>
+              <span class="en-only">Apr 3, 2026 · deducted from Mar 29 – Apr 4 payout</span>
+              <span class="ar-only">3 أبريل 2026 · خُصمت من دفعة 29 مارس</span>
+            </small>
+          </div>
+          <a href="#" class="btn btn-outline btn-xs"><span class="en-only">Details</span><span class="ar-only">تفاصيل</span></a>
+        </div>
+        <div class="alert refund">
+          <div class="ico">↩</div>
+          <div class="txt">
+            <span class="en-only">QAR 60 adjustment — duplicate charge fixed (Saturday Studio)</span>
+            <span class="ar-only">تعديل 60 ر.ق — تصحيح رسوم مكررة (استوديو السبت)</span>
+            <small>
+              <span class="en-only">Feb 22, 2026 · processed automatically</span>
+              <span class="ar-only">22 فبراير 2026 · تمت تلقائياً</span>
+            </small>
+          </div>
+          <a href="#" class="btn btn-outline btn-xs"><span class="en-only">Details</span><span class="ar-only">تفاصيل</span></a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ INSIGHTS ============ -->
+<section class="panel" id="panel-insights">
+  <div class="container">
+    <div class="sec-head">
+      <h2><span class="en-only">How your <span class="pop">business</span> is doing</span><span class="ar-only">كيف <span class="pop">يسير</span> عملك</span></h2>
+      <div class="seg">
+        <button class="on" onclick="segClick(this)"><span class="en-only">Last 30 days</span><span class="ar-only">آخر 30 يوم</span></button>
+        <button onclick="segClick(this)"><span class="en-only">Quarter</span><span class="ar-only">الربع</span></button>
+        <button onclick="segClick(this)"><span class="en-only">Year</span><span class="ar-only">السنة</span></button>
+      </div>
+    </div>
+
+    <div class="insight-row">
+      <div class="ins-card">
+        <h4><span class="en-only">Bookings trend</span><span class="ar-only">اتجاه الحجوزات</span></h4>
+        <div class="big">84 <span style="font-size: 14px; color: #0a7c42;">↑ 18%</span></div>
+        <div class="sub"><span class="en-only">vs previous 30 days (71)</span><span class="ar-only">مقارنة بـ 30 يوم السابقة</span></div>
+        <div class="spark">
+          <span style="height: 30%"></span><span style="height: 45%"></span><span style="height: 38%"></span>
+          <span style="height: 55%"></span><span style="height: 62%"></span><span style="height: 48%"></span>
+          <span style="height: 72%"></span><span style="height: 65%"></span><span style="height: 80%"></span>
+          <span style="height: 72%"></span><span style="height: 88%"></span><span style="height: 95%"></span>
+        </div>
+      </div>
+      <div class="ins-card">
+        <h4><span class="en-only">Repeat families</span><span class="ar-only">عائلات متكررة</span></h4>
+        <div class="big">62%</div>
+        <div class="sub"><span class="en-only">of active families booked a 2nd class · Sawyer avg 45%</span><span class="ar-only">من العائلات النشطة حجزت مرة ثانية · متوسط سوير 45٪</span></div>
+        <div class="spark">
+          <span style="height: 40%" class="dim"></span><span style="height: 42%" class="dim"></span>
+          <span style="height: 45%" class="dim"></span><span style="height: 48%"></span>
+          <span style="height: 52%"></span><span style="height: 55%"></span>
+          <span style="height: 58%"></span><span style="height: 56%"></span>
+          <span style="height: 60%"></span><span style="height: 62%"></span>
+          <span style="height: 62%"></span><span style="height: 64%"></span>
+        </div>
+      </div>
+      <div class="ins-card">
+        <h4><span class="en-only">Avg rating</span><span class="ar-only">متوسط التقييم</span></h4>
+        <div class="big">4.88 ★</div>
+        <div class="sub"><span class="en-only">from 23 reviews last 30 days · 2 new this week</span><span class="ar-only">من 23 مراجعة · 2 جديدة هذا الأسبوع</span></div>
+        <div class="spark">
+          <span style="height: 80%"></span><span style="height: 85%"></span>
+          <span style="height: 88%"></span><span style="height: 82%"></span>
+          <span style="height: 90%"></span><span style="height: 88%"></span>
+          <span style="height: 92%"></span><span style="height: 90%"></span>
+          <span style="height: 95%"></span><span style="height: 90%"></span>
+          <span style="height: 92%"></span><span style="height: 96%"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-14">
+      <div class="card-head">
+        <h3><span class="en-only">Top listings</span><span class="ar-only">الأفضل أداءً</span></h3>
+        <span class="meta"><span class="en-only">By bookings · last 30 days</span><span class="ar-only">حسب الحجوزات · آخر 30 يوم</span></span>
+      </div>
+      <div class="card-body p0">
+        <div class="mini-row">
+          <div class="av c1">🎨</div>
+          <div class="mi">
+            <div class="nm"><span class="en-only">Mini Picasso</span><span class="ar-only">ميني بيكاسو</span></div>
+            <div class="sn"><span class="en-only">38 bookings · 4.9 ★ · 92% fill</span><span class="ar-only">38 · 4.9 ★ · 92٪</span></div>
+          </div>
+          <div class="when" style="font-family: Fraunces; font-size: 16px;">QAR 2,280</div>
+        </div>
+        <div class="mini-row">
+          <div class="av c4">🏕</div>
+          <div class="mi">
+            <div class="nm"><span class="en-only">Spring Break Art Camp</span><span class="ar-only">مخيم الربيع</span></div>
+            <div class="sn"><span class="en-only">14 bookings · 88% fill · opens Apr 20</span><span class="ar-only">14 · 88٪ · يبدأ 20 أبريل</span></div>
+          </div>
+          <div class="when" style="font-family: Fraunces; font-size: 16px;">QAR 1,785</div>
+        </div>
+        <div class="mini-row">
+          <div class="av c2">🎭</div>
+          <div class="mi">
+            <div class="nm"><span class="en-only">Messy Play</span><span class="ar-only">اللعب الحسي</span></div>
+            <div class="sn"><span class="en-only">24 bookings · 4.8 ★ · 80% fill</span><span class="ar-only">24 · 4.8 ★ · 80٪</span></div>
+          </div>
+          <div class="when" style="font-family: Fraunces; font-size: 16px;">QAR 1,440</div>
+        </div>
+        <div class="mini-row">
+          <div class="av c3">🖌</div>
+          <div class="mi">
+            <div class="nm"><span class="en-only">Saturday Studio</span><span class="ar-only">استوديو السبت</span></div>
+            <div class="sn"><span class="en-only">19 bookings · 4.7 ★ · 58% fill · low — try boost</span><span class="ar-only">19 · 4.7 ★ · 58٪ · منخفض</span></div>
+          </div>
+          <div class="when" style="font-family: Fraunces; font-size: 16px;">QAR 1,120</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <h3><span class="en-only">Where your families come from</span><span class="ar-only">من أين تأتي العائلات</span></h3>
+      </div>
+      <div class="card-body">
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;">
+          <div style="background: var(--butter-soft); border: 2px solid var(--ink); border-radius: 14px; padding: 14px;">
+            <div style="font-family: Fraunces; font-weight: 700; font-size: 24px;">42%</div>
+            <div style="font-size: 11.5px; color: var(--ink-soft); font-weight: 600;"><span class="en-only">Yalla Kids search</span><span class="ar-only">بحث يلا كيدز</span></div>
+          </div>
+          <div style="background: var(--mint-soft); border: 2px solid var(--ink); border-radius: 14px; padding: 14px;">
+            <div style="font-family: Fraunces; font-weight: 700; font-size: 24px;">28%</div>
+            <div style="font-size: 11.5px; color: var(--ink-soft); font-weight: 600;"><span class="en-only">Direct (saved)</span><span class="ar-only">مباشر</span></div>
+          </div>
+          <div style="background: var(--lavender-soft); border: 2px solid var(--ink); border-radius: 14px; padding: 14px;">
+            <div style="font-family: Fraunces; font-weight: 700; font-size: 24px;">18%</div>
+            <div style="font-size: 11.5px; color: var(--ink-soft); font-weight: 600;"><span class="en-only">West Bay area page</span><span class="ar-only">صفحة الخليج الغربي</span></div>
+          </div>
+          <div style="background: var(--coral-soft); border: 2px solid var(--ink); border-radius: 14px; padding: 14px;">
+            <div style="font-family: Fraunces; font-weight: 700; font-size: 24px;">12%</div>
+            <div style="font-size: 11.5px; color: var(--ink-soft); font-weight: 600;"><span class="en-only">Referral from parents</span><span class="ar-only">إحالة من أولياء الأمور</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site">
+  <div class="foot-wrap">
+    <div>© 2026 Yalla Kids · <span class="en-only">Doha, Qatar</span><span class="ar-only">الدوحة، قطر</span></div>
+    <div class="foot-links">
+      <a href="yalla-kids-for-providers.html"><span class="en-only">Provider home</span><span class="ar-only">الصفحة الرئيسية للمزودين</span></a>
+      <a href="#"><span class="en-only">Provider agreement</span><span class="ar-only">اتفاقية المزود</span></a>
+      <a href="#"><span class="en-only">Help center</span><span class="ar-only">المساعدة</span></a>
+      <a href="#"><span class="en-only">WhatsApp support</span><span class="ar-only">دعم واتساب</span></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ====== TABS ======
+  const tabs = document.querySelectorAll('.tab');
+  const panels = document.querySelectorAll('.panel');
+  function showTab(name) {
+    tabs.forEach(t => t.classList.toggle('active', t.dataset.tab === name));
+    panels.forEach(p => p.classList.toggle('active', p.id === 'panel-' + name));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  tabs.forEach(t => t.addEventListener('click', () => showTab(t.dataset.tab)));
+
+  // Allow deep-link via hash (#messages, #listings, etc)
+  window.addEventListener('DOMContentLoaded', () => {
+    const hash = location.hash.replace('#', '');
+    if (hash && document.getElementById('panel-' + hash)) showTab(hash);
+  });
+
+  // ====== SEGMENTED TOGGLE ======
+  function segClick(btn) {
+    const group = btn.parentElement;
+    group.querySelectorAll('button').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+  }
+
+  // ====== RTL TOGGLE ======
+  document.getElementById('langBtn').addEventListener('click', () => {
+    const isRtl = document.documentElement.dir === 'rtl';
+    document.documentElement.dir = isRtl ? 'ltr' : 'rtl';
+    document.documentElement.lang = isRtl ? 'en' : 'ar';
+  });
+
+  // ====== ATTENDANCE TOGGLE ======
+  document.querySelectorAll('.attend-toggle').forEach(tog => {
+    tog.querySelectorAll('button').forEach(b => {
+      b.addEventListener('click', () => {
+        tog.querySelectorAll('button').forEach(x => x.classList.remove('on'));
+        b.classList.add('on');
+      });
+    });
+  });
+
+  // ====== QUICK CHIPS — copy into textarea ======
+  document.querySelectorAll('.quick-chips .chip').forEach(c => {
+    c.addEventListener('click', () => {
+      const t = document.querySelector('.conv-input textarea');
+      if (t) {
+        t.value = c.innerText.trim();
+        t.focus();
+      }
+    });
+  });
+
+  // ====== THREAD SELECTION ======
+  document.querySelectorAll('.thread').forEach(th => {
+    th.addEventListener('click', () => {
+      document.querySelectorAll('.thread').forEach(x => x.classList.remove('active'));
+      th.classList.add('active');
+    });
+  });
+
+  // ====== MENU BTN stub ======
+  document.querySelectorAll('.menu-btn').forEach(m => {
+    m.addEventListener('click', (e) => {
+      e.stopPropagation();
+      alert('Edit / Duplicate / Pause / Share link / Delete');
+    });
+  });
+</script>
+<script src="yalla-kids-shared.js"></script>
+</body>
+</html>

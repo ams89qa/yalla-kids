@@ -1,0 +1,30 @@
+# Netlify config — static site, no build step.
+
+[build]
+  publish = "."
+  command = ""
+
+# Nice headers for static assets
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Cache CSS/JS aggressively (hash filename later for busting)
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+# Fall back to branded 404
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404

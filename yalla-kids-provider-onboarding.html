@@ -1,0 +1,1464 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#8A1538">
+<title>Become a provider | Yalla Kids</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,600;1,9..144,700;1,9..144,800&family=Inter:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --maroon: #8A1538; --maroon-dark: #6B0F2B;
+    --gold: #F4B942; --gold-dark: #D99A1F;
+    --coral: #FF8A65; --coral-soft: #FFDCC9;
+    --lavender: #B388FF; --lavender-soft: #E8DCFF;
+    --teal: #4ECDC4; --teal-soft: #CEEDEB;
+    --lime: #9AC23C; --lime-soft: #E5F3C4;
+    --pink: #FF6B9D; --pink-soft: #FFD1E0;
+    --sky: #59C3F2; --sky-soft: #CDE8F7;
+    --mint: #5EE2A6; --mint-soft: #C7F0DC;
+    --peach: #FFB582; --peach-soft: #FFE4CC;
+    --butter: #FFD66B; --butter-soft: #FFF1C2;
+    --cream: #FFF6E8; --warm-white: #FFFCF6;
+    --parchment: #FDF1DC; --ink: #2A1810;
+    --ink-soft: #5A463A; --ink-mute: #8A7765;
+    --danger: #C23B5B;
+    --shadow-hard: 4px 4px 0 var(--ink);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Inter", -apple-system, sans-serif;
+    color: var(--ink); background: var(--warm-white);
+    background-image:
+      radial-gradient(circle at 6% 8%, var(--butter-soft) 0%, transparent 22%),
+      radial-gradient(circle at 94% 6%, var(--sky-soft) 0%, transparent 22%);
+    background-attachment: fixed;
+    line-height: 1.55;
+  }
+  [dir="rtl"] body { font-family: "Tajawal", "Inter", sans-serif; }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3, h4 { font-family: "Fraunces", Georgia, serif; letter-spacing: -0.02em; }
+  [dir="rtl"] h1, [dir="rtl"] h2, [dir="rtl"] h3, [dir="rtl"] h4 { font-family: "Tajawal", "Inter", sans-serif; }
+
+  /* ============ HEADER ============ */
+  header.site {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255, 252, 246, 0.94);
+    backdrop-filter: saturate(180%) blur(10px);
+    border-bottom: 2px solid var(--ink);
+  }
+  .nav-wrap { max-width: 1280px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; gap: 28px; }
+  .logo {
+    font-family: "Fraunces", Georgia, serif; font-weight: 800; font-size: 26px;
+    color: var(--maroon); letter-spacing: -0.02em;
+    display: inline-flex; align-items: center; gap: 4px;
+  }
+  .logo span { color: var(--gold-dark); }
+  .logo::after { content: "✨"; font-size: 14px; animation: twinkle 2.4s ease-in-out infinite; }
+  @keyframes twinkle { 0%, 100% { transform: scale(1) rotate(0); opacity: 0.85; } 50% { transform: scale(1.2) rotate(15deg); opacity: 1; } }
+  .nav-actions { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+  [dir="rtl"] .nav-actions { margin-left: 0; margin-right: auto; }
+  .lang-toggle { border: 2px solid var(--ink); background: var(--butter-soft); padding: 7px 14px; border-radius: 999px; font-size: 13px; cursor: pointer; font-weight: 700; color: var(--ink); }
+  .save-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; color: var(--ink-soft); font-weight: 600;
+    background: var(--mint-soft); padding: 6px 12px; border-radius: 999px;
+    border: 1.5px solid var(--ink);
+  }
+  .save-chip .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--mint); }
+
+  .btn { padding: 10px 20px; border-radius: 999px; font-size: 14px; font-weight: 700; cursor: pointer; border: 2px solid var(--ink); display: inline-flex; align-items: center; gap: 6px; font-family: inherit; transition: transform 0.12s, box-shadow 0.12s; background: transparent; color: var(--ink); }
+  .btn:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--ink); }
+  .btn-ghost { border-color: transparent; }
+  .btn-ghost:hover { background: var(--butter-soft); border-color: var(--ink); }
+  .btn-primary { background: var(--maroon); color: #fff; }
+  .btn-primary:hover { background: var(--maroon-dark); }
+  .btn-outline { background: #fff; }
+  .btn-gold { background: var(--gold); color: #3a2c07; }
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+  .btn:disabled:hover { transform: none; box-shadow: none; }
+
+  .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+  .crumb { padding: 18px 0 4px; font-size: 13px; color: var(--ink-mute); font-weight: 500; }
+  .crumb a:hover { color: var(--maroon); text-decoration: underline; text-underline-offset: 3px; }
+  .crumb .sep { margin: 0 8px; opacity: 0.5; }
+
+  /* ============ PAGE HEAD ============ */
+  .page-head { padding: 22px 0 16px; }
+  .page-head h1 {
+    font-size: 40px; font-weight: 700; line-height: 1.1;
+  }
+  .page-head h1 .pop { font-style: italic; color: var(--maroon); position: relative; }
+  .page-head h1 .pop::after {
+    content: ""; position: absolute; left: -4px; right: -4px; bottom: -6px; height: 12px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'><path d='M2 8 Q 50 2, 100 6 T 198 6' stroke='%23F4B942' stroke-width='4' fill='none' stroke-linecap='round'/></svg>");
+    background-size: 100% 100%; z-index: -1;
+  }
+  .page-head p {
+    font-size: 16px; color: var(--ink-soft); margin-top: 10px; max-width: 640px;
+  }
+
+  /* ============ STEPPER ============ */
+  .stepper {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px;
+    margin: 22px 0 32px;
+    position: relative;
+  }
+  .step {
+    background: #fff; border: 2px solid var(--ink);
+    border-radius: 16px; padding: 14px 16px;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.12s, box-shadow 0.12s;
+  }
+  .step:hover { transform: translate(-1px, -1px); box-shadow: 3px 3px 0 var(--ink); }
+  .step.done { background: var(--mint-soft); }
+  .step.current { background: var(--butter); box-shadow: var(--shadow-hard); }
+  .step.locked { opacity: 0.45; cursor: not-allowed; }
+  .step.locked:hover { transform: none; box-shadow: none; }
+  .step-num {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: #fff; border: 1.5px solid var(--ink);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 13px; margin-bottom: 8px;
+    font-family: "Fraunces", Georgia, serif;
+  }
+  .step.done .step-num { background: var(--maroon); color: #fff; border-color: var(--maroon-dark); }
+  .step.done .step-num::before { content: "✓"; }
+  .step.done .step-num-txt { display: none; }
+  .step.current .step-num { background: var(--ink); color: var(--butter); }
+  .step-title { font-size: 13px; font-weight: 700; line-height: 1.25; }
+  .step-sub { font-size: 11px; color: var(--ink-soft); margin-top: 2px; letter-spacing: 0.04em; text-transform: uppercase; font-weight: 700; }
+
+  /* ============ LAYOUT ============ */
+  .wizard-grid {
+    display: grid; grid-template-columns: 1fr 320px;
+    gap: 32px; margin-bottom: 120px;
+  }
+  .panel {
+    background: #fff; border: 2px solid var(--ink);
+    border-radius: 24px; padding: 32px 34px;
+    box-shadow: var(--shadow-hard);
+    position: relative;
+  }
+  .panel.hidden { display: none; }
+  .panel h2 {
+    font-size: 28px; font-weight: 700; line-height: 1.15;
+  }
+  .panel > p.lead {
+    font-size: 15px; color: var(--ink-soft); margin-top: 8px;
+  }
+  .panel-eyebrow {
+    display: inline-block;
+    background: var(--sky-soft);
+    border: 2px solid var(--ink); border-radius: 999px;
+    padding: 4px 12px; font-size: 11px; font-weight: 800;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  /* ============ FORM FIELDS ============ */
+  .form-grid {
+    margin-top: 24px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
+  }
+  .form-grid.one-col { grid-template-columns: 1fr; }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .field.full { grid-column: 1 / -1; }
+  .field label {
+    font-size: 13px; font-weight: 700; color: var(--ink);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .field label .req { color: var(--danger); }
+  .field label .hint {
+    font-size: 11px; font-weight: 600; color: var(--ink-mute);
+    margin-left: auto; letter-spacing: 0.02em;
+  }
+  [dir="rtl"] .field label .hint { margin-left: 0; margin-right: auto; }
+  .field input, .field select, .field textarea {
+    padding: 12px 14px; font-size: 15px; font-family: inherit;
+    border: 2px solid var(--ink); border-radius: 12px;
+    background: #fff; color: var(--ink);
+    width: 100%;
+    transition: box-shadow 0.12s;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    outline: none; box-shadow: 3px 3px 0 var(--ink);
+  }
+  .field input::placeholder { color: var(--ink-mute); }
+  .field textarea { min-height: 92px; resize: vertical; }
+  .field .help { font-size: 12px; color: var(--ink-soft); }
+  .field .help a { color: var(--maroon); text-decoration: underline; text-underline-offset: 2px; }
+
+  .field-row {
+    display: grid; grid-template-columns: 90px 1fr; gap: 8px;
+  }
+  .field-row input { border-radius: 12px; }
+
+  /* Radio card group (business vs individual, etc) */
+  .choice-grid {
+    display: grid; gap: 12px; grid-template-columns: 1fr 1fr;
+    margin-top: 12px;
+  }
+  .choice {
+    display: block; cursor: pointer;
+    background: #fff; border: 2px solid var(--ink);
+    border-radius: 18px; padding: 20px;
+    transition: transform 0.12s, box-shadow 0.12s;
+  }
+  .choice:hover { transform: translate(-2px, -2px); box-shadow: var(--shadow-hard); }
+  .choice input { position: absolute; opacity: 0; pointer-events: none; }
+  .choice-hd {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 6px;
+  }
+  .choice .em { font-size: 28px; line-height: 1; }
+  .choice h4 { font-size: 17px; font-weight: 700; font-family: "Fraunces", Georgia, serif; }
+  .choice p { font-size: 13px; color: var(--ink-soft); }
+  .choice.selected { background: var(--butter-soft); box-shadow: var(--shadow-hard); }
+  .choice.selected .em { transform: scale(1.1); }
+
+  /* Upload drop zone */
+  .drop {
+    border: 2px dashed var(--ink);
+    border-radius: 16px;
+    padding: 22px;
+    text-align: center;
+    background: var(--parchment);
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .drop:hover { background: var(--butter-soft); }
+  .drop .em { font-size: 32px; }
+  .drop .t { font-size: 14px; font-weight: 700; margin-top: 4px; }
+  .drop .s { font-size: 12px; color: var(--ink-soft); margin-top: 2px; }
+  .drop.filled {
+    background: var(--mint-soft); border-style: solid;
+  }
+  .drop.filled .em { display: block; }
+  .drop.drag-over { background: var(--mint-soft); border-color: var(--maroon); }
+  .drop.error { background: #FEE2E2; border-color: #B91C1C; }
+
+  /* Pills (days of week, etc.) */
+  .pill-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pill {
+    background: #fff; border: 2px solid var(--ink);
+    border-radius: 999px; padding: 8px 16px;
+    font-size: 13px; font-weight: 700; cursor: pointer;
+    font-family: inherit; color: var(--ink);
+    user-select: none;
+  }
+  .pill:hover { box-shadow: 2px 2px 0 var(--ink); }
+  .pill.selected { background: var(--maroon); color: #fff; }
+  .pill.em-pill { background: var(--butter-soft); }
+  .pill.em-pill.selected { background: var(--maroon); }
+
+  /* Photo tiles */
+  .photo-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+    margin-top: 8px;
+  }
+  .photo-tile {
+    aspect-ratio: 1 / 1;
+    border: 2px dashed var(--ink); border-radius: 14px;
+    background: var(--parchment);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column;
+    font-size: 11px; color: var(--ink-soft); font-weight: 700;
+    cursor: pointer;
+    position: relative;
+  }
+  .photo-tile .em { font-size: 22px; margin-bottom: 2px; }
+  .photo-tile.filled {
+    background-size: cover; background-position: center;
+    border-style: solid;
+    color: transparent;
+  }
+  .photo-tile.filled .em { display: none; }
+  .photo-tile.filled::after {
+    content: "✓"; position: absolute; top: 6px; right: 6px;
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--mint); color: #fff; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; border: 1.5px solid var(--ink);
+  }
+
+  /* Toggle */
+  .toggle-row {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 14px 16px;
+    border: 1.5px dashed var(--ink); border-radius: 14px;
+    background: var(--parchment);
+  }
+  .toggle-row .t { flex: 1; }
+  .toggle-row .t h5 { font-size: 14px; font-weight: 800; font-family: "Inter", sans-serif; margin-bottom: 2px; }
+  .toggle-row .t p { font-size: 12px; color: var(--ink-soft); }
+  .switch {
+    position: relative; width: 46px; height: 26px;
+    background: #fff; border: 2px solid var(--ink); border-radius: 999px;
+    cursor: pointer; flex-shrink: 0;
+    transition: background 0.15s;
+  }
+  .switch::before {
+    content: ""; position: absolute; top: 2px; left: 2px;
+    width: 18px; height: 18px; border-radius: 50%;
+    background: var(--ink-mute);
+    transition: transform 0.15s, background 0.15s;
+  }
+  .switch.on { background: var(--mint-soft); }
+  .switch.on::before { transform: translateX(20px); background: var(--mint); }
+  [dir="rtl"] .switch.on::before { transform: translateX(-20px); }
+
+  /* Checkbox row */
+  .check-row {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 12px 14px;
+    border: 1.5px solid var(--ink); border-radius: 12px;
+    background: #fff;
+    cursor: pointer;
+  }
+  .check-row input {
+    width: 20px; height: 20px; flex-shrink: 0;
+    accent-color: var(--maroon);
+    margin-top: 2px;
+  }
+  .check-row .t { font-size: 13px; color: var(--ink); line-height: 1.5; }
+  .check-row .t strong { color: var(--ink); font-weight: 700; }
+  .check-row .t a { color: var(--maroon); text-decoration: underline; text-underline-offset: 2px; }
+
+  /* Alert banner */
+  .banner {
+    padding: 14px 18px; border-radius: 14px;
+    border: 2px solid var(--ink);
+    display: flex; gap: 12px; align-items: flex-start;
+    margin: 18px 0;
+    background: var(--sky-soft);
+    font-size: 13px; line-height: 1.5;
+  }
+  .banner.warn { background: var(--butter-soft); }
+  .banner.ok { background: var(--mint-soft); }
+  .banner .em { font-size: 20px; line-height: 1; }
+  .banner strong { font-weight: 800; }
+
+  /* Review summary */
+  .summary {
+    margin-top: 18px;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .summary-card {
+    background: var(--parchment); border: 2px solid var(--ink); border-radius: 18px;
+    padding: 18px 20px;
+    display: grid; grid-template-columns: 1fr auto; gap: 12px;
+  }
+  .summary-card h4 {
+    font-family: "Inter", sans-serif; font-size: 14px; font-weight: 800;
+    text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+  .summary-card .kv {
+    display: grid; grid-template-columns: 140px 1fr; gap: 4px 14px;
+    font-size: 13px;
+  }
+  .summary-card .kv .k { color: var(--ink-soft); font-weight: 600; }
+  .summary-card .kv .v { color: var(--ink); font-weight: 600; }
+  .summary-card .edit {
+    padding: 6px 12px; font-size: 12px; font-weight: 800;
+    border: 2px solid var(--ink); border-radius: 999px;
+    background: #fff; cursor: pointer; align-self: start;
+    white-space: nowrap;
+  }
+  .summary-card .edit:hover { background: var(--butter-soft); }
+
+  /* ============ SIDEBAR ============ */
+  aside.side {
+    position: sticky; top: 84px;
+    align-self: start;
+  }
+  .side-card {
+    background: #fff; border: 2px solid var(--ink);
+    border-radius: 22px; padding: 22px;
+    box-shadow: var(--shadow-hard);
+    margin-bottom: 16px;
+  }
+  .side-card h3 {
+    font-size: 17px; font-weight: 700;
+    margin-bottom: 10px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .side-card h3 .em { font-size: 22px; }
+  .side-card p { font-size: 13px; color: var(--ink-soft); line-height: 1.55; }
+  .side-card ul { margin-top: 8px; font-size: 13px; color: var(--ink); }
+  .side-card li {
+    list-style: none; padding: 5px 0 5px 22px; position: relative;
+    line-height: 1.45;
+  }
+  [dir="rtl"] .side-card li { padding: 5px 22px 5px 0; }
+  .side-card li::before {
+    content: "✓"; position: absolute; left: 0; top: 4px;
+    width: 16px; height: 16px; background: var(--mint);
+    border-radius: 50%; color: #fff; font-weight: 800; font-size: 10px;
+    display: flex; align-items: center; justify-content: center;
+    border: 1.5px solid var(--ink);
+  }
+  [dir="rtl"] .side-card li::before { left: auto; right: 0; }
+  .side-help {
+    display: flex; align-items: center; gap: 10px;
+    padding: 14px 16px;
+    background: var(--mint-soft); border: 2px solid var(--ink);
+    border-radius: 16px; font-size: 13px; font-weight: 700;
+  }
+  .side-help .em { font-size: 22px; }
+  .side-help a { color: var(--maroon); text-decoration: underline; text-underline-offset: 2px; }
+
+  /* ============ STICKY FOOTER NAV ============ */
+  .wizard-foot {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: rgba(255, 252, 246, 0.96);
+    backdrop-filter: saturate(180%) blur(12px);
+    border-top: 2px solid var(--ink);
+    padding: 12px 0;
+    z-index: 40;
+  }
+  .wizard-foot .container {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .wizard-foot .progress-txt {
+    font-size: 13px; font-weight: 700; color: var(--ink-soft);
+  }
+  .wizard-foot .spacer { flex: 1; }
+  .wizard-foot .draft { font-size: 12px; color: var(--ink-mute); font-weight: 600; margin-right: 6px; }
+
+  /* ============ PAGE FOOTER ============ */
+  footer.site {
+    background: var(--ink); color: #C9B89E;
+    padding: 40px 0 100px;
+  }
+  footer.site .container {
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+    font-size: 12px; color: #9A856E;
+  }
+  footer.site a { color: var(--butter); }
+  footer.site a:hover { color: var(--gold); }
+
+  .ar-only { display: none; }
+  [dir="rtl"] .en-only { display: none; }
+  [dir="rtl"] .ar-only { display: block; }
+  [dir="rtl"] .ar-only.inline { display: inline; }
+
+  /* ============ MOBILE ============ */
+  @media (max-width: 980px) {
+    .wizard-grid { grid-template-columns: 1fr; }
+    aside.side { position: static; }
+    .panel { padding: 24px 22px; border-radius: 20px; }
+    .panel h2 { font-size: 24px; }
+    .page-head h1 { font-size: 30px; }
+    .stepper { grid-template-columns: 1fr 1fr 1fr 1fr 1fr; gap: 6px; }
+    .step { padding: 10px 8px; border-radius: 12px; }
+    .step-title { font-size: 11px; }
+    .step-sub { display: none; }
+    .step-num { width: 22px; height: 22px; font-size: 11px; margin-bottom: 4px; }
+  }
+  @media (max-width: 640px) {
+    .form-grid { grid-template-columns: 1fr; gap: 14px; }
+    .choice-grid { grid-template-columns: 1fr; }
+    .photo-grid { grid-template-columns: repeat(3, 1fr); }
+    .page-head h1 { font-size: 26px; }
+    .panel h2 { font-size: 20px; }
+    .panel { padding: 20px 18px; }
+    .stepper { grid-template-columns: repeat(5, 1fr); }
+    .step { padding: 8px 4px; }
+    .step-title { font-size: 10px; }
+    .field input, .field select, .field textarea { font-size: 16px; } /* iOS no-zoom */
+    .summary-card { grid-template-columns: 1fr; }
+    .summary-card .kv { grid-template-columns: 1fr; gap: 2px 0; }
+    .wizard-foot .progress-txt { font-size: 12px; }
+    .wizard-foot .draft { display: none; }
+    .btn { padding: 10px 14px; font-size: 13px; }
+  }
+  @media (max-width: 420px) {
+    .photo-grid { grid-template-columns: 1fr 1fr; }
+    .stepper { gap: 4px; }
+    .step-num { width: 20px; height: 20px; font-size: 10px; }
+  }
+</style>
+<link rel="stylesheet" href="yalla-kids-shared.css">
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site">
+  <div class="nav-wrap container">
+    <a href="yalla-kids-home-wireframe.html" class="logo">
+      <span class="en-only inline">Yalla Kids</span>
+      <span class="ar-only inline">يلا كيدز</span>
+    </a>
+    <div class="nav-actions">
+      <span class="save-chip"><span class="dot"></span><span class="en-only"><span id="saveState">Draft saved</span></span><span class="ar-only">تم الحفظ</span></span>
+      <button class="lang-toggle" onclick="toggleLang()">
+        <span class="en-only inline">العربية</span>
+        <span class="ar-only inline">English</span>
+      </button>
+      <a href="yalla-kids-login.html" class="btn btn-ghost"><span class="en-only inline">Log in</span><span class="ar-only inline">تسجيل الدخول</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="crumb">
+    <a href="yalla-kids-home-wireframe.html"><span class="en-only">Home</span><span class="ar-only">الرئيسية</span></a>
+    <span class="sep">›</span>
+    <a href="yalla-kids-for-providers.html"><span class="en-only">For providers</span><span class="ar-only">للموفرين</span></a>
+    <span class="sep">›</span>
+    <span><span class="en-only">Onboarding</span><span class="ar-only">الانضمام</span></span>
+  </div>
+
+  <div class="page-head">
+    <h1>
+      <span class="en-only">Let's get you <span class="pop">listed</span> on Yalla Kids.</span>
+      <span class="ar-only">لنضعك على <span class="pop">يلا كيدز</span>.</span>
+    </h1>
+    <p>
+      <span class="en-only">Five steps, about 12 minutes. Your first listing is live within 2 business days of review. You can save a draft and come back anytime — everything you type is saved automatically.</span>
+      <span class="ar-only">خمس خطوات، 12 دقيقة تقريباً. إعلانك الأول يظهر خلال يومي عمل من المراجعة. احفظ مسوّدتك وعد لاحقاً — كل ما تكتبه يُحفظ تلقائياً.</span>
+    </p>
+  </div>
+
+  <!-- ============ STEPPER ============ -->
+  <div class="stepper">
+    <button class="step current" data-step="1" onclick="goToStep(1)">
+      <span class="step-num"><span class="step-num-txt">1</span></span>
+      <div class="step-sub"><span class="en-only">Step 1</span><span class="ar-only">الخطوة 1</span></div>
+      <div class="step-title"><span class="en-only">Account</span><span class="ar-only">الحساب</span></div>
+    </button>
+    <button class="step locked" data-step="2" onclick="goToStep(2)">
+      <span class="step-num"><span class="step-num-txt">2</span></span>
+      <div class="step-sub"><span class="en-only">Step 2</span><span class="ar-only">الخطوة 2</span></div>
+      <div class="step-title"><span class="en-only">Business</span><span class="ar-only">النشاط</span></div>
+    </button>
+    <button class="step locked" data-step="3" onclick="goToStep(3)">
+      <span class="step-num"><span class="step-num-txt">3</span></span>
+      <div class="step-sub"><span class="en-only">Step 3</span><span class="ar-only">الخطوة 3</span></div>
+      <div class="step-title"><span class="en-only">First listing</span><span class="ar-only">أول إعلان</span></div>
+    </button>
+    <button class="step locked" data-step="4" onclick="goToStep(4)">
+      <span class="step-num"><span class="step-num-txt">4</span></span>
+      <div class="step-sub"><span class="en-only">Step 4</span><span class="ar-only">الخطوة 4</span></div>
+      <div class="step-title"><span class="en-only">Payouts</span><span class="ar-only">التحويلات</span></div>
+    </button>
+    <button class="step locked" data-step="5" onclick="goToStep(5)">
+      <span class="step-num"><span class="step-num-txt">5</span></span>
+      <div class="step-sub"><span class="en-only">Step 5</span><span class="ar-only">الخطوة 5</span></div>
+      <div class="step-title"><span class="en-only">Review</span><span class="ar-only">المراجعة</span></div>
+    </button>
+  </div>
+
+  <div class="wizard-grid">
+    <!-- ============ PANELS ============ -->
+    <div>
+      <!-- === STEP 1: ACCOUNT === -->
+      <section class="panel" data-panel="1">
+        <div class="panel-eyebrow"><span class="en-only">Create your account</span><span class="ar-only">أنشئ حسابك</span></div>
+        <h2>
+          <span class="en-only">First, let's get you signed in.</span>
+          <span class="ar-only">أولاً، لنسجّلك في حسابك.</span>
+        </h2>
+        <p class="lead">
+          <span class="en-only">We'll use this email for booking notifications, payout alerts, and your login. Your mobile is shared with parents only when they book a class with you.</span>
+          <span class="ar-only">سنستخدم هذا البريد لتنبيهات الحجز والتحويلات وتسجيل الدخول. رقم جوالك يُشارَك مع الأهالي فقط عند الحجز.</span>
+        </p>
+
+        <div class="form-grid">
+          <div class="field">
+            <label><span class="en-only">Full name</span><span class="ar-only">الاسم الكامل</span><span class="req">*</span></label>
+            <input type="text" placeholder="Sara Al-Thani" data-en-placeholder="Sara Al-Thani" data-ar-placeholder="سارة الثاني" data-field="account.fullName">
+          </div>
+          <div class="field">
+            <label><span class="en-only">Email address</span><span class="ar-only">البريد الإلكتروني</span><span class="req">*</span></label>
+            <input type="email" placeholder="sara@example.com" data-field="account.email">
+          </div>
+          <div class="field full">
+            <label><span class="en-only">Mobile number</span><span class="ar-only">رقم الجوال</span><span class="req">*</span>
+              <span class="hint"><span class="en-only">Qatar only</span><span class="ar-only">قطر فقط</span></span>
+            </label>
+            <div class="field-row">
+              <input type="text" value="+974" readonly style="text-align: center; background: var(--parchment);">
+              <input type="tel" placeholder="5x xxx xxxx" data-en-placeholder="5x xxx xxxx" data-ar-placeholder="5x xxx xxxx" data-field="account.mobile">
+            </div>
+            <div class="help"><span class="en-only">We'll send a 6-digit verification code.</span><span class="ar-only">سنرسل رمز تحقق من 6 أرقام.</span></div>
+          </div>
+          <div class="field">
+            <label><span class="en-only">Password</span><span class="ar-only">كلمة المرور</span><span class="req">*</span>
+              <span class="hint"><span class="en-only">Min 10 chars</span><span class="ar-only">10 أحرف</span></span>
+            </label>
+            <input type="password" placeholder="••••••••••" data-field="account.password">
+          </div>
+          <div class="field">
+            <label><span class="en-only">Preferred language</span><span class="ar-only">اللغة المفضلة</span></label>
+            <select data-field="account.lang">
+              <option value="en">English</option>
+              <option value="ar">العربية</option>
+              <option value="both">Both / كلاهما</option>
+            </select>
+          </div>
+          <div class="field full">
+            <label class="check-row" style="cursor: pointer;">
+              <input type="checkbox" data-field="account.wa">
+              <span class="t"><span class="en-only">Yes, parents can reach me on <strong>WhatsApp</strong> for booking questions. (Recommended — 3× higher conversion.)</span><span class="ar-only">نعم، يمكن للأهل التواصل معي على <strong>واتساب</strong> للاستفسارات. (موصى به — تحويل أعلى بـ3 مرات.)</span></span>
+            </label>
+          </div>
+          <div class="field full">
+            <label class="check-row" style="cursor: pointer;">
+              <input type="checkbox" data-field="account.agree">
+              <span class="t"><span class="en-only">I agree to Yalla Kids' <a href="yalla-kids-terms.html">Terms</a>, <a href="yalla-kids-privacy.html">Privacy Policy</a>, and the <a href="yalla-kids-terms.html#provider-conduct">Provider Code of Conduct</a>.</span><span class="ar-only">أوافق على <a href="yalla-kids-terms.html">الشروط</a> و<a href="yalla-kids-privacy.html">سياسة الخصوصية</a> و<a href="yalla-kids-terms.html#provider-conduct">ميثاق الموفر</a>.</span></span>
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <!-- === STEP 2: BUSINESS === -->
+      <section class="panel hidden" data-panel="2">
+        <div class="panel-eyebrow"><span class="en-only">About your business</span><span class="ar-only">عن نشاطك</span></div>
+        <h2>
+          <span class="en-only">Tell parents who you are.</span>
+          <span class="ar-only">أخبر الأهل بمن أنت.</span>
+        </h2>
+        <p class="lead">
+          <span class="en-only">This becomes your public provider page. We verify every business before going live — expect a short WhatsApp call from our team within 1 business day.</span>
+          <span class="ar-only">هذا سيصبح ملفك العام. نتحقق من كل نشاط قبل النشر — توقع اتصال واتساب قصيراً خلال يوم عمل.</span>
+        </p>
+
+        <div class="field full" style="margin-top: 22px;">
+          <label><span class="en-only">What kind of provider are you?</span><span class="ar-only">ما نوع النشاط؟</span><span class="req">*</span></label>
+          <div class="choice-grid" id="providerTypeChoice">
+            <label class="choice" data-val="business">
+              <input type="radio" name="ptype">
+              <div class="choice-hd"><span class="em">🏢</span><h4><span class="en-only">Registered business</span><span class="ar-only">نشاط مسجّل</span></h4></div>
+              <p><span class="en-only">You have a Commercial Registration (CR). Academy, venue, studio, or company.</span><span class="ar-only">لديك سجل تجاري. أكاديمية، مكان، استوديو، أو شركة.</span></p>
+            </label>
+            <label class="choice" data-val="individual">
+              <input type="radio" name="ptype">
+              <div class="choice-hd"><span class="em">👩‍🏫</span><h4><span class="en-only">Individual instructor</span><span class="ar-only">مدرّب فرد</span></h4></div>
+              <p><span class="en-only">Freelance coach or teacher. You have a Qatar ID and work permit that allows freelance work.</span><span class="ar-only">مدرّب أو معلم مستقل. لديك هوية قطرية وإذن عمل.</span></p>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-grid" style="margin-top: 22px;">
+          <div class="field">
+            <label><span class="en-only">Business name (English)</span><span class="ar-only">اسم النشاط (إنجليزي)</span><span class="req">*</span></label>
+            <input type="text" placeholder="Katara Art Studio" data-en-placeholder="Katara Art Studio" data-ar-placeholder="استوديو كتارا للفن" data-field="business.nameEn">
+          </div>
+          <div class="field">
+            <label><span class="en-only">Business name (Arabic)</span><span class="ar-only">اسم النشاط (عربي)</span><span class="req">*</span></label>
+            <input type="text" placeholder="استوديو كتارا للفنون" data-field="business.nameAr" dir="rtl">
+          </div>
+          <div class="field biz-only">
+            <label><span class="en-only">CR number</span><span class="ar-only">رقم السجل التجاري</span><span class="req">*</span>
+              <span class="hint"><span class="en-only">7 digits</span><span class="ar-only">7 أرقام</span></span>
+            </label>
+            <input type="text" placeholder="1234567" data-field="business.cr">
+          </div>
+          <div class="field biz-only">
+            <label><span class="en-only">VAT number (optional)</span><span class="ar-only">رقم الضريبة (اختياري)</span></label>
+            <input type="text" placeholder="Not yet required in Qatar" data-en-placeholder="Not yet required in Qatar" data-ar-placeholder="غير مطلوب حالياً في قطر" data-field="business.vat">
+          </div>
+          <div class="field ind-only hidden">
+            <label><span class="en-only">Qatar ID (QID)</span><span class="ar-only">الرقم الشخصي</span><span class="req">*</span>
+              <span class="hint"><span class="en-only">11 digits</span><span class="ar-only">11 رقماً</span></span>
+            </label>
+            <input type="text" placeholder="28765412345" data-field="business.qid">
+          </div>
+          <div class="field ind-only hidden">
+            <label><span class="en-only">Work permit / sponsorship</span><span class="ar-only">تصريح العمل</span></label>
+            <select data-field="business.permit">
+              <option value="">Select…</option>
+              <option>Qatari citizen</option>
+              <option>Spouse/family visa — freelance allowed</option>
+              <option>Work sponsorship — employer permission</option>
+              <option>Self-sponsor / business partner</option>
+            </select>
+          </div>
+          <div class="field">
+            <label><span class="en-only">Primary area</span><span class="ar-only">المنطقة الرئيسية</span><span class="req">*</span></label>
+            <select data-field="business.area">
+              <option value="">Select…</option>
+              <option>West Bay</option>
+              <option>The Pearl</option>
+              <option>Lusail</option>
+              <option>Msheireb / Downtown</option>
+              <option>Katara</option>
+              <option>Aspire Zone</option>
+              <option>Education City</option>
+              <option>Al Sadd</option>
+              <option>Al Waab</option>
+              <option>Al Rayyan</option>
+              <option>Al Wakra</option>
+              <option>Old Airport</option>
+              <option>Duhail</option>
+              <option>Mobile / home visits</option>
+            </select>
+          </div>
+          <div class="field">
+            <label><span class="en-only">Address</span><span class="ar-only">العنوان</span></label>
+            <input type="text" placeholder="Building 12, Street 350, Zone 63" data-en-placeholder="Building 12, Street 350, Zone 63" data-ar-placeholder="مبنى ١٢، شارع ٣٥٠، منطقة ٦٣" data-field="business.address">
+          </div>
+          <div class="field full">
+            <label><span class="en-only">Tagline</span><span class="ar-only">شعار قصير</span>
+              <span class="hint"><span class="en-only">70 chars</span><span class="ar-only">70 حرفاً</span></span>
+            </label>
+            <input type="text" placeholder="Playful art classes for curious Doha kids" data-en-placeholder="Playful art classes for curious Doha kids" data-ar-placeholder="صفوف فنية مرحة لأطفال الدوحة الفضوليين" data-field="business.tagline" maxlength="70">
+          </div>
+          <div class="field full">
+            <label><span class="en-only">About us — English</span><span class="ar-only">عنّا — إنجليزي</span><span class="req">*</span></label>
+            <textarea placeholder="We run small-group art classes for kids 4–12. Our teachers trained at VCUarts Qatar and we've been in Katara since 2019…" data-en-placeholder="We run small-group art classes for kids 4–12. Our teachers trained at VCUarts Qatar and we've been in Katara since 2019…" data-ar-placeholder="نقدّم صفوف فنية لمجموعات صغيرة لأطفال ٤–١٢. مدرّسونا تدرّبوا في VCUarts قطر ونحن في كتارا منذ ٢٠١٩…" data-field="business.bioEn"></textarea>
+          </div>
+          <div class="field full">
+            <label><span class="en-only">About us — Arabic</span><span class="ar-only">عنّا — عربي</span><span class="req">*</span></label>
+            <textarea placeholder="نقدّم صفوف فن للأطفال 4–12 في مجموعات صغيرة…" data-field="business.bioAr" dir="rtl"></textarea>
+          </div>
+          <div class="field full">
+            <label><span class="en-only">Logo / profile photo</span><span class="ar-only">الشعار / الصورة</span><span class="req">*</span></label>
+            <div class="drop" onclick="fakeUpload(this, 'logo-filename.png')">
+              <div class="em">🖼️</div>
+              <div class="t"><span class="en-only">Click to upload logo</span><span class="ar-only">اضغط لرفع الشعار</span></div>
+              <div class="s"><span class="en-only">PNG or JPG, 500×500 min, under 5 MB</span><span class="ar-only">PNG أو JPG، 500×500 كحد أدنى، أقل من 5 ميغا</span></div>
+            </div>
+          </div>
+          <div class="field full biz-only">
+            <label><span class="en-only">CR certificate (PDF)</span><span class="ar-only">شهادة السجل التجاري (PDF)</span><span class="req">*</span></label>
+            <div class="drop" onclick="fakeUpload(this, 'CR-certificate.pdf')">
+              <div class="em">📄</div>
+              <div class="t"><span class="en-only">Upload CR certificate</span><span class="ar-only">ارفع شهادة السجل</span></div>
+              <div class="s"><span class="en-only">Kept private. Used only for verification.</span><span class="ar-only">خاصة. للتحقق فقط.</span></div>
+            </div>
+          </div>
+          <div class="field full ind-only hidden">
+            <label><span class="en-only">QID scan (front & back)</span><span class="ar-only">صورة الهوية (أمام وخلف)</span><span class="req">*</span></label>
+            <div class="drop" onclick="fakeUpload(this, 'QID-scan.pdf')">
+              <div class="em">🪪</div>
+              <div class="t"><span class="en-only">Upload QID scan</span><span class="ar-only">ارفع الهوية</span></div>
+              <div class="s"><span class="en-only">Kept private. For KYC only.</span><span class="ar-only">خاصة. للتحقق فقط.</span></div>
+            </div>
+          </div>
+          <div class="field">
+            <label><span class="en-only">Website (optional)</span><span class="ar-only">الموقع (اختياري)</span></label>
+            <input type="url" placeholder="https://..." data-field="business.website">
+          </div>
+          <div class="field">
+            <label><span class="en-only">Instagram (optional)</span><span class="ar-only">إنستغرام (اختياري)</span></label>
+            <input type="text" placeholder="@kataraartstudio" data-field="business.ig">
+          </div>
+        </div>
+      </section>
+
+      <!-- === STEP 3: FIRST LISTING === -->
+      <section class="panel hidden" data-panel="3">
+        <div class="panel-eyebrow"><span class="en-only">Create your first listing</span><span class="ar-only">أنشئ أول إعلان</span></div>
+        <h2>
+          <span class="en-only">Add one thing parents can book.</span>
+          <span class="ar-only">أضف شيئاً واحداً يمكن حجزه.</span>
+        </h2>
+        <p class="lead">
+          <span class="en-only">Start with one class, camp, or open-play session. You can add more after you're live — most providers end up with 3–6 listings.</span>
+          <span class="ar-only">ابدأ بصف أو معسكر أو جلسة لعب واحدة. يمكنك الإضافة بعد النشر — معظم الموفرين ينتهون بـ3–6 إعلانات.</span>
+        </p>
+
+        <div class="field full" style="margin-top: 22px;">
+          <label><span class="en-only">Listing type</span><span class="ar-only">نوع الإعلان</span><span class="req">*</span></label>
+          <div class="pill-row">
+            <button class="pill selected em-pill" type="button">🎨 <span class="en-only">Weekly class</span><span class="ar-only">صف أسبوعي</span></button>
+            <button class="pill em-pill" type="button">⛺ <span class="en-only">Camp / block</span><span class="ar-only">معسكر</span></button>
+            <button class="pill em-pill" type="button">🎪 <span class="en-only">Birthday venue</span><span class="ar-only">حفلة ميلاد</span></button>
+            <button class="pill em-pill" type="button">🧸 <span class="en-only">Open play drop-in</span><span class="ar-only">لعب حر</span></button>
+            <button class="pill em-pill" type="button">🛠️ <span class="en-only">One-off workshop</span><span class="ar-only">ورشة خاصة</span></button>
+          </div>
+        </div>
+
+        <div class="form-grid" style="margin-top: 22px;">
+          <div class="field">
+            <label><span class="en-only">Listing title (English)</span><span class="ar-only">عنوان الإعلان (إنجليزي)</span><span class="req">*</span></label>
+            <input type="text" placeholder="Little painters workshop" data-en-placeholder="Little painters workshop" data-ar-placeholder="ورشة الرسّامين الصغار" data-field="listing.titleEn">
+          </div>
+          <div class="field">
+            <label><span class="en-only">Listing title (Arabic)</span><span class="ar-only">عنوان الإعلان (عربي)</span><span class="req">*</span></label>
+            <input type="text" placeholder="ورشة الرسامين الصغار" data-field="listing.titleAr" dir="rtl">
+          </div>
+          <div class="field">
+            <label><span class="en-only">Category</span><span class="ar-only">الفئة</span><span class="req">*</span></label>
+            <select data-field="listing.category">
+              <option value="">Select…</option>
+              <option>🎨 Art & crafts</option>
+              <option>🎵 Music</option>
+              <option>🏊 Swimming</option>
+              <option>⚽ Sports</option>
+              <option>💃 Dance</option>
+              <option>💻 Coding & tech</option>
+              <option>🔤 Arabic language</option>
+              <option>🧪 STEAM / science</option>
+              <option>🎭 Theater & drama</option>
+              <option>🧘 Yoga & mindfulness</option>
+            </select>
+          </div>
+          <div class="field">
+            <label><span class="en-only">Venue</span><span class="ar-only">المكان</span><span class="req">*</span></label>
+            <select data-field="listing.venue">
+              <option>At our venue (same as business address)</option>
+              <option>At a partner venue</option>
+              <option>At the kid's home (mobile)</option>
+              <option>Online</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label><span class="en-only">Minimum age</span><span class="ar-only">أصغر عمر</span><span class="req">*</span></label>
+            <input type="number" placeholder="4" min="0" max="18" data-field="listing.ageMin">
+          </div>
+          <div class="field">
+            <label><span class="en-only">Maximum age</span><span class="ar-only">أكبر عمر</span><span class="req">*</span></label>
+            <input type="number" placeholder="8" min="0" max="18" data-field="listing.ageMax">
+          </div>
+
+          <div class="field full">
+            <label><span class="en-only">Which days does it run?</span><span class="ar-only">في أي أيام؟</span><span class="req">*</span></label>
+            <div class="pill-row" id="dayPicker">
+              <button class="pill" type="button">Sun</button>
+              <button class="pill" type="button">Mon</button>
+              <button class="pill" type="button">Tue</button>
+              <button class="pill" type="button">Wed</button>
+              <button class="pill" type="button">Thu</button>
+              <button class="pill selected" type="button">Fri</button>
+              <button class="pill selected" type="button">Sat</button>
+            </div>
+          </div>
+
+          <div class="field">
+            <label><span class="en-only">Session time</span><span class="ar-only">وقت الجلسة</span><span class="req">*</span></label>
+            <input type="time" value="10:00" data-field="listing.time">
+          </div>
+          <div class="field">
+            <label><span class="en-only">Session length</span><span class="ar-only">مدة الجلسة</span><span class="req">*</span></label>
+            <select data-field="listing.duration">
+              <option>30 min</option>
+              <option>45 min</option>
+              <option selected>60 min</option>
+              <option>75 min</option>
+              <option>90 min</option>
+              <option>2 hours</option>
+              <option>3 hours</option>
+              <option>Half-day (4h)</option>
+              <option>Full-day (8h)</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label><span class="en-only">Price per session (QAR)</span><span class="ar-only">السعر للجلسة (ر.ق)</span><span class="req">*</span></label>
+            <input type="number" placeholder="120" data-field="listing.price">
+          </div>
+          <div class="field">
+            <label><span class="en-only">Max kids per session</span><span class="ar-only">عدد الأطفال الأقصى</span><span class="req">*</span></label>
+            <input type="number" placeholder="10" data-field="listing.capacity">
+          </div>
+
+          <div class="field full">
+            <label><span class="en-only">Description (English)</span><span class="ar-only">الوصف (إنجليزي)</span><span class="req">*</span></label>
+            <textarea placeholder="What happens in a typical session? What will they learn? What should parents know?" data-en-placeholder="What happens in a typical session? What will they learn? What should parents know?" data-ar-placeholder="ماذا يحدث في الجلسة؟ ماذا سيتعلّمون؟ ما الذي ينبغي للأهل معرفته؟" data-field="listing.descEn"></textarea>
+          </div>
+          <div class="field full">
+            <label><span class="en-only">Description (Arabic)</span><span class="ar-only">الوصف (عربي)</span><span class="req">*</span></label>
+            <textarea placeholder="ما الذي يحدث في الجلسة؟ ماذا سيتعلمون؟" data-field="listing.descAr" dir="rtl"></textarea>
+          </div>
+
+          <div class="field full">
+            <label><span class="en-only">Photos</span><span class="ar-only">الصور</span><span class="req">*</span>
+              <span class="hint"><span class="en-only">4–8 photos, action shots convert best</span><span class="ar-only">4–8 صور، اللقطات أثناء النشاط أفضل</span></span>
+            </label>
+            <div class="photo-grid" id="photoGrid">
+              <div class="photo-tile" onclick="fakePhoto(this, 'c-art')">
+                <span class="em">📷</span>
+                <span><span class="en-only">Add photo</span><span class="ar-only">أضف صورة</span></span>
+              </div>
+              <div class="photo-tile" onclick="fakePhoto(this, 'c-art2')">
+                <span class="em">📷</span>
+                <span><span class="en-only">Add photo</span><span class="ar-only">أضف صورة</span></span>
+              </div>
+              <div class="photo-tile" onclick="fakePhoto(this, 'c-art3')">
+                <span class="em">📷</span>
+                <span><span class="en-only">Add photo</span><span class="ar-only">أضف صورة</span></span>
+              </div>
+              <div class="photo-tile" onclick="fakePhoto(this, 'c-art4')">
+                <span class="em">📷</span>
+                <span><span class="en-only">Add photo</span><span class="ar-only">أضف صورة</span></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="field full">
+            <label><span class="en-only">Policies &amp; extras</span><span class="ar-only">السياسات والإضافات</span></label>
+            <div style="display: grid; gap: 8px; margin-top: 4px;">
+              <div class="toggle-row">
+                <div class="t">
+                  <h5><span class="en-only">Drop-off (parents don't stay)</span><span class="ar-only">بدون مرافق (الأهل لا يبقون)</span></h5>
+                  <p><span class="en-only">Kids go in, parents pick up after.</span><span class="ar-only">الأطفال يدخلون، والأهل يرجعون لاستلامهم.</span></p>
+                </div>
+                <div class="switch on" onclick="this.classList.toggle('on')"></div>
+              </div>
+              <div class="toggle-row">
+                <div class="t">
+                  <h5><span class="en-only">Materials included</span><span class="ar-only">المواد متضمنة</span></h5>
+                  <p><span class="en-only">No need for parents to bring anything.</span><span class="ar-only">لا حاجة لأن يحضر الأهل شيئاً.</span></p>
+                </div>
+                <div class="switch on" onclick="this.classList.toggle('on')"></div>
+              </div>
+              <div class="toggle-row">
+                <div class="t">
+                  <h5><span class="en-only">Free trial session available</span><span class="ar-only">جلسة تجريبية مجانية</span></h5>
+                  <p><span class="en-only">Converts 2× better. Highly recommended for new providers.</span><span class="ar-only">تحويل أعلى بمرتين. موصى به للموفرين الجدد.</span></p>
+                </div>
+                <div class="switch" onclick="this.classList.toggle('on')"></div>
+              </div>
+              <div class="toggle-row">
+                <div class="t">
+                  <h5><span class="en-only">Halal-friendly environment</span><span class="ar-only">بيئة ملائمة للمسلمين</span></h5>
+                  <p><span class="en-only">Prayer space, modest dress code respected.</span><span class="ar-only">مساحة للصلاة، احترام اللباس المحتشم.</span></p>
+                </div>
+                <div class="switch on" onclick="this.classList.toggle('on')"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- === STEP 4: PAYOUTS === -->
+      <section class="panel hidden" data-panel="4">
+        <div class="panel-eyebrow"><span class="en-only">Get paid</span><span class="ar-only">استلم أموالك</span></div>
+        <h2>
+          <span class="en-only">Where should we send your earnings?</span>
+          <span class="ar-only">إلى أين نرسل أرباحك؟</span>
+        </h2>
+        <p class="lead">
+          <span class="en-only">We use <strong>MyFatoorah Suppliers</strong> to split payments at the source — parents pay, your share lands in your bank, our 10% platform fee stays with us. Payouts run every Monday for the previous week's earnings.</span>
+          <span class="ar-only">نستخدم <strong>ماي فاتورة</strong> لتقسيم المدفوعات — الأهل يدفعون، حصتك تصل لبنكك، و10% رسوم المنصة تبقى لنا. التحويلات كل اثنين عن أسبوع العمل السابق.</span>
+        </p>
+
+        <div class="banner">
+          <span class="em">🔒</span>
+          <div>
+            <strong><span class="en-only">Your bank details stay between you, your bank, and MyFatoorah.</span><span class="ar-only">تفاصيل بنكك تبقى بينك وبين البنك وماي فاتورة.</span></strong><br>
+            <span class="en-only">Yalla Kids never sees your full IBAN after you enter it — we only see the last 4 digits in your dashboard.</span><span class="ar-only">يلا كيدز لا يرى رقم الآيبان الكامل بعد إدخاله — فقط آخر 4 أرقام.</span>
+          </div>
+        </div>
+
+        <div class="form-grid" style="margin-top: 18px;">
+          <div class="field">
+            <label><span class="en-only">Account holder name</span><span class="ar-only">اسم صاحب الحساب</span><span class="req">*</span>
+              <span class="hint"><span class="en-only">Must match CR / QID</span><span class="ar-only">يجب مطابقة السجل أو الهوية</span></span>
+            </label>
+            <input type="text" placeholder="Katara Art Studio WLL" data-en-placeholder="Katara Art Studio WLL" data-ar-placeholder="استوديو كتارا للفن ذ.م.م" data-field="payouts.holder">
+          </div>
+          <div class="field">
+            <label><span class="en-only">Bank</span><span class="ar-only">البنك</span><span class="req">*</span></label>
+            <select data-field="payouts.bank">
+              <option value="">Select your bank…</option>
+              <option>Qatar National Bank (QNB)</option>
+              <option>Qatar Islamic Bank (QIB)</option>
+              <option>Commercial Bank of Qatar</option>
+              <option>Doha Bank</option>
+              <option>Qatar International Islamic Bank (QIIB)</option>
+              <option>Masraf Al Rayan</option>
+              <option>Dukhan Bank</option>
+              <option>Ahli Bank Qatar</option>
+              <option>Standard Chartered Qatar</option>
+              <option>HSBC Qatar</option>
+              <option>Mashreq Qatar</option>
+            </select>
+          </div>
+          <div class="field full">
+            <label><span class="en-only">IBAN</span><span class="ar-only">رقم الآيبان</span><span class="req">*</span>
+              <span class="hint"><span class="en-only">QA## + 27 digits</span><span class="ar-only">QA## + 27 رقماً</span></span>
+            </label>
+            <input type="text" placeholder="QA58 DOHB 0000 1234 5678 9012 3456 78" data-en-placeholder="QA58 DOHB 0000 1234 5678 9012 3456 78" data-ar-placeholder="QA58 DOHB 0000 1234 5678 9012 3456 78" data-field="payouts.iban" maxlength="34">
+            <div class="help"><span class="en-only">Find your IBAN in your mobile banking app or on a bank letter. We'll send a QAR 1 test deposit to confirm.</span><span class="ar-only">ستجد الآيبان في تطبيق البنك أو في خطاب البنك. سنرسل 1 ر.ق للتحقق.</span></div>
+          </div>
+          <div class="field">
+            <label><span class="en-only">SWIFT / BIC (optional)</span><span class="ar-only">رمز سويفت (اختياري)</span></label>
+            <input type="text" placeholder="QNBAQAQAXXX" data-field="payouts.swift">
+          </div>
+          <div class="field">
+            <label><span class="en-only">Payout frequency</span><span class="ar-only">تكرار التحويل</span></label>
+            <select data-field="payouts.freq">
+              <option selected>Weekly (every Monday)</option>
+              <option>Bi-weekly (every other Monday)</option>
+              <option>Monthly (1st of month)</option>
+            </select>
+          </div>
+
+          <div class="field full">
+            <label><span class="en-only">Bank confirmation letter</span><span class="ar-only">خطاب تأكيد البنك</span><span class="req">*</span>
+              <span class="hint"><span class="en-only">Last 3 months</span><span class="ar-only">آخر 3 أشهر</span></span>
+            </label>
+            <div class="drop" onclick="fakeUpload(this, 'bank-letter.pdf')">
+              <div class="em">🏦</div>
+              <div class="t"><span class="en-only">Upload bank letter or statement header</span><span class="ar-only">ارفع خطاب البنك أو ترويسة الكشف</span></div>
+              <div class="s"><span class="en-only">Must show account holder name and IBAN on bank letterhead.</span><span class="ar-only">يجب أن يُظهر الاسم والآيبان على ورق البنك.</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="banner warn">
+          <span class="em">💸</span>
+          <div>
+            <strong><span class="en-only">Our commission, spelled out.</span><span class="ar-only">العمولة بوضوح.</span></strong><br>
+            <span class="en-only">We keep 10% of each completed booking as a platform fee. There are no listing fees, no monthly fees, and no fees on refunded or cancelled bookings. If a parent pays QAR 500, you receive QAR 450.</span><span class="ar-only">نحتفظ بـ10% من كل حجز مكتمل كرسوم منصة. لا رسوم إدراج، لا رسوم شهرية، ولا رسوم على الحجوزات المُسترَدة. إذا دفع الأهل 500 ر.ق، تستلم 450 ر.ق.</span>
+          </div>
+        </div>
+
+        <div class="check-row" style="margin-top: 14px;">
+          <input type="checkbox" data-field="payouts.agree">
+          <span class="t"><span class="en-only">I've reviewed the <a href="yalla-kids-terms.html#payment-agreement">Provider Payment Agreement</a>, confirm the bank details above are correct, and authorize MyFatoorah to process payouts on Yalla Kids' behalf.</span><span class="ar-only">راجعت <a href="yalla-kids-terms.html#payment-agreement">اتفاقية الدفع للموفر</a>، وأؤكد صحة تفاصيل البنك أعلاه، وأفوّض ماي فاتورة بمعالجة التحويلات نيابة عن يلا كيدز.</span></span>
+        </div>
+      </section>
+
+      <!-- === STEP 5: REVIEW === -->
+      <section class="panel hidden" data-panel="5">
+        <div class="panel-eyebrow"><span class="en-only">One last look</span><span class="ar-only">مراجعة أخيرة</span></div>
+        <h2>
+          <span class="en-only">Ready to go live?</span>
+          <span class="ar-only">جاهز للنشر؟</span>
+        </h2>
+        <p class="lead">
+          <span class="en-only">Check everything below. Edit any section by clicking the button. Once you submit, our team reviews within 2 business days and sends you a WhatsApp when you're live.</span>
+          <span class="ar-only">راجع كل شيء أدناه. عدّل أي قسم بالضغط على الزر. بعد الإرسال، فريقنا يراجع خلال يومي عمل ويرسل واتساب عند النشر.</span>
+        </p>
+
+        <div class="summary">
+          <div class="summary-card">
+            <div>
+              <h4><span class="en-only">1 · Account</span><span class="ar-only">1 · الحساب</span></h4>
+              <div class="kv">
+                <span class="k"><span class="en-only">Name</span><span class="ar-only">الاسم</span></span><span class="v" id="r-name">Sara Al-Thani</span>
+                <span class="k"><span class="en-only">Email</span><span class="ar-only">البريد</span></span><span class="v" id="r-email">sara@example.com</span>
+                <span class="k"><span class="en-only">Mobile</span><span class="ar-only">الجوال</span></span><span class="v" id="r-mobile">+974 5xxx xxxx</span>
+                <span class="k"><span class="en-only">WhatsApp</span><span class="ar-only">واتساب</span></span><span class="v" id="r-wa">Enabled</span>
+              </div>
+            </div>
+            <button class="edit" onclick="goToStep(1)"><span class="en-only">Edit</span><span class="ar-only">عدّل</span></button>
+          </div>
+
+          <div class="summary-card">
+            <div>
+              <h4><span class="en-only">2 · Business</span><span class="ar-only">2 · النشاط</span></h4>
+              <div class="kv">
+                <span class="k"><span class="en-only">Type</span><span class="ar-only">النوع</span></span><span class="v" id="r-ptype">Registered business</span>
+                <span class="k"><span class="en-only">Name</span><span class="ar-only">الاسم</span></span><span class="v" id="r-bname">Katara Art Studio</span>
+                <span class="k"><span class="en-only">CR / QID</span><span class="ar-only">السجل / الهوية</span></span><span class="v" id="r-crqid">CR 1234567</span>
+                <span class="k"><span class="en-only">Area</span><span class="ar-only">المنطقة</span></span><span class="v" id="r-area">Katara</span>
+                <span class="k"><span class="en-only">Documents</span><span class="ar-only">المستندات</span></span><span class="v">✅ CR · ✅ Logo</span>
+              </div>
+            </div>
+            <button class="edit" onclick="goToStep(2)"><span class="en-only">Edit</span><span class="ar-only">عدّل</span></button>
+          </div>
+
+          <div class="summary-card">
+            <div>
+              <h4><span class="en-only">3 · First listing</span><span class="ar-only">3 · الإعلان الأول</span></h4>
+              <div class="kv">
+                <span class="k"><span class="en-only">Type</span><span class="ar-only">النوع</span></span><span class="v">Weekly class</span>
+                <span class="k"><span class="en-only">Title</span><span class="ar-only">العنوان</span></span><span class="v" id="r-title">Little painters workshop</span>
+                <span class="k"><span class="en-only">Category</span><span class="ar-only">الفئة</span></span><span class="v">🎨 Art &amp; crafts</span>
+                <span class="k"><span class="en-only">Ages</span><span class="ar-only">الأعمار</span></span><span class="v" id="r-ages">4–8</span>
+                <span class="k"><span class="en-only">When</span><span class="ar-only">متى</span></span><span class="v" id="r-when">Fri, Sat · 10:00 AM · 60 min</span>
+                <span class="k"><span class="en-only">Price &amp; capacity</span><span class="ar-only">السعر والسعة</span></span><span class="v" id="r-price">QAR 120 · 10 kids</span>
+                <span class="k"><span class="en-only">Photos</span><span class="ar-only">الصور</span></span><span class="v">✅ 4 uploaded</span>
+              </div>
+            </div>
+            <button class="edit" onclick="goToStep(3)"><span class="en-only">Edit</span><span class="ar-only">عدّل</span></button>
+          </div>
+
+          <div class="summary-card">
+            <div>
+              <h4><span class="en-only">4 · Payouts</span><span class="ar-only">4 · التحويلات</span></h4>
+              <div class="kv">
+                <span class="k"><span class="en-only">Holder</span><span class="ar-only">صاحب الحساب</span></span><span class="v" id="r-holder">Katara Art Studio WLL</span>
+                <span class="k"><span class="en-only">Bank</span><span class="ar-only">البنك</span></span><span class="v" id="r-bank">QNB · ending 3478</span>
+                <span class="k"><span class="en-only">Frequency</span><span class="ar-only">التكرار</span></span><span class="v">Weekly · Monday</span>
+                <span class="k"><span class="en-only">Commission</span><span class="ar-only">العمولة</span></span><span class="v">10% platform fee</span>
+              </div>
+            </div>
+            <button class="edit" onclick="goToStep(4)"><span class="en-only">Edit</span><span class="ar-only">عدّل</span></button>
+          </div>
+        </div>
+
+        <div class="banner ok" style="margin-top: 22px;">
+          <span class="em">📋</span>
+          <div>
+            <strong><span class="en-only">What happens next</span><span class="ar-only">ما التالي</span></strong><br>
+            <span class="en-only">1. Our team calls you on WhatsApp for a 10-min verification chat. 2. We confirm your CR/QID and bank details with MyFatoorah. 3. You get a "You're live!" WhatsApp with your public provider page. Most providers go live within 2 business days.</span>
+            <span class="ar-only">1. فريقنا يتصل بك على واتساب لمكالمة تحقق 10 دقائق. 2. نؤكّد السجل/الهوية وتفاصيل البنك مع ماي فاتورة. 3. تستلم رسالة واتساب "أنت منشور!" مع رابط ملفك العام. معظم الموفرين يُنشرون خلال يومي عمل.</span>
+          </div>
+        </div>
+
+        <div style="display: grid; gap: 10px; margin-top: 18px;">
+          <label class="check-row">
+            <input type="checkbox" data-field="review.agreement">
+            <span class="t"><span class="en-only">I've read and agree to the full <a href="yalla-kids-terms.html#provider-agreement">Yalla Kids Provider Agreement</a> including cancellation rules, refund policy, and dispute resolution process.</span><span class="ar-only">قرأت ووافقت على <a href="yalla-kids-terms.html#provider-agreement">اتفاقية موفر يلا كيدز</a> كاملة بما فيها قواعد الإلغاء والاسترداد وحل النزاعات.</span></span>
+          </label>
+          <label class="check-row">
+            <input type="checkbox" data-field="review.accurate">
+            <span class="t"><span class="en-only">Everything I've submitted is accurate. I understand listings with false information are removed and payouts are withheld pending investigation.</span><span class="ar-only">كل ما قدّمته دقيق. أفهم أن الإعلانات الكاذبة تُزال والتحويلات تُحجز حتى التحقيق.</span></span>
+          </label>
+          <label class="check-row">
+            <input type="checkbox" data-field="review.safety">
+            <span class="t"><span class="en-only">All staff interacting with children hold valid police clearance certificates. I'll upload them on request.</span><span class="ar-only">جميع الموظفين العاملين مع الأطفال لديهم شهادة حسن سيرة وسلوك سارية. سأرفعها عند الطلب.</span></span>
+          </label>
+        </div>
+      </section>
+    </div>
+
+    <!-- ============ SIDEBAR ============ -->
+    <aside class="side">
+      <div class="side-card">
+        <h3><span class="em">🎯</span><span class="en-only">Why providers join</span><span class="ar-only">لماذا ينضم الموفرون</span></h3>
+        <ul>
+          <li><span class="en-only">2,400+ Doha families search here monthly</span><span class="ar-only">2,400+ عائلة دوحاوية تبحث شهرياً</span></li>
+          <li><span class="en-only">10% flat commission — no other fees</span><span class="ar-only">10% عمولة ثابتة — بلا رسوم أخرى</span></li>
+          <li><span class="en-only">Weekly payouts via MyFatoorah</span><span class="ar-only">تحويلات أسبوعية عبر ماي فاتورة</span></li>
+          <li><span class="en-only">Bilingual EN/AR listings done for you</span><span class="ar-only">إعلانات بلغتين (EN/AR) جاهزة</span></li>
+          <li><span class="en-only">WhatsApp + dashboard booking management</span><span class="ar-only">إدارة الحجوزات عبر واتساب ولوحة التحكم</span></li>
+        </ul>
+      </div>
+      <div class="side-card">
+        <h3><span class="em">⏱️</span><span class="en-only">Step 1 of 5</span><span class="ar-only">الخطوة 1 من 5</span></h3>
+        <p id="sideHelp"><span class="en-only">Create your account. We only use your email for booking notifications and payout alerts, never marketing.</span><span class="ar-only">أنشئ حسابك. نستخدم البريد للإشعارات والتحويلات فقط، ليس للتسويق.</span></p>
+      </div>
+      <div class="side-help">
+        <span class="em">💬</span>
+        <div>
+          <div><span class="en-only">Need help?</span><span class="ar-only">تحتاج مساعدة؟</span></div>
+          <a href="https://wa.me/97400000000"><span class="en-only">WhatsApp us</span><span class="ar-only">راسلنا واتساب</span></a>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<!-- ============ STICKY FOOTER NAV ============ -->
+<div class="wizard-foot">
+  <div class="container">
+    <div class="progress-txt" id="progressTxt"><span class="en-only">Step 1 of 5 · Account</span><span class="ar-only">الخطوة 1 من 5 · الحساب</span></div>
+    <div class="spacer"></div>
+    <span class="draft"><span class="en-only">Auto-saved just now</span><span class="ar-only">محفوظ الآن</span></span>
+    <button class="btn btn-outline" id="backBtn" onclick="prevStep()" disabled><span class="en-only">← Back</span><span class="ar-only">← رجوع</span></button>
+    <button class="btn btn-primary" id="nextBtn" onclick="nextStep()"><span class="en-only">Continue →</span><span class="ar-only">متابعة ←</span></button>
+    <button class="btn btn-gold hidden" id="submitBtn" onclick="submitAll()"><span class="en-only">Submit for review 🎉</span><span class="ar-only">إرسال للمراجعة 🎉</span></button>
+  </div>
+</div>
+
+<!-- ============ PAGE FOOTER ============ -->
+<footer class="site">
+  <div class="container">
+    <span>© 2026 Yalla Kids WLL · Doha, Qatar · CR #XXXXXX 🇶🇦</span>
+    <span><a href="yalla-kids-home-wireframe.html"><span class="en-only">Back to home</span><span class="ar-only">الصفحة الرئيسية</span></a></span>
+  </div>
+</footer>
+
+<script>
+  function toggleLang() {
+    const html = document.documentElement;
+    const isRTL = html.getAttribute("dir") === "rtl";
+    html.setAttribute("dir", isRTL ? "ltr" : "rtl");
+    html.setAttribute("lang", isRTL ? "en" : "ar");
+  }
+
+  /* ============ WIZARD STATE ============ */
+  const TOTAL_STEPS = 5;
+  let currentStep = 1;
+  let furthest = 1;
+
+  const stepCopy = {
+    1: { en: "Create your account. We only use your email for booking notifications and payout alerts, never marketing.",
+         ar: "أنشئ حسابك. نستخدم البريد للإشعارات والتحويلات فقط، ليس للتسويق." },
+    2: { en: "Tell parents who you are. The more specific your story, the more bookings you get. Bilingual gets 40% more views.",
+         ar: "أخبر الأهل بقصتك. كلما كانت أكثر تحديداً، زادت الحجوزات. النسخة بلغتين تحصل على مشاهدات أعلى بـ40%." },
+    3: { en: "One listing is enough to go live. Most providers add 3–6 listings in their first month.",
+         ar: "إعلان واحد كافٍ للنشر. معظم الموفرين يضيفون 3–6 إعلانات في أول شهر." },
+    4: { en: "Your bank details stay encrypted with MyFatoorah. We only see the last 4 digits of your IBAN.",
+         ar: "تفاصيل البنك مشفّرة مع ماي فاتورة. نرى فقط آخر 4 أرقام من الآيبان." },
+    5: { en: "Double-check every section. Our team will call you on WhatsApp within 1 business day to verify.",
+         ar: "راجع كل قسم. فريقنا سيتصل على واتساب خلال يوم عمل للتحقق." }
+  };
+
+  function setStep(n) {
+    if (n < 1 || n > TOTAL_STEPS) return;
+    currentStep = n;
+    if (n > furthest) furthest = n;
+
+    // panels
+    document.querySelectorAll(".panel").forEach(p => {
+      p.classList.toggle("hidden", +p.dataset.panel !== n);
+    });
+
+    // stepper
+    document.querySelectorAll(".step").forEach(s => {
+      const sn = +s.dataset.step;
+      s.classList.remove("current", "done", "locked");
+      if (sn === n) s.classList.add("current");
+      else if (sn < n) s.classList.add("done");
+      else if (sn > furthest) s.classList.add("locked");
+    });
+
+    // buttons
+    document.getElementById("backBtn").disabled = (n === 1);
+    const nextBtn = document.getElementById("nextBtn");
+    const submitBtn = document.getElementById("submitBtn");
+    if (n === TOTAL_STEPS) {
+      nextBtn.classList.add("hidden");
+      submitBtn.classList.remove("hidden");
+    } else {
+      nextBtn.classList.remove("hidden");
+      submitBtn.classList.add("hidden");
+    }
+
+    // progress text
+    const titles = {
+      1: ["Account","الحساب"], 2: ["Business","النشاط"], 3: ["First listing","الإعلان الأول"],
+      4: ["Payouts","التحويلات"], 5: ["Review &amp; submit","المراجعة والإرسال"]
+    };
+    document.getElementById("progressTxt").innerHTML =
+      `<span class="en-only">Step ${n} of ${TOTAL_STEPS} · ${titles[n][0]}</span>` +
+      `<span class="ar-only">الخطوة ${n} من ${TOTAL_STEPS} · ${titles[n][1]}</span>`;
+
+    // side help
+    const s = stepCopy[n];
+    document.getElementById("sideHelp").innerHTML =
+      `<span class="en-only">${s.en}</span><span class="ar-only">${s.ar}</span>`;
+
+    // scroll top of panel
+    window.scrollTo({ top: document.querySelector(".stepper").offsetTop - 80, behavior: "smooth" });
+  }
+
+  function nextStep() { setStep(currentStep + 1); pulseSave(); }
+  function prevStep() { setStep(currentStep - 1); }
+  function goToStep(n) {
+    if (n <= furthest) setStep(n);
+  }
+
+  function submitAll() {
+    const btn = document.getElementById("submitBtn");
+    btn.textContent = "Submitted! ✓";
+    btn.disabled = true;
+    setTimeout(() => {
+      alert("🎉 Draft submitted. In the real product, we'd route you to a confirmation page and WhatsApp our ops team.");
+    }, 200);
+  }
+
+  /* Pulse save chip */
+  function pulseSave() {
+    const chip = document.getElementById("saveState");
+    const original = chip.textContent;
+    chip.textContent = "Saving…";
+    setTimeout(() => { chip.textContent = "Draft saved"; }, 700);
+  }
+
+  /* Auto-save on any input change */
+  document.addEventListener("input", (e) => {
+    if (e.target.matches("input, textarea, select")) pulseSave();
+  });
+
+  /* ============ PROVIDER TYPE CHOICE ============ */
+  document.querySelectorAll("#providerTypeChoice .choice").forEach(c => {
+    c.addEventListener("click", () => {
+      document.querySelectorAll("#providerTypeChoice .choice").forEach(x => x.classList.remove("selected"));
+      c.classList.add("selected");
+      const isIndividual = c.dataset.val === "individual";
+      document.querySelectorAll(".biz-only").forEach(el => el.classList.toggle("hidden", isIndividual));
+      document.querySelectorAll(".ind-only").forEach(el => el.classList.toggle("hidden", !isIndividual));
+      // update review
+      document.getElementById("r-ptype").textContent = isIndividual ? "Individual instructor" : "Registered business";
+      document.getElementById("r-crqid").textContent = isIndividual ? "QID •••••12345" : "CR 1234567";
+    });
+  });
+  // default
+  document.querySelector('#providerTypeChoice .choice[data-val="business"]').classList.add("selected");
+
+  /* ============ LISTING TYPE PILLS ============ */
+  document.querySelectorAll(".panel[data-panel='3'] .pill-row:not(#dayPicker) .pill").forEach(p => {
+    p.addEventListener("click", () => {
+      p.parentElement.querySelectorAll(".pill").forEach(x => x.classList.remove("selected"));
+      p.classList.add("selected");
+    });
+  });
+
+  /* ============ DAY PICKER (multi-select) ============ */
+  document.querySelectorAll("#dayPicker .pill").forEach(p => {
+    p.addEventListener("click", () => p.classList.toggle("selected"));
+  });
+
+  /* ============ REAL FILE UPLOADS ============
+     Each .drop tile becomes a click-to-pick file input. We accept image/* + PDFs,
+     enforce a 5 MB ceiling, and show a real preview (image thumb or filename pill).
+     Files are kept client-side only — they're staged for upload on submit. */
+  function fakeUpload(el, filename) {
+    // Build a hidden <input type="file"> for this tile if not present.
+    var existing = el.querySelector('input[type="file"]');
+    var hint = (filename || '').toLowerCase();
+    var accept = '*/*';
+    if (/\.(png|jpe?g|webp|gif)$/.test(hint)) accept = 'image/*';
+    else if (/\.pdf$/.test(hint)) accept = 'application/pdf,image/*'; // accept image scans too
+    if (!existing) {
+      var input = document.createElement('input');
+      input.type = 'file';
+      input.accept = accept;
+      input.style.position = 'absolute';
+      input.style.left = '-9999px';
+      el.style.position = 'relative';
+      el.appendChild(input);
+      input.addEventListener('click', function (e) { e.stopPropagation(); });
+      input.addEventListener('change', function (e) {
+        var f = (e.target.files && e.target.files[0]) || null;
+        if (!f) return;
+        handleUploadedFile(el, f, filename);
+      });
+      // Bind drag-and-drop
+      el.addEventListener('dragover', function (e) {
+        e.preventDefault();
+        el.classList.add('drag-over');
+      });
+      el.addEventListener('dragleave', function () { el.classList.remove('drag-over'); });
+      el.addEventListener('drop', function (e) {
+        e.preventDefault();
+        el.classList.remove('drag-over');
+        var f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+        if (f) handleUploadedFile(el, f, filename);
+      });
+      existing = input;
+    }
+    existing.click();
+  }
+
+  function handleUploadedFile(el, file, hintName) {
+    // 5 MB ceiling
+    if (file.size > 5 * 1024 * 1024) {
+      flashError(el, 'File over 5 MB. Compress or split, then try again.');
+      return;
+    }
+    el.classList.add('filled');
+    el.classList.remove('error');
+    var t = el.querySelector('.t');
+    var s = el.querySelector('.s');
+    var em = el.querySelector('.em');
+    var sizeKb = Math.round(file.size / 1024);
+    var sizeStr = sizeKb > 1024 ? (sizeKb / 1024).toFixed(1) + ' MB' : sizeKb + ' KB';
+    if (t) t.innerHTML = '✅ ' + escapeText(file.name);
+    if (s) s.innerHTML = '<span style="font-weight:600;">' + sizeStr + '</span> · ' +
+                        '<span class="en-only">Click to replace</span><span class="ar-only">اضغط للاستبدال</span>';
+    // Show image preview if it's a picture
+    if (/^image\//.test(file.type) && em) {
+      var reader = new FileReader();
+      reader.onload = function (ev) {
+        em.innerHTML = '<img src="' + ev.target.result +
+          '" alt="" style="max-width:64px;max-height:64px;border-radius:8px;border:2px solid var(--ink);object-fit:cover;" />';
+      };
+      reader.readAsDataURL(file);
+    } else if (em) {
+      em.textContent = '📎';
+    }
+    // Stash the File on the element for the eventual submit
+    el._ykFile = file;
+    pulseSave();
+  }
+
+  function flashError(el, msg) {
+    el.classList.add('error');
+    var s = el.querySelector('.s');
+    if (s) s.innerHTML = '<span style="color:#B91C1C;font-weight:700;">⚠ ' + escapeText(msg) + '</span>';
+    setTimeout(function () { el.classList.remove('error'); }, 3500);
+  }
+  function escapeText(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function fakePhoto(tile, seed) {
+    // Real photo upload for the photo-grid tiles
+    var existing = tile.querySelector('input[type="file"]');
+    if (!existing) {
+      var input = document.createElement('input');
+      input.type = 'file';
+      input.accept = 'image/*';
+      input.style.position = 'absolute';
+      input.style.left = '-9999px';
+      tile.style.position = 'relative';
+      tile.appendChild(input);
+      input.addEventListener('click', function (e) { e.stopPropagation(); });
+      input.addEventListener('change', function (e) {
+        var f = e.target.files && e.target.files[0];
+        if (!f) return;
+        if (f.size > 5 * 1024 * 1024) {
+          tile.classList.add('error');
+          tile.style.outline = '2px solid #B91C1C';
+          setTimeout(function () { tile.style.outline = ''; tile.classList.remove('error'); }, 2500);
+          return;
+        }
+        var reader = new FileReader();
+        reader.onload = function (ev) {
+          tile.classList.add('filled');
+          tile.style.backgroundImage = 'url(' + ev.target.result + ')';
+          tile.style.backgroundSize = 'cover';
+          tile.style.backgroundPosition = 'center';
+          tile.textContent = '';
+          pulseSave();
+        };
+        reader.readAsDataURL(f);
+        tile._ykFile = f;
+      });
+      existing = input;
+    }
+    existing.click();
+  }
+
+  /* ============ CR NUMBER VALIDATION ============ */
+  (function () {
+    var crInput = document.querySelector('input[data-field="business.cr"]');
+    if (!crInput) return;
+    var hint = document.createElement('div');
+    hint.style.cssText = 'font-size:12px;margin-top:4px;font-weight:600;';
+    crInput.parentElement.appendChild(hint);
+    function validate() {
+      var v = (crInput.value || '').replace(/\D/g, '').slice(0, 7);
+      if (v !== crInput.value) crInput.value = v; // strip non-digits + clip to 7
+      if (!v) {
+        hint.textContent = '';
+        crInput.style.borderColor = '';
+      } else if (v.length < 7) {
+        hint.textContent = '↳ ' + (7 - v.length) + ' more digit' + (7 - v.length === 1 ? '' : 's') + ' to go';
+        hint.style.color = 'var(--ink-mute)';
+        crInput.style.borderColor = '';
+      } else {
+        hint.textContent = '✓ Looks like a valid Qatar CR number. We\'ll verify with MOCI.';
+        hint.style.color = '#1F7A4D';
+        crInput.style.borderColor = '#1F7A4D';
+      }
+    }
+    crInput.addEventListener('input', validate);
+    crInput.addEventListener('blur', validate);
+  })();
+
+  /* QID: 11 digits */
+  (function () {
+    var qidInput = document.querySelector('input[data-field="business.qid"]');
+    if (!qidInput) return;
+    qidInput.addEventListener('input', function () {
+      var v = qidInput.value.replace(/\D/g, '').slice(0, 11);
+      if (v !== qidInput.value) qidInput.value = v;
+    });
+  })();
+
+  /* ============ INIT ============ */
+  setStep(1);
+</script>
+<script src="yalla-kids-shared.js"></script>
+</body>
+</html>

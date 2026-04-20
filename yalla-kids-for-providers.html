@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#8A1538">
+  <title>List your business on Yalla Kids — for providers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,800;1,9..144,700&family=Inter:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="yalla-kids-shared.css">
+<style>
+  .prov-hero { max-width: 1280px; margin: 24px auto 0; padding: 48px 32px; background: var(--sky-soft); border: 2px solid var(--ink); border-radius: var(--r-lg); box-shadow: var(--shadow-hard-lg); display: grid; grid-template-columns: 1.3fr 1fr; gap: 32px; align-items: center; }
+  .prov-hero .eye { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--maroon); font-weight: 800; margin-bottom: 10px; }
+  .prov-hero h1 { font-size: 48px; line-height: 1.05; margin-bottom: 14px; }
+  .prov-hero p { font-size: 17px; color: var(--ink-soft); margin-bottom: 18px; line-height: 1.55; }
+  .prov-hero-stats { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 18px; }
+  .prov-hero-stat { padding: 6px 14px; background: var(--card-bg); border: 2px solid var(--ink); border-radius: 99px; font-size: 13px; font-weight: 700; }
+  .prov-hero-visual { padding: 22px; background: var(--card-bg); border: 2px solid var(--ink); border-radius: var(--r); box-shadow: var(--shadow-hard); }
+  .dashboard-preview { height: 280px; background: linear-gradient(135deg, var(--butter-soft), var(--pink-soft)); border: 2px solid var(--ink); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 72px; }
+
+  .benefit-grid { max-width: 1280px; margin: 48px auto 0; padding: 0 24px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .benefit { padding: 24px 20px; border: 2px solid var(--ink); border-radius: var(--r); box-shadow: var(--shadow-hard); }
+  .benefit .em { font-size: 36px; margin-bottom: 10px; }
+  .benefit h3 { font-family: "Fraunces", serif; font-size: 18px; margin-bottom: 6px; }
+  .benefit p { font-size: 13px; color: var(--ink-soft); line-height: 1.55; }
+
+  /* Pricing */
+  .pricing { max-width: 1280px; margin: 60px auto 0; padding: 0 24px; }
+  .pricing-head { text-align: center; margin-bottom: 24px; }
+  .pricing-head h2 { font-size: 34px; margin-bottom: 8px; }
+  .pricing-head p { color: var(--ink-soft); font-size: 15px; }
+  .pricing-toggle { display: flex; justify-content: center; margin-bottom: 28px; }
+  .pricing-toggle-inner { display: flex; border: 2px solid var(--ink); border-radius: 99px; padding: 4px; background: var(--card-bg); box-shadow: var(--shadow-hard); }
+  .pricing-toggle-inner span { padding: 8px 20px; border-radius: 99px; font-weight: 700; font-size: 13px; cursor: pointer; color: var(--ink-soft); }
+  .pricing-toggle-inner span.active { background: var(--maroon); color: #fff; }
+
+  .tier-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .tier { border: 2px solid var(--ink); border-radius: var(--r); padding: 28px 24px; box-shadow: var(--shadow-hard); background: var(--card-bg); position: relative; }
+  .tier.popular { box-shadow: var(--shadow-hard-lg); background: var(--butter-soft); }
+  .tier.popular::before { content: "⭐ Most popular"; position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--maroon); color: #fff; padding: 4px 14px; border-radius: 99px; font-size: 11px; font-weight: 800; border: 2px solid var(--ink); }
+  .tier h3 { font-family: "Fraunces", serif; font-size: 20px; margin-bottom: 6px; }
+  .tier .price { font-family: "Fraunces", serif; font-size: 36px; font-weight: 800; color: var(--maroon); line-height: 1; margin: 12px 0 4px; }
+  .tier .per { font-size: 12px; color: var(--ink-mute); margin-bottom: 16px; }
+  .tier ul { list-style: none; font-size: 13px; color: var(--ink-soft); line-height: 1.65; }
+  .tier li { padding: 5px 0; padding-left: 22px; position: relative; }
+  .tier li::before { content: "✓"; position: absolute; left: 0; color: #1f7a4d; font-weight: 800; }
+  .tier li.x::before { content: "—"; color: var(--ink-mute); }
+  .tier .btn { width: 100%; text-align: center; display: block; margin-top: 18px; }
+
+  /* Commission box */
+  .commission { max-width: 900px; margin: 48px auto 0; padding: 28px 32px; background: var(--pink-soft); border: 2px solid var(--ink); border-radius: var(--r); box-shadow: var(--shadow-hard); text-align: center; }
+  .commission h3 { font-family: "Fraunces", serif; font-size: 22px; margin-bottom: 8px; }
+  .commission p { color: var(--ink-soft); font-size: 15px; line-height: 1.55; }
+
+  /* How to join */
+  .onboard { max-width: 1280px; margin: 60px auto 0; padding: 0 24px; }
+  .onboard h2 { font-size: 32px; margin-bottom: 24px; text-align: center; }
+  .onboard-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .onb-step { padding: 20px; border: 2px solid var(--ink); border-radius: var(--r); background: var(--warm-white); box-shadow: var(--shadow-hard); text-align: center; position: relative; }
+  .onb-step .n { font-family: "Fraunces", serif; font-size: 46px; font-weight: 800; color: var(--maroon); line-height: 1; margin-bottom: 8px; }
+  .onb-step h4 { font-family: "Fraunces", serif; font-size: 17px; margin-bottom: 6px; }
+  .onb-step p { font-size: 13px; color: var(--ink-soft); line-height: 1.5; }
+
+  /* Testimonials */
+  .testimonials { max-width: 1280px; margin: 60px auto 0; padding: 0 24px; }
+  .test-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  .test { padding: 28px; border: 2px solid var(--ink); border-radius: var(--r); box-shadow: var(--shadow-hard); background: var(--card-bg); }
+  .test q { font-family: "Fraunces", serif; font-style: italic; font-size: 17px; color: var(--ink); line-height: 1.55; display: block; margin-bottom: 14px; }
+  .test-who { display: flex; gap: 12px; align-items: center; font-size: 13px; }
+  .test-av { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--ink); background: var(--teal-soft); display: flex; align-items: center; justify-content: center; font-weight: 800; }
+  .test-who strong { color: var(--ink); }
+  .test-who span { color: var(--ink-mute); }
+
+  /* Signup CTA */
+  .signup { max-width: 720px; margin: 60px auto; padding: 40px 32px; background: var(--maroon); color: #fff; border: 2px solid var(--ink); border-radius: var(--r-lg); box-shadow: var(--shadow-hard-xl); text-align: center; }
+  .signup h2 { font-family: "Fraunces", serif; font-size: 32px; margin-bottom: 10px; }
+  .signup p { margin-bottom: 22px; color: rgba(255,255,255,0.85); }
+  .signup input { background: #fff; color: var(--ink); border: 2px solid var(--ink); }
+  .signup-form { display: flex; gap: 10px; max-width: 440px; margin: 0 auto; flex-wrap: wrap; }
+  .signup .btn { background: var(--gold); color: var(--ink); }
+
+  @media (max-width: 980px) {
+    .prov-hero { grid-template-columns: 1fr; }
+    .prov-hero h1 { font-size: 34px; }
+    .benefit-grid { grid-template-columns: repeat(2, 1fr); }
+    .tier-grid { grid-template-columns: repeat(2, 1fr); }
+    .onboard-steps { grid-template-columns: repeat(2, 1fr); }
+    .test-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="nav-wrap container">
+    <a href="yalla-kids-home-wireframe.html" class="logo">
+      <span class="en-only inline">Yalla Kids</span>
+      <span class="ar-only inline">يلا كيدز</span>
+    </a>
+    <nav class="nav-links">
+      <a href="yalla-kids-classes-directory.html"><span class="en-only inline">Classes</span><span class="ar-only inline">الصفوف</span></a>
+      <a href="yalla-kids-places-directory.html"><span class="en-only inline">Places to go</span><span class="ar-only inline">أماكن للزيارة</span></a>
+      <a href="yalla-kids-camps.html"><span class="en-only inline">Camps</span><span class="ar-only inline">المعسكرات</span></a>
+      <a href="yalla-kids-guides-hub.html"><span class="en-only inline">Guides</span><span class="ar-only inline">الأدلة</span></a>
+      <a href="yalla-kids-for-providers.html"><span class="en-only inline">For providers</span><span class="ar-only inline">للموفرين</span></a>
+    </nav>
+    <div class="nav-actions">
+      <button class="lang-toggle" onclick="toggleLang()">
+        <span class="en-only inline">العربية</span>
+        <span class="ar-only inline">English</span>
+      </button>
+      <a href="yalla-kids-login.html" class="btn btn-ghost"><span class="en-only inline">Log in</span><span class="ar-only inline">تسجيل الدخول</span></a>
+      <a href="yalla-kids-signup.html" class="btn btn-primary"><span class="en-only inline">Sign up</span><span class="ar-only inline">إنشاء حساب</span></a>
+    </div>
+  </div>
+</header>
+
+<section class="prov-hero">
+  <div>
+    <div class="eye">For providers</div>
+    <h1><span class="en-only">Grow your kids' business with <span class="pop">Qatar's parents</span> on one platform.</span><span class="ar-only">نمِّ عملك مع <span class="pop">والدي قطر</span>.</span></h1>
+    <p>List your classes, venue, or party package on Yalla Kids and put yourself in front of thousands of searching parents — no more relying on one overworked Instagram account.</p>
+    <div class="prov-hero-stats">
+      <span class="prov-hero-stat">📊 8,400 monthly parents</span>
+      <span class="prov-hero-stat">💳 10% commission only</span>
+      <span class="prov-hero-stat">🚀 Free tier available</span>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <a href="#signup" class="btn primary lg">Apply to list →</a>
+      <a href="#pricing" class="btn outline lg">See pricing</a>
+    </div>
+  </div>
+  <div class="prov-hero-visual">
+    <div class="dashboard-preview">📊</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px;">
+      <div style="padding:8px;border:1.5px solid var(--ink);border-radius:10px;text-align:center;background:var(--coral-soft);"><div style="font-weight:800;font-size:18px;font-family:'Fraunces',serif;">34</div><div style="font-size:11px;color:var(--ink-soft);">Bookings</div></div>
+      <div style="padding:8px;border:1.5px solid var(--ink);border-radius:10px;text-align:center;background:var(--teal-soft);"><div style="font-weight:800;font-size:18px;font-family:'Fraunces',serif;">QAR 23k</div><div style="font-size:11px;color:var(--ink-soft);">This month</div></div>
+      <div style="padding:8px;border:1.5px solid var(--ink);border-radius:10px;text-align:center;background:var(--butter-soft);"><div style="font-weight:800;font-size:18px;font-family:'Fraunces',serif;">4.9⭐</div><div style="font-size:11px;color:var(--ink-soft);">Rating</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Benefits -->
+<section class="benefit-grid">
+  <div class="benefit" style="background:var(--coral-soft);">
+    <div class="em">🎯</div><h3>Real, booking parents</h3><p>Not lookers. Every Yalla Kids visitor is here because they're searching for something to book this week.</p>
+  </div>
+  <div class="benefit" style="background:var(--teal-soft);">
+    <div class="em">💳</div><h3>Get paid reliably</h3><p>Payouts twice a month via bank transfer. Weekly payouts on Premium. We handle MyFatoorah for you.</p>
+  </div>
+  <div class="benefit" style="background:var(--butter-soft);">
+    <div class="em">📅</div><h3>A real calendar</h3><p>Manage terms, one-off sessions, make-ups, and waitlists in one place. Works with Google &amp; Outlook.</p>
+  </div>
+  <div class="benefit" style="background:var(--lime-soft);">
+    <div class="em">🗣</div><h3>Bilingual listings</h3><p>We'll translate your EN listing to AR (or vice versa) for you. Premium providers get editorial-quality localization.</p>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section class="pricing" id="pricing">
+  <div class="pricing-head">
+    <h2><span class="en-only">Pricing — for <span class="pop">places</span></span><span class="ar-only">الأسعار — <span class="pop">للأماكن</span></span></h2>
+    <p>Classes are flat 10% commission — no subscription. Places pick a tier:</p>
+  </div>
+  <div class="pricing-toggle">
+    <div class="pricing-toggle-inner">
+      <span class="active">Monthly</span>
+      <span>Yearly (save 17%)</span>
+    </div>
+  </div>
+
+  <div class="tier-grid">
+    <div class="tier">
+      <h3>Free</h3>
+      <div class="price">QAR 0</div>
+      <div class="per">forever</div>
+      <ul>
+        <li>Basic listing</li>
+        <li>Place appears in directory</li>
+        <li>Parents can save &amp; review</li>
+        <li class="x">Featured placement</li>
+        <li class="x">Analytics dashboard</li>
+        <li class="x">Photo upgrades</li>
+      </ul>
+      <a href="#signup" class="btn outline">Start free</a>
+    </div>
+    <div class="tier">
+      <h3>Verified</h3>
+      <div class="price">QAR 99</div>
+      <div class="per">per month</div>
+      <ul>
+        <li>Everything in Free</li>
+        <li>✓ Verified badge</li>
+        <li>Priority support</li>
+        <li>Basic analytics</li>
+        <li>Ability to reply to reviews</li>
+        <li class="x">Featured placement</li>
+      </ul>
+      <a href="#signup" class="btn outline">Choose Verified</a>
+    </div>
+    <div class="tier popular">
+      <h3>Featured</h3>
+      <div class="price">QAR 499</div>
+      <div class="per">per month</div>
+      <ul>
+        <li>Everything in Verified</li>
+        <li>⭐ Featured badge</li>
+        <li>Top placement in category</li>
+        <li>Priority in Related &amp; Nearby</li>
+        <li>2× Instagram promo / month</li>
+        <li>Advanced analytics</li>
+      </ul>
+      <a href="#signup" class="btn primary">Choose Featured</a>
+    </div>
+    <div class="tier">
+      <h3>Premium</h3>
+      <div class="price">QAR 1,499</div>
+      <div class="per">per month</div>
+      <ul>
+        <li>Everything in Featured</li>
+        <li>🏆 Premium Partner badge</li>
+        <li>Homepage placement</li>
+        <li>Editorial profile + photos</li>
+        <li>Included in newsletter twice / quarter</li>
+        <li>Dedicated account manager</li>
+      </ul>
+      <a href="#signup" class="btn outline">Apply for Premium</a>
+    </div>
+  </div>
+</section>
+
+<!-- Commission note -->
+<div class="commission">
+  <h3>For classes &amp; party packages: 10% commission</h3>
+  <p>No monthly fee. You only pay when a parent books. We handle payment processing, send SMS reminders, and issue the receipt. Cancellations are always refunded to the parent — you're only deducted the net amount.</p>
+</div>
+
+<!-- Onboarding -->
+<section class="onboard">
+  <h2><span class="en-only">How to get <span class="pop">listed</span></span><span class="ar-only">كيف تنضم <span class="pop">للقائمة</span></span></h2>
+  <div class="onboard-steps">
+    <div class="onb-step" style="background:var(--sky-soft);">
+      <div class="n">1</div>
+      <h4>Apply online</h4>
+      <p>10-minute form. Business details, CR number, insurance, photos.</p>
+    </div>
+    <div class="onb-step" style="background:var(--mint-soft);">
+      <div class="n">2</div>
+      <h4>Verify</h4>
+      <p>We confirm your trade license and do a short phone interview (usually 48h).</p>
+    </div>
+    <div class="onb-step" style="background:var(--butter-soft);">
+      <div class="n">3</div>
+      <h4>Build your profile</h4>
+      <p>Photos, classes, staff bios. We'll help you translate to Arabic if needed.</p>
+    </div>
+    <div class="onb-step" style="background:var(--pink-soft);">
+      <div class="n">4</div>
+      <h4>Go live + get bookings</h4>
+      <p>First booking usually lands within a week of approval.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Honest founder note (replaces invented provider testimonials) -->
+<section class="testimonials">
+  <h2 style="font-size:32px;margin-bottom:20px;"><span class="en-only">Why we&rsquo;re building this</span><span class="ar-only">لماذا نبني هذا</span></h2>
+  <div class="test-grid">
+    <div class="test">
+      <q>We&rsquo;re a Doha-based team cataloguing every vetted kids&rsquo; class and family venue in Qatar &mdash; 40 places and 60+ programmes live on day one, sourced from public websites and ministry listings. Providers get free profiles, Arabic support, and MyFatoorah checkout. When our first cohort of partners has real results to share, their quotes will appear here with names, studios, and consent.</q>
+      <div class="test-who">
+        <div class="test-av">Y</div>
+        <div><strong>Yalla Kids team</strong> · <span>Doha, April 2026</span></div>
+      </div>
+    </div>
+    <div class="test">
+      <q>If you&rsquo;re a Qatar studio, academy, or venue owner reading this &mdash; you&rsquo;re exactly who we want to hear from. The early-provider application below is real; we reply within 48 hours.</q>
+      <div class="test-who">
+        <div class="test-av" style="background:var(--coral-soft);">↓</div>
+        <div><strong>Apply below</strong> · <span>No fee for early providers</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Signup -->
+<section class="signup" id="signup">
+  <h2>List your business today</h2>
+  <p>Tell us a little about you and we'll be in touch within 48 hours. No commitment.</p>
+  <form class="signup-form">
+    <input type="text" class="input" placeholder="Business name" data-en-placeholder="Business name" data-ar-placeholder="اسم النشاط التجاري" style="flex:1;min-width:200px;">
+    <input type="email" class="input" placeholder="Your email" data-en-placeholder="Your email" data-ar-placeholder="بريدك الإلكتروني" style="flex:1;min-width:200px;">
+    <button class="btn">Apply now →</button>
+  </form>
+  <p style="margin-top:16px;font-size:12px;color:rgba(255,255,255,0.7);">Or email <strong>partners@yallakids.qa</strong> — we read every message.</p>
+</section>
+
+<footer class="site">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="logo">
+          <span class="en-only inline">Yalla Kids</span>
+          <span class="ar-only inline">يلا كيدز</span>
+        </div>
+        <p class="foot-about">
+          <span class="en-only inline">Qatar's kids' classes and places, one place to book. Bilingual, built in Doha.</span>
+          <span class="ar-only inline">صفوف وأماكن للأطفال في قطر في مكان واحد. بلغتين، صُنعت في الدوحة.</span>
+        </p>
+        <div class="foot-social">
+          <a href="#" aria-label="Instagram">📷</a>
+          <a href="#" aria-label="WhatsApp">💬</a>
+          <a href="#" aria-label="TikTok">🎵</a>
+          <a href="#" aria-label="Email">✉</a>
+        </div>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Classes</span><span class="ar-only inline">الصفوف</span></h5>
+        <a href="yalla-kids-classes-directory.html"><span class="en-only inline">All classes</span><span class="ar-only inline">كل الصفوف</span></a>
+        <a href="yalla-kids-classes-directory.html?cat=art"><span class="en-only inline">Art &amp; crafts</span><span class="ar-only inline">فن وحرف</span></a>
+        <a href="yalla-kids-classes-directory.html?cat=swimming"><span class="en-only inline">Swimming</span><span class="ar-only inline">سباحة</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Places</span><span class="ar-only inline">الأماكن</span></h5>
+        <a href="yalla-kids-places-directory.html"><span class="en-only inline">All places</span><span class="ar-only inline">كل الأماكن</span></a>
+        <a href="yalla-kids-places-directory.html#softplay"><span class="en-only inline">Soft plays</span><span class="ar-only inline">صالات اللعب</span></a>
+        <a href="yalla-kids-map.html"><span class="en-only inline">Map</span><span class="ar-only inline">خريطة</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">For providers</span><span class="ar-only inline">للموفرين</span></h5>
+        <a href="yalla-kids-for-providers.html"><span class="en-only inline">List a class</span><span class="ar-only inline">أدرج صفاً</span></a>
+        <a href="yalla-kids-how-it-works.html"><span class="en-only inline">How it works</span><span class="ar-only inline">كيف نعمل</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Company</span><span class="ar-only inline">الشركة</span></h5>
+        <a href="yalla-kids-about.html"><span class="en-only inline">About</span><span class="ar-only inline">من نحن</span></a>
+        <a href="yalla-kids-contact.html"><span class="en-only inline">Contact</span><span class="ar-only inline">تواصل</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Legal</span><span class="ar-only inline">قانوني</span></h5>
+        <a href="yalla-kids-terms.html"><span class="en-only inline">Terms</span><span class="ar-only inline">الشروط</span></a>
+        <a href="yalla-kids-privacy.html"><span class="en-only inline">Privacy</span><span class="ar-only inline">الخصوصية</span></a>
+        <a href="yalla-kids-faq.html"><span class="en-only inline">FAQ</span><span class="ar-only inline">الأسئلة الشائعة</span></a>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>© 2026 Yalla Kids WLL · Doha, Qatar · CR #XXXXXX 🇶🇦</span>
+      <span><span class="en-only inline">Made with 💛 for Doha families</span><span class="ar-only inline">صُنعت بـ 💛 لعائلات الدوحة</span></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleLang() { const html = document.documentElement; if (html.dir === 'rtl') { html.dir = 'ltr'; html.lang = 'en'; } else { html.dir = 'rtl'; html.lang = 'ar'; } }
+  document.querySelectorAll('.pricing-toggle-inner span').forEach(s => {
+    s.addEventListener('click', () => {
+      document.querySelectorAll('.pricing-toggle-inner span').forEach(x => x.classList.remove('active'));
+      s.classList.add('active');
+    });
+  });
+</script>
+<script src="yalla-kids-shared.js"></script>
+</body>
+</html>

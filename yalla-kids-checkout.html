@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#8A1538">
+  <title>Checkout — Yalla Kids</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,600;1,9..144,700&family=Inter:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="yalla-kids-shared.css">
+<style>
+  .checkout-wrap {
+    max-width: 1100px;
+    margin: 24px auto 0;
+    padding: 0 24px;
+  }
+
+  /* Back link */
+  .checkout-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink-soft);
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 99px;
+    margin-bottom: 10px;
+    transition: color 0.15s, background 0.15s;
+  }
+  .checkout-back:hover { color: var(--maroon); background: var(--butter-soft); }
+
+  /* Selected-from-detail pill on summary */
+  .selected-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 99px;
+    background: var(--mint-soft, #D5F5E3);
+    color: #1f7a4d;
+    border: 1.5px solid #1f7a4d;
+    margin-bottom: 12px;
+    letter-spacing: 0.02em;
+  }
+  .selected-pill .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #1f7a4d;
+    animation: selected-pulse 2s infinite;
+  }
+  @keyframes selected-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.35; }
+  }
+  .stepper a.step { text-decoration: none; cursor: pointer; }
+  .stepper a.step:hover { background: var(--butter-soft); }
+
+  /* Stepper */
+  .stepper-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 28px;
+  }
+  .stepper {
+    display: flex;
+    gap: 0;
+    background: var(--warm-white);
+    border: 2px solid var(--ink);
+    border-radius: 99px;
+    padding: 4px;
+    box-shadow: var(--shadow-hard);
+    overflow-x: auto;
+  }
+  .step {
+    padding: 10px 22px;
+    font-size: 13px; font-weight: 700;
+    border-radius: 99px;
+    color: var(--ink-mute);
+    white-space: nowrap;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .step.done { color: var(--ink-soft); }
+  .step.done .n { background: var(--mint); border-color: var(--ink); }
+  .step.active { background: var(--maroon); color: #fff; }
+  .step.active .n { background: var(--gold); color: var(--ink); }
+  .step .n {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    border: 2px solid var(--ink);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    background: var(--card-bg);
+    color: var(--ink);
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 28px;
+    align-items: start;
+  }
+
+  .panel {
+    background: var(--card-bg);
+    border: 2px solid var(--ink);
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow-hard-lg);
+    padding: 28px;
+    margin-bottom: 22px;
+  }
+  .panel h2 {
+    font-size: 24px;
+    margin-bottom: 18px;
+    font-family: "Fraunces", serif;
+  }
+  .panel h3 {
+    font-size: 17px;
+    margin: 18px 0 10px;
+    font-family: "Fraunces", serif;
+  }
+  .muted { font-size: 13px; color: var(--ink-mute); }
+
+  /* Kid cards */
+  .kids-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .kid-card {
+    border: 2px solid var(--ink);
+    border-radius: var(--r);
+    padding: 16px 14px;
+    background: var(--warm-white);
+    box-shadow: var(--shadow-hard);
+    cursor: pointer;
+    text-align: center;
+    position: relative;
+  }
+  .kid-card.selected {
+    background: var(--butter-soft);
+    box-shadow: var(--shadow-hard-lg);
+  }
+  .kid-card.selected::after {
+    content: "✓";
+    position: absolute; top: 8px; right: 10px;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--mint);
+    border: 2px solid var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900;
+  }
+  .kid-avatar {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--ink);
+    margin: 0 auto 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+  }
+  .kid-name { font-weight: 700; font-size: 14px; }
+  .kid-age { font-size: 12px; color: var(--ink-mute); }
+  .kid-card.add {
+    background: transparent;
+    border: 2px dashed var(--ink);
+    box-shadow: none;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--ink-soft);
+    font-weight: 700;
+  }
+
+  /* Form rows */
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 12px;
+  }
+  label {
+    font-size: 13px; font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 4px;
+    display: block;
+  }
+  label .req { color: var(--maroon); }
+
+  /* Waiver */
+  .waiver-box {
+    background: var(--warm-white);
+    border: 2px solid var(--ink);
+    border-radius: var(--r);
+    padding: 18px;
+    max-height: 220px;
+    overflow-y: auto;
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+  .waiver-box p { margin-bottom: 8px; }
+  .check-row {
+    display: flex; align-items: flex-start; gap: 10px;
+    margin-top: 12px;
+    font-size: 14px;
+  }
+  .check-row input[type="checkbox"] {
+    margin-top: 3px;
+    width: 18px; height: 18px;
+    accent-color: var(--maroon);
+  }
+
+  /* Summary rail */
+  .summary {
+    position: sticky;
+    top: 96px;
+    background: var(--card-bg);
+    border: 2px solid var(--ink);
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow-hard-lg);
+    padding: 22px;
+  }
+  .summary h3 {
+    font-family: "Fraunces", serif;
+    font-size: 20px;
+    margin-bottom: 14px;
+  }
+  .sum-item {
+    display: flex;
+    gap: 12px;
+    padding-bottom: 14px;
+    margin-bottom: 14px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .sum-thumb {
+    width: 64px; height: 64px;
+    border-radius: 14px;
+    border: 2px solid var(--ink);
+    background: var(--coral-soft);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px;
+    flex-shrink: 0;
+  }
+  .sum-title { font-weight: 700; font-size: 14px; line-height: 1.3; }
+  .sum-meta { font-size: 12px; color: var(--ink-mute); margin-top: 4px; }
+
+  .line {
+    display: flex; justify-content: space-between;
+    font-size: 14px;
+    padding: 6px 0;
+    color: var(--ink-soft);
+  }
+  .line.total {
+    border-top: 2px solid var(--ink);
+    padding-top: 12px; margin-top: 8px;
+    font-weight: 800; color: var(--ink);
+    font-size: 17px;
+  }
+  .line .price { color: var(--ink); font-weight: 600; }
+
+  .promo-row {
+    display: flex; gap: 8px;
+    margin: 14px 0;
+  }
+  .promo-row .input { flex: 1; }
+
+  .secure-note {
+    text-align: center;
+    font-size: 12px;
+    color: var(--ink-mute);
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border-strong);
+  }
+  .secure-note .logos {
+    display: flex; justify-content: center; gap: 8px;
+    margin-top: 8px;
+    font-size: 20px;
+  }
+
+  .pay-btn {
+    background: var(--maroon);
+    color: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 99px;
+    padding: 16px 24px;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: var(--shadow-hard);
+    transition: all 0.15s ease;
+  }
+  .pay-btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: var(--shadow-hard-lg);
+  }
+
+  @media (max-width: 980px) {
+    .layout { grid-template-columns: 1fr; gap: 28px; }
+    .summary, .summary-card { position: static; order: -1; }
+    .kids-grid { grid-template-columns: repeat(2, 1fr); }
+    .form-row { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    h1, .page-head h1 { font-size: 28px; }
+    .kids-grid { grid-template-columns: 1fr; }
+    .form-card, .summary-card { padding: 20px; border-radius: 20px; }
+    .form-card h3 { font-size: 18px; }
+    .pay-btn { width: 100%; padding: 16px; font-size: 15px; }
+    input, select, textarea { font-size: 16px !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER (simplified for checkout) ============ -->
+<header class="site">
+  <div class="nav-wrap container">
+    <a href="yalla-kids-home-wireframe.html" class="logo">
+      <span class="en-only inline">Yalla Kids</span>
+      <span class="ar-only inline">يلا كيدز</span>
+    </a>
+    <nav class="nav-links">
+      <a href="yalla-kids-classes-directory.html"><span class="en-only inline">Classes</span><span class="ar-only inline">الصفوف</span></a>
+      <a href="yalla-kids-places-directory.html"><span class="en-only inline">Places to go</span><span class="ar-only inline">أماكن للزيارة</span></a>
+      <a href="yalla-kids-camps.html"><span class="en-only inline">Camps</span><span class="ar-only inline">المعسكرات</span></a>
+      <a href="yalla-kids-guides-hub.html"><span class="en-only inline">Guides</span><span class="ar-only inline">الأدلة</span></a>
+      <a href="yalla-kids-for-providers.html"><span class="en-only inline">For providers</span><span class="ar-only inline">للموفرين</span></a>    </nav>
+    <div class="nav-actions">
+      <button class="lang-toggle" onclick="toggleLang()">
+        <span class="en-only inline">العربية</span>
+        <span class="ar-only inline">English</span>
+      </button>
+      <a href="yalla-kids-login.html" class="btn btn-ghost"><span class="en-only inline">Log in</span><span class="ar-only inline">تسجيل الدخول</span></a>
+      <a href="yalla-kids-signup.html" class="btn btn-primary"><span class="en-only inline">Sign up</span><span class="ar-only inline">إنشاء حساب</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="checkout-wrap">
+
+  <!-- Back link -->
+  <a href="yalla-kids-classes-directory.html" class="checkout-back" id="backLink">
+    ← <span class="en-only">Back to class</span><span class="ar-only">الرجوع إلى الصف</span>
+  </a>
+
+  <!-- Stepper -->
+  <div class="stepper-wrap">
+    <div class="stepper">
+      <a href="yalla-kids-classes-directory.html" class="step done" id="stepperBack"><span class="n">✓</span> <span class="en-only">Select class</span><span class="ar-only">اختر صفاً</span></a>
+      <div class="step active"><span class="n">2</span> <span class="en-only">Your details</span><span class="ar-only">بياناتك</span></div>
+      <div class="step"><span class="n">3</span> <span class="en-only">Review &amp; pay</span><span class="ar-only">المراجعة والدفع</span></div>
+      <div class="step"><span class="n">4</span> <span class="en-only">Confirmation</span><span class="ar-only">التأكيد</span></div>
+    </div>
+  </div>
+
+  <div class="layout">
+
+    <!-- Main form -->
+    <div>
+
+      <!-- 1. Choose kid -->
+      <div class="panel">
+        <h2>
+          <span class="en-only">Who's <span class="pop">attending?</span></span>
+          <span class="ar-only">من <span class="pop">سيحضر؟</span></span>
+        </h2>
+        <p class="muted">
+          <span class="en-only">Select the child you're enrolling. You can save kids to your profile to speed up future bookings.</span>
+          <span class="ar-only">اختر الطفل الذي سجلته. يمكنك حفظ الأطفال في ملفك لتسريع الحجوزات القادمة.</span>
+        </p>
+
+        <div class="kids-grid" style="margin-top:16px;">
+          <div class="kid-card selected">
+            <div class="kid-avatar" style="background:var(--coral-soft);">👧</div>
+            <div class="kid-name">Layla</div>
+            <div class="kid-age"><span class="en-only">Age 7 · born 2018</span><span class="ar-only">7 سنوات · مواليد 2018</span></div>
+          </div>
+          <div class="kid-card">
+            <div class="kid-avatar" style="background:var(--teal-soft);">👦</div>
+            <div class="kid-name">Omar</div>
+            <div class="kid-age"><span class="en-only">Age 9 · born 2016</span><span class="ar-only">9 سنوات · مواليد 2016</span></div>
+          </div>
+          <div class="kid-card add">
+            <div>
+              <div style="font-size:24px;">＋</div>
+              <div style="margin-top:4px;"><span class="en-only">Add a kid</span><span class="ar-only">أضف طفلاً</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Parent details -->
+      <div class="panel">
+        <h2>
+          <span class="en-only">Parent <span class="pop">contact</span></span>
+          <span class="ar-only">بيانات <span class="pop">الوالدين</span></span>
+        </h2>
+        <div class="form-row">
+          <div>
+            <label><span class="en-only">Full name</span><span class="ar-only">الاسم الكامل</span> <span class="req">*</span></label>
+            <input type="text" class="input" placeholder="Aisha Al-Thani" data-en-placeholder="Aisha Al-Thani" data-ar-placeholder="عائشة الثاني" value="Aisha Al-Thani">
+          </div>
+          <div>
+            <label><span class="en-only">Mobile</span><span class="ar-only">الجوّال</span> <span class="req">*</span></label>
+            <input type="tel" class="input" placeholder="+974 5555 5555" value="+974 5555 5555">
+          </div>
+        </div>
+        <div class="form-row">
+          <div>
+            <label><span class="en-only">Email</span><span class="ar-only">البريد الإلكتروني</span> <span class="req">*</span></label>
+            <input type="email" class="input" placeholder="you@example.com" value="aisha@example.com">
+          </div>
+          <div>
+            <label><span class="en-only">Preferred language</span><span class="ar-only">اللغة المفضلة</span></label>
+            <select class="input">
+              <option>English</option>
+              <option>العربية</option>
+            </select>
+          </div>
+        </div>
+        <div class="check-row">
+          <input type="checkbox" id="sms" checked>
+          <label for="sms" style="font-weight:500;color:var(--ink-soft);">
+            <span class="en-only">Send class reminders by SMS and WhatsApp (recommended)</span>
+            <span class="ar-only">أرسل التذكيرات عبر الرسائل وواتساب (موصى به)</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- 3. Emergency & medical -->
+      <div class="panel">
+        <h2>
+          <span class="en-only"><span class="pop">Emergency</span> contact</span>
+          <span class="ar-only">جهة <span class="pop">الطوارئ</span></span>
+        </h2>
+        <div class="form-row">
+          <div>
+            <label><span class="en-only">Emergency contact name</span><span class="ar-only">اسم جهة الطوارئ</span> <span class="req">*</span></label>
+            <input type="text" class="input" placeholder="Partner / family member" data-en-placeholder="Partner / family member" data-ar-placeholder="الشريك / فرد من العائلة">
+          </div>
+          <div>
+            <label><span class="en-only">Emergency mobile</span><span class="ar-only">جوّال الطوارئ</span> <span class="req">*</span></label>
+            <input type="tel" class="input" placeholder="+974 ...">
+          </div>
+        </div>
+
+        <h3><span class="en-only">Medical notes</span><span class="ar-only">ملاحظات طبية</span></h3>
+        <label><span class="en-only">Allergies, medications, or conditions we should know</span><span class="ar-only">حساسية أو أدوية أو حالات صحية ينبغي لنا معرفتها</span></label>
+        <textarea class="input" rows="3" placeholder="Peanut allergy · carries EpiPen · mild asthma · etc. (Leave blank if none)" data-en-placeholder="Peanut allergy · carries EpiPen · mild asthma · etc. (Leave blank if none)" data-ar-placeholder="حساسية الفول السوداني · يحمل إيبي بن · ربو خفيف · إلخ. (اتركها فارغة إن لم يوجد)"></textarea>
+        <p class="muted" style="margin-top:6px;">
+          <span class="en-only">Shared only with this provider's instructors. Not public.</span>
+          <span class="ar-only">تُشارك فقط مع مدرّبي هذا المزوّد. ليست علنية.</span>
+        </p>
+
+        <h3><span class="en-only">Pickup authorization</span><span class="ar-only">إذن الاستلام</span></h3>
+        <label><span class="en-only">Who else is allowed to pick up your child?</span><span class="ar-only">من غيرك مسموح له باستلام الطفل؟</span></label>
+        <input type="text" class="input" placeholder="e.g. Nanny · Fatima · +974 ... (optional)" data-en-placeholder="e.g. Nanny · Fatima · +974 ... (optional)" data-ar-placeholder="مثال: المربية · فاطمة · ‎+974 ... (اختياري)">
+      </div>
+
+      <!-- 4. Waiver -->
+      <div class="panel">
+        <h2>
+          <span class="en-only">Liability <span class="pop">waiver</span></span>
+          <span class="ar-only">إقرار <span class="pop">المسؤولية</span></span>
+        </h2>
+        <p class="muted">Please read and agree. Qatar law applies. You can request the Arabic version at any time.</p>
+
+        <div class="waiver-box" style="margin-top:12px;">
+          <p><strong>1. Acknowledgment of risk.</strong> I understand that participation in the selected class involves age-appropriate activities (which may include the use of paints, clay, sports equipment, musical instruments or similar depending on the class). I accept that minor scrapes, stains, or allergic reactions may occur despite reasonable precautions.</p>
+          <p><strong>2. Medical authorization.</strong> In the event of a medical emergency and where a parent/guardian cannot be reached, I authorize the class provider's staff to seek emergency medical treatment for my child at the nearest facility.</p>
+          <p><strong>3. Photo &amp; media.</strong> I [accept / decline below] the use of photos of my child for the provider's social posts and the Yalla Kids platform. Decline is honored without penalty.</p>
+          <p><strong>4. Cancellation &amp; refunds.</strong> Refunds are available in full up to 7 days before term start. Partial refund (50%) up to 48 hours before. No refund after the first session. See full cancellation policy on yallakids.qa/terms.</p>
+          <p><strong>5. Governing law.</strong> This agreement is governed by the laws of the State of Qatar. Disputes are handled first by the Yalla Kids dispute team, then by competent Qatari courts.</p>
+        </div>
+
+        <div class="check-row">
+          <input type="checkbox" id="agree1">
+          <label for="agree1" style="font-weight:500;color:var(--ink-soft);">
+            I have read and agree to the waiver and cancellation policy above. <span class="req">*</span>
+          </label>
+        </div>
+        <div class="check-row">
+          <input type="checkbox" id="agree2" checked>
+          <label for="agree2" style="font-weight:500;color:var(--ink-soft);">
+            I accept the use of photos of my child for provider and Yalla Kids media.
+          </label>
+        </div>
+        <div class="check-row">
+          <input type="checkbox" id="agree3" checked>
+          <label for="agree3" style="font-weight:500;color:var(--ink-soft);">
+            I agree to Yalla Kids' <a href="yalla-kids-terms.html" style="color:var(--maroon);text-decoration:underline;">Terms of Service</a> and <a href="yalla-kids-privacy.html" style="color:var(--maroon);text-decoration:underline;">Privacy Policy</a>. <span class="req">*</span>
+          </label>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Summary rail -->
+    <aside class="summary">
+      <div class="selected-pill" id="selectedPill" style="display:none;">
+        <span class="dot"></span>
+        <span class="en-only">Selected from class page</span>
+        <span class="ar-only">مختار من صفحة الصف</span>
+      </div>
+
+      <h3><span class="en-only">Your booking</span><span class="ar-only">ملخّص حجزك</span></h3>
+
+      <div class="sum-item">
+        <div class="sum-thumb">🎨</div>
+        <div>
+          <div class="sum-title" id="sumTitle"><span class="en-only">Your selected class</span><span class="ar-only">الصف الذي اخترته</span></div>
+          <div class="sum-meta" id="sumProvider"><span class="en-only">Provider details populate from the class page</span><span class="ar-only">تُعبّأ تفاصيل المزوّد من صفحة الصف</span></div>
+          <div class="sum-meta" id="sumDate"><span class="en-only">Session time from your selection</span><span class="ar-only">وقت الحصة من اختيارك</span></div>
+          <div class="sum-meta" id="sumAges"><span class="en-only">Ages from listing</span><span class="ar-only">الأعمار من القائمة</span></div>
+          <div class="sum-meta" id="sumChild"><span class="en-only">For: your child</span><span class="ar-only">لـ: طفلك</span></div>
+        </div>
+      </div>
+
+      <div class="line"><span><span class="en-only">Drop-in session</span><span class="ar-only">حصة واحدة</span></span><span class="price" id="lineSession">QAR 95.00</span></div>
+      <div class="line"><span><span class="en-only">Material kit</span><span class="ar-only">مواد الحصة</span></span><span class="price">QAR 10.00</span></div>
+      <div class="line"><span><span class="en-only">Platform fee</span><span class="ar-only">رسوم المنصة</span></span><span class="price">QAR 5.00</span></div>
+
+      <div class="promo-row">
+        <input type="text" class="input" placeholder="Promo code / رمز الخصم">
+        <button class="btn outline"><span class="en-only">Apply</span><span class="ar-only">تطبيق</span></button>
+      </div>
+
+      <div class="line total"><span><span class="en-only">Total</span><span class="ar-only">الإجمالي</span></span><span id="lineTotal">QAR 110.00</span></div>
+
+      <a href="yalla-kids-checkout-success.html" class="pay-btn" id="payBtn" style="display:block;text-align:center;text-decoration:none;margin-top:18px;">
+        <span class="en-only">Pay </span><span class="ar-only">ادفع </span><span id="payAmount">QAR 110.00</span> →
+      </a>
+
+      <div class="secure-note">
+        🔒 <span class="en-only">Secured by</span><span class="ar-only">مؤمَّن عبر</span> <strong>MyFatoorah</strong><br>
+        <span class="en-only">Your card is never stored on Yalla Kids.</span>
+        <span class="ar-only">لا نخزن بيانات بطاقتك على يلا كيدز.</span>
+        <div class="logos">💳 🏦 📱</div>
+        <div style="margin-top:4px;">Visa · Mastercard · Apple Pay · NAPS</div>
+      </div>
+    </aside>
+
+  </div>
+
+  <div style="text-align:center;margin:28px 0 40px;font-size:13px;color:var(--ink-mute);">
+    Questions? <a href="yalla-kids-contact.html" style="color:var(--maroon);text-decoration:underline;">Contact support</a> · 📞 +974 4444 0000
+  </div>
+</div>
+
+<!-- ============ FOOTER (minimal) ============ -->
+<footer class="site">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="logo">
+          <span class="en-only inline">Yalla Kids</span>
+          <span class="ar-only inline">يلا كيدز</span>
+        </div>
+        <p class="foot-about">
+          <span class="en-only inline">Qatar's kids' classes and places, one place to book. Bilingual, built in Doha.</span>
+          <span class="ar-only inline">صفوف وأماكن للأطفال في قطر في مكان واحد. بلغتين، صُنعت في الدوحة.</span>
+        </p>
+        <div class="foot-social">
+          <a href="#" aria-label="Instagram">📷</a>
+          <a href="#" aria-label="WhatsApp">💬</a>
+          <a href="#" aria-label="TikTok">🎵</a>
+          <a href="#" aria-label="Email">✉</a>
+        </div>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Classes</span><span class="ar-only inline">الصفوف</span></h5>
+        <a href="yalla-kids-classes-directory.html"><span class="en-only inline">All classes</span><span class="ar-only inline">كل الصفوف</span></a>
+        <a href="yalla-kids-classes-directory.html?cat=art"><span class="en-only inline">Art &amp; crafts</span><span class="ar-only inline">فن وحرف</span></a>
+        <a href="yalla-kids-classes-directory.html?cat=swimming"><span class="en-only inline">Swimming</span><span class="ar-only inline">سباحة</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Places</span><span class="ar-only inline">الأماكن</span></h5>
+        <a href="yalla-kids-places-directory.html"><span class="en-only inline">All places</span><span class="ar-only inline">كل الأماكن</span></a>
+        <a href="yalla-kids-places-directory.html#softplay"><span class="en-only inline">Soft plays</span><span class="ar-only inline">صالات اللعب</span></a>
+        <a href="yalla-kids-map.html"><span class="en-only inline">Map</span><span class="ar-only inline">خريطة</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">For providers</span><span class="ar-only inline">للموفرين</span></h5>
+        <a href="yalla-kids-for-providers.html"><span class="en-only inline">List a class</span><span class="ar-only inline">أدرج صفاً</span></a>
+        <a href="yalla-kids-how-it-works.html"><span class="en-only inline">How it works</span><span class="ar-only inline">كيف نعمل</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Company</span><span class="ar-only inline">الشركة</span></h5>
+        <a href="yalla-kids-about.html"><span class="en-only inline">About</span><span class="ar-only inline">من نحن</span></a>
+        <a href="yalla-kids-contact.html"><span class="en-only inline">Contact</span><span class="ar-only inline">تواصل</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Legal</span><span class="ar-only inline">قانوني</span></h5>
+        <a href="yalla-kids-terms.html"><span class="en-only inline">Terms</span><span class="ar-only inline">الشروط</span></a>
+        <a href="yalla-kids-privacy.html"><span class="en-only inline">Privacy</span><span class="ar-only inline">الخصوصية</span></a>
+        <a href="yalla-kids-faq.html"><span class="en-only inline">FAQ</span><span class="ar-only inline">الأسئلة الشائعة</span></a>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>© 2026 Yalla Kids WLL · Doha, Qatar · CR #XXXXXX 🇶🇦</span>
+      <span><span class="en-only inline">Made with 💛 for Doha families</span><span class="ar-only inline">صُنعت بـ 💛 لعائلات الدوحة</span></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleLang() {
+    const html = document.documentElement;
+    if (html.dir === 'rtl') { html.dir = 'ltr'; html.lang = 'en'; }
+    else { html.dir = 'rtl'; html.lang = 'ar'; }
+  }
+  document.querySelectorAll('.kid-card:not(.add)').forEach(card => {
+    card.addEventListener('click', () => {
+      document.querySelectorAll('.kid-card').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+    });
+  });
+
+  // ---- Hydrate summary from query-string selection ----
+  (function hydrateSummary() {
+    const qs = new URLSearchParams(window.location.search);
+    if (qs.toString() === '') return; // no params → keep defaults
+
+    const classSlug = qs.get('class');
+    const providerSlug = qs.get('provider');
+    const sessionISO = qs.get('session');
+    const endTime = qs.get('end');
+    const ages = qs.get('ages');
+    const priceQ = parseFloat(qs.get('price')) || 95;
+
+    // Show the "selected from class page" pill
+    const pill = document.getElementById('selectedPill');
+    if (pill) pill.style.display = 'inline-flex';
+
+    // Format date/time
+    const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const DAYS_LONG = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+    let dateStr = 'Tuesday, Apr 14 · 4:00–5:30 PM';
+    if (sessionISO) {
+      try {
+        const d = new Date(sessionISO);
+        if (!isNaN(d.getTime())) {
+          const dayName = DAYS_LONG[d.getDay()];
+          const month = MONTHS[d.getMonth()];
+          const day = d.getDate();
+          const hr = d.getHours();
+          const mn = String(d.getMinutes()).padStart(2, '0');
+          const h12 = hr === 0 ? 12 : hr > 12 ? hr - 12 : hr;
+          const am = hr < 12 ? 'AM' : 'PM';
+          let endStr = '';
+          if (endTime) {
+            const [eh, em] = endTime.split(':').map(Number);
+            const eh12 = eh === 0 ? 12 : eh > 12 ? eh - 12 : eh;
+            const eam = eh < 12 ? 'AM' : 'PM';
+            endStr = `–${eh12}:${String(em).padStart(2, '0')} ${eam}`;
+          }
+          dateStr = `${dayName}, ${month} ${day} · ${h12}:${mn} ${am}${endStr}`;
+        }
+      } catch (e) { /* fall through */ }
+    }
+
+    // Title + provider from slug (lightweight humanization)
+    const humanize = (s) => s ? s.split('-').map(w => w[0].toUpperCase() + w.slice(1)).join(' ') : '';
+    if (classSlug) {
+      const el = document.getElementById('sumTitle');
+      if (el) el.textContent = humanize(classSlug);
+      // Route back link to the specific class detail if we came from one
+      const backHref = 'yalla-kids-class-detail.html?slug=' + encodeURIComponent(classSlug);
+      const back = document.getElementById('backLink');
+      const stepperBack = document.getElementById('stepperBack');
+      if (back) back.href = backHref;
+      if (stepperBack) stepperBack.href = backHref;
+    }
+    if (providerSlug) {
+      const el = document.getElementById('sumProvider');
+      if (el) el.textContent = humanize(providerSlug);
+    }
+
+    const dateEl = document.getElementById('sumDate');
+    if (dateEl) dateEl.textContent = dateStr;
+
+    if (ages) {
+      const el = document.getElementById('sumAges');
+      if (el) {
+        el.innerHTML = `<span class="en-only">Ages ${ages}</span><span class="ar-only">${ages} سنوات</span>`;
+      }
+    }
+
+    // Pricing
+    const material = 10;
+    const fee = 5;
+    const total = priceQ + material + fee;
+    const fmt = (n) => `QAR ${n.toFixed(2)}`;
+    const setText = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+    setText('lineSession', fmt(priceQ));
+    setText('lineTotal', fmt(total));
+    setText('payAmount', fmt(total));
+  })();
+</script>
+<script src="yalla-kids-shared.js"></script>
+</body>
+</html>

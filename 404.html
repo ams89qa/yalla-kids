@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Lost in the souq? — Yalla Kids</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400..900;1,400..900&family=Inter:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="yalla-kids-shared.css">
+  <style>
+    .nf-wrap {
+      min-height: calc(100vh - 200px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px;
+    }
+    .nf-card {
+      max-width: 680px;
+      width: 100%;
+      background: var(--cream);
+      border: 3px solid var(--ink);
+      border-radius: 28px;
+      box-shadow: 8px 8px 0 var(--ink);
+      padding: 40px 36px;
+      text-align: center;
+    }
+    .nf-emoji {
+      font-size: 92px;
+      line-height: 1;
+      margin-bottom: 8px;
+      animation: nf-bounce 2.6s ease-in-out infinite;
+    }
+    @keyframes nf-bounce {
+      0%,100% { transform: translateY(0) rotate(-2deg); }
+      50%     { transform: translateY(-8px) rotate(2deg); }
+    }
+    .nf-eyebrow {
+      display: inline-block;
+      padding: 4px 12px;
+      background: var(--gold);
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      box-shadow: 2px 2px 0 var(--ink);
+      margin-bottom: 14px;
+    }
+    .nf-card h1 {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 38px;
+      line-height: 1.05;
+      margin: 0 0 12px;
+      color: var(--ink);
+    }
+    .nf-card h1 .pop {
+      color: var(--maroon);
+      font-style: italic;
+    }
+    .nf-card p {
+      color: var(--ink-soft);
+      font-size: 16.5px;
+      line-height: 1.55;
+      margin: 0 auto 22px;
+      max-width: 540px;
+    }
+    .nf-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    .nf-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 11px 20px;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      box-shadow: 3px 3px 0 var(--ink);
+      transition: transform 0.12s, box-shadow 0.12s;
+      text-decoration: none;
+    }
+    .nf-btn:hover { transform: translate(-1px,-1px); box-shadow: 4px 4px 0 var(--ink); }
+    .nf-btn.primary { background: var(--maroon); color: #fff; }
+    .nf-btn.outline { background: #fff; color: var(--ink); }
+    .nf-suggest {
+      border-top: 2px dashed var(--border-strong);
+      padding-top: 22px;
+    }
+    .nf-suggest h3 {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 14px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      margin: 0 0 14px;
+      font-weight: 700;
+    }
+    .nf-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+    }
+    .nf-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      background: #fff;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink);
+      text-decoration: none;
+      box-shadow: 2px 2px 0 var(--ink);
+      transition: transform 0.12s;
+    }
+    .nf-chip:hover { transform: translate(-1px,-1px); box-shadow: 3px 3px 0 var(--ink); }
+    .nf-meta {
+      margin-top: 26px;
+      font-size: 12px;
+      color: var(--ink-mute);
+      font-family: "Inter", monospace;
+    }
+    @media (max-width: 560px) {
+      .nf-card { padding: 28px 22px; border-radius: 22px; box-shadow: 5px 5px 0 var(--ink); }
+      .nf-emoji { font-size: 72px; }
+      .nf-card h1 { font-size: 28px; }
+      .nf-card p { font-size: 15px; }
+    }
+
+    .nf-mini-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 24px;
+      border-bottom: 2px solid var(--ink);
+      background: var(--warm-white);
+    }
+    .nf-mini-header .logo {
+      font-family: "Fraunces", Georgia, serif;
+      font-weight: 800;
+      font-size: 22px;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nf-mini-header .logo .pop { color: var(--maroon); font-style: italic; }
+    .nf-mini-header a.home {
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--ink);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <header class="nf-mini-header">
+    <a href="yalla-kids-home-souq.html" class="logo">
+      <span class="en-only">Yalla <span class="pop">Kids</span></span>
+      <span class="ar-only">يلا <span class="pop">كيدز</span></span>
+    </a>
+    <a href="yalla-kids-home-souq.html" class="home">
+      <span class="en-only">← Back home</span>
+      <span class="ar-only">← الرئيسية</span>
+    </a>
+  </header>
+
+  <main class="nf-wrap">
+    <div class="nf-card">
+      <div class="nf-emoji" aria-hidden="true">🦒</div>
+      <span class="nf-eyebrow">404</span>
+      <h1>
+        <span class="en-only">Lost in the <span class="pop">souq</span>?</span>
+        <span class="ar-only">تهت في <span class="pop">السوق</span>؟</span>
+      </h1>
+      <p>
+        <span class="en-only">This page wandered off — maybe to the desert, maybe to the corniche. Let's get you back to something fun.</span>
+        <span class="ar-only">الصفحة هذي راحت عنّا — يمكن للصحراء أو الكورنيش. خلنا نرجعك لشي ممتع.</span>
+      </p>
+
+      <div class="nf-actions">
+        <a class="nf-btn primary" href="yalla-kids-home-souq.html">
+          <span class="en-only">🏠 Take me home</span>
+          <span class="ar-only">🏠 الرئيسية</span>
+        </a>
+        <a class="nf-btn outline" href="yalla-kids-search.html">
+          <span class="en-only">🔍 Search Yalla Kids</span>
+          <span class="ar-only">🔍 ابحث في يلا كيدز</span>
+        </a>
+      </div>
+
+      <div class="nf-suggest">
+        <h3>
+          <span class="en-only">Or try one of these</span>
+          <span class="ar-only">أو جرّب هذي</span>
+        </h3>
+        <div class="nf-chips">
+          <a class="nf-chip" href="yalla-kids-classes-directory.html">
+            <span aria-hidden="true">🎯</span>
+            <span class="en-only">All classes</span><span class="ar-only">كل الصفوف</span>
+          </a>
+          <a class="nf-chip" href="yalla-kids-places-directory.html">
+            <span aria-hidden="true">📍</span>
+            <span class="en-only">Places to play</span><span class="ar-only">أماكن للعب</span>
+          </a>
+          <a class="nf-chip" href="yalla-kids-camps.html">
+            <span aria-hidden="true">⛺</span>
+            <span class="en-only">School-break camps</span><span class="ar-only">معسكرات</span>
+          </a>
+          <a class="nf-chip" href="yalla-kids-map.html">
+            <span aria-hidden="true">🗺️</span>
+            <span class="en-only">Map explorer</span><span class="ar-only">الخريطة</span>
+          </a>
+          <a class="nf-chip" href="yalla-kids-guides-hub.html">
+            <span aria-hidden="true">📖</span>
+            <span class="en-only">Parent guides</span><span class="ar-only">أدلة الأهل</span>
+          </a>
+          <a class="nf-chip" href="yalla-kids-contact.html">
+            <span aria-hidden="true">💬</span>
+            <span class="en-only">Talk to us</span><span class="ar-only">تواصل معنا</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="nf-meta" id="nf-path"></div>
+    </div>
+  </main>
+
+  <script>
+    // Show the broken path so users / referrers can see what 404'd
+    (function () {
+      var p = (location.pathname || '') + (location.search || '') + (location.hash || '');
+      if (p && p !== '/yalla-kids-404.html' && p !== 'yalla-kids-404.html') {
+        document.getElementById('nf-path').textContent = '↪ ' + p;
+      }
+      // Light analytics breadcrumb (consent-gated by analytics layer)
+      try {
+        if (window.plausible) window.plausible('404', { props: { path: p } });
+      } catch (e) {}
+    })();
+  </script>
+  <script src="yalla-kids-shared.js"></script>
+</body>
+</html>

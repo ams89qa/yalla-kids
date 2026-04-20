@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#8A1538">
+  <title>Privacy Policy · Yalla Kids</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,800;1,9..144,700&family=Inter:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="yalla-kids-shared.css">
+<style>
+  .static-hero { max-width: 860px; margin: 48px auto 0; padding: 0 24px; text-align: center; }
+  .static-hero .eye { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--maroon); font-weight: 800; margin-bottom: 10px; }
+  .static-hero h1 { font-size: 46px; margin-bottom: 14px; }
+  .static-hero .dek { font-size: 16px; color: var(--ink-soft); max-width: 580px; margin: 0 auto; }
+  .stamp { display: inline-block; margin-top: 14px; padding: 6px 14px; background: var(--mint-soft); border: 1.5px solid var(--ink); border-radius: 99px; font-size: 12px; font-weight: 700; }
+
+  .summary-box { max-width: 860px; margin: 36px auto 0; padding: 0 24px; }
+  .summary-inner { padding: 24px 28px; background: var(--butter-soft); border: 2px solid var(--ink); border-radius: var(--r-lg); box-shadow: var(--shadow-hard-lg); }
+  .summary-inner h3 { font-family: "Fraunces", serif; font-size: 20px; margin-bottom: 10px; }
+  .summary-inner ul { list-style: none; }
+  .summary-inner li { padding: 6px 0; font-size: 14px; display: flex; gap: 10px; color: var(--ink); }
+  .summary-inner li::before { content: "✓"; color: var(--maroon); font-weight: 800; }
+
+  .legal-layout { max-width: 1100px; margin: 48px auto 0; padding: 0 24px; display: grid; grid-template-columns: 240px 1fr; gap: 40px; align-items: start; }
+  .toc { position: sticky; top: 96px; padding: 20px; border: 2px solid var(--ink); border-radius: var(--r); background: var(--card-bg); box-shadow: var(--shadow-hard); }
+  .toc h4 { font-family: "Fraunces", serif; font-size: 15px; margin-bottom: 10px; }
+  .toc ol { list-style: none; counter-reset: s; font-size: 13px; }
+  .toc ol li { counter-increment: s; padding: 5px 0; }
+  .toc ol li::before { content: counter(s) ". "; color: var(--maroon); font-weight: 700; margin-right: 4px; }
+  .toc a { color: var(--ink-soft); text-decoration: none; }
+  .toc a:hover { color: var(--maroon); }
+
+  .prose { max-width: 720px; }
+  .prose h2 { font-size: 26px; margin: 36px 0 12px; padding-top: 20px; border-top: 2px solid var(--ink); }
+  .prose h2:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+  .prose h3 { font-family: "Fraunces", serif; font-size: 18px; margin: 20px 0 8px; }
+  .prose p { font-family: "Fraunces", Georgia, serif; font-size: 16px; line-height: 1.7; color: var(--ink-soft); margin-bottom: 12px; }
+  .prose p strong { color: var(--ink); }
+  .prose ul { margin: 10px 0 14px 22px; font-family: "Fraunces", Georgia, serif; font-size: 16px; color: var(--ink-soft); line-height: 1.7; }
+  .prose ul li { margin-bottom: 6px; }
+
+  .data-table { width: 100%; margin: 14px 0 20px; border: 2px solid var(--ink); border-radius: var(--r); overflow: hidden; box-shadow: var(--shadow-hard); font-size: 13.5px; }
+  .data-table th { background: var(--butter-soft); text-align: left; padding: 10px 14px; font-family: "Inter", sans-serif; font-weight: 800; border-bottom: 2px solid var(--ink); font-size: 13px; }
+  .data-table td { padding: 10px 14px; border-bottom: 1px solid #e4dfd3; vertical-align: top; font-family: "Inter", sans-serif; color: var(--ink-soft); }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table td strong { color: var(--ink); font-weight: 700; }
+
+  .callout { background: var(--pink-soft); border: 2px solid var(--ink); border-radius: var(--r); padding: 16px 20px; margin: 16px 0; box-shadow: var(--shadow-hard); font-family: "Inter", sans-serif; font-size: 14px; color: var(--ink); }
+  .callout strong { color: var(--maroon); }
+
+  @media (max-width: 860px) {
+    .legal-layout { grid-template-columns: 1fr; }
+    .toc { position: static; }
+    .static-hero h1 { font-size: 34px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="nav-wrap container">
+    <a href="yalla-kids-home-wireframe.html" class="logo">
+      <span class="en-only inline">Yalla Kids</span>
+      <span class="ar-only inline">يلا كيدز</span>
+    </a>
+    <nav class="nav-links">
+      <a href="yalla-kids-classes-directory.html"><span class="en-only inline">Classes</span><span class="ar-only inline">الصفوف</span></a>
+      <a href="yalla-kids-places-directory.html"><span class="en-only inline">Places to go</span><span class="ar-only inline">أماكن للزيارة</span></a>
+      <a href="yalla-kids-camps.html"><span class="en-only inline">Camps</span><span class="ar-only inline">المعسكرات</span></a>
+      <a href="yalla-kids-guides-hub.html"><span class="en-only inline">Guides</span><span class="ar-only inline">الأدلة</span></a>
+      <a href="yalla-kids-for-providers.html"><span class="en-only inline">For providers</span><span class="ar-only inline">للموفرين</span></a>    </nav>
+    <div class="nav-actions">
+      <button class="lang-toggle" onclick="toggleLang()">
+        <span class="en-only inline">العربية</span>
+        <span class="ar-only inline">English</span>
+      </button>
+      <a href="yalla-kids-login.html" class="btn btn-ghost"><span class="en-only inline">Log in</span><span class="ar-only inline">تسجيل الدخول</span></a>
+      <a href="yalla-kids-signup.html" class="btn btn-primary"><span class="en-only inline">Sign up</span><span class="ar-only inline">إنشاء حساب</span></a>
+    </div>
+  </div>
+</header>
+
+<section class="static-hero">
+  <div class="eye">Legal</div>
+  <h1><span class="en-only">Privacy <span class="pop">Policy</span></span><span class="ar-only">سياسة <span class="pop">الخصوصية</span></span></h1>
+  <p class="dek">What we collect, why we collect it, and how we protect it — especially when it comes to your kids.</p>
+  <div class="stamp">Last updated: 12 March 2026</div>
+</section>
+
+<div class="summary-box">
+  <div class="summary-inner">
+    <h3>The short version</h3>
+    <ul>
+      <li>We collect only what's needed to operate bookings and keep kids safe.</li>
+      <li>We never sell your data. Not to anyone, ever.</li>
+      <li>Payments go through MyFatoorah — we never store full card numbers.</li>
+      <li>Children's information is shared only with the specific provider you book with.</li>
+      <li>You can download or delete your data anytime from your dashboard.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="legal-layout">
+
+  <aside class="toc">
+    <h4>Contents</h4>
+    <ol>
+      <li><a href="#intro">Who we are</a></li>
+      <li><a href="#collect">What we collect</a></li>
+      <li><a href="#why">Why we collect it</a></li>
+      <li><a href="#kids">Kids' data</a></li>
+      <li><a href="#share">Who we share with</a></li>
+      <li><a href="#retain">How long we keep it</a></li>
+      <li><a href="#security">Security</a></li>
+      <li><a href="#rights">Your rights</a></li>
+      <li><a href="#cookies">Cookies</a></li>
+      <li><a href="#intl">International transfers</a></li>
+      <li><a href="#changes">Changes</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ol>
+  </aside>
+
+  <div class="prose">
+    <h2 id="intro">1. Who we are</h2>
+    <p>This Privacy Policy describes how <strong>Yalla Kids Technologies W.L.L.</strong> ("Yalla Kids", "we", "us") collects and uses personal information when you use yallakids.qa. We're registered and operate from Doha, Qatar, and we process data in accordance with Qatari data protection law (Law No. 13 of 2016).</p>
+
+    <h2 id="collect">2. What we collect</h2>
+
+    <h3>Information you give us</h3>
+    <table class="data-table">
+      <tr><th>Category</th><th>Examples</th></tr>
+      <tr><td><strong>Account</strong></td><td>Name, email, phone number, preferred language, password (hashed).</td></tr>
+      <tr><td><strong>Child profile</strong></td><td>Child's first name, age or date of birth, gender (optional), allergies, medical notes, pickup authorization.</td></tr>
+      <tr><td><strong>Booking</strong></td><td>Class/venue selected, schedule, pricing, promo codes used.</td></tr>
+      <tr><td><strong>Payment</strong></td><td>Card type and last 4 digits only (full numbers handled by MyFatoorah), billing address.</td></tr>
+      <tr><td><strong>Reviews &amp; content</strong></td><td>Ratings, review text, photos you upload.</td></tr>
+      <tr><td><strong>Support</strong></td><td>Messages you send us via the contact form, email, or chat.</td></tr>
+    </table>
+
+    <h3>Information we collect automatically</h3>
+    <table class="data-table">
+      <tr><th>Category</th><th>Examples</th></tr>
+      <tr><td><strong>Device</strong></td><td>Browser type, device type, operating system, approximate location from IP.</td></tr>
+      <tr><td><strong>Usage</strong></td><td>Pages viewed, searches performed, clicks, scroll depth (via privacy-friendly analytics).</td></tr>
+      <tr><td><strong>Cookies</strong></td><td>Session ID, language preference, login state. See §9.</td></tr>
+    </table>
+
+    <h2 id="why">3. Why we collect it</h2>
+    <ul>
+      <li><strong>To operate bookings</strong> — matching you with providers, processing payments, issuing receipts.</li>
+      <li><strong>To keep kids safe</strong> — sharing allergy and pickup information with the provider your child is attending.</li>
+      <li><strong>To communicate</strong> — booking confirmations, SMS reminders, WhatsApp updates (only if you opt in), service announcements.</li>
+      <li><strong>To improve the Service</strong> — understanding which listings are popular, where users drop off, what filters are useful.</li>
+      <li><strong>To comply with the law</strong> — tax records, consumer protection obligations, responding to lawful requests.</li>
+      <li><strong>To prevent fraud</strong> — detecting suspicious logins, chargeback abuse, and fake reviews.</li>
+    </ul>
+
+    <h2 id="kids">4. Kids' data</h2>
+    <p>We treat information about children with extra care. When you add a child to your account, that information is:</p>
+    <ul>
+      <li><strong>Visible only to you</strong> inside Yalla Kids, except when you make a booking — at which point the relevant details (first name, age, allergies, emergency contact, pickup authorization) are shared with the provider for that class only.</li>
+      <li><strong>Never used for advertising</strong> or profiling.</li>
+      <li><strong>Never sold or rented</strong> to any third party.</li>
+    </ul>
+    <p>Children should not create Yalla Kids accounts themselves. If you believe a child under 18 has created an account without parental consent, email <strong>privacy@yallakids.qa</strong> and we will remove it.</p>
+    <div class="callout"><strong>Medical information:</strong> Allergy and medical notes are stored encrypted and shared only with the providers delivering a class your child is enrolled in. They are removed from booking records 90 days after the booking ends.</div>
+
+    <h2 id="share">5. Who we share data with</h2>
+    <p>We share data only with parties who help us operate the Service, and only to the extent they need it:</p>
+    <ul>
+      <li><strong>Providers</strong> — name, age, allergies, and pickup info of children enrolled in their classes.</li>
+      <li><strong>MyFatoorah</strong> — for payment processing. MyFatoorah is PCI-DSS compliant and regulated by the Qatar Central Bank.</li>
+      <li><strong>Communication tools</strong> — email (Resend / Amazon SES), SMS (Ooredoo / Vodafone Qatar APIs), WhatsApp Business API.</li>
+      <li><strong>Analytics</strong> — Plausible Analytics (privacy-first, no personal identifiers).</li>
+      <li><strong>Infrastructure</strong> — our hosting provider (AWS Middle East - Bahrain region) and CDN.</li>
+      <li><strong>Qatari authorities</strong> — when legally required (court order, tax audit, regulatory request).</li>
+    </ul>
+    <p>We do <strong>not</strong> sell personal data. We do <strong>not</strong> use third-party ad networks.</p>
+
+    <h2 id="retain">6. How long we keep data</h2>
+    <ul>
+      <li><strong>Account data</strong> — while your account is active, plus 12 months after closure.</li>
+      <li><strong>Booking &amp; payment records</strong> — 5 years (Qatari tax &amp; commercial law).</li>
+      <li><strong>Medical / allergy notes</strong> — removed from booking records 90 days after the booking ends. Kept on the kid profile only if you keep it there.</li>
+      <li><strong>Support messages</strong> — 2 years.</li>
+      <li><strong>Analytics data</strong> — aggregated, not linked to individuals, kept indefinitely.</li>
+    </ul>
+
+    <h2 id="security">7. Security</h2>
+    <p>We encrypt data in transit (TLS 1.3) and at rest. Passwords are hashed with bcrypt. We restrict employee access to personal data on a need-to-know basis and log all access. We run security reviews annually and after any incident.</p>
+    <p>If we ever discover a data breach that affects your personal information, we'll notify you within 72 hours and tell you what we know, what we're doing about it, and what you should do.</p>
+
+    <h2 id="rights">8. Your rights</h2>
+    <p>Under Qatari data protection law, you have the right to:</p>
+    <ul>
+      <li><strong>Access</strong> the data we hold about you (self-serve in your dashboard, or request a copy).</li>
+      <li><strong>Correct</strong> inaccurate data.</li>
+      <li><strong>Delete</strong> your account and associated data (except records we must retain for tax or safety reasons).</li>
+      <li><strong>Export</strong> your data in a portable format (JSON or CSV).</li>
+      <li><strong>Withdraw consent</strong> for marketing messages at any time.</li>
+      <li><strong>Object</strong> to certain uses of your data.</li>
+      <li><strong>Complain</strong> to the Compliance and Data Protection Department at the Ministry of Transport and Communications.</li>
+    </ul>
+    <p>To exercise any of these rights, use your <a href="yalla-kids-parent-dashboard.html" style="color:var(--maroon);text-decoration:underline;">dashboard settings</a> or email <strong>privacy@yallakids.qa</strong>. We'll respond within 30 days.</p>
+
+    <h2 id="cookies">9. Cookies</h2>
+    <p>We use a small number of cookies:</p>
+    <ul>
+      <li><strong>Strictly necessary</strong> — login session, language preference, CSRF token. These can't be turned off.</li>
+      <li><strong>Analytics</strong> — a first-party Plausible cookie to count page views. Anonymous, no cross-site tracking.</li>
+    </ul>
+    <p>We do not use advertising cookies or third-party trackers. You can clear cookies anytime from your browser settings.</p>
+
+    <h2 id="intl">10. International transfers</h2>
+    <p>Our servers are hosted in AWS Middle East (Bahrain). Some service providers (e.g. Resend for email) may process data outside of Qatar and the GCC. Where that happens, we rely on standard contractual clauses and encryption to protect your data.</p>
+
+    <h2 id="changes">11. Changes to this policy</h2>
+    <p>We may update this Privacy Policy. For material changes we'll notify you by email and post a notice on the Service at least 14 days before changes take effect. The "Last updated" date at the top of this page will always reflect the current version.</p>
+
+    <h2 id="contact">12. Contact &amp; data protection officer</h2>
+    <p>Questions, requests, or complaints about privacy? Email our Data Protection Officer at <strong>privacy@yallakids.qa</strong>, or write to us:</p>
+    <p style="margin-top:10px;color:var(--ink-mute);font-size:14px;">Yalla Kids Technologies W.L.L.<br>Attn: Data Protection Officer<br>Msheireb Downtown Doha, Building 12, Office 201<br>Doha, Qatar</p>
+  </div>
+</div>
+
+<div style="height:80px;"></div>
+
+<footer class="site">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="logo">
+          <span class="en-only inline">Yalla Kids</span>
+          <span class="ar-only inline">يلا كيدز</span>
+        </div>
+        <p class="foot-about">
+          <span class="en-only inline">Qatar's kids' classes and places, one place to book. Bilingual, built in Doha.</span>
+          <span class="ar-only inline">صفوف وأماكن للأطفال في قطر في مكان واحد. بلغتين، صُنعت في الدوحة.</span>
+        </p>
+        <div class="foot-social">
+          <a href="#" aria-label="Instagram">📷</a>
+          <a href="#" aria-label="WhatsApp">💬</a>
+          <a href="#" aria-label="TikTok">🎵</a>
+          <a href="#" aria-label="Email">✉</a>
+        </div>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Classes</span><span class="ar-only inline">الصفوف</span></h5>
+        <a href="yalla-kids-classes-directory.html"><span class="en-only inline">All classes</span><span class="ar-only inline">كل الصفوف</span></a>
+        <a href="yalla-kids-classes-directory.html?cat=art"><span class="en-only inline">Art &amp; crafts</span><span class="ar-only inline">فن وحرف</span></a>
+        <a href="yalla-kids-classes-directory.html?cat=swimming"><span class="en-only inline">Swimming</span><span class="ar-only inline">سباحة</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Places</span><span class="ar-only inline">الأماكن</span></h5>
+        <a href="yalla-kids-places-directory.html"><span class="en-only inline">All places</span><span class="ar-only inline">كل الأماكن</span></a>
+        <a href="yalla-kids-places-directory.html#softplay"><span class="en-only inline">Soft plays</span><span class="ar-only inline">صالات اللعب</span></a>
+        <a href="yalla-kids-map.html"><span class="en-only inline">Map</span><span class="ar-only inline">خريطة</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">For providers</span><span class="ar-only inline">للموفرين</span></h5>
+        <a href="yalla-kids-for-providers.html"><span class="en-only inline">List a class</span><span class="ar-only inline">أدرج صفاً</span></a>
+        <a href="yalla-kids-how-it-works.html"><span class="en-only inline">How it works</span><span class="ar-only inline">كيف نعمل</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Company</span><span class="ar-only inline">الشركة</span></h5>
+        <a href="yalla-kids-about.html"><span class="en-only inline">About</span><span class="ar-only inline">من نحن</span></a>
+        <a href="yalla-kids-contact.html"><span class="en-only inline">Contact</span><span class="ar-only inline">تواصل</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Legal</span><span class="ar-only inline">قانوني</span></h5>
+        <a href="yalla-kids-terms.html"><span class="en-only inline">Terms</span><span class="ar-only inline">الشروط</span></a>
+        <a href="yalla-kids-privacy.html"><span class="en-only inline">Privacy</span><span class="ar-only inline">الخصوصية</span></a>
+        <a href="yalla-kids-faq.html"><span class="en-only inline">FAQ</span><span class="ar-only inline">الأسئلة الشائعة</span></a>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>© 2026 Yalla Kids WLL · Doha, Qatar · CR #XXXXXX 🇶🇦</span>
+      <span><span class="en-only inline">Made with 💛 for Doha families</span><span class="ar-only inline">صُنعت بـ 💛 لعائلات الدوحة</span></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleLang() { const html = document.documentElement; if (html.dir === 'rtl') { html.dir = 'ltr'; html.lang = 'en'; } else { html.dir = 'rtl'; html.lang = 'ar'; } }
+</script>
+<script src="yalla-kids-shared.js"></script>
+</body>
+</html>

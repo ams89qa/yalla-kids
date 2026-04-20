@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign up — Yalla Kids</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400..900;1,400..900&family=Inter:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="yalla-kids-shared.css">
+  <style>
+    .auth-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: calc(100vh - 80px);
+    }
+    .auth-panel {
+      background: var(--lavender-soft);
+      background-image:
+        radial-gradient(circle at 15% 18%, var(--mint-soft) 0%, transparent 45%),
+        radial-gradient(circle at 85% 82%, var(--butter-soft) 0%, transparent 45%);
+      padding: 56px 56px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 2px solid var(--ink);
+      position: relative;
+      overflow: hidden;
+    }
+    [dir="rtl"] .auth-panel { border-right: none; border-left: 2px solid var(--ink); }
+    .auth-panel::before {
+      content: "";
+      position: absolute;
+      bottom: -100px; left: -100px;
+      width: 280px; height: 280px;
+      background: var(--coral-soft);
+      border-radius: 50%;
+      border: 2px solid var(--ink);
+      opacity: 0.45;
+      z-index: 0;
+    }
+    .auth-panel > * { position: relative; z-index: 1; }
+
+    .auth-head h2 {
+      font-size: clamp(32px, 4.2vw, 44px);
+      line-height: 1.08;
+      font-weight: 600;
+      max-width: 480px;
+      margin-bottom: 14px;
+    }
+    .auth-head h2 .pop { font-style: italic; color: var(--maroon); }
+    .auth-head p {
+      color: var(--ink-soft);
+      font-size: 17px;
+      max-width: 440px;
+      line-height: 1.5;
+    }
+
+    .perks {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      gap: 14px;
+      max-width: 440px;
+      margin-top: 24px;
+    }
+    .perks li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: #fff;
+      padding: 16px 18px;
+      border: 2px solid var(--ink);
+      border-radius: 16px;
+      box-shadow: var(--shadow-hard);
+    }
+    .perks .ico {
+      width: 40px; height: 40px;
+      min-width: 40px;
+      border-radius: 50%;
+      background: var(--butter);
+      border: 2px solid var(--ink);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+    }
+    .perks li:nth-child(2) .ico { background: var(--teal); }
+    .perks li:nth-child(3) .ico { background: var(--pink); }
+    .perks .t { font-weight: 700; font-size: 15px; margin-bottom: 2px; }
+    .perks .d { font-size: 13px; color: var(--ink-soft); line-height: 1.45; }
+
+    .auth-form-col {
+      padding: 48px 56px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: var(--warm-white);
+    }
+    .auth-form {
+      width: 100%;
+      max-width: 440px;
+    }
+    .auth-form h1 {
+      font-size: 30px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .auth-form .sub {
+      color: var(--ink-mute);
+      font-size: 15px;
+      margin-bottom: 22px;
+    }
+
+    .social-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    .social-btn {
+      appearance: none;
+      background: #fff;
+      border: 2px solid var(--ink);
+      border-radius: 14px;
+      padding: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      box-shadow: 2px 2px 0 var(--ink);
+      transition: transform 0.1s, box-shadow 0.1s;
+      font-family: inherit;
+      color: var(--ink);
+    }
+    .social-btn:hover { transform: translate(-1px, -1px); box-shadow: 3px 3px 0 var(--ink); }
+    .social-btn:active { transform: translate(1px, 1px); box-shadow: 0 0 0 var(--ink); }
+    .social-btn .ico { font-size: 18px; }
+    .social-btn.wa { background: #25D366; color: #fff; }
+    .social-btn.ap { background: var(--ink); color: #fff; }
+
+    .divider {
+      display: flex; align-items: center; gap: 12px;
+      color: var(--ink-mute);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+      margin: 20px 0;
+    }
+    .divider::before, .divider::after {
+      content: ""; flex: 1; height: 1.5px; background: var(--border-strong);
+    }
+
+    .field {
+      margin-bottom: 14px;
+    }
+    .field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+    .field .hint {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--ink-mute);
+      margin-left: 6px;
+    }
+    [dir="rtl"] .field .hint { margin-left: 0; margin-right: 6px; }
+    .field input,
+    .field select {
+      width: 100%;
+      padding: 13px 16px;
+      border: 2px solid var(--ink);
+      border-radius: 14px;
+      font-size: 15px;
+      font-family: inherit;
+      background: #fff;
+      color: var(--ink);
+      transition: box-shadow 0.15s;
+    }
+    .field input:focus,
+    .field select:focus {
+      outline: none;
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+    .field input::placeholder { color: #B8A893; }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .phone-row {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 10px;
+    }
+
+    .pwd-wrap {
+      position: relative;
+    }
+    .pwd-wrap input { padding-right: 60px; }
+    [dir="rtl"] .pwd-wrap input { padding-right: 16px; padding-left: 60px; }
+    .pwd-toggle {
+      position: absolute;
+      right: 14px; top: 50%; transform: translateY(-50%);
+      background: none; border: none;
+      font-size: 13px; font-weight: 600;
+      color: var(--ink-soft);
+      cursor: pointer;
+      padding: 4px 6px;
+      font-family: inherit;
+    }
+    [dir="rtl"] .pwd-toggle { right: auto; left: 14px; }
+    .pwd-toggle:hover { color: var(--maroon); }
+    .pwd-meter {
+      height: 5px;
+      background: var(--border-strong);
+      border-radius: 99px;
+      margin-top: 8px;
+      overflow: hidden;
+    }
+    .pwd-meter-bar {
+      height: 100%;
+      width: 0%;
+      background: var(--coral);
+      border-radius: 99px;
+      transition: width 0.2s, background 0.2s;
+    }
+    .pwd-hint {
+      font-size: 12px;
+      color: var(--ink-mute);
+      margin-top: 5px;
+    }
+
+    /* Kids section */
+    .kids-section {
+      margin-top: 8px;
+      padding: 16px;
+      background: var(--butter-soft);
+      border: 1.5px solid var(--border-strong);
+      border-radius: 16px;
+      margin-bottom: 16px;
+    }
+    .kids-section > label {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      display: block;
+    }
+    .kid-row {
+      display: grid;
+      grid-template-columns: 2fr 1fr auto;
+      gap: 8px;
+      margin-bottom: 8px;
+      align-items: center;
+    }
+    .kid-row input,
+    .kid-row select {
+      padding: 10px 12px;
+      border: 1.5px solid var(--border-strong);
+      border-radius: 10px;
+      font-size: 14px;
+      font-family: inherit;
+      background: #fff;
+      color: var(--ink);
+    }
+    .kid-row input:focus, .kid-row select:focus {
+      outline: none;
+      border-color: var(--ink);
+    }
+    .kid-remove {
+      background: none;
+      border: none;
+      color: var(--ink-mute);
+      font-size: 18px;
+      cursor: pointer;
+      padding: 6px;
+      line-height: 1;
+      font-family: inherit;
+    }
+    .kid-remove:hover { color: var(--coral); }
+    .kid-add {
+      background: none;
+      border: 1.5px dashed var(--ink);
+      border-radius: 10px;
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 9px 14px;
+      cursor: pointer;
+      margin-top: 6px;
+      font-family: inherit;
+    }
+    .kid-add:hover { background: #fff; }
+
+    .checkbox-field {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 12px;
+      font-size: 13px;
+      color: var(--ink-soft);
+      line-height: 1.45;
+      cursor: pointer;
+    }
+    .checkbox-field input {
+      width: 20px; height: 20px;
+      min-width: 20px;
+      margin-top: 1px;
+      border: 2px solid var(--ink);
+      border-radius: 5px;
+      accent-color: var(--maroon);
+      cursor: pointer;
+    }
+    .checkbox-field a {
+      color: var(--maroon);
+      text-decoration: underline;
+      font-weight: 600;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 15px;
+      background: var(--maroon);
+      color: #fff;
+      border: 2px solid var(--ink);
+      border-radius: 14px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 3px 3px 0 var(--ink);
+      transition: transform 0.1s, box-shadow 0.1s, background 0.15s;
+      font-family: inherit;
+      margin-top: 8px;
+    }
+    .submit-btn:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--ink); background: var(--maroon-dark); }
+    .submit-btn:active { transform: translate(1px, 1px); box-shadow: 0 0 0 var(--ink); }
+
+    .switch-auth {
+      text-align: center;
+      margin-top: 22px;
+      padding-top: 20px;
+      border-top: 1.5px solid var(--border-strong);
+      font-size: 14px;
+      color: var(--ink-soft);
+    }
+    .switch-auth a {
+      color: var(--maroon);
+      font-weight: 700;
+      text-decoration: underline;
+      margin-left: 6px;
+    }
+    [dir="rtl"] .switch-auth a { margin-left: 0; margin-right: 6px; }
+
+    .tiny-print {
+      font-size: 12px;
+      color: var(--ink-mute);
+      text-align: center;
+      margin-top: 12px;
+      line-height: 1.5;
+    }
+    .tiny-print a { color: var(--ink-soft); text-decoration: underline; }
+
+    /* responsive */
+    @media (max-width: 900px) {
+      .auth-wrap { grid-template-columns: 1fr; }
+      .auth-panel {
+        padding: 40px 24px;
+        border-right: none;
+        border-bottom: 2px solid var(--ink);
+      }
+      [dir="rtl"] .auth-panel { border-left: none; border-bottom: 2px solid var(--ink); }
+      .auth-panel::before { width: 180px; height: 180px; bottom: -60px; left: -60px; }
+      .auth-form-col { padding: 40px 24px; }
+      .perks { display: none; }
+    }
+    @media (max-width: 520px) {
+      .social-row { grid-template-columns: 1fr; }
+      .grid-2 { grid-template-columns: 1fr; }
+      .kid-row { grid-template-columns: 1fr 1fr; }
+      .kid-row .kid-remove { grid-column: 2; justify-self: end; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site">
+  <div class="nav-wrap container">
+    <a href="yalla-kids-home-wireframe.html" class="logo">
+      <span class="en-only inline">Yalla Kids<span class="dot">.</span></span>
+      <span class="ar-only inline">يلا كيدز<span class="dot">.</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="yalla-kids-classes-directory.html"><span class="en-only inline">Classes</span><span class="ar-only inline">الصفوف</span></a>
+      <a href="yalla-kids-places-directory.html"><span class="en-only inline">Places to go</span><span class="ar-only inline">أماكن للزيارة</span></a>
+      <a href="yalla-kids-camps.html"><span class="en-only inline">Camps</span><span class="ar-only inline">المعسكرات</span></a>
+      <a href="yalla-kids-guides-hub.html"><span class="en-only inline">Guides</span><span class="ar-only inline">الأدلة</span></a>
+      <a href="yalla-kids-for-providers.html"><span class="en-only inline">For providers</span><span class="ar-only inline">للموفرين</span></a>    </nav>
+    <div class="nav-actions">
+      <button class="lang-toggle" onclick="toggleLang()">
+        <span class="en-only inline">العربية</span>
+        <span class="ar-only inline">English</span>
+      </button>
+      <a href="yalla-kids-login.html" class="btn btn-ghost"><span class="en-only inline">Log in</span><span class="ar-only inline">تسجيل الدخول</span></a>
+      <a href="yalla-kids-signup.html" class="btn btn-primary active"><span class="en-only inline">Sign up</span><span class="ar-only inline">إنشاء حساب</span></a>
+    </div>
+  </div>
+</header>
+
+<main class="auth-wrap">
+  <aside class="auth-panel">
+    <div class="auth-head">
+      <h2>
+        <span class="en-only inline">Your family's classes & days out, <span class="pop">one account</span>.</span>
+        <span class="ar-only inline">صفوف عائلتك وأيامها، <span class="pop">حساب واحد</span>.</span>
+      </h2>
+      <p>
+        <span class="en-only inline">Free to join. Track every term, rebook favourites, and save places you want to try.</span>
+        <span class="ar-only inline">الانضمام مجاني. تابع كل فصل، أعد حجز المفضلات، واحفظ الأماكن التي تود تجربتها.</span>
+      </p>
+    </div>
+
+    <ul class="perks">
+      <li>
+        <div class="ico">⚡</div>
+        <div>
+          <div class="t">
+            <span class="en-only inline">Book in three taps</span>
+            <span class="ar-only inline">احجز بثلاث نقرات</span>
+          </div>
+          <div class="d">
+            <span class="en-only inline">No more WhatsApping five studios. Real-time availability, pay online.</span>
+            <span class="ar-only inline">لا مزيد من مراسلة خمس استوديوهات. توفّر فوري، ودفع إلكتروني.</span>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="ico">🗂️</div>
+        <div>
+          <div class="t">
+            <span class="en-only inline">Every term in one place</span>
+            <span class="ar-only inline">كل الفصول في مكان واحد</span>
+          </div>
+          <div class="d">
+            <span class="en-only inline">Calendar of your kids' classes. Reminders the day before. One family hub.</span>
+            <span class="ar-only inline">تقويم لصفوف أطفالك. تذكيرات اليوم السابق. مركز عائلة واحد.</span>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="ico">💛</div>
+        <div>
+          <div class="t">
+            <span class="en-only inline">Saved favourites</span>
+            <span class="ar-only inline">المفضّلات المحفوظة</span>
+          </div>
+          <div class="d">
+            <span class="en-only inline">Keep a wishlist of places, classes and camps to try next.</span>
+            <span class="ar-only inline">احتفظ بقائمة رغبات للأماكن والصفوف والمعسكرات.</span>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </aside>
+
+  <section class="auth-form-col">
+    <div class="auth-form">
+      <h1>
+        <span class="en-only inline">Create your account</span>
+        <span class="ar-only inline">أنشئ حسابك</span>
+      </h1>
+      <p class="sub">
+        <span class="en-only inline">Takes about 30 seconds. No payment details up front.</span>
+        <span class="ar-only inline">يستغرق نحو 30 ثانية. لا حاجة لتفاصيل الدفع الآن.</span>
+      </p>
+
+      <div class="social-row">
+        <button class="social-btn" type="button" onclick="socialSignup('google')">
+          <span class="ico">🅶</span>
+          <span class="en-only inline">Google</span>
+          <span class="ar-only inline">جوجل</span>
+        </button>
+        <button class="social-btn ap" type="button" onclick="socialSignup('apple')">
+          <span class="ico"></span>
+          <span class="en-only inline">Apple</span>
+          <span class="ar-only inline">آبل</span>
+        </button>
+        <button class="social-btn wa" type="button" onclick="socialSignup('whatsapp')">
+          <span class="ico">💬</span>
+          <span class="en-only inline">WhatsApp</span>
+          <span class="ar-only inline">واتساب</span>
+        </button>
+      </div>
+
+      <div class="divider">
+        <span class="en-only inline">or with email</span>
+        <span class="ar-only inline">أو بالبريد</span>
+      </div>
+
+      <form onsubmit="handleSignup(event)">
+        <div class="grid-2">
+          <div class="field">
+            <label for="firstName">
+              <span class="en-only inline">First name</span>
+              <span class="ar-only inline">الاسم الأول</span>
+            </label>
+            <input id="firstName" name="firstName" type="text" required autocomplete="given-name" placeholder="Maryam">
+          </div>
+          <div class="field">
+            <label for="lastName">
+              <span class="en-only inline">Last name</span>
+              <span class="ar-only inline">اسم العائلة</span>
+            </label>
+            <input id="lastName" name="lastName" type="text" required autocomplete="family-name" placeholder="Al-Thani">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="email">
+            <span class="en-only inline">Email</span>
+            <span class="ar-only inline">البريد الإلكتروني</span>
+          </label>
+          <input id="email" name="email" type="email" required autocomplete="email" placeholder="you@example.com">
+        </div>
+
+        <div class="field">
+          <label for="phone">
+            <span class="en-only inline">Mobile</span>
+            <span class="ar-only inline">الجوال</span>
+          </label>
+          <div class="phone-row">
+            <select id="cc" name="cc">
+              <option value="+974" selected>🇶🇦 +974</option>
+              <option value="+971">🇦🇪 +971</option>
+              <option value="+966">🇸🇦 +966</option>
+              <option value="+973">🇧🇭 +973</option>
+              <option value="+965">🇰🇼 +965</option>
+              <option value="+968">🇴🇲 +968</option>
+              <option value="+20">🇪🇬 +20</option>
+            </select>
+            <input id="phone" name="phone" type="tel" required autocomplete="tel-national" placeholder="5000 0000" pattern="[0-9 ]{7,11}">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="password">
+            <span class="en-only inline">Password</span>
+            <span class="ar-only inline">كلمة المرور</span>
+            <span class="hint">
+              <span class="en-only inline">(8+ characters)</span>
+              <span class="ar-only inline">(8 أحرف فأكثر)</span>
+            </span>
+          </label>
+          <div class="pwd-wrap">
+            <input id="password" name="password" type="password" required autocomplete="new-password" minlength="8" placeholder="••••••••" oninput="scorePwd(this.value)">
+            <button type="button" class="pwd-toggle" onclick="togglePwd(this)">
+              <span class="en-only inline">Show</span>
+              <span class="ar-only inline">عرض</span>
+            </button>
+          </div>
+          <div class="pwd-meter"><div class="pwd-meter-bar" id="pwdMeter"></div></div>
+          <div class="pwd-hint" id="pwdHint">
+            <span class="en-only inline">Mix letters, numbers & a symbol for a stronger password.</span>
+            <span class="ar-only inline">امزج حروفاً وأرقاماً ورمزاً لكلمة مرور أقوى.</span>
+          </div>
+        </div>
+
+        <div class="kids-section">
+          <label>
+            <span class="en-only inline">Your kids <span class="hint">(you can add them later)</span></span>
+            <span class="ar-only inline">أطفالك <span class="hint">(يمكنك إضافتهم لاحقاً)</span></span>
+          </label>
+          <div id="kidsList">
+            <div class="kid-row">
+              <input type="text" name="kidName[]" placeholder="Kid's name" data-en-placeholder="Kid's name" data-ar-placeholder="اسم الطفل" aria-label="Kid name" data-en-aria-label="Kid name" data-ar-aria-label="اسم الطفل">
+              <select name="kidYear[]" aria-label="Birth year" data-en-aria-label="Birth year" data-ar-aria-label="سنة الميلاد">
+                <option value="">Birth year</option>
+                <option>2026</option><option>2025</option><option>2024</option>
+                <option>2023</option><option>2022</option><option>2021</option>
+                <option>2020</option><option>2019</option><option>2018</option>
+                <option>2017</option><option>2016</option><option>2015</option>
+                <option>2014</option><option>2013</option><option>2012</option>
+                <option>2011</option><option>2010</option><option>2009</option>
+                <option>2008</option>
+              </select>
+              <button type="button" class="kid-remove" onclick="removeKid(this)" aria-label="Remove">✕</button>
+            </div>
+          </div>
+          <button type="button" class="kid-add" onclick="addKid()">
+            <span class="en-only inline">+ Add another kid</span>
+            <span class="ar-only inline">+ أضف طفلاً آخر</span>
+          </button>
+        </div>
+
+        <div class="field">
+          <label for="area">
+            <span class="en-only inline">Area of Doha</span>
+            <span class="ar-only inline">المنطقة في الدوحة</span>
+          </label>
+          <select id="area" name="area">
+            <option value="">—</option>
+            <option>West Bay</option>
+            <option>The Pearl</option>
+            <option>Lusail</option>
+            <option>Al Waab</option>
+            <option>Al Gharrafa</option>
+            <option>Al Sadd</option>
+            <option>Al Rayyan</option>
+            <option>Msheireb</option>
+            <option>Katara</option>
+            <option>Education City</option>
+            <option>Al Wakra</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <label class="checkbox-field">
+          <input type="checkbox" required>
+          <span>
+            <span class="en-only inline">I agree to the <a href="yalla-kids-terms.html">Terms</a> and <a href="yalla-kids-privacy.html">Privacy Policy</a>.</span>
+            <span class="ar-only inline">أوافق على <a href="yalla-kids-terms.html">الشروط</a> و<a href="yalla-kids-privacy.html">سياسة الخصوصية</a>.</span>
+          </span>
+        </label>
+
+        <label class="checkbox-field">
+          <input type="checkbox" name="marketing" checked>
+          <span>
+            <span class="en-only inline">Send me the weekly "this week in Doha" newsletter and new-class alerts for my kids' ages.</span>
+            <span class="ar-only inline">أرسل لي نشرة "هذا الأسبوع في الدوحة" وتنبيهات الصفوف الجديدة بحسب أعمار أطفالي.</span>
+          </span>
+        </label>
+
+        <button type="submit" class="submit-btn">
+          <span class="en-only inline">Create account</span>
+          <span class="ar-only inline">أنشئ الحساب</span>
+        </button>
+      </form>
+
+      <div class="switch-auth">
+        <span class="en-only inline">Already have an account?</span>
+        <span class="ar-only inline">لديك حساب بالفعل؟</span>
+        <a href="yalla-kids-login.html">
+          <span class="en-only inline">Log in →</span>
+          <span class="ar-only inline">تسجيل الدخول ←</span>
+        </a>
+      </div>
+
+      <p class="tiny-print">
+        <span class="en-only inline">Are you a studio or venue? <a href="yalla-kids-for-providers.html">Apply as a provider</a></span>
+        <span class="ar-only inline">أنت استوديو أو مكان؟ <a href="yalla-kids-for-providers.html">سجّل كموفّر</a></span>
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="logo">
+          <span class="en-only inline">Yalla Kids<span class="dot">.</span></span>
+          <span class="ar-only inline">يلا كيدز<span class="dot">.</span></span>
+        </div>
+        <p class="foot-about">
+          <span class="en-only inline">Qatar's kids' classes and places, one place to book. Bilingual, built in Doha.</span>
+          <span class="ar-only inline">صفوف وأماكن للأطفال في قطر في مكان واحد. بلغتين، صُنعت في الدوحة.</span>
+        </p>
+        <div class="foot-social">
+          <a href="#" aria-label="Instagram">📷</a>
+          <a href="#" aria-label="WhatsApp">💬</a>
+          <a href="#" aria-label="TikTok">🎵</a>
+          <a href="#" aria-label="Email">✉</a>
+        </div>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Classes</span><span class="ar-only inline">الصفوف</span></h5>
+        <a href="yalla-kids-classes-directory.html"><span class="en-only inline">All classes</span><span class="ar-only inline">كل الصفوف</span></a>
+        <a href="yalla-kids-classes-directory.html?cat=art"><span class="en-only inline">Art &amp; crafts</span><span class="ar-only inline">فن وحرف</span></a>
+        <a href="yalla-kids-classes-directory.html?cat=swimming"><span class="en-only inline">Swimming</span><span class="ar-only inline">سباحة</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Places</span><span class="ar-only inline">الأماكن</span></h5>
+        <a href="yalla-kids-places-directory.html"><span class="en-only inline">All places</span><span class="ar-only inline">كل الأماكن</span></a>
+        <a href="yalla-kids-places-directory.html#softplay"><span class="en-only inline">Soft plays</span><span class="ar-only inline">صالات اللعب</span></a>
+        <a href="yalla-kids-map.html"><span class="en-only inline">Map</span><span class="ar-only inline">خريطة</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">For providers</span><span class="ar-only inline">للموفرين</span></h5>
+        <a href="yalla-kids-for-providers.html"><span class="en-only inline">List a class</span><span class="ar-only inline">أدرج صفاً</span></a>
+        <a href="yalla-kids-how-it-works.html"><span class="en-only inline">How it works</span><span class="ar-only inline">كيف نعمل</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Company</span><span class="ar-only inline">الشركة</span></h5>
+        <a href="yalla-kids-about.html"><span class="en-only inline">About</span><span class="ar-only inline">من نحن</span></a>
+        <a href="yalla-kids-contact.html"><span class="en-only inline">Contact</span><span class="ar-only inline">تواصل</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Legal</span><span class="ar-only inline">قانوني</span></h5>
+        <a href="yalla-kids-terms.html"><span class="en-only inline">Terms</span><span class="ar-only inline">الشروط</span></a>
+        <a href="yalla-kids-privacy.html"><span class="en-only inline">Privacy</span><span class="ar-only inline">الخصوصية</span></a>
+        <a href="yalla-kids-faq.html"><span class="en-only inline">FAQ</span><span class="ar-only inline">الأسئلة الشائعة</span></a>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>© 2026 Yalla Kids WLL · Doha, Qatar · CR #XXXXXX 🇶🇦</span>
+      <span><span class="en-only inline">Made with 💛 for Doha families</span><span class="ar-only inline">صُنعت بـ 💛 لعائلات الدوحة</span></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleLang() {
+    const html = document.documentElement;
+    const isRTL = html.getAttribute("dir") === "rtl";
+    html.setAttribute("dir", isRTL ? "ltr" : "rtl");
+    html.setAttribute("lang", isRTL ? "en" : "ar");
+    document.title = isRTL ? "Sign up — Yalla Kids" : "إنشاء حساب — يلا كيدز";
+  }
+  function togglePwd(btn) {
+    const input = btn.previousElementSibling;
+    const showing = input.type === "text";
+    input.type = showing ? "password" : "text";
+    btn.querySelector(".en-only").textContent = showing ? "Show" : "Hide";
+    btn.querySelector(".ar-only").textContent = showing ? "عرض" : "إخفاء";
+  }
+  function scorePwd(v) {
+    const bar = document.getElementById("pwdMeter");
+    let score = 0;
+    if (v.length >= 8) score++;
+    if (v.length >= 12) score++;
+    if (/[A-Z]/.test(v) && /[a-z]/.test(v)) score++;
+    if (/[0-9]/.test(v)) score++;
+    if (/[^A-Za-z0-9]/.test(v)) score++;
+    const pct = Math.min(100, score * 20);
+    bar.style.width = pct + "%";
+    if (pct < 40) bar.style.background = "var(--coral)";
+    else if (pct < 80) bar.style.background = "var(--butter)";
+    else bar.style.background = "var(--mint)";
+  }
+  function addKid() {
+    const list = document.getElementById("kidsList");
+    const row = document.createElement("div");
+    row.className = "kid-row";
+    row.innerHTML = `
+      <input type="text" name="kidName[]" placeholder="Kid's name" data-en-placeholder="Kid's name" data-ar-placeholder="اسم الطفل" aria-label="Kid name" data-en-aria-label="Kid name" data-ar-aria-label="اسم الطفل">
+      <select name="kidYear[]" aria-label="Birth year" data-en-aria-label="Birth year" data-ar-aria-label="سنة الميلاد">
+        <option value="">Birth year</option>
+        <option>2026</option><option>2025</option><option>2024</option>
+        <option>2023</option><option>2022</option><option>2021</option>
+        <option>2020</option><option>2019</option><option>2018</option>
+        <option>2017</option><option>2016</option><option>2015</option>
+        <option>2014</option><option>2013</option><option>2012</option>
+        <option>2011</option><option>2010</option><option>2009</option>
+        <option>2008</option>
+      </select>
+      <button type="button" class="kid-remove" onclick="removeKid(this)" aria-label="Remove">✕</button>`;
+    list.appendChild(row);
+  }
+  function removeKid(btn) {
+    const row = btn.closest(".kid-row");
+    const list = document.getElementById("kidsList");
+    if (list.children.length > 1) row.remove();
+    else {
+      // keep one row but clear it
+      row.querySelectorAll("input, select").forEach(el => el.value = "");
+    }
+  }
+  function handleSignup(e) {
+    e.preventDefault();
+    window.location.href = "yalla-kids-parent-dashboard.html?welcome=1";
+  }
+  function socialSignup(provider) {
+    window.location.href = "yalla-kids-parent-dashboard.html?welcome=1&via=" + provider;
+  }
+</script>
+
+<script src="yalla-kids-shared.js"></script>
+</body>
+</html>

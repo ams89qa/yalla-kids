@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#8A1538">
+  <title>My Yalla Kids — Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,600;1,9..144,700&family=Inter:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="yalla-kids-shared.css">
+<style>
+  .dash-wrap {
+    max-width: 1280px;
+    margin: 24px auto 0;
+    padding: 0 24px;
+  }
+
+  /* Greeting */
+  .greeting {
+    background: var(--card-bg);
+    border: 2px solid var(--ink);
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow-hard);
+    padding: 24px 28px;
+    margin-bottom: 24px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 20px;
+    align-items: center;
+  }
+  .greeting h1 {
+    font-size: 32px;
+    font-family: "Fraunces", serif;
+    margin-bottom: 6px;
+  }
+  .greeting .sub { color: var(--ink-soft); font-size: 15px; }
+  .greet-stats {
+    display: flex; gap: 20px;
+  }
+  .greet-stat {
+    text-align: center;
+    min-width: 72px;
+  }
+  .greet-stat .n {
+    font-family: "Fraunces", serif;
+    font-size: 32px; font-weight: 800;
+    color: var(--maroon);
+    line-height: 1;
+  }
+  .greet-stat .l {
+    font-size: 11px; color: var(--ink-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+    margin-top: 4px;
+  }
+
+  /* Dashboard layout */
+  .dash-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  /* Sidebar */
+  .dash-side {
+    background: var(--card-bg);
+    border: 2px solid var(--ink);
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow-hard);
+    padding: 12px;
+    position: sticky;
+    top: 96px;
+  }
+  .dash-side h5 {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-mute);
+    padding: 10px 12px 6px;
+    font-weight: 700;
+  }
+  .side-item {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 10px 12px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink-soft);
+    cursor: pointer;
+  }
+  .side-item:hover { background: var(--butter-soft); color: var(--ink); }
+  .side-item.active {
+    background: var(--maroon);
+    color: #fff;
+  }
+  .side-item .badge {
+    margin-left: auto;
+    background: var(--butter);
+    border: 1.5px solid var(--ink);
+    border-radius: 99px;
+    padding: 0 7px;
+    font-size: 11px;
+    color: var(--ink);
+  }
+
+  /* Tabs (top of main) */
+  .dash-main { min-width: 0; }
+  .sec-card {
+    background: var(--card-bg);
+    border: 2px solid var(--ink);
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow-hard);
+    padding: 24px;
+    margin-bottom: 22px;
+  }
+  .sec-card h2 {
+    font-family: "Fraunces", serif;
+    font-size: 22px;
+    margin-bottom: 14px;
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 10px;
+  }
+  .sec-card h2 a {
+    font-size: 13px;
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+    color: var(--maroon);
+    text-decoration: underline;
+  }
+
+  /* Upcoming list */
+  .upcoming {
+    display: grid;
+    gap: 12px;
+  }
+  .upcoming-item {
+    display: grid;
+    grid-template-columns: 68px 1fr auto;
+    gap: 16px;
+    align-items: center;
+    padding: 14px 16px;
+    border: 2px solid var(--ink);
+    border-radius: var(--r);
+    background: var(--warm-white);
+  }
+  .upcoming-item.next { background: var(--butter-soft); box-shadow: var(--shadow-hard); }
+  .date-chip {
+    text-align: center;
+    background: var(--coral-soft);
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    padding: 8px 6px;
+    font-family: "Fraunces", serif;
+  }
+  .date-chip .m { font-size: 11px; text-transform: uppercase; font-weight: 700; color: var(--ink); }
+  .date-chip .d { font-size: 22px; font-weight: 800; line-height: 1; margin-top: 2px; }
+  .up-title { font-weight: 700; font-size: 15px; margin-bottom: 2px; }
+  .up-meta { font-size: 13px; color: var(--ink-soft); }
+
+  /* Kids row */
+  .kids-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .kid-tile {
+    border: 2px solid var(--ink);
+    border-radius: var(--r);
+    padding: 16px;
+    background: var(--warm-white);
+    display: grid;
+    grid-template-columns: 54px 1fr;
+    gap: 12px;
+    align-items: center;
+    text-align: left;
+  }
+  .kid-tile .av {
+    width: 54px; height: 54px;
+    border-radius: 50%;
+    border: 2px solid var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px;
+  }
+  .kid-tile .n { font-weight: 700; font-size: 16px; font-family: "Fraunces", serif; }
+  .kid-tile .m { font-size: 12px; color: var(--ink-soft); margin-top: 2px; }
+  .kid-tile.add {
+    border-style: dashed;
+    background: transparent;
+    grid-template-columns: 1fr;
+    text-align: center;
+    cursor: pointer;
+    color: var(--ink-soft);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+  }
+
+  /* Favorites grid */
+  .fav-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .fav-card {
+    border: 2px solid var(--ink);
+    border-radius: var(--r);
+    background: var(--warm-white);
+    box-shadow: var(--shadow-hard);
+    overflow: hidden;
+  }
+  .fav-thumb {
+    height: 96px;
+    border-bottom: 2px solid var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 34px;
+  }
+  .fav-body { padding: 10px 12px; }
+  .fav-body h4 { font-size: 14px; margin-bottom: 2px; }
+  .fav-body .m { font-size: 12px; color: var(--ink-mute); }
+
+  /* Planning board */
+  .plan-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+  .plan-chip {
+    border: 2px solid var(--ink);
+    border-radius: 99px;
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    background: var(--sky-soft);
+  }
+  .plan-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .plan-col {
+    border: 2px solid var(--ink);
+    border-radius: var(--r);
+    padding: 14px;
+    background: var(--warm-white);
+  }
+  .plan-col h4 {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 10px;
+    color: var(--ink);
+  }
+  .plan-item {
+    background: var(--card-bg);
+    border: 1.5px solid var(--ink);
+    border-radius: 14px;
+    padding: 8px 10px;
+    font-size: 13px;
+    margin-bottom: 8px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+
+  /* Receipts */
+  .receipt-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .receipt-table th,
+  .receipt-table td {
+    text-align: left;
+    padding: 12px 10px;
+    font-size: 13px;
+    border-bottom: 1.5px solid var(--border-strong);
+  }
+  .receipt-table th {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--ink-mute);
+    background: var(--warm-white);
+  }
+  .receipt-table .amount { font-weight: 700; font-family: "Fraunces", serif; }
+  .receipt-table a { color: var(--maroon); text-decoration: underline; }
+
+  /* Settings list */
+  .settings {
+    display: grid; gap: 10px;
+  }
+  .setting-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    padding: 12px 14px;
+    border: 2px solid var(--ink);
+    border-radius: var(--r);
+    background: var(--warm-white);
+    font-size: 14px;
+  }
+  .setting-row .k { font-weight: 700; }
+  .setting-row .v { color: var(--ink-soft); font-size: 13px; }
+  .toggle {
+    width: 42px; height: 24px;
+    background: var(--mint);
+    border: 2px solid var(--ink);
+    border-radius: 99px;
+    position: relative;
+    cursor: pointer;
+  }
+  .toggle::after {
+    content: "";
+    position: absolute;
+    top: 1px; right: 1px;
+    width: 18px; height: 18px;
+    background: var(--card-bg);
+    border: 2px solid var(--ink);
+    border-radius: 50%;
+  }
+  .toggle.off { background: var(--border); }
+  .toggle.off::after { right: auto; left: 1px; }
+
+  @media (max-width: 980px) {
+    .dash-layout { grid-template-columns: 1fr; gap: 24px; }
+    .dash-side { position: static; order: -1; }
+    .kids-row { grid-template-columns: 1fr 1fr; }
+    .fav-grid { grid-template-columns: repeat(2, 1fr); }
+    .plan-board { grid-template-columns: 1fr; }
+    .greeting { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .dash-layout { gap: 20px; }
+    .dash-card, .panel { padding: 18px; border-radius: 20px; }
+    h1, .page-head h1 { font-size: 26px; }
+    h2, .panel h2 { font-size: 20px; }
+    .kids-row { grid-template-columns: 1fr; gap: 10px; }
+    .fav-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .stats { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  @media (max-width: 560px) {
+    .upcoming-item { grid-template-columns: 50px 1fr; gap: 12px; }
+    .upcoming-item .btn { grid-column: 2; justify-self: start; width: 100%; justify-content: center; }
+    .fav-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site">
+  <div class="nav-wrap container">
+    <a href="yalla-kids-home-sunny.html" class="logo">
+      <span class="en-only inline">Yalla Kids</span>
+      <span class="ar-only inline">يلا كيدز</span>
+    </a>
+    <nav class="nav-links">
+      <a href="yalla-kids-search.html"><span class="en-only inline">Explore</span><span class="ar-only inline">اكتشف</span></a>
+      <a href="yalla-kids-places-directory.html"><span class="en-only inline">Places</span><span class="ar-only inline">الأماكن</span></a>
+      <a href="yalla-kids-parent-dashboard.html" class="active" style="color:var(--maroon)"><span class="en-only inline">My stuff</span><span class="ar-only inline">حساباتي</span></a>
+      <a href="yalla-kids-messages.html"><span class="en-only inline">Messages</span><span class="ar-only inline">الرسائل</span></a>
+      <a href="yalla-kids-guides-hub.html"><span class="en-only inline">Guides</span><span class="ar-only inline">الأدلة</span></a>
+      <a href="yalla-kids-for-providers.html"><span class="en-only inline">For providers</span><span class="ar-only inline">للموفرين</span></a>
+    </nav>
+    <div class="nav-actions">
+      <button class="lang-toggle" onclick="toggleLang()">
+        <span class="en-only inline">العربية</span>
+        <span class="ar-only inline">English</span>
+      </button>
+      <a href="yalla-kids-sitemap.html" class="btn btn-ghost" title="Site map" data-en-title="Site map" data-ar-title="خريطة الموقع"><span class="en-only inline">Site map</span><span class="ar-only inline">خريطة الموقع</span></a>
+      <a href="#" class="btn btn-primary" style="background:linear-gradient(135deg,var(--maroon),#a5305b);">A</a>
+    </div>
+  </div>
+</header>
+
+<div class="dash-wrap">
+
+  <!-- Greeting -->
+  <div class="greeting">
+    <div>
+      <h1>
+        <span class="en-only">Yalla, <span class="pop">Aisha!</span> 👋</span>
+        <span class="ar-only">مرحبًا، <span class="pop">عائشة!</span></span>
+      </h1>
+      <p class="sub">
+        <span class="en-only">Your week: 2 classes coming up, Layla's first art class is Tuesday 🎨</span>
+        <span class="ar-only">أسبوعك: درسان قادمان — أول صف فن لليلى الثلاثاء 🎨</span>
+      </p>
+    </div>
+    <div class="greet-stats">
+      <div class="greet-stat"><div class="n">3</div><div class="l">Active<br>bookings</div></div>
+      <div class="greet-stat"><div class="n">12</div><div class="l">Favorite<br>places</div></div>
+      <div class="greet-stat"><div class="n">QAR 50</div><div class="l">Referral<br>credit</div></div>
+    </div>
+  </div>
+
+  <div class="dash-layout">
+
+    <!-- Sidebar -->
+    <aside class="dash-side">
+      <h5>Parent tools</h5>
+      <a href="yalla-kids-parent-dashboard.html" class="side-item active" style="text-decoration:none;color:inherit;display:block;">🏠 Overview</a>
+      <a href="yalla-kids-manage-booking.html" class="side-item" style="text-decoration:none;color:inherit;display:block;">📅 Bookings</a>
+      <a href="yalla-kids-messages.html" class="side-item" style="text-decoration:none;color:inherit;display:block;">💬 Messages</a>
+      <a href="yalla-kids-review.html" class="side-item" style="text-decoration:none;color:inherit;display:block;">★ Reviews</a>
+      <a href="yalla-kids-parent-dashboard.html#favs" class="side-item" style="text-decoration:none;color:inherit;display:block;">♡ Favorites</a>
+      <h5 style="margin-top:8px;">Account</h5>
+      <a href="#" class="side-item" style="text-decoration:none;color:inherit;display:block;">⚙️ Settings</a>
+      <a href="yalla-kids-faq.html" class="side-item" style="text-decoration:none;color:inherit;display:block;">❓ Help</a>
+      <a href="yalla-kids-login.html" class="side-item" style="color:var(--ink-mute);text-decoration:none;display:block;">↪ Sign out</a>
+    </aside>
+
+    <!-- Main -->
+    <main class="dash-main">
+
+      <!-- Honest preview banner: dashboard content is sample data for design review -->
+      <div style="background:#FAF5EA;border:1px solid #E4DCC9;border-radius:8px;padding:8px 12px;margin-bottom:14px;font-size:13px;line-height:1.5;">
+        <b>Dashboard preview — sample data.</b>
+        <span class="en-only">The bookings, family profiles, messages, favourites and receipts below are placeholder UI. Your real dashboard fills in once you book a class. Browse the real catalogue from <a href="yalla-kids-classes-directory.html" style="color:var(--maroon);">classes</a> or <a href="yalla-kids-places-directory.html" style="color:var(--maroon);">places</a>.</span>
+        <span class="ar-only">هذه لوحة عرض توضيحية. الحجوزات وبيانات العائلة والرسائل والمفضلة أدناه نماذج. تُملأ لوحتك الفعلية بعد أول حجز. تصفّحي الكتالوج الحقيقي من <a href="yalla-kids-classes-directory.html" style="color:var(--maroon);">الصفوف</a> أو <a href="yalla-kids-places-directory.html" style="color:var(--maroon);">الأماكن</a>.</span>
+      </div>
+
+      <!-- Quick hub strip -->
+      <section class="sec-card" style="padding:14px 18px;">
+        <h2 style="margin-bottom:10px;">
+          <span>Your <span class="pop">quick links</span></span>
+          <a href="yalla-kids-sitemap.html">Full site map →</a>
+        </h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;">
+          <a href="yalla-kids-manage-booking.html" style="display:flex;gap:10px;align-items:center;padding:10px 12px;border:2px solid var(--ink);border-radius:12px;background:var(--mint-soft, #E3F2EA);text-decoration:none;color:var(--ink);">
+            <span style="font-size:20px;">📅</span>
+            <span><b style="display:block;font-size:13px;">Manage bookings</b><small style="color:var(--ink-mute, #6b6b6b);font-size:11px;">3 active</small></span>
+          </a>
+          <a href="yalla-kids-messages.html" style="display:flex;gap:10px;align-items:center;padding:10px 12px;border:2px solid var(--ink);border-radius:12px;background:var(--butter-soft);text-decoration:none;color:var(--ink);">
+            <span style="font-size:20px;">💬</span>
+            <span><b style="display:block;font-size:13px;">Messages</b><small style="color:var(--ink-mute, #6b6b6b);font-size:11px;">2 unread</small></span>
+          </a>
+          <a href="yalla-kids-review.html" style="display:flex;gap:10px;align-items:center;padding:10px 12px;border:2px solid var(--ink);border-radius:12px;background:#FFF4D3;text-decoration:none;color:var(--ink);">
+            <span style="font-size:20px;">★</span>
+            <span><b style="display:block;font-size:13px;">Review to write</b><small style="color:var(--ink-mute, #6b6b6b);font-size:11px;">After your next class</small></span>
+          </a>
+          <a href="yalla-kids-search.html" style="display:flex;gap:10px;align-items:center;padding:10px 12px;border:2px solid var(--ink);border-radius:12px;background:#CFE3F3;text-decoration:none;color:var(--ink);">
+            <span style="font-size:20px;">🔍</span>
+            <span><b style="display:block;font-size:13px;">Find something new</b><small style="color:var(--ink-mute, #6b6b6b);font-size:11px;">Saved search: West Bay</small></span>
+          </a>
+        </div>
+      </section>
+
+      <!-- Upcoming classes -->
+      <section class="sec-card">
+        <h2>
+          <span>Upcoming <span class="pop">this week</span></span>
+          <a href="yalla-kids-manage-booking.html">See all bookings →</a>
+        </h2>
+        <div class="upcoming">
+          <div class="upcoming-item next">
+            <div class="date-chip">
+              <div class="m">May</div>
+              <div class="d">05</div>
+            </div>
+            <div>
+              <div class="up-title">Sample · weekly art class (Session 1 of 8)</div>
+              <div class="up-meta">Sample studio · 4:30 pm · Child (7)</div>
+            </div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;">
+              <a href="yalla-kids-messages.html" class="btn outline" style="padding:8px 12px;font-size:12px;">💬 Message</a>
+              <a href="yalla-kids-manage-booking.html" class="btn outline" style="padding:8px 12px;font-size:12px;">Manage</a>
+              <a href="yalla-kids-classes-directory.html" class="btn primary" style="padding:8px 12px;font-size:12px;">Browse real classes</a>
+            </div>
+          </div>
+          <div class="upcoming-item">
+            <div class="date-chip" style="background:var(--teal-soft);">
+              <div class="m">May</div>
+              <div class="d">07</div>
+            </div>
+            <div>
+              <div class="up-title">Sample · library storytime</div>
+              <div class="up-meta">Qatar National Library · 10:00 am · Child (9)</div>
+            </div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;">
+              <a href="yalla-kids-manage-booking.html" class="btn outline" style="padding:8px 12px;font-size:12px;">Manage</a>
+              <a href="yalla-kids-place-detail.html?slug=qatar-national-library-children-s-library" class="btn outline" style="padding:8px 12px;font-size:12px;">View QNL</a>
+            </div>
+          </div>
+          <div class="upcoming-item">
+            <div class="date-chip" style="background:var(--butter-soft);">
+              <div class="m">May</div>
+              <div class="d">09</div>
+            </div>
+            <div>
+              <div class="up-title">OliOli play museum visit (saved for weekend)</div>
+              <div class="up-meta">Aspire · Paid place · 4 in group</div>
+            </div>
+            <div style="display:flex;gap:6px;">
+              <a href="yalla-kids-place-detail.html?slug=olioli-doha-children-s-play-museum" class="btn outline" style="padding:8px 12px;font-size:12px;">View place</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Family -->
+      <section class="sec-card">
+        <h2>
+          <span>My <span class="pop">family</span></span>
+          <a href="#">Manage all →</a>
+        </h2>
+        <div class="kids-row">
+          <div class="kid-tile">
+            <div class="av" style="background:var(--coral-soft);">👧</div>
+            <div>
+              <div class="n">Layla</div>
+              <div class="m">7 yrs · Art · Ballet</div>
+            </div>
+          </div>
+          <div class="kid-tile">
+            <div class="av" style="background:var(--teal-soft);">👦</div>
+            <div>
+              <div class="n">Omar</div>
+              <div class="m">9 yrs · Football · Science</div>
+            </div>
+          </div>
+          <div class="kid-tile add">
+            ＋ Add a kid
+          </div>
+        </div>
+      </section>
+
+      <!-- Favorites -->
+      <section class="sec-card" id="favs">
+        <h2>
+          <span><span class="pop">Favorites</span> &amp; saved</span>
+          <span id="fav-count" style="font-size:14px;color:var(--ink-mute,#6b6b6b);font-weight:600;"></span>
+        </h2>
+        <div class="fav-grid" id="live-fav-grid"></div>
+        <div id="fav-empty" style="display:none;"></div>
+      </section>
+      <script>
+      (function () {
+        if (!window.YALLA_DATA) return;
+        var D = window.YALLA_DATA;
+        var grid = document.getElementById('live-fav-grid');
+        var empty = document.getElementById('fav-empty');
+        var countEl = document.getElementById('fav-count');
+        function thumbStyleFor(it) {
+          var accent = (D.accentFor && D.accentFor(it)) || '#FFE5A3';
+          return 'background:' + accent + ';';
+        }
+        function emojiFor(it) { return (D.emojiFor && D.emojiFor(it)) || '🎈'; }
+        function render() {
+          var items = (D.favorites && D.favorites.items()) || [];
+          if (countEl) countEl.textContent = items.length ? '· ' + items.length + ' saved' : '';
+          if (!items.length) {
+            if (grid) grid.innerHTML = '';
+            if (empty) {
+              empty.innerHTML = D.emptyStateHTML({
+                emoji: '♡',
+                titleEn: 'No favorites yet',
+                titleAr: 'لا توجد مفضلات بعد',
+                bodyEn: 'Tap the ♡ on any class or place to save it here for later — perfect for shortlisting birthday venues or Saturday plans.',
+                bodyAr: 'اضغط ♡ على أي صف أو مكان لحفظه هنا — مثالي لاختيار مكان عيد ميلاد أو خطط نهاية الأسبوع.',
+                actions: [
+                  { label: 'Browse classes', labelAr: 'تصفّح الصفوف', href: 'yalla-kids-classes-directory.html', primary: true },
+                  { label: 'Browse places', labelAr: 'تصفّح الأماكن', href: 'yalla-kids-places-directory.html' }
+                ]
+              });
+              empty.style.display = 'block';
+            }
+            return;
+          }
+          if (empty) empty.style.display = 'none';
+          var html = items.map(function (it) {
+            var href = 'yalla-kids-' + (it.kind === 'class' ? 'class' : 'place') + '-detail.html?slug=' + encodeURIComponent(it.slug);
+            var sub = (it.kind === 'class' ? 'Class' : 'Place') + (it.area ? ' · ' + it.area : '');
+            return (
+              '<a href="' + href + '" class="fav-card">' +
+                '<div class="fav-thumb" style="' + thumbStyleFor(it) + '">' + emojiFor(it) + '</div>' +
+                '<div class="fav-body">' +
+                  '<h4>' + D.escapeHtml(it.name_en || '') + '</h4>' +
+                  '<div class="m">' + D.escapeHtml(sub) + '</div>' +
+                '</div>' +
+              '</a>'
+            );
+          }).join('');
+          if (grid) grid.innerHTML = html;
+        }
+        render();
+        window.addEventListener('yalla:favorites', render);
+      })();
+      </script>
+
+      <!-- Planning -->
+      <section class="sec-card">
+        <h2>
+          <span>Trip <span class="pop">planning</span></span>
+          <a href="#">+ New trip</a>
+        </h2>
+        <div class="plan-row">
+          <span class="plan-chip">🌴 Eid weekend — Apr 25–27</span>
+          <span class="plan-chip" style="background:var(--pink-soft);">🎂 Omar's birthday — Jun 12</span>
+        </div>
+        <div class="plan-board">
+          <div class="plan-col">
+            <h4>Morning</h4>
+            <div class="plan-item">🏖 Beach at Katara <span>→</span></div>
+            <div class="plan-item">🥞 Brunch at Flat White <span>→</span></div>
+          </div>
+          <div class="plan-col">
+            <h4>Afternoon</h4>
+            <div class="plan-item">🛝 OliOli visit (4 tickets) <span>→</span></div>
+            <div class="plan-item">🍦 Ice cream at Desserted <span>→</span></div>
+          </div>
+          <div class="plan-col">
+            <h4>Evening</h4>
+            <div class="plan-item">🕌 Msheireb walk + Souq Waqif <span>→</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Receipts -->
+      <section class="sec-card">
+        <h2>
+          <span><span class="pop">Receipts</span> &amp; refunds</span>
+          <a href="#">Download all (PDF)</a>
+        </h2>
+        <table class="receipt-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Item</th>
+              <th>Kid</th>
+              <th>Status</th>
+              <th style="text-align:right;">Amount</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Apr 17, 2026</td>
+              <td>Creative Art Tuesdays · 8-wk term</td>
+              <td>Layla</td>
+              <td><span class="chip verified" style="padding:2px 10px;font-size:11px;">Paid</span></td>
+              <td class="amount" style="text-align:right;">QAR 692.00</td>
+              <td><a href="#">Receipt</a></td>
+            </tr>
+            <tr>
+              <td>Apr 10, 2026</td>
+              <td>OliOli · 4 tickets</td>
+              <td>Family</td>
+              <td><span class="chip verified" style="padding:2px 10px;font-size:11px;">Paid</span></td>
+              <td class="amount" style="text-align:right;">QAR 260.00</td>
+              <td><a href="#">Receipt</a></td>
+            </tr>
+            <tr>
+              <td>Mar 22, 2026</td>
+              <td>Football Starter · 4-wk term</td>
+              <td>Omar</td>
+              <td><span class="chip" style="padding:2px 10px;font-size:11px;background:var(--peach-soft);">Refunded</span></td>
+              <td class="amount" style="text-align:right;">QAR 440.00</td>
+              <td><a href="#">Refund note</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Settings preview -->
+      <section class="sec-card">
+        <h2>
+          <span>Settings &amp; <span class="pop">preferences</span></span>
+          <a href="#">Edit all →</a>
+        </h2>
+        <div class="settings">
+          <div class="setting-row">
+            <div>
+              <div class="k">SMS reminders</div>
+              <div class="v">Day-before reminders for every class</div>
+            </div>
+            <div class="toggle"></div>
+          </div>
+          <div class="setting-row">
+            <div>
+              <div class="k">WhatsApp updates</div>
+              <div class="v">Class changes and provider messages</div>
+            </div>
+            <div class="toggle"></div>
+          </div>
+          <div class="setting-row">
+            <div>
+              <div class="k">Weekly "what's on" newsletter</div>
+              <div class="v">Top picks in Doha every Wednesday</div>
+            </div>
+            <div class="toggle off"></div>
+          </div>
+          <div class="setting-row">
+            <div>
+              <div class="k">Preferred language</div>
+              <div class="v">Affects emails, SMS, and this dashboard</div>
+            </div>
+            <div style="display:flex;gap:6px;">
+              <span class="chip" style="background:var(--butter-soft);">EN</span>
+              <span class="chip" style="background:transparent;border:2px solid var(--ink);">AR</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="logo">
+          <span class="en-only inline">Yalla Kids</span>
+          <span class="ar-only inline">يلا كيدز</span>
+        </div>
+        <p class="foot-about">
+          <span class="en-only inline">Qatar's kids' classes and places, one place to book. Bilingual, built in Doha.</span>
+          <span class="ar-only inline">صفوف وأماكن للأطفال في قطر في مكان واحد. بلغتين، صُنعت في الدوحة.</span>
+        </p>
+        <div class="foot-social">
+          <a href="#" aria-label="Instagram">📷</a>
+          <a href="#" aria-label="WhatsApp">💬</a>
+          <a href="#" aria-label="TikTok">🎵</a>
+          <a href="#" aria-label="Email">✉</a>
+        </div>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Classes</span><span class="ar-only inline">الصفوف</span></h5>
+        <a href="yalla-kids-classes-directory.html"><span class="en-only inline">All classes</span><span class="ar-only inline">كل الصفوف</span></a>
+        <a href="yalla-kids-classes-directory.html?cat=art"><span class="en-only inline">Art &amp; crafts</span><span class="ar-only inline">فن وحرف</span></a>
+        <a href="yalla-kids-classes-directory.html?cat=swimming"><span class="en-only inline">Swimming</span><span class="ar-only inline">سباحة</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Places</span><span class="ar-only inline">الأماكن</span></h5>
+        <a href="yalla-kids-places-directory.html"><span class="en-only inline">All places</span><span class="ar-only inline">كل الأماكن</span></a>
+        <a href="yalla-kids-places-directory.html#softplay"><span class="en-only inline">Soft plays</span><span class="ar-only inline">صالات اللعب</span></a>
+        <a href="yalla-kids-map.html"><span class="en-only inline">Map</span><span class="ar-only inline">خريطة</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">For providers</span><span class="ar-only inline">للموفرين</span></h5>
+        <a href="yalla-kids-for-providers.html"><span class="en-only inline">List a class</span><span class="ar-only inline">أدرج صفاً</span></a>
+        <a href="yalla-kids-how-it-works.html"><span class="en-only inline">How it works</span><span class="ar-only inline">كيف نعمل</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Company</span><span class="ar-only inline">الشركة</span></h5>
+        <a href="yalla-kids-about.html"><span class="en-only inline">About</span><span class="ar-only inline">من نحن</span></a>
+        <a href="yalla-kids-contact.html"><span class="en-only inline">Contact</span><span class="ar-only inline">تواصل</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Legal</span><span class="ar-only inline">قانوني</span></h5>
+        <a href="yalla-kids-terms.html"><span class="en-only inline">Terms</span><span class="ar-only inline">الشروط</span></a>
+        <a href="yalla-kids-privacy.html"><span class="en-only inline">Privacy</span><span class="ar-only inline">الخصوصية</span></a>
+        <a href="yalla-kids-faq.html"><span class="en-only inline">FAQ</span><span class="ar-only inline">الأسئلة الشائعة</span></a>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>© 2026 Yalla Kids WLL · Doha, Qatar · CR #XXXXXX 🇶🇦</span>
+      <span><span class="en-only inline">Made with 💛 for Doha families</span><span class="ar-only inline">صُنعت بـ 💛 لعائلات الدوحة</span></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleLang() {
+    const html = document.documentElement;
+    if (html.dir === 'rtl') { html.dir = 'ltr'; html.lang = 'en'; }
+    else { html.dir = 'rtl'; html.lang = 'ar'; }
+  }
+  document.querySelectorAll('.side-item').forEach(i => {
+    i.addEventListener('click', () => {
+      document.querySelectorAll('.side-item').forEach(x => x.classList.remove('active'));
+      i.classList.add('active');
+    });
+  });
+  document.querySelectorAll('.toggle').forEach(t => {
+    t.addEventListener('click', () => t.classList.toggle('off'));
+  });
+</script>
+<script src="yalla-kids-shared.js"></script>
+</body>
+</html>

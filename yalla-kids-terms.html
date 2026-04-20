@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#8A1538">
+  <title>Terms of Service · Yalla Kids</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,800;1,9..144,700&family=Inter:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="yalla-kids-shared.css">
+<style>
+  .static-hero { max-width: 860px; margin: 48px auto 0; padding: 0 24px; text-align: center; }
+  .static-hero .eye { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--maroon); font-weight: 800; margin-bottom: 10px; }
+  .static-hero h1 { font-size: 46px; margin-bottom: 14px; }
+  .static-hero .dek { font-size: 16px; color: var(--ink-soft); max-width: 560px; margin: 0 auto; }
+  .stamp { display: inline-block; margin-top: 14px; padding: 6px 14px; background: var(--butter-soft); border: 1.5px solid var(--ink); border-radius: 99px; font-size: 12px; font-weight: 700; }
+
+  .legal-layout { max-width: 1100px; margin: 48px auto 0; padding: 0 24px; display: grid; grid-template-columns: 240px 1fr; gap: 40px; align-items: start; }
+  .toc { position: sticky; top: 96px; padding: 20px; border: 2px solid var(--ink); border-radius: var(--r); background: var(--card-bg); box-shadow: var(--shadow-hard); }
+  .toc h4 { font-family: "Fraunces", serif; font-size: 15px; margin-bottom: 10px; }
+  .toc ol { list-style: none; counter-reset: s; font-size: 13px; }
+  .toc ol li { counter-increment: s; padding: 5px 0; }
+  .toc ol li::before { content: counter(s) ". "; color: var(--maroon); font-weight: 700; margin-right: 4px; }
+  .toc a { color: var(--ink-soft); text-decoration: none; }
+  .toc a:hover { color: var(--maroon); }
+
+  .prose { max-width: 720px; }
+  .prose h2 { font-size: 26px; margin: 36px 0 12px; padding-top: 20px; border-top: 2px solid var(--ink); }
+  .prose h2:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+  .prose h3 { font-family: "Fraunces", serif; font-size: 18px; margin: 20px 0 8px; }
+  .prose p { font-family: "Fraunces", Georgia, serif; font-size: 16px; line-height: 1.7; color: var(--ink-soft); margin-bottom: 12px; }
+  .prose p strong { color: var(--ink); }
+  .prose ul { margin: 10px 0 14px 22px; font-family: "Fraunces", Georgia, serif; font-size: 16px; color: var(--ink-soft); line-height: 1.7; }
+  .prose ul li { margin-bottom: 6px; }
+  .callout { background: var(--butter-soft); border: 2px solid var(--ink); border-radius: var(--r); padding: 16px 20px; margin: 16px 0; box-shadow: var(--shadow-hard); font-family: "Inter", sans-serif; font-size: 14px; color: var(--ink); }
+  .callout strong { color: var(--maroon); }
+
+  @media (max-width: 860px) {
+    .legal-layout { grid-template-columns: 1fr; }
+    .toc { position: static; }
+    .static-hero h1 { font-size: 34px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="nav-wrap container">
+    <a href="yalla-kids-home-wireframe.html" class="logo">
+      <span class="en-only inline">Yalla Kids</span>
+      <span class="ar-only inline">يلا كيدز</span>
+    </a>
+    <nav class="nav-links">
+      <a href="yalla-kids-classes-directory.html"><span class="en-only inline">Classes</span><span class="ar-only inline">الصفوف</span></a>
+      <a href="yalla-kids-places-directory.html"><span class="en-only inline">Places to go</span><span class="ar-only inline">أماكن للزيارة</span></a>
+      <a href="yalla-kids-camps.html"><span class="en-only inline">Camps</span><span class="ar-only inline">المعسكرات</span></a>
+      <a href="yalla-kids-guides-hub.html"><span class="en-only inline">Guides</span><span class="ar-only inline">الأدلة</span></a>
+      <a href="yalla-kids-for-providers.html"><span class="en-only inline">For providers</span><span class="ar-only inline">للموفرين</span></a>    </nav>
+    <div class="nav-actions">
+      <button class="lang-toggle" onclick="toggleLang()">
+        <span class="en-only inline">العربية</span>
+        <span class="ar-only inline">English</span>
+      </button>
+      <a href="yalla-kids-login.html" class="btn btn-ghost"><span class="en-only inline">Log in</span><span class="ar-only inline">تسجيل الدخول</span></a>
+      <a href="yalla-kids-signup.html" class="btn btn-primary"><span class="en-only inline">Sign up</span><span class="ar-only inline">إنشاء حساب</span></a>
+    </div>
+  </div>
+</header>
+
+<section class="static-hero">
+  <div class="eye">Legal</div>
+  <h1><span class="en-only">Terms of <span class="pop">Service</span></span><span class="ar-only">شروط <span class="pop">الخدمة</span></span></h1>
+  <p class="dek">The rules for using Yalla Kids. Plain language where we can, lawyer language where we must.</p>
+  <div class="stamp">Last updated: 12 March 2026</div>
+</section>
+
+<div class="legal-layout">
+
+  <aside class="toc">
+    <h4>Contents</h4>
+    <ol>
+      <li><a href="#accept">Acceptance</a></li>
+      <li><a href="#service">What we do</a></li>
+      <li><a href="#accounts">Your account</a></li>
+      <li><a href="#bookings">Bookings</a></li>
+      <li><a href="#payments">Payments &amp; refunds</a></li>
+      <li><a href="#providers">Providers</a></li>
+      <li><a href="#conduct">User conduct</a></li>
+      <li><a href="#ip">Intellectual property</a></li>
+      <li><a href="#liability">Liability</a></li>
+      <li><a href="#termination">Termination</a></li>
+      <li><a href="#governing">Governing law</a></li>
+      <li><a href="#changes">Changes</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ol>
+  </aside>
+
+  <div class="prose">
+    <h2 id="accept">1. Acceptance of terms</h2>
+    <p>By creating an account, making a booking, or otherwise using yallakids.qa (the "Service"), you agree to these Terms of Service and to our <a href="yalla-kids-privacy.html" style="color:var(--maroon);text-decoration:underline;">Privacy Policy</a>. If you don't agree, please don't use the Service.</p>
+    <p>Yalla Kids is operated by <strong>Yalla Kids Technologies W.L.L.</strong>, a company registered in Doha, Qatar.</p>
+
+    <h2 id="service">2. What we do</h2>
+    <p>Yalla Kids is a marketplace that connects parents in Qatar with classes, camps, venues, and experiences for their children. We verify providers, publish listings, and facilitate bookings and payments. <strong>We are not the provider</strong> of any class or experience listed on the platform — the provider is.</p>
+
+    <h2 id="accounts">3. Your account</h2>
+    <p>You must be at least 18 years old and a parent, guardian, or legally responsible adult to create an account. You are responsible for keeping your login credentials safe and for all activity on your account. Let us know immediately if you suspect unauthorized access.</p>
+    <p>When registering a child on your account, you confirm that you are the parent or legal guardian, or have permission from them.</p>
+
+    <h2 id="bookings">4. Bookings</h2>
+    <p>When you book a class or experience through Yalla Kids, you enter a contract directly with the provider. We facilitate the booking and payment, but the provider is responsible for delivering the service.</p>
+    <p>You must provide accurate information about your child (age, allergies, medical notes, pickup authorization). Inaccurate information may affect the provider's ability to keep your child safe, and may void our refund guarantees.</p>
+
+    <h2 id="payments">5. Payments &amp; refunds</h2>
+    <p>Payments are processed by <strong>MyFatoorah</strong>, a licensed payment provider in the State of Qatar. We accept Visa, Mastercard, Apple Pay, and NAPS. All prices are in Qatari Riyals (QAR) and include any applicable taxes.</p>
+    <h3>Refund policy</h3>
+    <ul>
+      <li><strong>Full refund</strong> if you cancel at least 7 days before the term start date.</li>
+      <li><strong>50% refund</strong> if you cancel between 48 hours and 7 days before the term start date.</li>
+      <li><strong>No refund</strong> after the first session of the term has taken place, except where the provider cancels the class or materially fails to deliver it.</li>
+      <li>If a provider cancels, you get a <strong>full refund</strong> automatically.</li>
+    </ul>
+    <p>Processing fees (displayed as a line item at checkout) are non-refundable. Refunds are issued to the original payment method within 7–14 business days.</p>
+    <div class="callout"><strong>Safety-related refunds:</strong> If we de-list a provider for a verified safety issue mid-term, we refund the unused portion of your booking in full, regardless of when you cancel.</div>
+
+    <h2 id="providers">6. Providers</h2>
+    <p>Providers are independent third parties. We vet them — trade license, insurance, staff permits — but we do not supervise day-to-day operations. Disputes about the quality of a class should first be raised with the provider. If you can't resolve it directly, contact us and we'll help mediate.</p>
+    <p>Providers listed as "Verified" have passed our baseline checks. The "Featured" and "Premium" labels indicate a commercial tier and do not imply a higher safety standard.</p>
+
+    <h2 id="conduct">7. User conduct</h2>
+    <p>You agree not to:</p>
+    <ul>
+      <li>Post false, defamatory, or deliberately misleading reviews.</li>
+      <li>Harass providers, staff, or other parents on the platform.</li>
+      <li>Use the Service for any unlawful purpose under Qatari law.</li>
+      <li>Scrape, copy, or republish listing data without our permission.</li>
+      <li>Impersonate another person or misrepresent your relationship to a child.</li>
+    </ul>
+    <p>We may remove content or suspend accounts that violate these rules.</p>
+
+    <h2 id="ip">8. Intellectual property</h2>
+    <p>Yalla Kids, the logo, and the design of the platform are our property. Editorial content (guides, photography, and ratings produced by our team) is copyright © Yalla Kids Technologies W.L.L. You may share individual listings and guides, but not wholesale republish our content.</p>
+    <p>Reviews you post remain yours, but you grant us a non-exclusive, worldwide license to display them on the Service.</p>
+
+    <h2 id="liability">9. Limitation of liability</h2>
+    <p>We provide the Service on an "as-is" basis. To the extent permitted by Qatari law, we are not liable for indirect, incidental, or consequential damages arising from use of the Service, including but not limited to injury, illness, or property damage that occurs during a class or at a listed venue.</p>
+    <p>Our total liability to you for any claim related to the Service is limited to the amount you paid us in the 12 months preceding the claim.</p>
+    <div class="callout"><strong>This does not limit liability</strong> for death or personal injury caused by our negligence, fraud, or any other liability that cannot be excluded under Qatari law.</div>
+
+    <h2 id="termination">10. Termination</h2>
+    <p>You may close your account at any time from your <a href="yalla-kids-parent-dashboard.html" style="color:var(--maroon);text-decoration:underline;">dashboard settings</a>. We may suspend or close your account for violations of these Terms, for fraudulent activity, or if required by law. Outstanding bookings will be handled per the refund policy above.</p>
+
+    <h2 id="governing">11. Governing law &amp; disputes</h2>
+    <p>These Terms are governed by the laws of the <strong>State of Qatar</strong>. Any dispute that can't be resolved through our support team will be submitted to the Qatari courts in Doha, unless both parties agree to mediation or arbitration first.</p>
+
+    <h2 id="changes">12. Changes to these terms</h2>
+    <p>We may update these Terms from time to time. If we make material changes, we'll notify you by email and post a notice on the Service at least 14 days before the changes take effect. Your continued use of the Service after the effective date means you accept the new Terms.</p>
+
+    <h2 id="contact">13. Contact</h2>
+    <p>Questions about these Terms? Email <strong>legal@yallakids.qa</strong> or use our <a href="yalla-kids-contact.html" style="color:var(--maroon);text-decoration:underline;">contact form</a>.</p>
+    <p style="margin-top:30px;color:var(--ink-mute);font-size:14px;">Yalla Kids Technologies W.L.L. · CR 123456 · Msheireb Downtown Doha, Building 12, Office 201 · Doha, Qatar.</p>
+  </div>
+</div>
+
+<div style="height:80px;"></div>
+
+<footer class="site">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="logo">
+          <span class="en-only inline">Yalla Kids</span>
+          <span class="ar-only inline">يلا كيدز</span>
+        </div>
+        <p class="foot-about">
+          <span class="en-only inline">Qatar's kids' classes and places, one place to book. Bilingual, built in Doha.</span>
+          <span class="ar-only inline">صفوف وأماكن للأطفال في قطر في مكان واحد. بلغتين، صُنعت في الدوحة.</span>
+        </p>
+        <div class="foot-social">
+          <a href="#" aria-label="Instagram">📷</a>
+          <a href="#" aria-label="WhatsApp">💬</a>
+          <a href="#" aria-label="TikTok">🎵</a>
+          <a href="#" aria-label="Email">✉</a>
+        </div>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Classes</span><span class="ar-only inline">الصفوف</span></h5>
+        <a href="yalla-kids-classes-directory.html"><span class="en-only inline">All classes</span><span class="ar-only inline">كل الصفوف</span></a>
+        <a href="yalla-kids-classes-directory.html?cat=art"><span class="en-only inline">Art &amp; crafts</span><span class="ar-only inline">فن وحرف</span></a>
+        <a href="yalla-kids-classes-directory.html?cat=swimming"><span class="en-only inline">Swimming</span><span class="ar-only inline">سباحة</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Places</span><span class="ar-only inline">الأماكن</span></h5>
+        <a href="yalla-kids-places-directory.html"><span class="en-only inline">All places</span><span class="ar-only inline">كل الأماكن</span></a>
+        <a href="yalla-kids-places-directory.html#softplay"><span class="en-only inline">Soft plays</span><span class="ar-only inline">صالات اللعب</span></a>
+        <a href="yalla-kids-map.html"><span class="en-only inline">Map</span><span class="ar-only inline">خريطة</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">For providers</span><span class="ar-only inline">للموفرين</span></h5>
+        <a href="yalla-kids-for-providers.html"><span class="en-only inline">List a class</span><span class="ar-only inline">أدرج صفاً</span></a>
+        <a href="yalla-kids-how-it-works.html"><span class="en-only inline">How it works</span><span class="ar-only inline">كيف نعمل</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Company</span><span class="ar-only inline">الشركة</span></h5>
+        <a href="yalla-kids-about.html"><span class="en-only inline">About</span><span class="ar-only inline">من نحن</span></a>
+        <a href="yalla-kids-contact.html"><span class="en-only inline">Contact</span><span class="ar-only inline">تواصل</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Legal</span><span class="ar-only inline">قانوني</span></h5>
+        <a href="yalla-kids-terms.html"><span class="en-only inline">Terms</span><span class="ar-only inline">الشروط</span></a>
+        <a href="yalla-kids-privacy.html"><span class="en-only inline">Privacy</span><span class="ar-only inline">الخصوصية</span></a>
+        <a href="yalla-kids-faq.html"><span class="en-only inline">FAQ</span><span class="ar-only inline">الأسئلة الشائعة</span></a>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>© 2026 Yalla Kids WLL · Doha, Qatar · CR #XXXXXX 🇶🇦</span>
+      <span><span class="en-only inline">Made with 💛 for Doha families</span><span class="ar-only inline">صُنعت بـ 💛 لعائلات الدوحة</span></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleLang() { const html = document.documentElement; if (html.dir === 'rtl') { html.dir = 'ltr'; html.lang = 'en'; } else { html.dir = 'rtl'; html.lang = 'ar'; } }
+</script>
+<script src="yalla-kids-shared.js"></script>
+</body>
+</html>

@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#8A1538">
+<title>Kids' camps in Qatar | Yalla Kids</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,600;1,9..144,700;1,9..144,800&family=Inter:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --maroon: #8A1538; --maroon-dark: #6B0F2B;
+    --gold: #F4B942; --gold-dark: #D99A1F;
+    --coral: #FF8A65; --coral-soft: #FFDCC9;
+    --lavender: #B388FF; --lavender-soft: #E8DCFF;
+    --teal: #4ECDC4; --teal-soft: #CEEDEB;
+    --lime: #9AC23C; --lime-soft: #E5F3C4;
+    --pink: #FF6B9D; --pink-soft: #FFD1E0;
+    --sky: #59C3F2; --sky-soft: #CDE8F7;
+    --mint: #5EE2A6; --mint-soft: #C7F0DC;
+    --peach: #FFB582; --peach-soft: #FFE4CC;
+    --butter: #FFD66B; --butter-soft: #FFF1C2;
+    --cream: #FFF6E8; --warm-white: #FFFCF6;
+    --parchment: #FDF1DC; --ink: #2A1810;
+    --ink-soft: #5A463A; --ink-mute: #8A7765;
+    --shadow-hard: 4px 4px 0 var(--ink);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Inter", -apple-system, sans-serif;
+    color: var(--ink); background: var(--warm-white);
+    background-image:
+      radial-gradient(circle at 8% 12%, var(--butter-soft) 0%, transparent 24%),
+      radial-gradient(circle at 92% 4%, var(--sky-soft) 0%, transparent 22%);
+    background-attachment: fixed;
+    line-height: 1.55;
+  }
+  [dir="rtl"] body { font-family: "Tajawal", "Inter", sans-serif; }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3, h4 { font-family: "Fraunces", Georgia, serif; letter-spacing: -0.02em; }
+  [dir="rtl"] h1, [dir="rtl"] h2, [dir="rtl"] h3, [dir="rtl"] h4 { font-family: "Tajawal", "Inter", sans-serif; }
+
+  header.site {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255, 252, 246, 0.94);
+    backdrop-filter: saturate(180%) blur(10px);
+    border-bottom: 2px solid var(--ink);
+  }
+  .nav-wrap { max-width: 1280px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; gap: 28px; }
+  .logo {
+    font-family: "Fraunces", Georgia, serif; font-weight: 800; font-size: 26px;
+    color: var(--maroon); letter-spacing: -0.02em;
+    display: inline-flex; align-items: center; gap: 4px;
+  }
+  .logo span { color: var(--gold-dark); }
+  .logo::after { content: "✨"; font-size: 14px; animation: twinkle 2.4s ease-in-out infinite; }
+  @keyframes twinkle { 0%, 100% { transform: scale(1) rotate(0); opacity: 0.85; } 50% { transform: scale(1.2) rotate(15deg); opacity: 1; } }
+  .nav-links { display: flex; gap: 26px; font-size: 14px; font-weight: 600; }
+  .nav-links a { color: var(--ink-soft); padding: 6px 2px; position: relative; }
+  .nav-links a.active { color: var(--maroon); }
+  .nav-links a.active::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: -2px;
+    height: 3px; background: var(--gold); border-radius: 3px;
+  }
+  .nav-links a:hover { color: var(--maroon); }
+  .nav-actions { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+  [dir="rtl"] .nav-actions { margin-left: 0; margin-right: auto; }
+  .lang-toggle { border: 2px solid var(--ink); background: var(--butter-soft); padding: 7px 14px; border-radius: 999px; font-size: 13px; cursor: pointer; font-weight: 700; color: var(--ink); }
+  .btn { padding: 10px 20px; border-radius: 999px; font-size: 14px; font-weight: 700; cursor: pointer; border: 2px solid var(--ink); display: inline-flex; align-items: center; gap: 6px; font-family: inherit; transition: transform 0.12s, box-shadow 0.12s; }
+  .btn:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--ink); }
+  .btn-ghost { background: transparent; color: var(--ink); border-color: transparent; }
+  .btn-ghost:hover { background: var(--butter-soft); border-color: var(--ink); }
+  .btn-primary { background: var(--maroon); color: #fff; }
+  .btn-primary:hover { background: var(--maroon-dark); }
+  .btn-gold { background: var(--gold); color: #3a2c07; }
+  .btn-outline { background: #fff; color: var(--ink); }
+
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+  .crumb { padding: 22px 0 6px; font-size: 13px; color: var(--ink-mute); font-weight: 500; }
+  .crumb a:hover { color: var(--maroon); text-decoration: underline; text-underline-offset: 3px; }
+  .crumb .sep { margin: 0 8px; opacity: 0.5; }
+
+  /* ===== HERO ===== */
+  .camps-hero {
+    padding: 28px 0 30px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-inner {
+    display: grid; grid-template-columns: 1.3fr 1fr;
+    gap: 40px; align-items: center;
+  }
+  .page-eyebrow {
+    display: inline-block;
+    background: var(--lime-soft);
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    padding: 5px 14px;
+    font-size: 11px; font-weight: 800;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 16px;
+    box-shadow: 2px 2px 0 var(--ink);
+  }
+  .camps-hero h1 {
+    font-size: 58px; font-weight: 700; line-height: 1.05;
+  }
+  .camps-hero h1 .pop {
+    font-style: italic; color: var(--maroon); position: relative; white-space: nowrap;
+  }
+  .camps-hero h1 .pop::after {
+    content: ""; position: absolute; left: -4px; right: -4px; bottom: -6px; height: 14px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'><path d='M2 8 Q 50 2, 100 6 T 198 6' stroke='%23F4B942' stroke-width='4' fill='none' stroke-linecap='round'/></svg>");
+    background-size: 100% 100%; z-index: -1;
+  }
+  .camps-hero p.lead {
+    font-size: 18px; color: var(--ink-soft); margin-top: 16px; max-width: 560px;
+  }
+  .hero-chips { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .hero-chip {
+    background: #fff; border: 2px solid var(--ink); border-radius: 999px;
+    padding: 7px 14px; font-size: 13px; font-weight: 700;
+    box-shadow: 2px 2px 0 var(--ink);
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--ink); text-decoration: none; cursor: pointer;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+  }
+  .hero-chip:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+  .hero-chip:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0 var(--ink); }
+
+  /* Hero calendar card */
+  .hero-card {
+    background: #fff; border: 2px solid var(--ink);
+    border-radius: 28px; padding: 26px;
+    box-shadow: 6px 6px 0 var(--ink);
+    position: relative;
+  }
+  .hero-card::before {
+    content: "🏕️"; position: absolute; top: -24px; right: 22px;
+    font-size: 44px; transform: rotate(-10deg);
+    background: var(--butter); border: 2px solid var(--ink); border-radius: 50%;
+    width: 64px; height: 64px; display: flex; align-items: center; justify-content: center;
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+  [dir="rtl"] .hero-card::before { right: auto; left: 22px; transform: rotate(10deg); }
+  .hero-card h3 {
+    font-size: 18px; font-weight: 700; margin-bottom: 6px;
+    font-family: "Inter", sans-serif; letter-spacing: 0;
+  }
+  .hero-card .sub-note { font-size: 13px; color: var(--ink-soft); margin-bottom: 16px; }
+  .cal-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 14px; border-radius: 14px;
+    border: 1.5px dashed var(--ink); margin-bottom: 10px;
+    background: var(--parchment);
+  }
+  .cal-row:last-child { margin-bottom: 0; }
+  .cal-row.open { background: var(--mint-soft); border-style: solid; }
+  .cal-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--ink-mute); flex-shrink: 0;
+  }
+  .cal-row.open .cal-dot { background: var(--mint); box-shadow: 0 0 0 3px var(--mint-soft); }
+  .cal-body { flex: 1; }
+  .cal-title { font-weight: 800; font-size: 14px; }
+  .cal-dates { font-size: 12px; color: var(--ink-soft); margin-top: 2px; }
+  .cal-pill {
+    font-size: 10px; font-weight: 800; text-transform: uppercase;
+    letter-spacing: 0.08em; padding: 3px 8px; border-radius: 999px;
+    border: 1.5px solid var(--ink); background: #fff;
+  }
+  .cal-pill.live { background: var(--gold); color: #3a2c07; }
+
+  /* ===== SEASON TABS ===== */
+  .season-bar {
+    border-top: 2px solid var(--ink);
+    background: var(--cream);
+    padding: 18px 0;
+  }
+  .season-tabs {
+    display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+  }
+  .season-label {
+    font-size: 12px; font-weight: 800; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--ink-soft); margin-right: 6px;
+  }
+  [dir="rtl"] .season-label { margin-right: 0; margin-left: 6px; }
+  .season-pill {
+    background: #fff; border: 2px solid var(--ink); border-radius: 999px;
+    padding: 8px 16px; font-size: 13px; font-weight: 700;
+    cursor: pointer; box-shadow: 2px 2px 0 var(--ink);
+    transition: transform 0.12s, box-shadow 0.12s;
+    font-family: inherit; color: var(--ink);
+  }
+  .season-pill:hover { transform: translate(-1px, -1px); box-shadow: 3px 3px 0 var(--ink); }
+  .season-pill.active {
+    background: var(--maroon); color: #fff; border-color: var(--ink);
+  }
+  .season-pill.soon { opacity: 0.65; }
+  .season-pill .count {
+    font-size: 11px; font-weight: 800; margin-left: 6px;
+    background: var(--butter); color: #3a2c07;
+    padding: 1px 8px; border-radius: 999px;
+    border: 1.5px solid var(--ink);
+  }
+  .season-pill.active .count { background: var(--gold); color: #3a2c07; }
+  [dir="rtl"] .season-pill .count { margin-left: 0; margin-right: 6px; }
+
+  /* ===== SECTIONS ===== */
+  section.block { padding: 50px 0; }
+  section.block h2 {
+    font-size: 36px; font-weight: 700;
+    display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+  }
+  section.block h2 .pop {
+    font-style: italic; color: var(--maroon); position: relative;
+  }
+  section.block h2 .pop::after {
+    content: ""; position: absolute; left: -2px; right: -2px; bottom: -4px; height: 10px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'><path d='M2 8 Q 50 2, 100 6 T 198 6' stroke='%23F4B942' stroke-width='4' fill='none' stroke-linecap='round'/></svg>");
+    background-size: 100% 100%; z-index: -1;
+  }
+  section.block h2 .count {
+    font-size: 13px; color: var(--ink-soft); font-weight: 600;
+    background: #fff; padding: 4px 12px; border-radius: 999px;
+    border: 2px solid var(--ink); box-shadow: 2px 2px 0 var(--ink);
+    font-family: "Inter", sans-serif;
+  }
+  section.block .sub { color: var(--ink-soft); margin-top: 6px; font-size: 15px; max-width: 640px; }
+
+  /* ===== CATEGORY GRID ===== */
+  .cat-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 16px; margin-top: 24px;
+  }
+  .cat-card {
+    background: #fff; border: 2px solid var(--ink);
+    border-radius: 22px; padding: 22px;
+    box-shadow: 4px 4px 0 var(--ink);
+    transition: transform 0.15s, box-shadow 0.15s;
+    cursor: pointer; display: block;
+  }
+  .cat-card:hover { transform: translate(-3px, -3px); box-shadow: 7px 7px 0 var(--ink); }
+  .cat-card.c1 { background: var(--peach-soft); }
+  .cat-card.c2 { background: var(--lavender-soft); }
+  .cat-card.c3 { background: var(--sky-soft); }
+  .cat-card.c4 { background: var(--lime-soft); }
+  .cat-card.c5 { background: var(--pink-soft); }
+  .cat-card.c6 { background: var(--mint-soft); }
+  .cat-card.c7 { background: var(--butter-soft); }
+  .cat-card.c8 { background: var(--coral-soft); }
+  .cat-emoji { font-size: 38px; line-height: 1; margin-bottom: 8px; display: block; }
+  .cat-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+  .cat-card .cat-count {
+    font-size: 12px; color: var(--ink-soft); font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+
+  /* ===== CAMP CARDS ===== */
+  .camp-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px;
+    margin-top: 26px;
+  }
+  .camp-card {
+    background: #fff; border: 2px solid var(--ink);
+    border-radius: 22px; overflow: hidden;
+    box-shadow: 4px 4px 0 var(--ink);
+    transition: transform 0.15s, box-shadow 0.15s;
+    display: flex; flex-direction: column;
+  }
+  .camp-card:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--ink); }
+  .camp-img {
+    aspect-ratio: 5 / 3;
+    background-size: cover; background-position: center;
+    border-bottom: 2px solid var(--ink);
+    position: relative;
+  }
+  .camp-img::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 55%, rgba(0,0,0,0.35) 100%);
+  }
+  .camp-dates {
+    position: absolute; top: 12px; left: 12px; z-index: 1;
+    background: var(--butter); color: #3a2c07;
+    padding: 6px 12px; border-radius: 12px;
+    font-size: 12px; font-weight: 800;
+    border: 2px solid var(--ink);
+    box-shadow: 2px 2px 0 var(--ink);
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  [dir="rtl"] .camp-dates { left: auto; right: 12px; }
+  .camp-age {
+    position: absolute; top: 12px; right: 12px; z-index: 1;
+    background: #fff; color: var(--ink);
+    padding: 5px 11px; border-radius: 999px;
+    font-size: 11px; font-weight: 800;
+    border: 2px solid var(--ink);
+    box-shadow: 2px 2px 0 var(--ink);
+  }
+  [dir="rtl"] .camp-age { right: auto; left: 12px; }
+  .camp-heat {
+    position: absolute; bottom: 12px; left: 12px; z-index: 1;
+    background: var(--maroon); color: #fff;
+    padding: 4px 10px; border-radius: 999px;
+    font-size: 10px; font-weight: 800;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    border: 2px solid var(--ink);
+  }
+  [dir="rtl"] .camp-heat { left: auto; right: 12px; }
+  .camp-body { padding: 18px; display: flex; flex-direction: column; flex: 1; }
+  .camp-provider {
+    font-size: 11px; color: var(--ink-soft); text-transform: uppercase;
+    letter-spacing: 0.06em; font-weight: 800; margin-bottom: 4px;
+  }
+  .camp-body h4 {
+    font-size: 20px; font-weight: 700; line-height: 1.2;
+    margin-bottom: 10px;
+  }
+  .camp-facts {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6px 12px;
+    font-size: 12px; color: var(--ink-soft); font-weight: 500;
+    margin-bottom: 12px;
+  }
+  .camp-facts .fact { display: flex; align-items: center; gap: 6px; }
+  .camp-facts .fact .em { font-size: 14px; }
+  .camp-tags {
+    display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 14px;
+  }
+  .camp-tag {
+    font-size: 11px; padding: 3px 10px; border-radius: 999px;
+    background: var(--butter-soft); color: var(--ink); font-weight: 700;
+    border: 1.5px solid var(--ink);
+  }
+  .camp-foot {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-top: auto; padding-top: 12px;
+    border-top: 1.5px dashed var(--ink);
+    gap: 10px;
+  }
+  .camp-price {
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 22px; font-weight: 800; line-height: 1;
+  }
+  .camp-price small {
+    display: block; font-family: "Inter", sans-serif;
+    font-size: 11px; font-weight: 600; color: var(--ink-soft);
+    margin-top: 3px; letter-spacing: 0.02em;
+  }
+  .camp-cta {
+    background: var(--maroon); color: #fff;
+    padding: 8px 14px; border-radius: 999px;
+    font-size: 12px; font-weight: 800;
+    border: 2px solid var(--ink);
+    box-shadow: 2px 2px 0 var(--ink);
+    white-space: nowrap;
+  }
+
+  /* ===== SPOTLIGHT ===== */
+  .spotlight {
+    background: var(--maroon);
+    color: #FFF8E8;
+    border-radius: 28px;
+    padding: 38px;
+    border: 2px solid var(--ink);
+    box-shadow: 6px 6px 0 var(--ink);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: center;
+    margin-top: 10px;
+    position: relative;
+    overflow: hidden;
+  }
+  .spotlight::before {
+    content: ""; position: absolute; top: -60px; right: -60px;
+    width: 220px; height: 220px; border-radius: 50%;
+    background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
+    opacity: 0.65;
+  }
+  .spot-eyebrow {
+    display: inline-block;
+    background: var(--gold); color: #3a2c07;
+    padding: 5px 14px; border-radius: 999px;
+    font-size: 11px; font-weight: 800;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    border: 2px solid var(--ink);
+    margin-bottom: 14px;
+  }
+  .spotlight h2 { color: #fff; font-size: 38px; line-height: 1.1; }
+  .spotlight p { margin-top: 14px; color: #FFE8CF; font-size: 16px; }
+  .spot-stats {
+    margin-top: 22px;
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px;
+  }
+  .spot-stat {
+    background: rgba(255, 248, 232, 0.08);
+    border: 1.5px dashed #FFD66B;
+    border-radius: 14px;
+    padding: 12px;
+  }
+  .spot-stat .n { font-family: "Fraunces", Georgia, serif; font-size: 28px; font-weight: 800; color: var(--gold); }
+  .spot-stat .t { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #FFE8CF; font-weight: 700; margin-top: 2px; }
+  .spot-cta {
+    margin-top: 22px;
+    display: flex; gap: 10px; flex-wrap: wrap;
+  }
+  .spot-cta .btn {
+    border-color: var(--ink);
+  }
+  .spot-visual {
+    position: relative;
+    height: 320px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--coral) 100%);
+    border: 2px solid var(--ink);
+    overflow: hidden;
+  }
+  .spot-visual .sun {
+    position: absolute; top: 28px; right: 34px;
+    width: 90px; height: 90px; border-radius: 50%;
+    background: #FFF1A8;
+    box-shadow: 0 0 50px 20px rgba(255, 241, 168, 0.55);
+  }
+  .spot-visual .tent {
+    position: absolute; bottom: 20px; left: 30px;
+    font-size: 120px; line-height: 1;
+  }
+  .spot-visual .palm {
+    position: absolute; bottom: 10px; right: 24px;
+    font-size: 90px; line-height: 1;
+  }
+  .spot-visual .sand {
+    position: absolute; left: 0; right: 0; bottom: 0; height: 40%;
+    background: linear-gradient(180deg, transparent, rgba(255, 214, 107, 0.6));
+  }
+
+  /* ===== FILTER BAR ===== */
+  .filter-pills {
+    display: flex; gap: 10px; flex-wrap: wrap;
+    margin-top: 22px; margin-bottom: 10px;
+  }
+  .fpill {
+    background: #fff; border: 2px solid var(--ink);
+    border-radius: 999px; padding: 8px 16px;
+    font-size: 13px; font-weight: 700;
+    cursor: pointer; color: var(--ink);
+    box-shadow: 2px 2px 0 var(--ink);
+    font-family: inherit;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .fpill:hover { transform: translate(-1px, -1px); box-shadow: 3px 3px 0 var(--ink); }
+  .fpill.active { background: var(--ink); color: #fff; }
+
+  /* ===== CHECKLIST ===== */
+  .check-sec {
+    background: var(--parchment);
+    border-top: 2px solid var(--ink);
+    border-bottom: 2px solid var(--ink);
+  }
+  .check-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    margin-top: 24px;
+  }
+  .check-card {
+    background: #fff; border: 2px solid var(--ink);
+    border-radius: 20px; padding: 22px;
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+  .check-card .em {
+    font-size: 32px; margin-bottom: 8px; display: block;
+  }
+  .check-card h4 { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+  .check-card p { font-size: 14px; color: var(--ink-soft); line-height: 1.55; }
+
+  /* ===== FAQ ===== */
+  .faq-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    margin-top: 24px;
+  }
+  .faq-item {
+    background: #fff; border: 2px solid var(--ink);
+    border-radius: 18px; padding: 20px 22px;
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+  .faq-item h4 {
+    font-size: 17px; font-weight: 700; margin-bottom: 8px;
+    display: flex; gap: 10px; align-items: flex-start;
+    font-family: "Fraunces", Georgia, serif;
+  }
+  .faq-item h4 .q {
+    flex-shrink: 0; background: var(--gold); color: #3a2c07;
+    width: 26px; height: 26px; border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 800; font-family: "Inter", sans-serif;
+    border: 1.5px solid var(--ink); line-height: 1;
+  }
+  .faq-item p { font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+
+  /* ===== NOTE CARD ===== */
+  .note-card {
+    margin-top: 40px; padding: 24px 28px;
+    background: var(--butter-soft);
+    border: 2px solid var(--ink);
+    border-radius: 22px;
+    box-shadow: var(--shadow-hard);
+    position: relative;
+  }
+  .note-card::before {
+    content: "💡"; position: absolute; top: -18px; left: 22px;
+    font-size: 34px; transform: rotate(-8deg);
+  }
+  [dir="rtl"] .note-card::before { left: auto; right: 22px; transform: rotate(8deg); }
+  .note-card strong { font-family: "Fraunces", Georgia, serif; font-weight: 700; }
+
+  /* ===== FOOTER ===== */
+  footer.site {
+    background: var(--ink); color: #C9B89E;
+    padding: 48px 0 24px; margin-top: 60px;
+  }
+  footer.site .foot-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 30px;
+  }
+  footer.site h5 {
+    font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--butter); margin-bottom: 10px; font-weight: 800;
+    font-family: "Inter", sans-serif;
+  }
+  footer.site a { display: block; color: #C9B89E; padding: 3px 0; font-size: 13px; font-weight: 500; }
+  footer.site a:hover { color: var(--gold); }
+  footer.site .foot-about { color: #C9B89E; font-size: 13px; margin-top: 10px; max-width: 260px; }
+  footer.site .foot-social { margin-top: 12px; display: flex; gap: 10px; font-size: 18px; }
+  footer.site .foot-social a { display: inline-flex; padding: 6px; width: 36px; height: 36px; align-items: center; justify-content: center; border: 1.5px solid #4A3A2E; border-radius: 50%; }
+  footer.site .foot-social a:hover { border-color: var(--gold); }
+  footer.site .logo { color: var(--butter); }
+  footer.site .logo span { color: var(--coral); }
+  .foot-base {
+    margin-top: 32px; padding-top: 20px; border-top: 1.5px dashed #4A3A2E;
+    font-size: 12px; color: #9A856E;
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+  }
+
+  .ar-only { display: none; }
+  [dir="rtl"] .en-only { display: none; }
+  [dir="rtl"] .ar-only { display: block; }
+  [dir="rtl"] .ar-only.inline { display: inline; }
+
+  /* ===== MOBILE ===== */
+  @media (max-width: 980px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 24px; }
+    .camps-hero h1 { font-size: 40px; }
+    .cat-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .camp-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .check-grid { grid-template-columns: 1fr 1fr; }
+    .faq-grid { grid-template-columns: 1fr; }
+    .spotlight { grid-template-columns: 1fr; padding: 26px; gap: 22px; }
+    .spotlight h2 { font-size: 28px; }
+    .spot-visual { height: 220px; }
+    footer.site .foot-grid { grid-template-columns: 1fr 1fr; }
+    section.block { padding: 34px 0; }
+    section.block h2 { font-size: 26px; }
+    .filter-pills { gap: 8px; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 6px; -webkit-overflow-scrolling: touch; }
+    .filter-pills .fpill { flex-shrink: 0; }
+  }
+  @media (max-width: 640px) {
+    .camps-hero h1 { font-size: 32px; }
+    .camps-hero p.lead { font-size: 15px; }
+    .cat-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .cat-card { padding: 16px; border-radius: 18px; }
+    .cat-card h3 { font-size: 16px; }
+    .cat-emoji { font-size: 30px; }
+    .camp-grid { grid-template-columns: 1fr; gap: 14px; }
+    .check-grid { grid-template-columns: 1fr; }
+    .spotlight { padding: 22px; border-radius: 22px; }
+    .spotlight h2 { font-size: 24px; }
+    .spot-stats { grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+    .spot-stat { padding: 10px; }
+    .spot-stat .n { font-size: 22px; }
+    .hero-card { padding: 20px; }
+    .hero-card::before { width: 54px; height: 54px; font-size: 36px; top: -20px; }
+    footer.site .foot-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+    .foot-base { flex-direction: column; }
+  }
+  @media (max-width: 420px) {
+    .camps-hero h1 { font-size: 28px; }
+    .cat-grid { grid-template-columns: 1fr; }
+    footer.site .foot-grid { grid-template-columns: 1fr; }
+  }
+</style>
+<link rel="stylesheet" href="yalla-kids-shared.css">
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site">
+  <div class="nav-wrap container">
+    <a href="yalla-kids-home-wireframe.html" class="logo">
+      <span class="en-only inline">Yalla Kids</span>
+      <span class="ar-only inline">يلا كيدز</span>
+    </a>
+    <nav class="nav-links">
+      <a href="yalla-kids-classes-directory.html"><span class="en-only inline">Classes</span><span class="ar-only inline">الصفوف</span></a>
+      <a href="yalla-kids-places-directory.html"><span class="en-only inline">Places to go</span><span class="ar-only inline">أماكن للزيارة</span></a>
+      <a href="yalla-kids-camps.html" class="active"><span class="en-only inline">Camps</span><span class="ar-only inline">المعسكرات</span></a>
+      <a href="yalla-kids-guides-hub.html"><span class="en-only inline">Guides</span><span class="ar-only inline">الأدلة</span></a>
+      <a href="yalla-kids-for-providers.html"><span class="en-only inline">For providers</span><span class="ar-only inline">للموفرين</span></a>    </nav>
+    <div class="nav-actions">
+      <button class="lang-toggle" onclick="toggleLang()">
+        <span class="en-only inline">العربية</span>
+        <span class="ar-only inline">English</span>
+      </button>
+      <a href="yalla-kids-login.html" class="btn btn-ghost"><span class="en-only inline">Log in</span><span class="ar-only inline">تسجيل الدخول</span></a>
+      <a href="yalla-kids-signup.html" class="btn btn-primary"><span class="en-only inline">Sign up</span><span class="ar-only inline">إنشاء حساب</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="crumb">
+    <a href="yalla-kids-home-wireframe.html"><span class="en-only">Home</span><span class="ar-only">الرئيسية</span></a>
+    <span class="sep">›</span>
+    <span><span class="en-only">Camps</span><span class="ar-only">المعسكرات</span></span>
+  </div>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="camps-hero">
+  <div class="container hero-inner">
+    <div>
+      <div class="page-eyebrow"><span class="en-only">Camps · Qatar 2026</span><span class="ar-only">معسكرات · قطر 2026</span></div>
+      <h1>
+        <span class="en-only">School break? <span class="pop">We've got camps.</span></span>
+        <span class="ar-only">عطلة المدرسة؟ <span class="pop">لدينا معسكرات.</span></span>
+      </h1>
+      <p class="lead">
+        <span class="en-only">Summer, spring, Eid and National Day break camps across Doha — sports, arts, STEAM, swim, Arabic and adventure. Full-day, half-day, weekly, or pick-your-days.</span>
+        <span class="ar-only">معسكرات الصيف والربيع والعيد واليوم الوطني في الدوحة — رياضة، فنون، علوم، سباحة، عربي، ومغامرات. يوم كامل أو نصف يوم أو أسبوعي أو اختر أيامك.</span>
+      </p>
+    </div>
+
+    <div class="hero-card">
+      <h3><span class="en-only">Qatar camp calendar</span><span class="ar-only">تقويم المعسكرات في قطر</span></h3>
+      <div class="sub-note"><span class="en-only">Aligned with Qatar school breaks.</span><span class="ar-only">متوافق مع عطلات مدارس قطر.</span></div>
+
+      <div class="cal-row">
+        <span class="cal-dot"></span>
+        <div class="cal-body">
+          <div class="cal-title"><span class="en-only">Eid Al-Fitr break</span><span class="ar-only">عطلة عيد الفطر</span></div>
+          <div class="cal-dates"><span class="en-only">Mar 14 – Mar 22 · past</span><span class="ar-only">14 – 22 مارس · انتهى</span></div>
+        </div>
+        <span class="cal-pill"><span class="en-only">Ended</span><span class="ar-only">انتهى</span></span>
+      </div>
+
+      <div class="cal-row open">
+        <span class="cal-dot"></span>
+        <div class="cal-body">
+          <div class="cal-title"><span class="en-only">Spring break camps</span><span class="ar-only">معسكرات عطلة الربيع</span></div>
+          <div class="cal-dates"><span class="en-only">Apr 19 – Apr 30 · booking now</span><span class="ar-only">19 – 30 أبريل · الحجز مفتوح</span></div>
+        </div>
+        <span class="cal-pill live"><span class="en-only">Open</span><span class="ar-only">متاح</span></span>
+      </div>
+
+      <div class="cal-row open">
+        <span class="cal-dot"></span>
+        <div class="cal-body">
+          <div class="cal-title"><span class="en-only">Summer 2026 — 9 weeks</span><span class="ar-only">صيف 2026 — 9 أسابيع</span></div>
+          <div class="cal-dates"><span class="en-only">Jun 15 – Aug 20 · early-bird pricing</span><span class="ar-only">15 يونيو – 20 أغسطس · سعر الحجز المبكر</span></div>
+        </div>
+        <span class="cal-pill live"><span class="en-only">Open</span><span class="ar-only">متاح</span></span>
+      </div>
+
+      <div class="cal-row">
+        <span class="cal-dot"></span>
+        <div class="cal-body">
+          <div class="cal-title"><span class="en-only">National Day break</span><span class="ar-only">عطلة اليوم الوطني</span></div>
+          <div class="cal-dates"><span class="en-only">Dec 13 – Dec 20 · opens Sep 1</span><span class="ar-only">13 – 20 ديسمبر · يفتح 1 سبتمبر</span></div>
+        </div>
+        <span class="cal-pill"><span class="en-only">Soon</span><span class="ar-only">قريباً</span></span>
+      </div>
+
+      <div class="cal-row">
+        <span class="cal-dot"></span>
+        <div class="cal-body">
+          <div class="cal-title"><span class="en-only">Winter break</span><span class="ar-only">عطلة الشتاء</span></div>
+          <div class="cal-dates"><span class="en-only">Dec 21 – Jan 4 · opens Oct 15</span><span class="ar-only">21 ديسمبر – 4 يناير · يفتح 15 أكتوبر</span></div>
+        </div>
+        <span class="cal-pill"><span class="en-only">Soon</span><span class="ar-only">قريباً</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SEASON TABS ============ -->
+<div class="season-bar">
+  <div class="container">
+    <div class="season-tabs">
+      <span class="season-label"><span class="en-only">Jump to:</span><span class="ar-only">انتقل إلى:</span></span>
+      <button class="season-pill active" data-season="spring"><span class="en-only">Spring break</span><span class="ar-only">عطلة الربيع</span><span class="count">34</span></button>
+      <button class="season-pill" data-season="summer"><span class="en-only">Summer '26</span><span class="ar-only">صيف 2026</span><span class="count">128</span></button>
+      <button class="season-pill" data-season="eid"><span class="en-only">Eid Al-Adha</span><span class="ar-only">عيد الأضحى</span><span class="count">22</span></button>
+      <button class="season-pill soon" data-season="national"><span class="en-only">National Day</span><span class="ar-only">اليوم الوطني</span><span class="count">· soon</span></button>
+      <button class="season-pill soon" data-season="winter"><span class="en-only">Winter '26</span><span class="ar-only">شتاء 2026</span><span class="count">· soon</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ CATEGORIES ============ -->
+<section class="block">
+  <div class="container">
+    <h2>
+      <span class="en-only">Browse by <span class="pop">camp type</span></span>
+      <span class="ar-only">تصفّح حسب <span class="pop">نوع المعسكر</span></span>
+      <span class="count"><span class="en-only">8 types</span><span class="ar-only">8 أنواع</span></span>
+    </h2>
+    <p class="sub">
+      <span class="en-only">From sleep-away adventure camps in the desert to afternoon coding clubs — pick the vibe.</span>
+      <span class="ar-only">من معسكرات المغامرة في الصحراء إلى نوادي البرمجة بعد الظهر — اختر الأجواء.</span>
+    </p>
+    <div class="cat-grid">
+      <a class="cat-card c1" href="yalla-kids-classes-directory.html?cat=sports">
+        <span class="cat-emoji">⚽</span>
+        <h3><span class="en-only">Sports academies</span><span class="ar-only">أكاديميات الرياضة</span></h3>
+        <div class="cat-count"><span class="en-only">38 camps</span><span class="ar-only">38 معسكراً</span></div>
+      </a>
+      <a class="cat-card c2" href="yalla-kids-classes-directory.html?cat=stem">
+        <span class="cat-emoji">🧪</span>
+        <h3><span class="en-only">STEAM & coding</span><span class="ar-only">علوم وبرمجة</span></h3>
+        <div class="cat-count"><span class="en-only">22 camps</span><span class="ar-only">22 معسكراً</span></div>
+      </a>
+      <a class="cat-card c3" href="yalla-kids-classes-directory.html?cat=swim">
+        <span class="cat-emoji">🏊</span>
+        <h3><span class="en-only">Swim & aquatics</span><span class="ar-only">سباحة ومائيات</span></h3>
+        <div class="cat-count"><span class="en-only">18 camps</span><span class="ar-only">18 معسكراً</span></div>
+      </a>
+      <a class="cat-card c4" href="yalla-kids-classes-directory.html?cat=art">
+        <span class="cat-emoji">🎨</span>
+        <h3><span class="en-only">Arts & theater</span><span class="ar-only">فنون ومسرح</span></h3>
+        <div class="cat-count"><span class="en-only">26 camps</span><span class="ar-only">26 معسكراً</span></div>
+      </a>
+      <a class="cat-card c5" href="yalla-kids-places-directory.html#cat-park">
+        <span class="cat-emoji">🏕️</span>
+        <h3><span class="en-only">Outdoor & desert</span><span class="ar-only">خارجي وصحراء</span></h3>
+        <div class="cat-count"><span class="en-only">14 camps</span><span class="ar-only">14 معسكراً</span></div>
+      </a>
+      <a class="cat-card c6" href="yalla-kids-classes-directory.html?cat=language">
+        <span class="cat-emoji">🔤</span>
+        <h3><span class="en-only">Arabic & Quran</span><span class="ar-only">العربية والقرآن</span></h3>
+        <div class="cat-count"><span class="en-only">12 camps</span><span class="ar-only">12 معسكراً</span></div>
+      </a>
+      <a class="cat-card c7" href="yalla-kids-classes-directory.html">
+        <span class="cat-emoji">☀️</span>
+        <h3><span class="en-only">Full-day multi</span><span class="ar-only">يوم كامل شامل</span></h3>
+        <div class="cat-count"><span class="en-only">32 camps</span><span class="ar-only">32 معسكراً</span></div>
+      </a>
+      <a class="cat-card c8" href="yalla-kids-classes-directory.html">
+        <span class="cat-emoji">🎧</span>
+        <h3><span class="en-only">Teen & tween</span><span class="ar-only">المراهقون</span></h3>
+        <div class="cat-count"><span class="en-only">16 camps</span><span class="ar-only">16 معسكراً</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SUMMER SPOTLIGHT ============ -->
+<section class="block">
+  <div class="container">
+    <div class="spotlight">
+      <div>
+        <span class="spot-eyebrow"><span class="en-only">Book by May 15</span><span class="ar-only">احجز قبل 15 مايو</span></span>
+        <h2>
+          <span class="en-only">Summer 2026, nine weeks, one booking.</span>
+          <span class="ar-only">صيف 2026، تسعة أسابيع، حجز واحد.</span>
+        </h2>
+        <p>
+          <span class="en-only">Lock in sibling discounts, flexible weeks, and the providers who sell out first. Early-bird pricing ends May 15.</span>
+          <span class="ar-only">احصل على خصم الإخوة، أسابيع مرنة، والموفرين الذين تنفد أماكنهم أولاً. ينتهي سعر الحجز المبكر في 15 مايو.</span>
+        </p>
+        <div class="spot-stats">
+          <div class="spot-stat">
+            <div class="n">128</div>
+            <div class="t"><span class="en-only">Summer camps</span><span class="ar-only">معسكرات صيفية</span></div>
+          </div>
+          <div class="spot-stat">
+            <div class="n">9</div>
+            <div class="t"><span class="en-only">Weekly blocks</span><span class="ar-only">كتل أسبوعية</span></div>
+          </div>
+          <div class="spot-stat">
+            <div class="n">15%</div>
+            <div class="t"><span class="en-only">Sibling saving</span><span class="ar-only">خصم الإخوة</span></div>
+          </div>
+        </div>
+        <div class="spot-cta">
+          <a href="#summer" class="btn btn-gold"><span class="en-only">Browse summer camps</span><span class="ar-only">تصفّح معسكرات الصيف</span></a>
+          <a href="yalla-kids-guides-hub.html?tag=camps" class="btn btn-outline"><span class="en-only">Read the summer guide</span><span class="ar-only">اقرأ دليل الصيف</span></a>
+        </div>
+      </div>
+      <div class="spot-visual" aria-hidden="true">
+        <div class="sun"></div>
+        <div class="sand"></div>
+        <div class="tent">⛺</div>
+        <div class="palm">🌴</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SPRING BREAK CAMPS ============ -->
+<section class="block" id="spring" style="background: var(--cream); border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink);">
+  <div class="container">
+    <h2>
+      <span class="en-only">Spring break <span class="pop">camps</span></span>
+      <span class="ar-only">معسكرات <span class="pop">عطلة الربيع</span></span>
+      <span class="count"><span class="en-only">Apr 19–30 · <span id="spring-h-count">—</span> programs</span><span class="ar-only">19–30 أبريل · <span id="spring-h-count-ar">—</span> برنامجاً</span></span>
+    </h2>
+    <p class="sub">
+      <span class="en-only">Two weeks, weekly or daily bookings, most venues still have spots.</span>
+      <span class="ar-only">أسبوعان، حجز أسبوعي أو يومي، معظم المواقع لا تزال تحتوي على أماكن.</span>
+    </p>
+    <div class="filter-pills">
+      <button class="fpill active"><span class="en-only">All</span><span class="ar-only">الكل</span></button>
+      <button class="fpill"><span class="en-only">Ages 3–5</span><span class="ar-only">3–5 سنوات</span></button>
+      <button class="fpill"><span class="en-only">Ages 6–9</span><span class="ar-only">6–9 سنوات</span></button>
+      <button class="fpill"><span class="en-only">Ages 10–14</span><span class="ar-only">10–14 سنة</span></button>
+      <button class="fpill">💰 <span class="en-only">Under QAR 1000</span><span class="ar-only">أقل من 1000 ريال</span></button>
+      <button class="fpill">🚌 <span class="en-only">Transport</span><span class="ar-only">نقل</span></button>
+      <button class="fpill">☀️ <span class="en-only">Full-day</span><span class="ar-only">يوم كامل</span></button>
+    </div>
+
+    <div class="camp-grid" id="live-camps-spring" data-season="spring"></div>
+
+    <div id="spring-see-more-wrap" style="display:none;text-align:center;margin-top:24px;">
+      <button id="spring-see-more-btn" type="button" style="padding:10px 22px;border-radius:999px;border:2px solid var(--ink);background:#fff;font-weight:700;font-size:14px;cursor:pointer;box-shadow:3px 3px 0 var(--ink);">
+        <span class="en-only">See more camps</span><span class="ar-only">عرض المزيد</span>
+        <span id="spring-see-more-count" style="color:#6b6b6b;font-weight:600;"></span>
+      </button>
+    </div>
+
+    <div style="margin-top: 36px; text-align: center;">
+      <a href="yalla-kids-classes-directory.html" class="btn btn-primary">
+        <span class="en-only">See all <span id="spring-count">—</span> spring programs →</span>
+        <span class="ar-only">عرض جميع برامج الربيع (<span id="spring-count-ar">—</span>) ←</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SUMMER SECTION ============ -->
+<section class="block" id="summer">
+  <div class="container">
+    <h2>
+      <span class="en-only">Summer <span class="pop">headliners</span></span>
+      <span class="ar-only">أبرز <span class="pop">معسكرات الصيف</span></span>
+      <span class="count"><span class="en-only">Jun 15 – Aug 20 · <span id="summer-h-count">—</span> programs</span><span class="ar-only">15 يونيو – 20 أغسطس · <span id="summer-h-count-ar">—</span> برنامجاً</span></span>
+    </h2>
+    <p class="sub">
+      <span class="en-only">Book full blocks of 4–9 weeks, or mix and match. Sibling discount auto-applies at checkout.</span>
+      <span class="ar-only">احجز كتل كاملة 4–9 أسابيع، أو امزج. خصم الإخوة يُطبّق تلقائياً.</span>
+    </p>
+
+    <div class="camp-grid" id="live-camps-summer" data-season="summer"></div>
+
+    <div id="summer-see-more-wrap" style="display:none;text-align:center;margin-top:24px;">
+      <button id="summer-see-more-btn" type="button" style="padding:10px 22px;border-radius:999px;border:2px solid var(--ink);background:#fff;font-weight:700;font-size:14px;cursor:pointer;box-shadow:3px 3px 0 var(--ink);">
+        <span class="en-only">See more camps</span><span class="ar-only">عرض المزيد</span>
+        <span id="summer-see-more-count" style="color:#6b6b6b;font-weight:600;"></span>
+      </button>
+    </div>
+
+    <div style="margin-top: 36px; text-align: center;">
+      <a href="yalla-kids-classes-directory.html" class="btn btn-primary">
+        <span class="en-only">See all <span id="summer-count">—</span> summer programs →</span>
+        <span class="ar-only">عرض جميع برامج الصيف (<span id="summer-count-ar">—</span>) ←</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW TO CHOOSE ============ -->
+<section class="block check-sec">
+  <div class="container">
+    <h2>
+      <span class="en-only">How to pick the <span class="pop">right camp</span></span>
+      <span class="ar-only">كيف تختار <span class="pop">المعسكر المناسب</span></span>
+    </h2>
+    <p class="sub">
+      <span class="en-only">Before you book, run through these six checks with your kid.</span>
+      <span class="ar-only">قبل الحجز، راجع هذه النقاط الست مع طفلك.</span>
+    </p>
+    <div class="check-grid">
+      <div class="check-card">
+        <span class="em">🎯</span>
+        <h4><span class="en-only">Match your kid's energy</span><span class="ar-only">اختر حسب طاقة طفلك</span></h4>
+        <p><span class="en-only">A full-day sports camp is heaven for some, exhausting for others. If they've never done a full day before, try half-day first.</span><span class="ar-only">يوم كامل من الرياضة جنة للبعض ومرهق للآخرين. إذا لم يجرّب قبلها، ابدأ بنصف يوم.</span></p>
+      </div>
+      <div class="check-card">
+        <span class="em">🚌</span>
+        <h4><span class="en-only">Check the logistics</span><span class="ar-only">افحص اللوجستيات</span></h4>
+        <p><span class="en-only">Transport, drop-off times, who can pick up, and whether lunch is included — the QAR 100 bus fee can be the deal-maker.</span><span class="ar-only">النقل، أوقات التوصيل، من يأخذ الطفل، وهل الغداء متضمن — رسوم الحافلة 100 ريال قد تحسم القرار.</span></p>
+      </div>
+      <div class="check-card">
+        <span class="em">👩‍🏫</span>
+        <h4><span class="en-only">Ask about staff ratios</span><span class="ar-only">اسأل عن نسبة المشرفين</span></h4>
+        <p><span class="en-only">For under-6s, look for 1:6 or better. Ask about first-aid training and whether staff rotate between groups.</span><span class="ar-only">للأطفال دون 6 سنوات، 1:6 أو أفضل. اسأل عن الإسعاف الأولي ودوران المشرفين.</span></p>
+      </div>
+      <div class="check-card">
+        <span class="em">🌡️</span>
+        <h4><span class="en-only">Mind the heat (summer)</span><span class="ar-only">انتبه للحرارة (الصيف)</span></h4>
+        <p><span class="en-only">July highs hit 45°C. Indoor camps or early-morning outdoor programs are safer. Ask about shade, water, and AC access.</span><span class="ar-only">يوليو يصل إلى 45°م. المعسكرات الداخلية أو الصباحية المبكرة أأمن. اسأل عن الظل والماء والتكييف.</span></p>
+      </div>
+      <div class="check-card">
+        <span class="em">🏷️</span>
+        <h4><span class="en-only">Know the refund rules</span><span class="ar-only">اعرف قواعد الاسترداد</span></h4>
+        <p><span class="en-only">Most providers allow 100% refund up to 14 days before camp starts, 50% until 7 days. Confirm before paying.</span><span class="ar-only">معظم الموفرين يسمحون باسترداد 100% حتى 14 يوماً قبل البدء، 50% حتى 7 أيام. تأكد قبل الدفع.</span></p>
+      </div>
+      <div class="check-card">
+        <span class="em">💬</span>
+        <h4><span class="en-only">Read 3 recent reviews</span><span class="ar-only">اقرأ 3 مراجعات حديثة</span></h4>
+        <p><span class="en-only">Skip 5-star hype, read the 3-star reviews — that's where the real info lives. Check for mentions of crowding, lunch quality, and pickup chaos.</span><span class="ar-only">تجاوز المراجعات المثالية، اقرأ ذات الـ3 نجوم — فيها الحقيقة. ابحث عن الازدحام وجودة الطعام وفوضى الاستلام.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="block">
+  <div class="container">
+    <h2>
+      <span class="en-only">Camp <span class="pop">questions</span></span>
+      <span class="ar-only">أسئلة <span class="pop">المعسكرات</span></span>
+    </h2>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <h4><span class="q">Q</span><span class="en-only">Can I book just specific weeks?</span><span class="ar-only">هل يمكنني حجز أسابيع محددة فقط؟</span></h4>
+        <p><span class="en-only">Yes — almost every summer camp listed lets you pick your weeks à la carte, or book a block of 4+ for a discount.</span><span class="ar-only">نعم — تقريباً جميع المعسكرات الصيفية تتيح اختيار الأسابيع أو حجز كتلة 4+ بخصم.</span></p>
+      </div>
+      <div class="faq-item">
+        <h4><span class="q">Q</span><span class="en-only">Are meals included?</span><span class="ar-only">هل الوجبات متضمنة؟</span></h4>
+        <p><span class="en-only">Most full-day camps include a halal hot lunch and snacks. Half-day camps usually ask you to send a snack. Each listing shows what's included.</span><span class="ar-only">معظم معسكرات اليوم الكامل تشمل وجبة حلال ووجبات خفيفة. النصف يومية تطلب عادةً إرسال وجبة. كل إعلان يوضح المتضمن.</span></p>
+      </div>
+      <div class="faq-item">
+        <h4><span class="q">Q</span><span class="en-only">Is there sibling discount?</span><span class="ar-only">هل يوجد خصم للإخوة؟</span></h4>
+        <p><span class="en-only">Yes. Most providers offer 10–15% off the second child and 20% off the third. It auto-applies at checkout when you add both kids to the booking.</span><span class="ar-only">نعم. معظم الموفرين يعطون 10–15% للطفل الثاني و20% للثالث. يُطبّق تلقائياً عند إضافة الطفلين.</span></p>
+      </div>
+      <div class="faq-item">
+        <h4><span class="q">Q</span><span class="en-only">What if my kid doesn't like it?</span><span class="ar-only">ماذا لو لم يحب طفلي المعسكر؟</span></h4>
+        <p><span class="en-only">Most providers offer a full refund after day 1 and a 50% refund after day 2. Pro tip: day 1 tears are normal — wait until day 3 before pulling them out.</span><span class="ar-only">معظم الموفرين يستردون المبلغ كاملاً بعد اليوم الأول و50% بعد الثاني. نصيحة: بكاء اليوم الأول طبيعي — انتظر لليوم الثالث.</span></p>
+      </div>
+      <div class="faq-item">
+        <h4><span class="q">Q</span><span class="en-only">Do camps run during Ramadan?</span><span class="ar-only">هل تُقام معسكرات في رمضان؟</span></h4>
+        <p><span class="en-only">A few yes, but most shift to post-iftar "night camps" (7–10pm) or pause entirely. The Eid Al-Fitr week is the busiest post-Ramadan.</span><span class="ar-only">قليل منها نعم، لكن معظمها ينتقل إلى "معسكرات ليلية" بعد الإفطار (7–10 م) أو يتوقف. أسبوع عيد الفطر هو الأكثر ازدحاماً.</span></p>
+      </div>
+      <div class="faq-item">
+        <h4><span class="q">Q</span><span class="en-only">What should I pack?</span><span class="ar-only">ماذا أحزم في الحقيبة؟</span></h4>
+        <p><span class="en-only">Water bottle, sunscreen, hat, change of clothes, swim kit if applicable, any medications (with a form). Each provider sends a pack list once you book.</span><span class="ar-only">زجاجة ماء، واقي شمس، قبعة، بدلة إضافية، لوازم السباحة، أي أدوية (مع نموذج). كل موفر يرسل قائمة بعد الحجز.</span></p>
+      </div>
+    </div>
+
+    <div class="note-card">
+      <strong><span class="en-only">Heads up — this is a wireframe.</span><span class="ar-only">ملاحظة — هذا نموذج أولي.</span></strong>
+      <span class="en-only">Camps is one of the four pillars of the marketplace (classes · places · camps · guides). The final version will include calendar-view filtering, per-week inventory, sibling auto-discount, and transport-zone search.</span>
+      <span class="ar-only">المعسكرات أحد الأركان الأربعة (صفوف · أماكن · معسكرات · أدلة). النسخة النهائية ستشمل عرض التقويم، مخزون كل أسبوع، خصم الإخوة التلقائي، وبحث مناطق النقل.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="logo">
+          <span class="en-only inline">Yalla Kids</span>
+          <span class="ar-only inline">يلا كيدز</span>
+        </div>
+        <p class="foot-about">
+          <span class="en-only inline">Qatar's kids' classes and places, one place to book. Bilingual, built in Doha.</span>
+          <span class="ar-only inline">صفوف وأماكن للأطفال في قطر في مكان واحد. بلغتين، صُنعت في الدوحة.</span>
+        </p>
+        <div class="foot-social">
+          <a href="#" aria-label="Instagram">📷</a>
+          <a href="#" aria-label="WhatsApp">💬</a>
+          <a href="#" aria-label="TikTok">🎵</a>
+          <a href="#" aria-label="Email">✉</a>
+        </div>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Classes</span><span class="ar-only inline">الصفوف</span></h5>
+        <a href="yalla-kids-classes-directory.html"><span class="en-only inline">All classes</span><span class="ar-only inline">كل الصفوف</span></a>
+        <a href="yalla-kids-classes-directory.html?cat=art"><span class="en-only inline">Art &amp; crafts</span><span class="ar-only inline">فن وحرف</span></a>
+        <a href="yalla-kids-classes-directory.html?cat=swimming"><span class="en-only inline">Swimming</span><span class="ar-only inline">سباحة</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Places</span><span class="ar-only inline">الأماكن</span></h5>
+        <a href="yalla-kids-places-directory.html"><span class="en-only inline">All places</span><span class="ar-only inline">كل الأماكن</span></a>
+        <a href="yalla-kids-places-directory.html#softplay"><span class="en-only inline">Soft plays</span><span class="ar-only inline">صالات اللعب</span></a>
+        <a href="yalla-kids-map.html"><span class="en-only inline">Map</span><span class="ar-only inline">خريطة</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Camps</span><span class="ar-only inline">المعسكرات</span></h5>
+        <a href="yalla-kids-camps.html#spring"><span class="en-only inline">Spring break</span><span class="ar-only inline">عطلة الربيع</span></a>
+        <a href="yalla-kids-camps.html#summer"><span class="en-only inline">Summer '26</span><span class="ar-only inline">صيف 2026</span></a>
+        <a href="yalla-kids-camps.html"><span class="en-only inline">All camps</span><span class="ar-only inline">جميع المعسكرات</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Company</span><span class="ar-only inline">الشركة</span></h5>
+        <a href="yalla-kids-about.html"><span class="en-only inline">About</span><span class="ar-only inline">من نحن</span></a>
+        <a href="yalla-kids-guides-hub.html"><span class="en-only inline">Blog</span><span class="ar-only inline">المدونة</span></a>
+        <a href="yalla-kids-contact.html"><span class="en-only inline">Contact</span><span class="ar-only inline">تواصل</span></a>      </div>
+      <div>
+        <h5><span class="en-only inline">Legal</span><span class="ar-only inline">قانوني</span></h5>
+        <a href="yalla-kids-terms.html"><span class="en-only inline">Terms</span><span class="ar-only inline">الشروط</span></a>
+        <a href="yalla-kids-privacy.html"><span class="en-only inline">Privacy</span><span class="ar-only inline">الخصوصية</span></a>
+        <a href="yalla-kids-faq.html"><span class="en-only inline">FAQ</span><span class="ar-only inline">الأسئلة الشائعة</span></a>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>© 2026 Yalla Kids WLL · Doha, Qatar · CR #XXXXXX 🇶🇦</span>
+      <span><span class="en-only inline">Made with 💛 for Doha families</span><span class="ar-only inline">صُنعت بـ 💛 لعائلات الدوحة</span></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleLang() {
+    const html = document.documentElement;
+    const isRTL = html.getAttribute("dir") === "rtl";
+    html.setAttribute("dir", isRTL ? "ltr" : "rtl");
+    html.setAttribute("lang", isRTL ? "en" : "ar");
+  }
+
+  // Season tabs — visual state only (scrolls to section when real data is wired)
+  document.querySelectorAll(".season-pill").forEach(btn => {
+    btn.addEventListener("click", () => {
+      if (btn.classList.contains("soon")) return;
+      document.querySelectorAll(".season-pill").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      const target = btn.dataset.season;
+      const el = document.getElementById(target);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+
+  // Filter pill toggles (visual only for wireframe)
+  document.querySelectorAll(".fpill").forEach(btn => {
+    btn.addEventListener("click", () => {
+      btn.classList.toggle("active");
+    });
+  });
+</script>
+
+<script src="yalla-kids-data.js"></script>
+<script>
+(function () {
+  var D = window.YALLA_DATA;
+  if (!D) return;
+
+  function pickAccent(slug) {
+    var hues = ['#FFE5A3', '#F4B942', '#F7C9B2', '#E8D5B0', '#C9E4D4', '#D5C9E8'];
+    var n = 0;
+    for (var i = 0; i < slug.length; i++) n = (n * 31 + slug.charCodeAt(i)) >>> 0;
+    return hues[n % hues.length];
+  }
+
+  function emojiFor(cat) {
+    return ({
+      sports:'⚽', swim:'🏊', dance:'💃', music:'🎵', art:'🎨', stem:'🤖',
+      'martial-arts':'🥋', equestrian:'🐎', language:'🗣️', drama:'🎭'
+    })[cat] || '🎯';
+  }
+
+  function campPriceLine(it) {
+    if (it.is_free) return { big: 'Free', sub: 'no booking fee' };
+    if (it.price_min == null && it.price_max == null) {
+      return { big: it.price_label || '—', sub: 'see listing' };
+    }
+    if (it.price_min === it.price_max) return { big: 'QAR ' + it.price_min, sub: it.price_label };
+    return { big: 'QAR ' + it.price_min + '–' + it.price_max, sub: it.price_label };
+  }
+
+  function ageBadge(it) {
+    if (it.age_label) return it.age_label;
+    if (it.age_max > it.age_min) return it.age_min + '–' + it.age_max;
+    return it.age_min + '+';
+  }
+
+  function cardHTML(it, season) {
+    var href = 'yalla-kids-class-detail.html?slug=' + encodeURIComponent(it.slug);
+    var accent = pickAccent(it.slug);
+    var emoji = emojiFor(it.category);
+    var price = campPriceLine(it);
+    var tags = (it.tags || []).slice(0, 3).map(function (t) {
+      return '<span class="camp-tag">' + D.escapeHtml(t) + '</span>';
+    }).join('');
+    var heat = '';
+    if (season === 'summer' && (it.category === 'stem' || it.category === 'equestrian')) {
+      heat = '<span class="camp-heat">🔥 <span class="en-only">Filling fast</span><span class="ar-only">أماكن محدودة</span></span>';
+    }
+    var dates = season === 'spring'
+      ? '<span class="en-only">Apr 19 · 1 wk</span><span class="ar-only">19 أبريل · أسبوع</span>'
+      : '<span class="en-only">Jun 15 · pick weeks</span><span class="ar-only">15 يونيو · اختر الأسابيع</span>';
+    var cta = season === 'spring'
+      ? '<span class="en-only">Book week →</span><span class="ar-only">احجز الأسبوع ←</span>'
+      : '<span class="en-only">Book weeks →</span><span class="ar-only">احجز أسابيع ←</span>';
+    var ogSrc = it.website ? D.ogImageUrl(it.website) : '';
+    var favSrc = it.website ? D.faviconUrl(it.website, 64) : '';
+    var ogImgHtml = ogSrc
+      ? '<img src="' + D.escapeHtml(ogSrc) + '" alt="" loading="lazy" decoding="async" onerror="this.remove();" onload="this.style.opacity=1;" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .35s ease;z-index:0;" />'
+      : '';
+    var favHtml = favSrc
+      ? '<img src="' + D.escapeHtml(favSrc) + '" alt="" loading="lazy" decoding="async" onerror="this.remove();" style="position:absolute;bottom:10px;left:10px;width:28px;height:28px;border-radius:50%;border:2px solid var(--ink);background:#fff;padding:3px;z-index:2;box-shadow:2px 2px 0 var(--ink);object-fit:contain;" />'
+      : '';
+    return (
+      '<a class="camp-card" href="' + href + '">' +
+        '<div class="camp-img" style="background:' + accent + ';display:flex;align-items:center;justify-content:center;font-size:64px;position:relative;">' +
+          ogImgHtml +
+          '<span style="position:relative;z-index:1;">' + emoji + '</span>' +
+          '<span class="camp-dates">' + dates + '</span>' +
+          '<span class="camp-age">' + D.escapeHtml(ageBadge(it)) + '</span>' +
+          heat +
+          favHtml +
+        '</div>' +
+        '<div class="camp-body">' +
+          '<div class="camp-provider">' + D.escapeHtml(it.category_label || '') + '</div>' +
+          '<h4>' + D.escapeHtml(it.name_en) + '</h4>' +
+          '<div class="camp-facts">' +
+            '<span class="fact"><span class="em">📍</span>' + D.escapeHtml(it.area || '—') + '</span>' +
+            (it.hours_or_schedule ? '<span class="fact"><span class="em">🕐</span>' + D.escapeHtml(it.hours_or_schedule.slice(0, 28)) + '</span>' : '') +
+            (it.bilingual ? '<span class="fact"><span class="em">🗣️</span>' + D.escapeHtml(it.bilingual) + '</span>' : '') +
+            (it.booking ? '<span class="fact"><span class="em">📅</span>' + D.escapeHtml(it.booking.slice(0, 24)) + '</span>' : '') +
+          '</div>' +
+          '<div class="camp-tags">' + tags + '</div>' +
+          '<div class="camp-foot">' +
+            '<div>' +
+              '<div class="camp-price">' + D.escapeHtml(price.big) + '</div>' +
+              '<small>' + D.escapeHtml(price.sub || '') + '</small>' +
+            '</div>' +
+            '<span class="camp-cta">' + cta + '</span>' +
+          '</div>' +
+        '</div>' +
+      '</a>'
+    );
+  }
+
+  // Split classes into spring/summer buckets by category balance.
+  // Spring: art/drama/language/music + small share of active
+  // Summer: sports/swim/stem/equestrian/martial-arts + dance
+  var all = D.classes.slice();
+  var springCats = { art: 1, drama: 1, language: 1, music: 1, dance: 1 };
+  var summerCats = { sports: 1, swim: 1, stem: 1, 'martial-arts': 1, equestrian: 1 };
+
+  var springItems = all.filter(function (c) { return springCats[c.category]; });
+  var summerItems = all.filter(function (c) { return summerCats[c.category]; });
+
+  // Fallback: if a bucket is thin, top it up from the other pool.
+  if (springItems.length < 6) springItems = springItems.concat(all.slice(0, 12));
+  if (summerItems.length < 6) summerItems = summerItems.concat(all.slice(0, 12));
+
+  // De-dup by slug
+  function uniq(arr) {
+    var seen = {}, out = [];
+    arr.forEach(function (it) { if (!seen[it.slug]) { seen[it.slug] = 1; out.push(it); } });
+    return out;
+  }
+  springItems = uniq(springItems).slice(0, 9);
+  summerItems = uniq(summerItems).slice(0, 9);
+
+  // Cap at 2 rows (3 cols × 2 = 6 cards) with See-more
+  var PAGE_SIZE = 6;
+  var limits = { spring: PAGE_SIZE, summer: PAGE_SIZE };
+  var filteredCache = { spring: springItems.slice(), summer: summerItems.slice() };
+
+  var springRoot = document.getElementById('live-camps-spring');
+  var summerRoot = document.getElementById('live-camps-summer');
+
+  function renderSeason(season) {
+    var root = season === 'spring' ? springRoot : summerRoot;
+    if (!root) return;
+    var items = filteredCache[season] || [];
+    var shown = items.slice(0, limits[season]);
+    if (shown.length === 0 && window.YALLA_DATA && window.YALLA_DATA.emptyStateHTML) {
+      root.innerHTML = window.YALLA_DATA.emptyStateHTML({
+        emoji: season === 'spring' ? '🌷' : '☀️',
+        titleEn: season === 'spring' ? 'No spring break camps match' : 'No summer camps match',
+        titleAr: 'لا توجد معسكرات مطابقة',
+        bodyEn: 'Try clearing the filters above, or check the other season.',
+        bodyAr: 'جرّب إزالة الفلاتر أعلاه، أو تصفّح الموسم الآخر.',
+        actions: [
+          { label: 'Browse weekly classes', labelAr: 'صفوف أسبوعية', href: 'yalla-kids-classes-directory.html', primary: true },
+          { label: 'See places instead', labelAr: 'تصفّح الأماكن', href: 'yalla-kids-places-directory.html' }
+        ]
+      });
+    } else {
+      root.innerHTML = shown.map(function (it) { return cardHTML(it, season); }).join('');
+    }
+    var wrap = document.getElementById(season + '-see-more-wrap');
+    var cnt = document.getElementById(season + '-see-more-count');
+    var hidden = items.length - shown.length;
+    if (wrap) {
+      if (hidden > 0) {
+        wrap.style.display = 'block';
+        if (cnt) cnt.textContent = ' · +' + hidden;
+      } else {
+        wrap.style.display = 'none';
+      }
+    }
+  }
+
+  renderSeason('spring');
+  renderSeason('summer');
+
+  // ---- Schema.org JSON-LD: ItemList of Event for both seasons ----------
+  (function emitCampJsonLd() {
+    try {
+      function eventFor(it, season) {
+        var year = new Date().getFullYear();
+        var dates = season === 'spring'
+          ? { start: year + '-04-19', end: year + '-04-26' }
+          : { start: year + '-06-15', end: year + '-08-31' };
+        var canonical = location.origin + '/yalla-kids-class-detail.html?slug=' + encodeURIComponent(it.slug);
+        return {
+          '@type': 'Event',
+          name: it.name_en + (season === 'spring' ? ' — Spring Camp' : ' — Summer Camp'),
+          startDate: dates.start,
+          endDate: dates.end,
+          eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+          eventStatus: 'https://schema.org/EventScheduled',
+          description: it.highlights || ((it.category_label || '') + ' camp for ages ' + (it.age_label || 'all') + ' in ' + (it.area || 'Qatar')),
+          url: canonical,
+          location: {
+            '@type': 'Place',
+            name: it.area || 'Doha',
+            address: {
+              '@type': 'PostalAddress',
+              streetAddress: it.address || '',
+              addressLocality: it.area || 'Doha',
+              addressCountry: 'QA'
+            }
+          },
+          organizer: {
+            '@type': 'Organization',
+            name: it.name_en,
+            url: it.website || undefined
+          },
+          offers: {
+            '@type': 'Offer',
+            price: it.is_free ? '0' : (it.price_min != null ? String(it.price_min) : undefined),
+            priceCurrency: 'QAR',
+            availability: 'https://schema.org/InStock',
+            url: canonical
+          }
+        };
+      }
+      var combined = []
+        .concat(filteredCache.spring.slice(0, 6).map(function (it) { return eventFor(it, 'spring'); }))
+        .concat(filteredCache.summer.slice(0, 6).map(function (it) { return eventFor(it, 'summer'); }));
+      function clean(o) {
+        if (Array.isArray(o)) return o.map(clean);
+        if (o && typeof o === 'object') {
+          var out = {};
+          Object.keys(o).forEach(function (k) {
+            var v = clean(o[k]);
+            if (v !== undefined && v !== null && v !== '') out[k] = v;
+          });
+          return out;
+        }
+        return o;
+      }
+      var ld = {
+        '@context': 'https://schema.org',
+        '@type': 'ItemList',
+        name: 'Kids camps in Qatar — Spring & Summer',
+        numberOfItems: combined.length,
+        itemListElement: combined.map(function (ev, i) {
+          return { '@type': 'ListItem', position: i + 1, item: clean(ev) };
+        })
+      };
+      var s = document.createElement('script');
+      s.type = 'application/ld+json';
+      s.textContent = JSON.stringify(ld);
+      document.head.appendChild(s);
+    } catch (e) { /* ignore */ }
+  })();
+
+  ['spring', 'summer'].forEach(function (season) {
+    var btn = document.getElementById(season + '-see-more-btn');
+    if (btn) {
+      btn.addEventListener('click', function () {
+        limits[season] += PAGE_SIZE;
+        renderSeason(season);
+      });
+    }
+  });
+
+  // Hero chip: Transport → activate the Transport filter pill
+  var transportChip = document.querySelector('.hero-chip[data-chip="transport"]');
+  if (transportChip) {
+    transportChip.addEventListener('click', function () {
+      var pills = document.querySelectorAll('.fpill');
+      pills.forEach(function (p) {
+        var label = (p.querySelector('.en-only') || {}).textContent || '';
+        if (label.indexOf('Transport') > -1) {
+          // turn off "All", turn on Transport
+          var all = document.querySelector('.fpill');
+          if (all) all.classList.remove('active');
+          p.classList.add('active');
+          setTimeout(applyFilters, 0);
+        }
+      });
+    });
+  }
+
+  // Counts
+  function setTxt(id, val) { var el = document.getElementById(id); if (el) el.textContent = val; }
+  setTxt('spring-count', springItems.length);
+  setTxt('spring-count-ar', springItems.length);
+  setTxt('summer-count', summerItems.length);
+  setTxt('summer-count-ar', summerItems.length);
+  setTxt('spring-h-count', springItems.length);
+  setTxt('spring-h-count-ar', springItems.length);
+  setTxt('summer-h-count', summerItems.length);
+  setTxt('summer-h-count-ar', summerItems.length);
+
+  // Filter pills: Ages 3-5 / 6-9 / 10-14 / Under QAR 1000 / Full-day
+  function pillLabel(btn) {
+    var s = (btn.querySelector('.en-only') || {}).textContent || '';
+    return s.trim();
+  }
+  function applyFilters() {
+    var pills = document.querySelectorAll('.fpill.active');
+    var wantAge3 = false, wantAge6 = false, wantAge10 = false, wantCheap = false, wantFullDay = false;
+    var anyActive = false;
+    pills.forEach(function (p) {
+      var s = pillLabel(p);
+      if (s === 'All') return;
+      anyActive = true;
+      if (s.indexOf('3–5') > -1) wantAge3 = true;
+      else if (s.indexOf('6–9') > -1) wantAge6 = true;
+      else if (s.indexOf('10–14') > -1) wantAge10 = true;
+      else if (s.indexOf('Under') > -1) wantCheap = true;
+      else if (s.indexOf('Full-day') > -1) wantFullDay = true;
+    });
+    function match(it) {
+      if (wantAge3 && !(it.age_min <= 5 && it.age_max >= 3)) return false;
+      if (wantAge6 && !(it.age_min <= 9 && it.age_max >= 6)) return false;
+      if (wantAge10 && !(it.age_min <= 14 && it.age_max >= 10)) return false;
+      if (wantCheap && !(it.price_min != null && it.price_min < 1000)) return false;
+      if (wantFullDay && !/full|day|8|9/i.test(it.hours_or_schedule || '')) return false;
+      return true;
+    }
+    filteredCache.spring = springItems.filter(match);
+    filteredCache.summer = summerItems.filter(match);
+    limits.spring = PAGE_SIZE;
+    limits.summer = PAGE_SIZE;
+    renderSeason('spring');
+    renderSeason('summer');
+  }
+
+  document.querySelectorAll('.fpill').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      // "All" toggles all off
+      var lbl = pillLabel(btn);
+      if (lbl === 'All') {
+        document.querySelectorAll('.fpill').forEach(function (b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+      } else {
+        document.querySelector('.fpill').classList.remove('active'); // remove from "All"
+      }
+      setTimeout(applyFilters, 0);
+    });
+  });
+})();
+</script>
+
+<script src="yalla-kids-shared.js"></script>
+</body>
+</html>

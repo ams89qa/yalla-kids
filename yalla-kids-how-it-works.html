@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#8A1538">
+  <title>How Yalla Kids works</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,800;1,9..144,700&family=Inter:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="yalla-kids-shared.css">
+<style>
+  .static-hero { max-width: 960px; margin: 48px auto 0; padding: 0 24px; text-align: center; }
+  .static-hero .eye { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--maroon); font-weight: 800; margin-bottom: 10px; }
+  .static-hero h1 { font-size: 52px; line-height: 1.05; margin-bottom: 16px; }
+  .static-hero .dek { font-size: 19px; color: var(--ink-soft); max-width: 640px; margin: 0 auto; }
+  .tab-switch { display: flex; justify-content: center; margin-top: 28px; }
+  .tab-switch-inner { display: flex; border: 2px solid var(--ink); border-radius: 99px; padding: 4px; box-shadow: var(--shadow-hard); background: var(--card-bg); }
+  .tab-switch-inner span { padding: 10px 22px; font-weight: 700; font-size: 14px; border-radius: 99px; cursor: pointer; color: var(--ink-soft); }
+  .tab-switch-inner span.active { background: var(--maroon); color: #fff; }
+
+  .steps { max-width: 1100px; margin: 56px auto 0; padding: 0 24px; }
+  .step-row { display: grid; grid-template-columns: 120px 1fr; gap: 24px; align-items: start; padding: 30px 0; border-top: 2px solid var(--ink); }
+  .step-row:first-of-type { border-top: 3px solid var(--ink); }
+  .step-num { font-family: "Fraunces", serif; font-size: 90px; font-weight: 800; color: var(--maroon); line-height: 0.9; }
+  .step-body h2 { font-size: 30px; margin-bottom: 10px; }
+  .step-body p { font-family: "Fraunces", Georgia, serif; font-size: 17px; color: var(--ink-soft); line-height: 1.65; margin-bottom: 12px; }
+  .step-detail { background: var(--butter-soft); border: 2px solid var(--ink); border-radius: var(--r); padding: 16px 20px; margin-top: 10px; box-shadow: var(--shadow-hard); font-family: "Inter", sans-serif; font-size: 14px; color: var(--ink); }
+
+  .pillars { max-width: 1100px; margin: 60px auto 0; padding: 0 24px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .pillar { padding: 28px; border: 2px solid var(--ink); border-radius: var(--r); box-shadow: var(--shadow-hard); }
+  .pillar .em { font-size: 42px; margin-bottom: 12px; }
+  .pillar h3 { font-family: "Fraunces", serif; font-size: 22px; margin-bottom: 8px; }
+  .pillar p { font-size: 14px; color: var(--ink-soft); line-height: 1.55; }
+
+  .cta-row { max-width: 1000px; margin: 60px auto; padding: 40px 28px; background: var(--coral-soft); border: 2px solid var(--ink); border-radius: var(--r-lg); box-shadow: var(--shadow-hard-lg); text-align: center; }
+  .cta-row h2 { font-size: 32px; margin-bottom: 10px; }
+  .cta-row p { color: var(--ink-soft); margin-bottom: 18px; }
+
+  @media (max-width: 720px) {
+    .step-row { grid-template-columns: 1fr; }
+    .step-num { font-size: 56px; }
+    .pillars { grid-template-columns: 1fr; }
+    .static-hero h1 { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="nav-wrap container">
+    <a href="yalla-kids-home-wireframe.html" class="logo">
+      <span class="en-only inline">Yalla Kids</span>
+      <span class="ar-only inline">يلا كيدز</span>
+    </a>
+    <nav class="nav-links">
+      <a href="yalla-kids-classes-directory.html"><span class="en-only inline">Classes</span><span class="ar-only inline">الصفوف</span></a>
+      <a href="yalla-kids-places-directory.html"><span class="en-only inline">Places to go</span><span class="ar-only inline">أماكن للزيارة</span></a>
+      <a href="yalla-kids-camps.html"><span class="en-only inline">Camps</span><span class="ar-only inline">المعسكرات</span></a>
+      <a href="yalla-kids-guides-hub.html"><span class="en-only inline">Guides</span><span class="ar-only inline">الأدلة</span></a>
+      <a href="yalla-kids-for-providers.html"><span class="en-only inline">For providers</span><span class="ar-only inline">للموفرين</span></a>    </nav>
+    <div class="nav-actions">
+      <button class="lang-toggle" onclick="toggleLang()">
+        <span class="en-only inline">العربية</span>
+        <span class="ar-only inline">English</span>
+      </button>
+      <a href="yalla-kids-login.html" class="btn btn-ghost"><span class="en-only inline">Log in</span><span class="ar-only inline">تسجيل الدخول</span></a>
+      <a href="yalla-kids-signup.html" class="btn btn-primary"><span class="en-only inline">Sign up</span><span class="ar-only inline">إنشاء حساب</span></a>
+    </div>
+  </div>
+</header>
+
+<section class="static-hero">
+  <div class="eye">How it works</div>
+  <h1><span class="en-only">Find. Book. <span class="pop">Enjoy.</span> Repeat.</span><span class="ar-only"><span class="pop">ابحث</span>، احجز، استمتع، كرّر.</span></h1>
+  <p class="dek">Yalla Kids in four steps — for parents. Provider? <a href="yalla-kids-for-providers.html" style="color:var(--maroon);text-decoration:underline;">Start here instead</a>.</p>
+  <div class="tab-switch">
+    <div class="tab-switch-inner">
+      <span class="active">For parents</span>
+      <span>For providers</span>
+    </div>
+  </div>
+</section>
+
+<!-- Steps -->
+<section class="steps">
+  <div class="step-row">
+    <div class="step-num">01</div>
+    <div class="step-body">
+      <h2>Discover — whether you want a class, a place, or a plan</h2>
+      <p>Search by age, neighborhood, or mood. Our editors keep the guides honest and the ratings real. Filter by <strong>AC</strong>, <strong>free</strong>, <strong>stroller-friendly</strong>, <strong>language</strong>, or <strong>halal food</strong> — the filters parents actually want.</p>
+      <div class="step-detail">💡 Tip: save your go-to's to My Favorites. Coming back to book is one tap.</div>
+    </div>
+  </div>
+
+  <div class="step-row">
+    <div class="step-num">02</div>
+    <div class="step-body">
+      <h2>Compare &amp; decide — every listing shows what matters</h2>
+      <p>Ratings from real Qatar parents. Honest pricing in QAR (never "call for price"). AC-status. Prayer-room info. Stroller access. Photos taken by editors or verified providers — not stock images from the other side of the world.</p>
+      <div class="step-detail">✓ Every provider is verified before they can list. Safety first, gimmicks never.</div>
+    </div>
+  </div>
+
+  <div class="step-row">
+    <div class="step-num">03</div>
+    <div class="step-body">
+      <h2>Book securely — pay through MyFatoorah</h2>
+      <p>Classes book directly on Yalla Kids. Places that charge entry (OliOli, Angry Birds, Mathaf guided tours) also bookable. <strong>One checkout</strong>, Arabic or English, with Visa/Mastercard, Apple Pay, or NAPS. No card on file, no surprise charges, no shady cash deposits.</p>
+      <div class="step-detail">🔒 Secured by MyFatoorah. Full refund within 7 days of term start. 50% up to 48h before.</div>
+    </div>
+  </div>
+
+  <div class="step-row">
+    <div class="step-num">04</div>
+    <div class="step-body">
+      <h2>Enjoy — and leave a real review</h2>
+      <p>Reminders by SMS or WhatsApp (your choice). Directions with accurate parking notes. After class, leave a review so the next parent gets the same benefit you did. Verified reviews only — you can't rate a class you didn't actually attend.</p>
+      <div class="step-detail">🎁 Get QAR 50 credit for every friend you refer who makes their first booking.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Pillars -->
+<section class="pillars">
+  <div class="pillar" style="background:var(--mint-soft);">
+    <div class="em">🛡</div>
+    <h3>Safety &amp; vetting</h3>
+    <p>We check trade licenses, insurance, work permits, and venue safety before any provider goes live. Anything off, we don't list.</p>
+  </div>
+  <div class="pillar" style="background:var(--butter-soft);">
+    <div class="em">💰</div>
+    <h3>Fair, transparent pricing</h3>
+    <p>10% commission on class bookings. Free tier for every place. Never "call for price" on a listing. Ever.</p>
+  </div>
+  <div class="pillar" style="background:var(--pink-soft);">
+    <div class="em">🗣</div>
+    <h3>Truly bilingual</h3>
+    <p>Every flow — search, booking, receipts, SMS — works in Arabic and English. Switch anytime, any page.</p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-row">
+  <h2>Ready to get started?</h2>
+  <p>Browse 800+ listings across Doha &amp; beyond. No signup required to look.</p>
+  <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+    <a href="yalla-kids-home-wireframe.html" class="btn primary lg">Start exploring →</a>
+    <a href="yalla-kids-for-providers.html" class="btn outline lg">I'm a provider</a>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="logo">
+          <span class="en-only inline">Yalla Kids</span>
+          <span class="ar-only inline">يلا كيدز</span>
+        </div>
+        <p class="foot-about">
+          <span class="en-only inline">Qatar's kids' classes and places, one place to book. Bilingual, built in Doha.</span>
+          <span class="ar-only inline">صفوف وأماكن للأطفال في قطر في مكان واحد. بلغتين، صُنعت في الدوحة.</span>
+        </p>
+        <div class="foot-social">
+          <a href="#" aria-label="Instagram">📷</a>
+          <a href="#" aria-label="WhatsApp">💬</a>
+          <a href="#" aria-label="TikTok">🎵</a>
+          <a href="#" aria-label="Email">✉</a>
+        </div>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Classes</span><span class="ar-only inline">الصفوف</span></h5>
+        <a href="yalla-kids-classes-directory.html"><span class="en-only inline">All classes</span><span class="ar-only inline">كل الصفوف</span></a>
+        <a href="yalla-kids-classes-directory.html?cat=art"><span class="en-only inline">Art &amp; crafts</span><span class="ar-only inline">فن وحرف</span></a>
+        <a href="yalla-kids-classes-directory.html?cat=swimming"><span class="en-only inline">Swimming</span><span class="ar-only inline">سباحة</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Places</span><span class="ar-only inline">الأماكن</span></h5>
+        <a href="yalla-kids-places-directory.html"><span class="en-only inline">All places</span><span class="ar-only inline">كل الأماكن</span></a>
+        <a href="yalla-kids-places-directory.html#softplay"><span class="en-only inline">Soft plays</span><span class="ar-only inline">صالات اللعب</span></a>
+        <a href="yalla-kids-map.html"><span class="en-only inline">Map</span><span class="ar-only inline">خريطة</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">For providers</span><span class="ar-only inline">للموفرين</span></h5>
+        <a href="yalla-kids-for-providers.html"><span class="en-only inline">List a class</span><span class="ar-only inline">أدرج صفاً</span></a>
+        <a href="yalla-kids-how-it-works.html"><span class="en-only inline">How it works</span><span class="ar-only inline">كيف نعمل</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Company</span><span class="ar-only inline">الشركة</span></h5>
+        <a href="yalla-kids-about.html"><span class="en-only inline">About</span><span class="ar-only inline">من نحن</span></a>
+        <a href="yalla-kids-contact.html"><span class="en-only inline">Contact</span><span class="ar-only inline">تواصل</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Legal</span><span class="ar-only inline">قانوني</span></h5>
+        <a href="yalla-kids-terms.html"><span class="en-only inline">Terms</span><span class="ar-only inline">الشروط</span></a>
+        <a href="yalla-kids-privacy.html"><span class="en-only inline">Privacy</span><span class="ar-only inline">الخصوصية</span></a>
+        <a href="yalla-kids-faq.html"><span class="en-only inline">FAQ</span><span class="ar-only inline">الأسئلة الشائعة</span></a>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>© 2026 Yalla Kids WLL · Doha, Qatar · CR #XXXXXX 🇶🇦</span>
+      <span><span class="en-only inline">Made with 💛 for Doha families</span><span class="ar-only inline">صُنعت بـ 💛 لعائلات الدوحة</span></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleLang() { const html = document.documentElement; if (html.dir === 'rtl') { html.dir = 'ltr'; html.lang = 'en'; } else { html.dir = 'rtl'; html.lang = 'ar'; } }
+  document.querySelectorAll('.tab-switch-inner span').forEach(s => {
+    s.addEventListener('click', () => {
+      document.querySelectorAll('.tab-switch-inner span').forEach(x => x.classList.remove('active'));
+      s.classList.add('active');
+    });
+  });
+</script>
+<script src="yalla-kids-shared.js"></script>
+</body>
+</html>

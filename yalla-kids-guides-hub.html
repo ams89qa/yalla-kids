@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#8A1538">
+  <title>Yalla Kids Guides — What to do with kids in Qatar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,600;1,9..144,700&family=Inter:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="yalla-kids-shared.css">
+<style>
+  .guides-hero {
+    max-width: 1280px;
+    margin: 24px auto 0;
+    padding: 48px 28px;
+    background: var(--butter-soft);
+    border: 2px solid var(--ink);
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow-hard-lg);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .guides-hero::before {
+    content: "📖";
+    position: absolute;
+    top: 20px; left: 30px;
+    font-size: 38px;
+    transform: rotate(-15deg);
+    opacity: 0.45;
+  }
+  .guides-hero::after {
+    content: "🗺️";
+    position: absolute;
+    bottom: 20px; right: 30px;
+    font-size: 44px;
+    transform: rotate(10deg);
+    opacity: 0.45;
+  }
+  .guides-hero h1 {
+    font-size: 52px;
+    line-height: 1.05;
+    margin-bottom: 14px;
+    max-width: 760px;
+    margin-left: auto; margin-right: auto;
+  }
+  .guides-hero p {
+    font-size: 18px;
+    color: var(--ink-soft);
+    max-width: 580px;
+    margin: 0 auto 24px;
+  }
+
+  .search-bar {
+    max-width: 540px;
+    margin: 0 auto;
+    display: flex;
+    gap: 10px;
+  }
+  .search-bar .input { flex: 1; }
+
+  /* Topic pills */
+  .topics {
+    max-width: 1280px;
+    margin: 24px auto 0;
+    padding: 0 28px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .topic-pill {
+    border: 2px solid var(--ink);
+    border-radius: 99px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 700;
+    background: var(--card-bg);
+    box-shadow: var(--shadow-hard);
+    cursor: pointer;
+  }
+  .topic-pill.active { background: var(--maroon); color: #fff; }
+
+  /* Featured layout */
+  .feature-grid {
+    max-width: 1280px;
+    margin: 40px auto 0;
+    padding: 0 28px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+  }
+  .feature-big {
+    background: var(--card-bg);
+    border: 2px solid var(--ink);
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow-hard-lg);
+    overflow: hidden;
+    display: block;
+  }
+  .fb-cover {
+    height: 340px;
+    background: linear-gradient(135deg, var(--coral-soft), var(--pink-soft) 60%, var(--butter-soft));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 110px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .fb-body { padding: 24px 28px; }
+  .fb-eyebrow {
+    font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--maroon); font-weight: 800; margin-bottom: 6px;
+  }
+  .fb-body h2 {
+    font-size: 32px; font-family: "Fraunces", serif;
+    margin-bottom: 10px; line-height: 1.15;
+  }
+  .fb-body .dek {
+    font-size: 16px; color: var(--ink-soft);
+    margin-bottom: 14px;
+  }
+  .fb-meta {
+    display: flex; gap: 12px; font-size: 12px;
+    color: var(--ink-mute);
+  }
+
+  .feature-side {
+    display: grid;
+    gap: 20px;
+  }
+  .side-card {
+    background: var(--card-bg);
+    border: 2px solid var(--ink);
+    border-radius: var(--r);
+    box-shadow: var(--shadow-hard);
+    overflow: hidden;
+    display: block;
+  }
+  .side-thumb {
+    height: 140px;
+    border-bottom: 2px solid var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 54px;
+  }
+  .side-body { padding: 14px 16px; }
+  .side-body h3 { font-size: 17px; margin-bottom: 4px; font-family: "Fraunces", serif; line-height: 1.2; }
+  .side-body .m { font-size: 12px; color: var(--ink-mute); }
+
+  /* Collection rows */
+  .collection {
+    max-width: 1280px;
+    margin: 56px auto 0;
+    padding: 0 28px;
+  }
+  .collection h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    display: flex; justify-content: space-between; align-items: baseline;
+  }
+  .collection h2 a {
+    font-size: 14px;
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+    color: var(--maroon);
+    text-decoration: underline;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+  .card {
+    background: var(--card-bg);
+    border: 2px solid var(--ink);
+    border-radius: var(--r);
+    box-shadow: var(--shadow-hard);
+    overflow: hidden;
+    display: block;
+    transition: transform 0.15s ease;
+  }
+  .card:hover { transform: translate(-2px, -2px); box-shadow: var(--shadow-hard-lg); }
+  .card-thumb {
+    height: 160px;
+    border-bottom: 2px solid var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 52px;
+  }
+  .card-body { padding: 14px 16px; }
+  .card-body .eye {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--maroon); font-weight: 800; margin-bottom: 4px;
+  }
+  .card-body h3 { font-size: 17px; line-height: 1.25; margin-bottom: 4px; font-family: "Fraunces", serif; }
+  .card-body .m { font-size: 12px; color: var(--ink-mute); }
+
+  /* Newsletter */
+  .newsletter {
+    max-width: 1280px;
+    margin: 60px auto 20px;
+    padding: 36px 28px;
+    background: var(--teal-soft);
+    border: 2px solid var(--ink);
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow-hard-lg);
+    text-align: center;
+  }
+  .newsletter h2 { font-size: 30px; margin-bottom: 8px; }
+  .newsletter p { color: var(--ink-soft); max-width: 520px; margin: 0 auto 18px; }
+  .nl-form { display: flex; gap: 10px; max-width: 440px; margin: 0 auto; }
+  .nl-form .input { flex: 1; }
+
+  @media (max-width: 980px) {
+    .feature-grid { grid-template-columns: 1fr; }
+    .card-grid { grid-template-columns: repeat(2, 1fr); }
+    .guides-hero h1 { font-size: 36px; }
+  }
+  @media (max-width: 560px) {
+    .card-grid { grid-template-columns: 1fr; }
+    .nl-form { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site">
+  <div class="nav-wrap container">
+    <a href="yalla-kids-home-wireframe.html" class="logo">
+      <span class="en-only inline">Yalla Kids</span>
+      <span class="ar-only inline">يلا كيدز</span>
+    </a>
+    <nav class="nav-links">
+      <a href="yalla-kids-classes-directory.html"><span class="en-only inline">Classes</span><span class="ar-only inline">الصفوف</span></a>
+      <a href="yalla-kids-places-directory.html"><span class="en-only inline">Places to go</span><span class="ar-only inline">أماكن للزيارة</span></a>
+      <a href="yalla-kids-camps.html"><span class="en-only inline">Camps</span><span class="ar-only inline">المعسكرات</span></a>
+      <a href="yalla-kids-guides-hub.html" class="active"><span class="en-only inline">Guides</span><span class="ar-only inline">الأدلة</span></a>
+      <a href="yalla-kids-for-providers.html"><span class="en-only inline">For providers</span><span class="ar-only inline">للموفرين</span></a>
+    </nav>
+    <div class="nav-actions">
+      <button class="lang-toggle" onclick="toggleLang()">
+        <span class="en-only inline">العربية</span>
+        <span class="ar-only inline">English</span>
+      </button>
+      <a href="yalla-kids-login.html" class="btn btn-ghost"><span class="en-only inline">Log in</span><span class="ar-only inline">تسجيل الدخول</span></a>
+      <a href="yalla-kids-signup.html" class="btn btn-primary"><span class="en-only inline">Sign up</span><span class="ar-only inline">إنشاء حساب</span></a>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="guides-hero">
+  <h1>
+    <span class="en-only">Yalla, here's <span class="pop">what to do</span> with kids this week in Doha.</span>
+    <span class="ar-only">إليك <span class="pop">ماذا تفعل</span> مع الأطفال هذا الأسبوع في الدوحة.</span>
+  </h1>
+  <p>Honest guides written by parents who live here. Beat the heat, plan perfect weekends, find free stuff — all in one place.</p>
+  <div class="search-bar">
+    <input type="text" class="input" placeholder="Search: rainy day, toddlers, Katara…" data-en-placeholder="Search: rainy day, toddlers, Katara…" data-ar-placeholder="بحث: يوم ماطر، الصغار، كتارا…">
+    <button class="btn primary">Search</button>
+  </div>
+</section>
+
+<!-- ============ TOPICS ============ -->
+<div class="topics">
+  <span class="topic-pill active">All topics</span>
+  <span class="topic-pill">🌴 Weekends</span>
+  <span class="topic-pill">☀️ Beat the heat</span>
+  <span class="topic-pill">👶 Toddlers 0–3</span>
+  <span class="topic-pill">🧒 Ages 4–8</span>
+  <span class="topic-pill">🎒 Ages 9–12</span>
+  <span class="topic-pill">💰 Free &amp; low cost</span>
+  <span class="topic-pill">🏝 Day trips</span>
+  <span class="topic-pill">🎂 Birthdays</span>
+  <span class="topic-pill">🕌 Ramadan &amp; Eid</span>
+</div>
+
+<!-- ============ FEATURED ============ -->
+<section class="feature-grid">
+  <a href="yalla-kids-guide-article.html" class="feature-big">
+    <div class="fb-cover">🌴🏖️✨</div>
+    <div class="fb-body">
+      <div class="fb-eyebrow">Featured guide</div>
+      <h2>The ultimate Doha weekend with kids: 48 hours, no repeats, no meltdowns.</h2>
+      <div class="dek">A minute-by-minute plan from Thursday pickup to Saturday bedtime — indoor mornings, cool-down afternoons, Corniche sunset. Tested with real kids in 38°C heat.</div>
+      <div class="fb-meta">
+        <span>📖 12-min read</span>
+        <span>Updated Apr 12, 2026</span>
+        <span>By Noor H.</span>
+      </div>
+    </div>
+  </a>
+
+  <div class="feature-side">
+    <a href="yalla-kids-guide-article.html" class="side-card">
+      <div class="side-thumb" style="background:var(--sky-soft);">💧</div>
+      <div class="side-body">
+        <div class="fb-eyebrow">Summer survival</div>
+        <h3>30 indoor places that aren't a mall</h3>
+        <div class="m">9-min read · AC guaranteed</div>
+      </div>
+    </a>
+    <a href="yalla-kids-guide-article.html" class="side-card">
+      <div class="side-thumb" style="background:var(--lime-soft);">🆓</div>
+      <div class="side-body">
+        <div class="fb-eyebrow">Money smart</div>
+        <h3>25 free things to do with kids in Qatar</h3>
+        <div class="m">7-min read · QAR 0 required</div>
+      </div>
+    </a>
+    <a href="yalla-kids-guide-article.html" class="side-card">
+      <div class="side-thumb" style="background:var(--pink-soft);">🎂</div>
+      <div class="side-body">
+        <div class="fb-eyebrow">Parties</div>
+        <h3>Birthday party venues for every budget</h3>
+        <div class="m">8-min read · QAR 300 → QAR 4,000</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ============ COLLECTION: WEEKEND ============ -->
+<section class="collection">
+  <h2>
+    <span>🌴 Weekend <span class="pop">plans</span></span>
+    <a href="yalla-kids-guides-hub.html#weekend">See all 24 →</a>
+  </h2>
+  <div class="card-grid">
+    <a href="yalla-kids-guide-article.html" class="card">
+      <div class="card-thumb" style="background:var(--coral-soft);">🏖</div>
+      <div class="card-body">
+        <div class="eye">Day trip</div>
+        <h3>Zekreet beach &amp; the mushroom rocks</h3>
+        <div class="m">6-min read · 90 min from Doha</div>
+      </div>
+    </a>
+    <a href="yalla-kids-guide-article.html" class="card">
+      <div class="card-thumb" style="background:var(--teal-soft);">🦩</div>
+      <div class="card-body">
+        <div class="eye">Wildlife</div>
+        <h3>Where to spot Qatar's flamingos</h3>
+        <div class="m">5-min read · Best in winter</div>
+      </div>
+    </a>
+    <a href="yalla-kids-guide-article.html" class="card">
+      <div class="card-thumb" style="background:var(--butter-soft);">🌅</div>
+      <div class="card-body">
+        <div class="eye">Golden hour</div>
+        <h3>5 sunset spots kids will actually sit still for</h3>
+        <div class="m">4-min read · Corniche to Lusail</div>
+      </div>
+    </a>
+    <a href="yalla-kids-guide-article.html" class="card">
+      <div class="card-thumb" style="background:var(--lavender-soft);">🐪</div>
+      <div class="card-body">
+        <div class="eye">Classic Doha</div>
+        <h3>Souq Waqif with kids: what to do, what to skip</h3>
+        <div class="m">8-min read · Stroller OK? Mostly.</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ============ COLLECTION: BY AGE ============ -->
+<section class="collection">
+  <h2>
+    <span>By <span class="pop">age group</span></span>
+    <a href="yalla-kids-guides-hub.html#age">See all 40+ →</a>
+  </h2>
+  <div class="card-grid">
+    <a href="yalla-kids-guide-article.html" class="card">
+      <div class="card-thumb" style="background:var(--mint-soft);">👶</div>
+      <div class="card-body">
+        <div class="eye">0–3 years</div>
+        <h3>Sensory play cafes &amp; quiet corners for toddlers</h3>
+        <div class="m">6-min read</div>
+      </div>
+    </a>
+    <a href="yalla-kids-guide-article.html" class="card">
+      <div class="card-thumb" style="background:var(--peach-soft);">🧸</div>
+      <div class="card-body">
+        <div class="eye">4–6 years</div>
+        <h3>Best soft play spots ranked by a 5-year-old</h3>
+        <div class="m">7-min read · Sticky chart inside</div>
+      </div>
+    </a>
+    <a href="yalla-kids-guide-article.html" class="card">
+      <div class="card-thumb" style="background:var(--sky-soft);">🔬</div>
+      <div class="card-body">
+        <div class="eye">7–9 years</div>
+        <h3>STEM Saturdays: science museums &amp; maker spaces</h3>
+        <div class="m">9-min read</div>
+      </div>
+    </a>
+    <a href="yalla-kids-guide-article.html" class="card">
+      <div class="card-thumb" style="background:var(--pink-soft);">🎨</div>
+      <div class="card-body">
+        <div class="eye">10–12 years</div>
+        <h3>Classes &amp; workshops tweens don't call "cringe"</h3>
+        <div class="m">8-min read</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ============ COLLECTION: SEASONAL ============ -->
+<section class="collection">
+  <h2>
+    <span>Right <span class="pop">now</span> in Qatar</span>
+    <a href="yalla-kids-guides-hub.html#seasonal">Seasonal archive →</a>
+  </h2>
+  <div class="card-grid">
+    <a href="yalla-kids-guide-article.html" class="card">
+      <div class="card-thumb" style="background:var(--butter-soft);">🌙</div>
+      <div class="card-body">
+        <div class="eye">Ramadan 2026</div>
+        <h3>Family-friendly iftars that won't break the bank</h3>
+        <div class="m">11-min read · 14 venues ranked</div>
+      </div>
+    </a>
+    <a href="yalla-kids-guide-article.html" class="card">
+      <div class="card-thumb" style="background:var(--coral-soft);">🎪</div>
+      <div class="card-body">
+        <div class="eye">Garangao</div>
+        <h3>What is Garangao — and how to celebrate it with kids</h3>
+        <div class="m">6-min read · Qatari traditions</div>
+      </div>
+    </a>
+    <a href="yalla-kids-guide-article.html" class="card">
+      <div class="card-thumb" style="background:var(--teal-soft);">🎢</div>
+      <div class="card-body">
+        <div class="eye">Eid Al-Fitr</div>
+        <h3>Eid events for kids 2026: festivals, fireworks, meals</h3>
+        <div class="m">8-min read · Updated weekly</div>
+      </div>
+    </a>
+    <a href="yalla-kids-guide-article.html" class="card">
+      <div class="card-thumb" style="background:var(--lime-soft);">🌬</div>
+      <div class="card-body">
+        <div class="eye">Winter 2026</div>
+        <h3>Outdoor season is finally here: 18 places to go</h3>
+        <div class="m">10-min read · Nov–Mar</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ============ NEWSLETTER ============ -->
+<section class="newsletter">
+  <h2>
+    <span class="en-only"><span class="pop">Wednesday</span> weekend plans, in your inbox.</span>
+    <span class="ar-only"><span class="pop">خطط</span> عطلة نهاية الأسبوع في بريدك.</span>
+  </h2>
+  <p>Every Wednesday morning — 5 things to do with kids this weekend in Qatar. Free. Easy to unsubscribe.</p>
+  <form class="nl-form">
+    <input type="email" class="input" placeholder="your@email.com">
+    <button class="btn primary">Subscribe</button>
+  </form>
+  <p style="font-size:12px;color:var(--ink-mute);margin-top:10px;">3,800+ Doha parents already on the list ✨</p>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="logo">
+          <span class="en-only inline">Yalla Kids</span>
+          <span class="ar-only inline">يلا كيدز</span>
+        </div>
+        <p class="foot-about">
+          <span class="en-only inline">Qatar's kids' classes and places, one place to book. Bilingual, built in Doha.</span>
+          <span class="ar-only inline">صفوف وأماكن للأطفال في قطر في مكان واحد. بلغتين، صُنعت في الدوحة.</span>
+        </p>
+        <div class="foot-social">
+          <a href="#" aria-label="Instagram">📷</a>
+          <a href="#" aria-label="WhatsApp">💬</a>
+          <a href="#" aria-label="TikTok">🎵</a>
+          <a href="#" aria-label="Email">✉</a>
+        </div>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Classes</span><span class="ar-only inline">الصفوف</span></h5>
+        <a href="yalla-kids-classes-directory.html"><span class="en-only inline">All classes</span><span class="ar-only inline">كل الصفوف</span></a>
+        <a href="yalla-kids-classes-directory.html?cat=art"><span class="en-only inline">Art &amp; crafts</span><span class="ar-only inline">فن وحرف</span></a>
+        <a href="yalla-kids-classes-directory.html?cat=swimming"><span class="en-only inline">Swimming</span><span class="ar-only inline">سباحة</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Places</span><span class="ar-only inline">الأماكن</span></h5>
+        <a href="yalla-kids-places-directory.html"><span class="en-only inline">All places</span><span class="ar-only inline">كل الأماكن</span></a>
+        <a href="yalla-kids-places-directory.html#softplay"><span class="en-only inline">Soft plays</span><span class="ar-only inline">صالات اللعب</span></a>
+        <a href="yalla-kids-map.html"><span class="en-only inline">Map</span><span class="ar-only inline">خريطة</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">For providers</span><span class="ar-only inline">للموفرين</span></h5>
+        <a href="yalla-kids-for-providers.html"><span class="en-only inline">List a class</span><span class="ar-only inline">أدرج صفاً</span></a>
+        <a href="yalla-kids-how-it-works.html"><span class="en-only inline">How it works</span><span class="ar-only inline">كيف نعمل</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Company</span><span class="ar-only inline">الشركة</span></h5>
+        <a href="yalla-kids-about.html"><span class="en-only inline">About</span><span class="ar-only inline">من نحن</span></a>
+        <a href="yalla-kids-contact.html"><span class="en-only inline">Contact</span><span class="ar-only inline">تواصل</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Legal</span><span class="ar-only inline">قانوني</span></h5>
+        <a href="yalla-kids-terms.html"><span class="en-only inline">Terms</span><span class="ar-only inline">الشروط</span></a>
+        <a href="yalla-kids-privacy.html"><span class="en-only inline">Privacy</span><span class="ar-only inline">الخصوصية</span></a>
+        <a href="yalla-kids-faq.html"><span class="en-only inline">FAQ</span><span class="ar-only inline">الأسئلة الشائعة</span></a>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>© 2026 Yalla Kids WLL · Doha, Qatar · CR #XXXXXX 🇶🇦</span>
+      <span><span class="en-only inline">Made with 💛 for Doha families</span><span class="ar-only inline">صُنعت بـ 💛 لعائلات الدوحة</span></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleLang() {
+    const html = document.documentElement;
+    if (html.dir === 'rtl') { html.dir = 'ltr'; html.lang = 'en'; }
+    else { html.dir = 'rtl'; html.lang = 'ar'; }
+  }
+  document.querySelectorAll('.topic-pill').forEach(p => {
+    p.addEventListener('click', () => {
+      document.querySelectorAll('.topic-pill').forEach(x => x.classList.remove('active'));
+      p.classList.add('active');
+    });
+  });
+</script>
+<script src="yalla-kids-shared.js"></script>
+</body>
+</html>

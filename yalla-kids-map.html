@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Map explorer · Yalla Kids</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,800;1,9..144,700&family=Inter:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="yalla-kids-shared.css">
+
+<!-- Leaflet + MarkerCluster -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+
+<style>
+  html, body { height: 100%; overflow: hidden; }
+  body { background: var(--warm-white); }
+
+  /* ---- Toolbar under sticky header ---- */
+  .map-toolbar {
+    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+    padding: 12px 24px; background: var(--card-bg);
+    border-bottom: 2px solid var(--ink);
+  }
+  .search-box {
+    position: relative; flex: 1 1 280px; max-width: 360px;
+  }
+  .search-box input {
+    width: 100%; padding: 10px 14px 10px 40px; font-family: inherit; font-size: 14px;
+    border: 2px solid var(--ink); border-radius: 999px; background: #fff;
+    box-shadow: 2px 2px 0 var(--ink); outline: none;
+  }
+  .search-box input:focus { box-shadow: 3px 3px 0 var(--maroon); }
+  .search-box .ico { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 15px; }
+
+  .view-toggle {
+    display: inline-flex; border: 2px solid var(--ink); border-radius: 999px; padding: 3px;
+    background: var(--butter-soft); box-shadow: 2px 2px 0 var(--ink);
+  }
+  .view-toggle a {
+    padding: 7px 14px; border-radius: 999px; font-size: 13px; font-weight: 700;
+    color: var(--ink-soft); display: flex; gap: 6px; align-items: center;
+  }
+  .view-toggle a.active { background: var(--maroon); color: #fff; }
+
+  .count-pill {
+    padding: 7px 14px; border-radius: 999px; font-size: 13px; font-weight: 700;
+    background: var(--mint-soft); border: 2px solid var(--ink); box-shadow: 2px 2px 0 var(--ink);
+  }
+  .count-pill b { color: var(--maroon); }
+
+  .sort-sel {
+    padding: 8px 14px; font-size: 13px; font-weight: 600; font-family: inherit;
+    border: 2px solid var(--ink); border-radius: 999px; background: #fff;
+    box-shadow: 2px 2px 0 var(--ink); cursor: pointer;
+  }
+
+  .mobile-filter-btn { display: none; }
+
+  /* ---- Main shell ---- */
+  .map-shell {
+    display: grid; grid-template-columns: 300px 1fr;
+    height: calc(100vh - 70px - 59px); /* header + toolbar */
+  }
+  .filter-rail {
+    border-right: 2px solid var(--ink);
+    background: var(--warm-white);
+    overflow-y: auto; padding: 20px;
+  }
+  .filter-rail::-webkit-scrollbar { width: 8px; }
+  .filter-rail::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 4px; }
+
+  .filter-rail h4 {
+    font-family: "Fraunces", serif; font-size: 14px; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--maroon); margin: 16px 0 8px;
+  }
+  .filter-rail h4:first-of-type { margin-top: 0; }
+
+  .chip-group { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 6px; }
+  .f-chip {
+    padding: 6px 11px; font-size: 12.5px; font-weight: 700; font-family: inherit;
+    background: #fff; color: var(--ink); border: 2px solid var(--ink); border-radius: 999px;
+    cursor: pointer; transition: transform 0.1s, box-shadow 0.1s;
+  }
+  .f-chip:hover { transform: translate(-1px,-1px); box-shadow: 2px 2px 0 var(--ink); }
+  .f-chip.on { background: var(--butter); box-shadow: 2px 2px 0 var(--ink); }
+  .f-chip.on.cat-play { background: var(--peach-soft); }
+  .f-chip.on.cat-museum { background: var(--lavender-soft); }
+  .f-chip.on.cat-park { background: var(--mint-soft); }
+  .f-chip.on.cat-theme { background: var(--coral-soft); }
+  .f-chip.on.cat-water { background: var(--sky-soft); }
+  .f-chip.on.cat-class { background: var(--butter-soft); }
+  .f-chip.on.cat-mall { background: var(--pink-soft); }
+  .f-chip.on.cat-library { background: var(--teal-soft); }
+  .f-chip.on.cat-cultural { background: var(--lavender-soft); }
+
+  .switch-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 7px 0; font-size: 13.5px; font-weight: 600;
+  }
+  .switch {
+    width: 40px; height: 22px; border: 2px solid var(--ink); border-radius: 999px;
+    background: #fff; position: relative; cursor: pointer; transition: background 0.15s;
+  }
+  .switch::after {
+    content: ""; position: absolute; left: 2px; top: 2px; width: 14px; height: 14px;
+    background: var(--ink); border-radius: 50%; transition: transform 0.15s;
+  }
+  .switch.on { background: var(--mint-soft); }
+  .switch.on::after { transform: translateX(18px); }
+
+  .clear-filters {
+    margin-top: 16px; padding: 9px; width: 100%; text-align: center;
+    background: var(--coral-soft); border: 2px solid var(--ink); border-radius: 999px;
+    font-size: 13px; font-weight: 700; cursor: pointer; box-shadow: 2px 2px 0 var(--ink);
+  }
+
+  /* ---- Map container ---- */
+  .map-container { position: relative; }
+  #map { width: 100%; height: 100%; background: var(--parchment); }
+
+  .legend {
+    position: absolute; left: 18px; bottom: 18px; z-index: 500;
+    background: #fff; border: 2px solid var(--ink); border-radius: var(--r);
+    padding: 12px 14px; box-shadow: var(--shadow-hard);
+    font-size: 12px; max-width: 220px;
+  }
+  .legend h5 {
+    font-family: "Fraunces", serif; font-size: 13px; font-weight: 800;
+    margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  .legend-row { display: flex; align-items: center; gap: 8px; padding: 2px 0; }
+  .legend-dot {
+    width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--ink);
+    box-shadow: 1px 1px 0 var(--ink); flex-shrink: 0;
+  }
+
+  .map-fab {
+    position: absolute; right: 18px; bottom: 18px; z-index: 500;
+    width: 46px; height: 46px; border-radius: 50%; background: #fff;
+    border: 2px solid var(--ink); box-shadow: var(--shadow-hard);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 18px;
+  }
+  .map-fab:hover { background: var(--butter-soft); }
+  .map-fab.second { bottom: 74px; }
+
+  /* ---- Custom Leaflet pins (DivIcon) ---- */
+  .yk-pin { background: transparent !important; border: none !important; }
+  .yk-pin-inner {
+    width: 40px; height: 40px; background: var(--peach-soft);
+    border: 2px solid var(--ink); border-radius: 50%;
+    box-shadow: 2px 2px 0 var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; position: relative;
+    transition: transform 0.15s;
+  }
+  .yk-pin-inner:hover { transform: scale(1.15); z-index: 10; }
+  .yk-pin-inner::after {
+    content: ""; position: absolute; left: 50%; bottom: -5px;
+    transform: translateX(-50%) rotate(45deg);
+    width: 10px; height: 10px; background: var(--peach-soft);
+    border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink);
+  }
+  .yk-pin.cat-museum .yk-pin-inner, .yk-pin.cat-museum .yk-pin-inner::after { background: var(--lavender-soft); }
+  .yk-pin.cat-park .yk-pin-inner, .yk-pin.cat-park .yk-pin-inner::after { background: var(--mint-soft); }
+  .yk-pin.cat-theme .yk-pin-inner, .yk-pin.cat-theme .yk-pin-inner::after { background: var(--coral-soft); }
+  .yk-pin.cat-water .yk-pin-inner, .yk-pin.cat-water .yk-pin-inner::after { background: var(--sky-soft); }
+  .yk-pin.cat-class .yk-pin-inner, .yk-pin.cat-class .yk-pin-inner::after { background: var(--butter-soft); }
+  .yk-pin.cat-mall .yk-pin-inner, .yk-pin.cat-mall .yk-pin-inner::after { background: var(--pink-soft); }
+  .yk-pin.cat-library .yk-pin-inner, .yk-pin.cat-library .yk-pin-inner::after { background: var(--teal-soft); }
+  .yk-pin.cat-cultural .yk-pin-inner, .yk-pin.cat-cultural .yk-pin-inner::after { background: var(--lavender-soft); }
+
+  .yk-pin.featured .yk-pin-inner { background: var(--butter); }
+  .yk-pin.featured .yk-pin-inner::after { background: var(--butter); }
+  .yk-pin.featured .yk-pin-inner::before {
+    content: "★"; position: absolute; top: -10px; right: -8px;
+    background: var(--maroon); color: #fff; width: 18px; height: 18px;
+    border-radius: 50%; border: 2px solid var(--ink); font-size: 10px;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* Cluster override to match */
+  .marker-cluster {
+    background-clip: padding-box; border-radius: 50%;
+    border: 2px solid var(--ink); box-shadow: 2px 2px 0 var(--ink);
+    background-color: rgba(244, 185, 66, 0.85);
+  }
+  .marker-cluster div {
+    background-color: var(--butter);
+    font-family: "Fraunces", serif; font-weight: 800; color: var(--ink);
+    border: none; margin: 4px;
+  }
+  .marker-cluster-small { background-color: rgba(244, 185, 66, 0.7); }
+  .marker-cluster-medium { background-color: rgba(255, 138, 101, 0.7); }
+  .marker-cluster-large { background-color: rgba(255, 107, 157, 0.7); }
+
+  /* Popup */
+  .leaflet-popup-content-wrapper {
+    border-radius: var(--r) !important; border: 2px solid var(--ink);
+    box-shadow: var(--shadow-hard-lg); padding: 0;
+    background: #fff;
+  }
+  .leaflet-popup-content { margin: 0 !important; width: 260px !important; }
+  .leaflet-popup-tip { border: 2px solid var(--ink); }
+  .yk-popup { padding: 0; font-family: "Inter", sans-serif; }
+  .yk-popup .cover {
+    height: 110px; border-radius: var(--r) var(--r) 0 0;
+    border-bottom: 2px solid var(--ink);
+    display: flex; align-items: flex-end; padding: 10px;
+    position: relative;
+  }
+  .yk-popup .cover .em {
+    font-size: 42px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25));
+  }
+  .yk-popup .body { padding: 14px 16px 16px; }
+  .yk-popup h4 {
+    font-family: "Fraunces", serif; font-size: 18px;
+    color: var(--ink); margin-bottom: 4px;
+  }
+  .yk-popup .cat {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--maroon); font-weight: 800; margin-bottom: 6px;
+  }
+  .yk-popup .meta {
+    font-size: 13px; color: var(--ink-soft); margin-bottom: 10px; line-height: 1.5;
+  }
+  .yk-popup .pills {
+    display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px;
+  }
+  .yk-popup .pi {
+    padding: 3px 8px; font-size: 11px; font-weight: 700; border-radius: 99px;
+    background: var(--butter-soft); border: 1.5px solid var(--ink);
+  }
+  .yk-popup .pi.free { background: var(--mint-soft); }
+  .yk-popup .cta {
+    display: block; text-align: center; padding: 8px 12px;
+    background: var(--maroon); color: #fff; border: 2px solid var(--ink);
+    border-radius: 999px; font-size: 13px; font-weight: 700; text-decoration: none;
+    box-shadow: 2px 2px 0 var(--ink);
+  }
+  .yk-popup .cta:hover { background: var(--maroon-dark); }
+
+  /* ---- Mobile ---- */
+  @media (max-width: 860px) {
+    .map-shell { grid-template-columns: 1fr; }
+    .filter-rail {
+      position: fixed; top: 0; left: 0; z-index: 1000;
+      width: 82vw; max-width: 340px; height: 100vh;
+      transform: translateX(-100%); transition: transform 0.25s;
+      border-right: 2px solid var(--ink); box-shadow: 6px 0 0 rgba(42,24,16,0.2);
+    }
+    .filter-rail.show { transform: translateX(0); }
+    .mobile-filter-btn {
+      display: inline-flex; padding: 8px 14px; border: 2px solid var(--ink);
+      background: var(--butter); border-radius: 999px; font-weight: 700;
+      font-size: 13px; cursor: pointer; gap: 6px; box-shadow: 2px 2px 0 var(--ink);
+    }
+    .view-toggle a span:not(.em) { display: none; }
+    .legend { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="nav-wrap container">
+    <a href="yalla-kids-home-wireframe.html" class="logo">
+      <span class="en-only inline">Yalla Kids</span>
+      <span class="ar-only inline">يلا كيدز</span>
+    </a>
+    <nav class="nav-links">
+      <a href="yalla-kids-classes-directory.html"><span class="en-only inline">Classes</span><span class="ar-only inline">الصفوف</span></a>
+      <a href="yalla-kids-places-directory.html" class="active"><span class="en-only inline">Places to go</span><span class="ar-only inline">أماكن للزيارة</span></a>
+      <a href="yalla-kids-camps.html"><span class="en-only inline">Camps</span><span class="ar-only inline">المعسكرات</span></a>
+      <a href="yalla-kids-guides-hub.html"><span class="en-only inline">Guides</span><span class="ar-only inline">الأدلة</span></a>
+      <a href="yalla-kids-for-providers.html"><span class="en-only inline">For providers</span><span class="ar-only inline">للموفرين</span></a>    </nav>
+    <div class="nav-actions">
+      <button class="lang-toggle" onclick="toggleLang()">
+        <span class="en-only inline">العربية</span>
+        <span class="ar-only inline">English</span>
+      </button>
+      <a href="yalla-kids-login.html" class="btn btn-ghost"><span class="en-only inline">Log in</span><span class="ar-only inline">تسجيل الدخول</span></a>
+      <a href="yalla-kids-signup.html" class="btn btn-primary"><span class="en-only inline">Sign up</span><span class="ar-only inline">إنشاء حساب</span></a>
+    </div>
+  </div>
+</header>
+
+<!-- Toolbar -->
+<div class="map-toolbar">
+  <div class="search-box">
+    <span class="ico">🔍</span>
+    <input id="searchInput" type="text" placeholder="Search places, neighborhoods, or what's nearby…" data-en-placeholder="Search places, neighborhoods, or what's nearby…" data-ar-placeholder="ابحث عن الأماكن أو الأحياء أو الأقرب…">
+  </div>
+  <button class="mobile-filter-btn" onclick="document.querySelector('.filter-rail').classList.toggle('show')">🎛 Filters</button>
+  <div class="view-toggle">
+    <a href="yalla-kids-places-directory.html"><span class="em">🔲</span><span> Grid</span></a>
+    <a href="#" class="active"><span class="em">🗺</span><span> Map</span></a>
+  </div>
+  <div style="flex:1"></div>
+  <div class="count-pill">📍 <b id="countN">25</b> places on map</div>
+  <select class="sort-sel">
+    <option>Sort: Most relevant</option>
+    <option>Rating (high to low)</option>
+    <option>Price (low to high)</option>
+    <option>Newly opened</option>
+    <option>Nearest to me</option>
+  </select>
+</div>
+
+<!-- Shell -->
+<div class="map-shell">
+
+  <!-- Filter rail -->
+  <aside class="filter-rail">
+
+    <h4>Category</h4>
+    <div class="chip-group" id="catChips">
+      <button class="f-chip cat-play on" data-f="cat" data-v="play">🎨 Play zones</button>
+      <button class="f-chip cat-museum on" data-f="cat" data-v="museum">🏛 Museums</button>
+      <button class="f-chip cat-park on" data-f="cat" data-v="park">🌳 Parks</button>
+      <button class="f-chip cat-theme on" data-f="cat" data-v="theme">🎢 Theme parks</button>
+      <button class="f-chip cat-water on" data-f="cat" data-v="water">🌊 Water</button>
+      <button class="f-chip cat-class on" data-f="cat" data-v="class">🎨 Classes</button>
+      <button class="f-chip cat-mall on" data-f="cat" data-v="mall">🛍 Malls</button>
+      <button class="f-chip cat-library on" data-f="cat" data-v="library">📚 Library</button>
+      <button class="f-chip cat-cultural on" data-f="cat" data-v="cultural">🎭 Cultural</button>
+    </div>
+
+    <h4>Age group</h4>
+    <div class="chip-group">
+      <button class="f-chip" data-f="age" data-v="0-3">0–3</button>
+      <button class="f-chip" data-f="age" data-v="4-7">4–7</button>
+      <button class="f-chip" data-f="age" data-v="8-12">8–12</button>
+      <button class="f-chip" data-f="age" data-v="13+">13+</button>
+    </div>
+
+    <h4>Price</h4>
+    <div class="chip-group">
+      <button class="f-chip" data-f="price" data-v="free">Free</button>
+      <button class="f-chip" data-f="price" data-v="low">QAR 1–50</button>
+      <button class="f-chip" data-f="price" data-v="mid">QAR 51–150</button>
+      <button class="f-chip" data-f="price" data-v="high">QAR 150+</button>
+    </div>
+
+    <h4>Neighborhood</h4>
+    <div class="chip-group">
+      <button class="f-chip" data-f="area" data-v="West Bay">West Bay</button>
+      <button class="f-chip" data-f="area" data-v="The Pearl">The Pearl</button>
+      <button class="f-chip" data-f="area" data-v="Katara">Katara</button>
+      <button class="f-chip" data-f="area" data-v="Lusail">Lusail</button>
+      <button class="f-chip" data-f="area" data-v="Aspire">Aspire</button>
+      <button class="f-chip" data-f="area" data-v="Msheireb">Msheireb</button>
+      <button class="f-chip" data-f="area" data-v="Festival City">Festival City</button>
+      <button class="f-chip" data-f="area" data-v="Education City">Education City</button>
+    </div>
+
+    <h4>Must have</h4>
+    <div class="switch-row"><span>Air-conditioned</span><div class="switch" data-t="ac"></div></div>
+    <div class="switch-row"><span>Stroller-friendly</span><div class="switch" data-t="stroller"></div></div>
+    <div class="switch-row"><span>Prayer room nearby</span><div class="switch" data-t="prayer"></div></div>
+    <div class="switch-row"><span>Halal food on site</span><div class="switch" data-t="halal"></div></div>
+    <div class="switch-row"><span>Open now</span><div class="switch" data-t="open"></div></div>
+    <div class="switch-row"><span>Verified only ✓</span><div class="switch" data-t="verified"></div></div>
+
+    <button class="clear-filters" onclick="clearAll()">Clear all filters</button>
+
+    <div style="margin-top:24px;padding:14px;background:var(--butter-soft);border:2px solid var(--ink);border-radius:var(--r);font-size:12.5px;line-height:1.5;">
+      <strong>Tip:</strong> Zoom in on a cluster to break it into individual pins. Click any pin for price, hours, and details.
+    </div>
+  </aside>
+
+  <!-- Map -->
+  <div class="map-container">
+    <div id="map"></div>
+
+    <div class="legend">
+      <h5>Pin colors</h5>
+      <div class="legend-row"><div class="legend-dot" style="background:var(--peach-soft);"></div>Play zones</div>
+      <div class="legend-row"><div class="legend-dot" style="background:var(--lavender-soft);"></div>Museums &amp; culture</div>
+      <div class="legend-row"><div class="legend-dot" style="background:var(--mint-soft);"></div>Parks</div>
+      <div class="legend-row"><div class="legend-dot" style="background:var(--coral-soft);"></div>Theme parks</div>
+      <div class="legend-row"><div class="legend-dot" style="background:var(--sky-soft);"></div>Water</div>
+      <div class="legend-row"><div class="legend-dot" style="background:var(--butter-soft);"></div>Classes</div>
+      <div class="legend-row"><div class="legend-dot" style="background:var(--butter);position:relative;">★</div>Featured / editor pick</div>
+    </div>
+
+    <div class="map-fab second" title="Zoom to Doha" data-en-title="Zoom to Doha" data-ar-title="تكبير على الدوحة" onclick="map.flyTo([25.305, 51.49], 11)">🏠</div>
+    <div class="map-fab" title="Find me" data-en-title="Find me" data-ar-title="حدّد موقعي" onclick="locateMe()">📍</div>
+  </div>
+</div>
+
+<script src="yalla-kids-data.js"></script>
+<script>
+  function toggleLang() { const h = document.documentElement; if (h.dir === 'rtl') { h.dir='ltr'; h.lang='en'; } else { h.dir='rtl'; h.lang='ar'; } }
+
+  /* ---- PLACES DATA (live, sourced from yalla-kids-data.js) ---- */
+  // Map of normalized area name → approximate coords. Markers cluster around the
+  // area centroid with a small jitter so multiple venues in the same area don't
+  // stack exactly on top of each other.
+  const AREA_COORDS = {
+    'Katara': [25.3601, 51.5224],
+    'Al Rayyan': [25.2906, 51.4197],
+    'Doha Festival City': [25.3478, 51.4803],
+    'Msheireb': [25.2887, 51.5276],
+    'Lusail': [25.4037, 51.5029],
+    'Aspire Zone': [25.2608, 51.4425],
+    'City Center': [25.3214, 51.5301],
+    'Mirqab': [25.2811, 51.5188],
+    'Abu Hamour': [25.2389, 51.4664],
+    'Tawar': [25.3553, 51.4839],
+    'West Bay': [25.3245, 51.5290],
+    'Education City': [25.3232, 51.4344],
+    'Museum Park': [25.2866, 51.5428],
+    'Corniche': [25.2900, 51.5353],
+    'Al Shahaniya': [25.3855, 51.1842],
+    'Umm Salal': [25.4170, 51.4040],
+    'Al Khor': [25.6820, 51.4916],
+    'Abu Nakhla': [25.1728, 51.4003],
+    'Madinat Khalifa North': [25.3344, 51.4889],
+    'Al Maamoura': [25.2492, 51.5220],
+    'Al Wakrah': [25.1715, 51.5982],
+    'Al Sadd': [25.2772, 51.5039],
+    'Al Gharrafa': [25.3415, 51.4445],
+    'Al Duhail': [25.3625, 51.4847],
+    'Al Waab': [25.2503, 51.4581],
+    'Bu Hamour': [25.2389, 51.4664],
+    'Al Asmakh': [25.2882, 51.5316],
+    'The Pearl': [25.3697, 51.5495],
+    'Old Doha Port': [25.2950, 51.5470],
+    'Online/Multi': [25.3050, 51.5050],
+    'Multi': [25.3050, 51.5050],
+    'Qatar University': [25.3786, 51.4906]
+  };
+  // Cat → emoji + colour family used by makeIcon/coverBgForCat
+  const CAT_FOR = {
+    'play-museum': 'museum', 'museum': 'museum',
+    'play-centre': 'play', 'role-play': 'play', 'indoor-park': 'play',
+    'theme-park': 'theme', 'trampoline': 'theme',
+    'park': 'park', 'zoo': 'park',
+    'waterpark': 'water',
+    'library': 'library'
+  };
+  const EMOJI_FOR = {
+    'play-museum': '🏛', 'play-centre': '🛝', 'theme-park': '🎢',
+    'trampoline': '🤸', 'indoor-park': '🛝', 'role-play': '👷',
+    'library': '📚', 'museum': '🏺', 'park': '🌳',
+    'zoo': '🦒', 'waterpark': '💦'
+  };
+  function jitter (idx) {
+    var ang = (idx * 137.5) * Math.PI / 180; // golden-angle scatter
+    var r = 0.005 * (1 + (idx % 4) * 0.2);
+    return [Math.cos(ang) * r, Math.sin(ang) * r];
+  }
+  // Build the places list from YALLA_DATA. Falls back to Doha centre if the area
+  // isn't in AREA_COORDS yet.
+  const D = window.YALLA_DATA;
+  const places = [];
+  if (D) {
+    var seenByArea = {};
+    D.places.forEach(function (p) {
+      var base = AREA_COORDS[p.area] || [25.305, 51.49];
+      var n = (seenByArea[p.area] || 0);
+      seenByArea[p.area] = n + 1;
+      var j = jitter(n);
+      var cat = CAT_FOR[p.category] || 'play';
+      places.push({
+        id: p.slug,
+        name: p.name_en,
+        cat: cat,
+        emoji: EMOJI_FOR[p.category] || '✨',
+        area: p.area,
+        coords: [base[0] + j[0], base[1] + j[1]],
+        price: p.price_label,
+        priceTier: p.is_free ? 'free' : (p.price_min == null ? 'mid' : (p.price_min < 60 ? 'low' : (p.price_min < 150 ? 'mid' : 'high'))),
+        age: p.age_label,
+        ac: p.indoor_outdoor && p.indoor_outdoor.indexOf('Indoor') >= 0,
+        stroller: true,
+        prayer: true,
+        halal: true,
+        verified: true,
+        blurb: p.highlights,
+        href: 'yalla-kids-place-detail.html?slug=' + encodeURIComponent(p.slug)
+      });
+    });
+  }
+
+  document.getElementById('countN').textContent = places.length;
+
+  /* ---- Map init ---- */
+  const map = L.map('map', { zoomControl: true, scrollWheelZoom: true })
+    .setView([25.305, 51.49], 11);
+  L.control.zoom({ position: 'topright' }).addTo(map);
+
+  // OpenStreetMap tiles — free, no API key, muted for Yalla Kids aesthetic via saturation filter via CSS
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© OpenStreetMap contributors',
+  }).addTo(map);
+
+  /* ---- Build pins ---- */
+  const clusterGroup = L.markerClusterGroup({
+    showCoverageOnHover: false, maxClusterRadius: 50,
+    spiderfyOnMaxZoom: true,
+  });
+
+  const allMarkers = [];
+
+  function makeIcon(place) {
+    let classes = 'yk-pin cat-' + place.cat;
+    if (place.featured) classes += ' featured';
+    return L.divIcon({
+      className: classes,
+      html: `<div class="yk-pin-inner"><span>${place.emoji}</span></div>`,
+      iconSize: [40, 46], iconAnchor: [20, 46], popupAnchor: [0, -40],
+    });
+  }
+
+  function coverBgForCat(cat) {
+    const map = {
+      play: 'linear-gradient(135deg, #FFB582, #FFDCC9)',
+      museum: 'linear-gradient(135deg, #B388FF, #E8DCFF)',
+      park: 'linear-gradient(135deg, #5EE2A6, #C7F0DC)',
+      theme: 'linear-gradient(135deg, #FF8A65, #FFDCC9)',
+      water: 'linear-gradient(135deg, #59C3F2, #CDE8F7)',
+      class: 'linear-gradient(135deg, #FFD66B, #FFF1C2)',
+      mall: 'linear-gradient(135deg, #FF6B9D, #FFD1E0)',
+      library: 'linear-gradient(135deg, #4ECDC4, #CEEDEB)',
+      cultural: 'linear-gradient(135deg, #F4B942, #FFD66B)',
+    };
+    return map[cat] || 'linear-gradient(135deg, #eee, #fff)';
+  }
+
+  function popupHtml(p) {
+    const priceBadge = p.priceTier === 'free' ? '<span class="pi free">Free</span>' : `<span class="pi">${p.price}</span>`;
+    const ageBadge = `<span class="pi">Ages ${p.age}</span>`;
+    const acBadge = p.ac ? '<span class="pi">❄️ AC</span>' : '';
+    const strBadge = p.stroller ? '<span class="pi">🚼 Stroller</span>' : '';
+    const featBadge = p.featured ? '<span class="pi" style="background:#FFD66B;">★ Editor pick</span>' : '';
+    const verifiedBadge = p.verified ? '' : '<span class="pi" style="background:var(--coral-soft);">Verifying</span>';
+    // Fall back to a real detail page so every pin is clickable. Category-aware pick.
+    const fallbackHref = 'yalla-kids-places-directory.html';
+    const linkHref = p.href || fallbackHref;
+    const linkLabel = 'View details →';
+    const note = p.note ? `<div style="font-size:11.5px;color:var(--ink-mute);margin-top:-6px;margin-bottom:8px;font-style:italic;">${p.note}</div>` : '';
+    return `
+      <div class="yk-popup">
+        <div class="cover" style="background: ${coverBgForCat(p.cat)};">
+          <div class="em">${p.emoji}</div>
+        </div>
+        <div class="body">
+          <div class="cat">${catLabel(p.cat)} · ${p.area}</div>
+          <h4>${p.name}</h4>
+          <div class="meta">${p.blurb}</div>
+          ${note}
+          <div class="pills">${priceBadge}${ageBadge}${acBadge}${strBadge}${featBadge}${verifiedBadge}</div>
+          <a class="cta" href="${linkHref}">${linkLabel}</a>
+        </div>
+      </div>
+    `;
+  }
+
+  function catLabel(c) {
+    return ({
+      play: 'Play centre', museum: 'Museum', park: 'Park', theme: 'Theme park',
+      water: 'Waterpark', class: 'Class', mall: 'Mall', library: 'Library', cultural: 'Cultural'
+    })[c] || c;
+  }
+
+  places.forEach(p => {
+    const marker = L.marker(p.coords, { icon: makeIcon(p), place: p });
+    marker.bindPopup(popupHtml(p), { closeButton: true });
+    allMarkers.push(marker);
+    clusterGroup.addLayer(marker);
+  });
+
+  map.addLayer(clusterGroup);
+
+  /* ---- Filter state ---- */
+  const activeFilters = {
+    cat: new Set(['play','museum','park','theme','water','class','mall','library','cultural']),
+    age: new Set(),
+    price: new Set(),
+    area: new Set(),
+    toggles: new Set(),
+    search: '',
+  };
+
+  function applyFilters() {
+    const visible = places.filter(p => {
+      if (!activeFilters.cat.has(p.cat)) return false;
+      if (activeFilters.area.size && !activeFilters.area.has(p.area)) return false;
+      if (activeFilters.price.size && !activeFilters.price.has(p.priceTier)) return false;
+      if (activeFilters.age.size) {
+        const ok = [...activeFilters.age].some(r => ageMatch(p.age, r));
+        if (!ok) return false;
+      }
+      if (activeFilters.toggles.has('ac') && !p.ac) return false;
+      if (activeFilters.toggles.has('stroller') && !p.stroller) return false;
+      if (activeFilters.toggles.has('prayer') && !p.prayer) return false;
+      if (activeFilters.toggles.has('halal') && !p.halal) return false;
+      if (activeFilters.toggles.has('verified') && !p.verified) return false;
+      if (activeFilters.search) {
+        const q = activeFilters.search.toLowerCase();
+        if (!p.name.toLowerCase().includes(q) && !p.area.toLowerCase().includes(q) && !p.blurb.toLowerCase().includes(q)) return false;
+      }
+      return true;
+    });
+    clusterGroup.clearLayers();
+    visible.forEach(p => {
+      const m = allMarkers.find(x => x.options.place.id === p.id);
+      if (m) clusterGroup.addLayer(m);
+    });
+    document.getElementById('countN').textContent = visible.length;
+  }
+
+  function ageMatch(placeAge, range) {
+    if (placeAge === 'All') return true;
+    const placeNums = (placeAge.match(/\d+/g) || []).map(Number);
+    const low = placeNums[0] || 0;
+    const high = placeNums[1] || 18;
+    if (range === '0-3') return low <= 3;
+    if (range === '4-7') return low <= 7 && high >= 4;
+    if (range === '8-12') return low <= 12 && high >= 8;
+    if (range === '13+') return high >= 13;
+    return true;
+  }
+
+  // Category & other chips
+  document.querySelectorAll('.f-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const f = chip.dataset.f, v = chip.dataset.v;
+      chip.classList.toggle('on');
+      const set = activeFilters[f];
+      if (chip.classList.contains('on')) set.add(v); else set.delete(v);
+      applyFilters();
+    });
+  });
+
+  // Toggles
+  document.querySelectorAll('.switch').forEach(sw => {
+    sw.addEventListener('click', () => {
+      sw.classList.toggle('on');
+      const t = sw.dataset.t;
+      if (sw.classList.contains('on')) activeFilters.toggles.add(t); else activeFilters.toggles.delete(t);
+      applyFilters();
+    });
+  });
+
+  // Search
+  document.getElementById('searchInput').addEventListener('input', (e) => {
+    activeFilters.search = e.target.value;
+    applyFilters();
+  });
+
+  function clearAll() {
+    document.querySelectorAll('.f-chip').forEach(c => {
+      if (c.dataset.f === 'cat') c.classList.add('on'); else c.classList.remove('on');
+    });
+    document.querySelectorAll('.switch').forEach(s => s.classList.remove('on'));
+    activeFilters.cat = new Set(['play','museum','park','theme','water','class','mall','library','cultural']);
+    activeFilters.age.clear(); activeFilters.price.clear(); activeFilters.area.clear();
+    activeFilters.toggles.clear();
+    activeFilters.search = ''; document.getElementById('searchInput').value = '';
+    applyFilters();
+  }
+
+  function locateMe() {
+    if (!navigator.geolocation) { alert('Geolocation not available'); return; }
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const { latitude, longitude } = pos.coords;
+        map.flyTo([latitude, longitude], 13);
+        L.circleMarker([latitude, longitude], {
+          radius: 10, color: '#8A1538', weight: 3, fillColor: '#FF6B9D', fillOpacity: 0.8,
+        }).addTo(map).bindPopup('You are here').openPopup();
+      },
+      () => alert('Could not access your location. Try enabling location permissions in your browser.')
+    );
+  }
+
+  // Initial filter apply
+  applyFilters();
+</script>
+<footer class="site">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="logo">
+          <span class="en-only inline">Yalla Kids</span>
+          <span class="ar-only inline">يلا كيدز</span>
+        </div>
+        <p class="foot-about">
+          <span class="en-only inline">Qatar's kids' classes and places, one place to book. Bilingual, built in Doha.</span>
+          <span class="ar-only inline">صفوف وأماكن للأطفال في قطر في مكان واحد. بلغتين، صُنعت في الدوحة.</span>
+        </p>
+        <div class="foot-social">
+          <a href="#" aria-label="Instagram">📷</a>
+          <a href="#" aria-label="WhatsApp">💬</a>
+          <a href="#" aria-label="TikTok">🎵</a>
+          <a href="#" aria-label="Email">✉</a>
+        </div>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Classes</span><span class="ar-only inline">الصفوف</span></h5>
+        <a href="yalla-kids-classes-directory.html"><span class="en-only inline">All classes</span><span class="ar-only inline">كل الصفوف</span></a>
+        <a href="yalla-kids-classes-directory.html?cat=art"><span class="en-only inline">Art &amp; crafts</span><span class="ar-only inline">فن وحرف</span></a>
+        <a href="yalla-kids-classes-directory.html?cat=swimming"><span class="en-only inline">Swimming</span><span class="ar-only inline">سباحة</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Places</span><span class="ar-only inline">الأماكن</span></h5>
+        <a href="yalla-kids-places-directory.html"><span class="en-only inline">All places</span><span class="ar-only inline">كل الأماكن</span></a>
+        <a href="yalla-kids-places-directory.html#softplay"><span class="en-only inline">Soft plays</span><span class="ar-only inline">صالات اللعب</span></a>
+        <a href="yalla-kids-map.html"><span class="en-only inline">Map</span><span class="ar-only inline">خريطة</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">For providers</span><span class="ar-only inline">للموفرين</span></h5>
+        <a href="yalla-kids-for-providers.html"><span class="en-only inline">List a class</span><span class="ar-only inline">أدرج صفاً</span></a>
+        <a href="yalla-kids-how-it-works.html"><span class="en-only inline">How it works</span><span class="ar-only inline">كيف نعمل</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Company</span><span class="ar-only inline">الشركة</span></h5>
+        <a href="yalla-kids-about.html"><span class="en-only inline">About</span><span class="ar-only inline">من نحن</span></a>
+        <a href="yalla-kids-contact.html"><span class="en-only inline">Contact</span><span class="ar-only inline">تواصل</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Legal</span><span class="ar-only inline">قانوني</span></h5>
+        <a href="yalla-kids-terms.html"><span class="en-only inline">Terms</span><span class="ar-only inline">الشروط</span></a>
+        <a href="yalla-kids-privacy.html"><span class="en-only inline">Privacy</span><span class="ar-only inline">الخصوصية</span></a>
+        <a href="yalla-kids-faq.html"><span class="en-only inline">FAQ</span><span class="ar-only inline">الأسئلة الشائعة</span></a>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>© 2026 Yalla Kids WLL · Doha, Qatar · CR #XXXXXX 🇶🇦</span>
+      <span><span class="en-only inline">Made with 💛 for Doha families</span><span class="ar-only inline">صُنعت بـ 💛 لعائلات الدوحة</span></span>
+    </div>
+  </div>
+</footer>
+<script src="yalla-kids-shared.js"></script>
+</body>
+</html>

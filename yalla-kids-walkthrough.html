@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Yalla Kids — 60-second tour</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400..900;1,400..900&family=Inter:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #2A1810;
+      --ink-soft: #5C4A3F;
+      --ink-mute: #8A7366;
+      --maroon: #8A1538;
+      --maroon-soft: #B54A6C;
+      --gold: #F4C55B;
+      --cream: #FFF6E8;
+      --warm-white: #FAF3E5;
+      --mint-soft: #D8EDE2;
+      --coral-soft: #FCD8CC;
+      --sky-soft: #D5E6F4;
+      --gold-soft: #FBE8C4;
+      --border: #E8D9BC;
+      --border-strong: #3D2B1F;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 28px 20px 40px;
+      overflow-x: hidden;
+    }
+
+    /* ---------------- Header ---------------- */
+    .wt-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 1080px;
+      margin-bottom: 18px;
+    }
+    .wt-logo {
+      font-family: "Fraunces", Georgia, serif;
+      font-weight: 800;
+      font-size: 24px;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+    .wt-logo .pop { color: var(--maroon); font-style: italic; }
+    .wt-head a.home {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink);
+      text-decoration: none;
+      border: 2px solid var(--ink);
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: #fff;
+      box-shadow: 2px 2px 0 var(--ink);
+      transition: transform .12s, box-shadow .12s;
+    }
+    .wt-head a.home:hover { transform: translate(-1px,-1px); box-shadow: 3px 3px 0 var(--ink); }
+
+    /* ---------------- Stage ---------------- */
+    .wt-stage {
+      position: relative;
+      width: 100%;
+      max-width: 1080px;
+      aspect-ratio: 16 / 9;
+      background: var(--warm-white);
+      border: 3px solid var(--ink);
+      border-radius: 26px;
+      box-shadow: 8px 8px 0 var(--ink);
+      overflow: hidden;
+    }
+
+    /* Progress bar */
+    .wt-progress {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 5px;
+      background: rgba(42,24,16,.08);
+      z-index: 30;
+    }
+    .wt-progress-fill {
+      height: 100%;
+      background: var(--maroon);
+      width: 0%;
+      transition: width 0.14s linear;
+    }
+
+    /* Scene wrapper */
+    .wt-scene {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .42s ease;
+    }
+    .wt-scene.active {
+      opacity: 1;
+      pointer-events: auto;
+      z-index: 2;
+    }
+
+    /* Caption */
+    .wt-caption {
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      bottom: 24px;
+      z-index: 5;
+      background: var(--cream);
+      border: 3px solid var(--ink);
+      border-radius: 18px;
+      box-shadow: 5px 5px 0 var(--ink);
+      padding: 18px 22px;
+      max-width: 640px;
+      display: none;
+    }
+    .wt-scene.active .wt-caption { display: block; animation: wt-slide 0.5s ease 0.1s both; }
+    @keyframes wt-slide {
+      from { transform: translateY(12px); opacity: 0; }
+      to   { transform: translateY(0);     opacity: 1; }
+    }
+    .wt-eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--maroon);
+      background: var(--gold-soft);
+      padding: 3px 10px;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      margin-bottom: 8px;
+    }
+    .wt-caption h2 {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 26px;
+      line-height: 1.1;
+      color: var(--ink);
+      margin: 0 0 4px;
+    }
+    .wt-caption h2 .pop { color: var(--maroon); font-style: italic; }
+    .wt-caption p {
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--ink-soft);
+      margin: 0;
+    }
+    .wt-caption-ar {
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 2px dashed var(--border);
+      font-family: "Tajawal", sans-serif;
+      font-size: 14.5px;
+      color: var(--ink-mute);
+      direction: rtl;
+      text-align: right;
+      line-height: 1.5;
+    }
+
+    /* ---------------- Scene visuals ---------------- */
+    .stage-art {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 36px 34px 180px;
+      gap: 18px;
+    }
+
+    /* Scene 1 — title card */
+    .scene1 .stage-art {
+      flex-direction: column;
+      justify-content: center;
+      padding: 36px 34px;
+      background: linear-gradient(135deg, var(--cream) 0%, var(--gold-soft) 60%, var(--coral-soft) 100%);
+    }
+    .scene1 .s1-eye {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--maroon);
+      margin-bottom: 14px;
+    }
+    .scene1 .s1-logo {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 78px;
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: -2px;
+      text-align: center;
+    }
+    .scene1 .s1-logo .pop { color: var(--maroon); font-style: italic; }
+    .scene1 .s1-sub {
+      margin-top: 14px;
+      font-size: 18px;
+      color: var(--ink-soft);
+      text-align: center;
+    }
+    .scene1 .s1-emoji {
+      font-size: 54px;
+      margin-bottom: 10px;
+      animation: s1-wiggle 2s ease-in-out infinite;
+    }
+    @keyframes s1-wiggle {
+      0%,100% { transform: rotate(-6deg); }
+      50%     { transform: rotate(6deg); }
+    }
+
+    /* Scene 2 — problem (whatsapp chaos) */
+    .scene2 .stage-art {
+      background: var(--warm-white);
+      flex-direction: column;
+      align-items: center;
+      padding-top: 48px;
+      padding-bottom: 170px;
+    }
+    .wa-group-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 180px);
+      grid-auto-rows: 70px;
+      gap: 10px;
+      position: relative;
+    }
+    .wa-bubble {
+      background: #fff;
+      border: 2px solid var(--ink);
+      border-radius: 14px;
+      padding: 8px 12px;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 3px 3px 0 var(--ink);
+      animation: wa-in 0.8s cubic-bezier(.2,.8,.2,1) both;
+    }
+    .wa-bubble.muted { opacity: 0.55; }
+    .wa-bubble .dot {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--gold-soft); display: inline-flex; align-items: center; justify-content: center; font-size: 12px;
+      flex-shrink: 0;
+    }
+    @keyframes wa-in {
+      from { opacity: 0; transform: translateY(10px) scale(.96); }
+      to   { opacity: 1; transform: translateY(0)  scale(1); }
+    }
+    .scene2.active .wa-bubble:nth-child(1) { animation-delay: .05s; }
+    .scene2.active .wa-bubble:nth-child(2) { animation-delay: .12s; }
+    .scene2.active .wa-bubble:nth-child(3) { animation-delay: .19s; }
+    .scene2.active .wa-bubble:nth-child(4) { animation-delay: .26s; }
+    .scene2.active .wa-bubble:nth-child(5) { animation-delay: .33s; }
+    .scene2.active .wa-bubble:nth-child(6) { animation-delay: .40s; }
+    .scene2.active .wa-bubble:nth-child(7) { animation-delay: .47s; }
+    .scene2.active .wa-bubble:nth-child(8) { animation-delay: .54s; }
+    .scene2.active .wa-bubble:nth-child(9) { animation-delay: .61s; }
+
+    /* Scene 3 — search */
+    .scene3 .stage-art {
+      background: var(--warm-white);
+      padding: 36px 34px 170px;
+      align-items: flex-start;
+      flex-direction: column;
+    }
+    .mini-nav {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 18px;
+      background: #fff;
+      border: 2px solid var(--ink);
+      border-radius: 16px;
+      box-shadow: 3px 3px 0 var(--ink);
+      margin-bottom: 24px;
+    }
+    .mini-nav .logo-s { font-family: "Fraunces", Georgia, serif; font-weight: 800; font-size: 20px; }
+    .mini-nav .logo-s .pop { color: var(--maroon); font-style: italic; }
+    .mini-nav .search-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 14px; border-radius: 999px;
+      background: var(--warm-white); border: 2px solid var(--ink);
+      font-size: 13px; font-weight: 600; color: var(--ink-mute);
+      box-shadow: 2px 2px 0 var(--ink);
+    }
+    .search-panel {
+      margin: 0 auto;
+      width: 560px;
+      max-width: 100%;
+      background: #fff;
+      border: 3px solid var(--ink);
+      border-radius: 22px;
+      box-shadow: 6px 6px 0 var(--ink);
+      overflow: hidden;
+      animation: s3-pop .4s cubic-bezier(.2,.8,.2,1);
+    }
+    @keyframes s3-pop { from { transform: translateY(8px) scale(.98); opacity: 0; } to { transform: translateY(0) scale(1); opacity: 1; } }
+    .search-input {
+      padding: 18px 22px;
+      font-size: 18px;
+      font-weight: 600;
+      border-bottom: 2px solid var(--ink);
+      background: var(--cream);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .search-input::after {
+      content: "";
+      display: inline-block; width: 2px; height: 20px;
+      background: var(--maroon);
+      animation: blink 0.8s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+    .search-results { padding: 8px 0; }
+    .search-section {
+      padding: 6px 22px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ink-mute);
+    }
+    .search-row {
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 22px;
+      font-size: 14px;
+      color: var(--ink);
+    }
+    .search-row .badge {
+      font-size: 10px; font-weight: 700;
+      padding: 3px 8px; border-radius: 999px;
+      border: 1.5px solid var(--ink);
+    }
+    .search-row .badge.place { background: var(--mint-soft); }
+    .search-row .badge.class { background: var(--sky-soft); }
+    .search-row.highlight { background: var(--gold-soft); border-left: 3px solid var(--maroon); }
+    .search-row .name { font-weight: 600; flex: 1; }
+
+    /* Scene 4 — filters / directory */
+    .scene4 .stage-art {
+      background: var(--warm-white);
+      padding: 26px;
+      align-items: stretch;
+      padding-bottom: 170px;
+    }
+    .dir-grid {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 18px;
+      width: 100%;
+    }
+    .dir-filters {
+      background: #fff;
+      border: 2px solid var(--ink);
+      border-radius: 18px;
+      padding: 14px;
+      box-shadow: 4px 4px 0 var(--ink);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .dir-filter-group h5 {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ink-mute);
+      margin-bottom: 6px;
+    }
+    .chip-row { display: flex; flex-wrap: wrap; gap: 5px; }
+    .chip {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border: 1.5px solid var(--ink);
+      border-radius: 999px;
+      background: #fff;
+    }
+    .chip .ct { color: var(--ink-mute); font-weight: 500; }
+    .chip.on { background: var(--maroon); color: #fff; border-color: var(--maroon); }
+    .chip.on .ct { color: rgba(255,255,255,.75); }
+    .dir-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .pcard {
+      background: #fff;
+      border: 2px solid var(--ink);
+      border-radius: 14px;
+      box-shadow: 3px 3px 0 var(--ink);
+      overflow: hidden;
+      animation: pcard-in 0.4s both;
+    }
+    @keyframes pcard-in { from { transform: translateY(6px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    .scene4.active .pcard:nth-child(1) { animation-delay: .1s; }
+    .scene4.active .pcard:nth-child(2) { animation-delay: .2s; }
+    .scene4.active .pcard:nth-child(3) { animation-delay: .3s; }
+    .scene4.active .pcard:nth-child(4) { animation-delay: .4s; }
+    .scene4.active .pcard:nth-child(5) { animation-delay: .5s; }
+    .scene4.active .pcard:nth-child(6) { animation-delay: .6s; }
+    .pcard .art {
+      height: 80px;
+      background: var(--gold-soft);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 38px;
+    }
+    .pcard:nth-child(2) .art { background: var(--mint-soft); }
+    .pcard:nth-child(3) .art { background: var(--sky-soft); }
+    .pcard:nth-child(4) .art { background: var(--coral-soft); }
+    .pcard:nth-child(5) .art { background: var(--gold-soft); }
+    .pcard:nth-child(6) .art { background: var(--mint-soft); }
+    .pcard .meta { padding: 8px 12px 10px; }
+    .pcard .n { font-size: 13px; font-weight: 700; line-height: 1.2; }
+    .pcard .m { font-size: 11px; color: var(--ink-mute); margin-top: 2px; }
+
+    /* Scene 5 — detail page */
+    .scene5 .stage-art {
+      background: var(--warm-white);
+      padding: 24px;
+      align-items: flex-start;
+      padding-bottom: 170px;
+    }
+    .detail-wrap {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 16px;
+      width: 100%;
+    }
+    .detail-main {
+      background: #fff;
+      border: 2px solid var(--ink);
+      border-radius: 18px;
+      box-shadow: 5px 5px 0 var(--ink);
+      overflow: hidden;
+    }
+    .detail-hero {
+      height: 140px;
+      background: linear-gradient(135deg, var(--coral-soft), var(--gold-soft));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 56px;
+      border-bottom: 2px solid var(--ink);
+      position: relative;
+    }
+    .save-fab {
+      position: absolute; top: 10px; right: 10px;
+      background: #fff; border: 2px solid var(--ink);
+      border-radius: 999px; padding: 4px 10px;
+      font-size: 13px; font-weight: 700;
+      box-shadow: 2px 2px 0 var(--ink);
+      animation: save-flash 1.4s ease infinite;
+    }
+    @keyframes save-flash {
+      0%,100% { transform: scale(1); }
+      50%     { transform: scale(1.06); }
+    }
+    .detail-body { padding: 14px 18px; }
+    .detail-body .h1 {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 22px;
+      font-weight: 800;
+    }
+    .detail-body .dek {
+      font-size: 12.5px;
+      color: var(--ink-mute);
+      margin-top: 2px;
+    }
+    .detail-body .chips {
+      display: flex; flex-wrap: wrap; gap: 5px;
+      margin: 10px 0 8px;
+    }
+    .detail-body .chips .chip { font-size: 10.5px; padding: 3px 8px; background: var(--warm-white); }
+    .detail-side {
+      background: #fff;
+      border: 2px solid var(--ink);
+      border-radius: 18px;
+      padding: 14px;
+      box-shadow: 4px 4px 0 var(--ink);
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .detail-side .price {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--maroon);
+      line-height: 1;
+    }
+    .detail-side .price span { font-size: 13px; color: var(--ink-mute); font-weight: 500; }
+    .book-btn {
+      background: var(--maroon);
+      color: #fff;
+      font-weight: 700;
+      padding: 11px;
+      border: 2px solid var(--ink);
+      border-radius: 12px;
+      font-size: 14px;
+      box-shadow: 3px 3px 0 var(--ink);
+      text-align: center;
+      animation: book-pulse 1.8s ease-in-out infinite;
+    }
+    @keyframes book-pulse {
+      0%,100% { transform: translate(0,0); box-shadow: 3px 3px 0 var(--ink); }
+      50%     { transform: translate(-1px,-1px); box-shadow: 4px 4px 0 var(--ink); }
+    }
+    .detail-side .slot {
+      background: var(--mint-soft);
+      border: 1.5px solid var(--ink);
+      border-radius: 10px;
+      padding: 8px 10px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    /* Scene 6 — checkout */
+    .scene6 .stage-art {
+      background: var(--warm-white);
+      padding: 28px;
+      padding-bottom: 170px;
+      flex-direction: column;
+      align-items: center;
+    }
+    .co-card {
+      background: #fff;
+      border: 2px solid var(--ink);
+      border-radius: 20px;
+      box-shadow: 5px 5px 0 var(--ink);
+      width: 540px;
+      max-width: 100%;
+      overflow: hidden;
+    }
+    .co-head {
+      padding: 14px 20px;
+      border-bottom: 2px solid var(--ink);
+      background: var(--cream);
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 20px;
+      font-weight: 800;
+    }
+    .co-body { padding: 18px 20px; display: flex; flex-direction: column; gap: 12px; }
+    .co-row {
+      display: flex; justify-content: space-between;
+      font-size: 13px;
+    }
+    .co-row .k { color: var(--ink-mute); }
+    .co-row .v { font-weight: 700; }
+    .co-input {
+      display: flex;
+      align-items: center;
+      padding: 10px 12px;
+      background: var(--warm-white);
+      border: 2px solid var(--ink);
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .co-input .card-emoji { margin-right: 8px; }
+    .co-input .cursor {
+      width: 1.5px; height: 16px;
+      background: var(--maroon);
+      margin-left: 4px;
+      animation: blink 0.8s step-end infinite;
+    }
+    .co-total {
+      display: flex; justify-content: space-between;
+      padding-top: 10px;
+      border-top: 2px dashed var(--border);
+      font-weight: 800;
+      font-size: 16px;
+    }
+    .co-total .total-num {
+      font-family: "Fraunces", serif;
+      color: var(--maroon);
+    }
+    .co-pay-btn {
+      background: var(--maroon); color: #fff;
+      padding: 12px;
+      border: 2px solid var(--ink);
+      border-radius: 12px;
+      font-weight: 700;
+      text-align: center;
+      font-size: 14px;
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+
+    /* Scene 7 — booking success */
+    .scene7 .stage-art {
+      background: linear-gradient(135deg, var(--mint-soft), var(--cream));
+      flex-direction: column;
+      justify-content: center;
+      padding: 36px 34px;
+    }
+    .succ-card {
+      background: #fff;
+      border: 3px solid var(--ink);
+      border-radius: 24px;
+      box-shadow: 7px 7px 0 var(--ink);
+      padding: 26px 30px;
+      max-width: 520px;
+      width: 100%;
+      text-align: center;
+    }
+    .succ-card .check {
+      font-size: 60px;
+      line-height: 1;
+      animation: succ-bounce 0.7s cubic-bezier(.3,1.4,.5,1);
+      margin-bottom: 10px;
+    }
+    @keyframes succ-bounce {
+      0%   { transform: scale(0.3);  }
+      60%  { transform: scale(1.12); }
+      100% { transform: scale(1);    }
+    }
+    .succ-card h3 {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 26px;
+      margin-bottom: 6px;
+    }
+    .succ-card p { color: var(--ink-mute); font-size: 13px; margin-bottom: 16px; }
+    .succ-actions {
+      display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+    }
+    .succ-actions .a {
+      padding: 8px 14px; font-size: 12px; font-weight: 700;
+      background: var(--warm-white); border: 2px solid var(--ink);
+      border-radius: 999px;
+      box-shadow: 2px 2px 0 var(--ink);
+    }
+
+    /* Scene 8 — bilingual */
+    .scene8 .stage-art {
+      background: var(--warm-white);
+      padding: 30px;
+      padding-bottom: 170px;
+      gap: 18px;
+      align-items: stretch;
+    }
+    .bilang-pane {
+      flex: 1;
+      background: #fff;
+      border: 2px solid var(--ink);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 4px 4px 0 var(--ink);
+      position: relative;
+    }
+    .bilang-pane .tag {
+      position: absolute; top: -12px; left: 16px;
+      background: var(--gold); border: 2px solid var(--ink);
+      padding: 3px 10px; font-size: 11px; font-weight: 800;
+      border-radius: 999px;
+      box-shadow: 2px 2px 0 var(--ink);
+    }
+    .bilang-pane h4 {
+      font-family: "Fraunces", serif;
+      font-size: 22px;
+      font-weight: 800;
+      line-height: 1.1;
+      margin: 8px 0 4px;
+    }
+    .bilang-pane h4 .pop { color: var(--maroon); font-style: italic; }
+    .bilang-pane p { font-size: 13px; color: var(--ink-soft); line-height: 1.5; }
+    .bilang-pane.ar { direction: rtl; text-align: right; font-family: "Tajawal", sans-serif; }
+    .bilang-pane.ar h4 { font-family: "Fraunces", serif; }
+    .bilang-pane .meta-chip {
+      display: inline-block; margin-top: 10px;
+      font-size: 11px; font-weight: 700;
+      padding: 4px 10px; background: var(--mint-soft);
+      border: 1.5px solid var(--ink); border-radius: 999px;
+    }
+
+    /* Scene 9 — map */
+    .scene9 .stage-art {
+      background: #E8EFD8;
+      padding: 0;
+      position: relative;
+    }
+    .scene9 .stage-art::before {
+      content: "";
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(circle at 30% 40%, rgba(80,130,220,.18) 0, transparent 50%),
+        radial-gradient(circle at 70% 60%, rgba(240,180,120,.22) 0, transparent 50%),
+        repeating-linear-gradient(45deg, rgba(42,24,16,.03) 0 2px, transparent 2px 14px);
+    }
+    .map-pin {
+      position: absolute;
+      width: 28px; height: 28px;
+      background: var(--maroon); color: #fff;
+      border: 2px solid var(--ink);
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 2px 2px 0 var(--ink);
+      animation: pin-drop 0.6s cubic-bezier(.3,1.4,.5,1) both;
+    }
+    .map-pin span { transform: rotate(45deg); font-size: 13px; }
+    @keyframes pin-drop {
+      from { transform: rotate(-45deg) translate(0, -40px); opacity: 0; }
+      to   { transform: rotate(-45deg) translate(0, 0); opacity: 1; }
+    }
+    .scene9.active .map-pin:nth-child(1) { animation-delay: .05s; }
+    .scene9.active .map-pin:nth-child(2) { animation-delay: .15s; }
+    .scene9.active .map-pin:nth-child(3) { animation-delay: .25s; }
+    .scene9.active .map-pin:nth-child(4) { animation-delay: .35s; }
+    .scene9.active .map-pin:nth-child(5) { animation-delay: .45s; }
+    .scene9.active .map-pin:nth-child(6) { animation-delay: .55s; }
+    .scene9.active .map-pin:nth-child(7) { animation-delay: .65s; }
+    .scene9.active .map-pin:nth-child(8) { animation-delay: .75s; }
+    .scene9.active .map-pin:nth-child(9) { animation-delay: .85s; }
+
+    /* Scene 10 — CTA */
+    .scene10 .stage-art {
+      background: linear-gradient(135deg, var(--coral-soft), var(--gold-soft), var(--mint-soft));
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 36px;
+    }
+    .cta-wrap { text-align: center; max-width: 620px; }
+    .cta-wrap .eye {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--maroon);
+      margin-bottom: 10px;
+    }
+    .cta-wrap h2 {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 44px;
+      line-height: 1;
+      letter-spacing: -1.5px;
+      margin-bottom: 10px;
+    }
+    .cta-wrap h2 .pop { color: var(--maroon); font-style: italic; }
+    .cta-wrap p { font-size: 16px; color: var(--ink-soft); margin-bottom: 22px; }
+    .cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .cta-row a {
+      padding: 12px 22px;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 14px;
+      text-decoration: none;
+      box-shadow: 3px 3px 0 var(--ink);
+      transition: transform .15s, box-shadow .15s;
+    }
+    .cta-row a.primary { background: var(--maroon); color: #fff; }
+    .cta-row a.outline { background: #fff; color: var(--ink); }
+    .cta-row a:hover { transform: translate(-1px,-1px); box-shadow: 4px 4px 0 var(--ink); }
+
+    /* ---------------- Controls ---------------- */
+    .wt-ctrls {
+      margin-top: 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
+      max-width: 1080px;
+      flex-wrap: wrap;
+    }
+    .wt-btn {
+      background: #fff;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      padding: 9px 18px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 2px 2px 0 var(--ink);
+      transition: transform .12s, box-shadow .12s;
+      font-family: "Inter", sans-serif;
+      color: var(--ink);
+    }
+    .wt-btn:hover { transform: translate(-1px,-1px); box-shadow: 3px 3px 0 var(--ink); }
+    .wt-btn.primary { background: var(--maroon); color: #fff; }
+    .wt-dots {
+      display: flex;
+      gap: 6px;
+      margin-left: auto;
+    }
+    .wt-dot {
+      width: 12px; height: 12px; border-radius: 50%;
+      background: #fff; border: 2px solid var(--ink);
+      cursor: pointer;
+      transition: background .15s;
+    }
+    .wt-dot.active { background: var(--maroon); transform: scale(1.18); }
+
+    .wt-scene-label {
+      font-size: 13px;
+      color: var(--ink-mute);
+      font-weight: 600;
+    }
+
+    /* Mobile */
+    @media (max-width: 760px) {
+      .wt-stage { border-radius: 18px; box-shadow: 5px 5px 0 var(--ink); border-width: 2px; }
+      .wt-caption { left: 12px; right: 12px; bottom: 12px; padding: 12px 14px; border-radius: 14px; }
+      .wt-caption h2 { font-size: 19px; }
+      .wt-caption p { font-size: 12.5px; }
+      .wt-caption-ar { font-size: 12.5px; }
+      .scene1 .s1-logo { font-size: 44px; }
+      .scene1 .s1-sub { font-size: 14px; }
+      .cta-wrap h2 { font-size: 28px; }
+      .cta-wrap p { font-size: 13.5px; }
+      .dir-grid { grid-template-columns: 1fr; }
+      .dir-filters { display: none; }
+      .dir-cards { grid-template-columns: repeat(2, 1fr); }
+      .detail-wrap { grid-template-columns: 1fr; }
+      .wa-group-grid { grid-template-columns: repeat(2, 140px); grid-auto-rows: 58px; }
+      .wa-bubble { font-size: 10.5px; padding: 6px 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wt-head">
+    <a href="yalla-kids-home-souq.html" class="wt-logo">Yalla <span class="pop">Kids</span></a>
+    <a href="yalla-kids-home-souq.html" class="home">← Back to the site</a>
+  </div>
+
+  <div class="wt-stage" id="stage">
+    <div class="wt-progress"><div class="wt-progress-fill" id="progFill"></div></div>
+
+    <!-- =========== SCENE 1 — title =========== -->
+    <div class="wt-scene scene1" data-scene="1">
+      <div class="stage-art">
+        <div class="s1-emoji">👋</div>
+        <div class="s1-eye">A 60-second tour</div>
+        <div class="s1-logo">Yalla <span class="pop">Kids</span></div>
+        <div class="s1-sub">Every kids' class, camp, and place to go — in Qatar.</div>
+      </div>
+      <div class="wt-caption">
+        <span class="wt-eyebrow">01 · Intro</span>
+        <h2>The one place for <span class="pop">Qatar families</span>.</h2>
+        <p>Yalla Kids is a bilingual marketplace for children's classes, camps, and family-friendly venues across Doha and beyond — built from the parent's perspective.</p>
+        <div class="wt-caption-ar">يلا كيدز — الوجهة الواحدة لكل نشاط وصف ومكان للأطفال في قطر. بالعربية والإنجليزية.</div>
+      </div>
+    </div>
+
+    <!-- =========== SCENE 2 — problem =========== -->
+    <div class="wt-scene scene2" data-scene="2">
+      <div class="stage-art">
+        <div class="wa-group-grid">
+          <div class="wa-bubble"><span class="dot">🏊</span>Swim Moms Al Sadd</div>
+          <div class="wa-bubble muted"><span class="dot">🎨</span>Art Aspire 4-6</div>
+          <div class="wa-bubble"><span class="dot">⚽</span>Football Dads</div>
+          <div class="wa-bubble muted"><span class="dot">🎹</span>Music Katara</div>
+          <div class="wa-bubble"><span class="dot">🩰</span>Ballet West Bay</div>
+          <div class="wa-bubble muted"><span class="dot">🏀</span>Sport Lusail</div>
+          <div class="wa-bubble"><span class="dot">📚</span>Qur'an Kids</div>
+          <div class="wa-bubble muted"><span class="dot">🧩</span>STEM Education City</div>
+          <div class="wa-bubble"><span class="dot">🎭</span>Drama Pearl</div>
+        </div>
+      </div>
+      <div class="wt-caption">
+        <span class="wt-eyebrow">02 · The problem</span>
+        <h2>17 WhatsApp groups. <span class="pop">No good answer.</span></h2>
+        <p>Parents rely on scattered WhatsApp groups and outdated Instagram posts to find what their kids can do. Providers have no reliable way to reach new families.</p>
+        <div class="wt-caption-ar">١٧ مجموعة واتساب، بدون إجابة واضحة. الأهل يبحثون في كل مكان، والمزوّدون لا يصلون للعائلات الجديدة.</div>
+      </div>
+    </div>
+
+    <!-- =========== SCENE 3 — search =========== -->
+    <div class="wt-scene scene3" data-scene="3">
+      <div class="stage-art">
+        <div class="mini-nav">
+          <div class="logo-s">Yalla <span class="pop">Kids</span></div>
+          <div class="search-btn">🔍 Search places &amp; classes</div>
+        </div>
+        <div class="search-panel">
+          <div class="search-input">🔍 pott</div>
+          <div class="search-results">
+            <div class="search-section">Classes</div>
+            <div class="search-row highlight">
+              <span class="badge class">Class</span>
+              <span class="name">Mini Picasso Pottery · Noura</span>
+              <span style="font-size:11px;color:var(--ink-mute)">West Bay · 4–6</span>
+            </div>
+            <div class="search-row">
+              <span class="badge class">Class</span>
+              <span class="name">Potter's Wheel for Kids · Clay Lab</span>
+              <span style="font-size:11px;color:var(--ink-mute)">Msheireb · 7+</span>
+            </div>
+            <div class="search-section">Places</div>
+            <div class="search-row">
+              <span class="badge place">Place</span>
+              <span class="name">The Pottery Studio Doha</span>
+              <span style="font-size:11px;color:var(--ink-mute)">Aspire</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="wt-caption">
+        <span class="wt-eyebrow">03 · Find it fast</span>
+        <h2>Universal search, <span class="pop">instant</span>.</h2>
+        <p>Hit "/" or tap the search icon anywhere on the site. Classes and places surface as you type — bilingual, keyboard-first, ranked by relevance.</p>
+        <div class="wt-caption-ar">البحث الفوري: صفوف وأماكن تظهر فور الكتابة، ثنائي اللغة وبلوحة المفاتيح.</div>
+      </div>
+    </div>
+
+    <!-- =========== SCENE 4 — directory / filters =========== -->
+    <div class="wt-scene scene4" data-scene="4">
+      <div class="stage-art">
+        <div class="dir-grid">
+          <div class="dir-filters">
+            <div class="dir-filter-group">
+              <h5>Age</h5>
+              <div class="chip-row">
+                <div class="chip">0–2 <span class="ct">12</span></div>
+                <div class="chip on">3–5 <span class="ct">38</span></div>
+                <div class="chip">6–8 <span class="ct">41</span></div>
+                <div class="chip">9+ <span class="ct">22</span></div>
+              </div>
+            </div>
+            <div class="dir-filter-group">
+              <h5>Area</h5>
+              <div class="chip-row">
+                <div class="chip on">West Bay <span class="ct">9</span></div>
+                <div class="chip">Pearl <span class="ct">7</span></div>
+                <div class="chip">Aspire <span class="ct">6</span></div>
+                <div class="chip">Lusail <span class="ct">11</span></div>
+              </div>
+            </div>
+            <div class="dir-filter-group">
+              <h5>Price</h5>
+              <div class="chip-row">
+                <div class="chip">Free <span class="ct">14</span></div>
+                <div class="chip">&lt; 200 <span class="ct">23</span></div>
+                <div class="chip on">200–500 <span class="ct">16</span></div>
+                <div class="chip">500+ <span class="ct">7</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="dir-cards">
+            <div class="pcard"><div class="art">🎨</div><div class="meta"><div class="n">Mini Picasso</div><div class="m">Art · West Bay · 4–6</div></div></div>
+            <div class="pcard"><div class="art">🩰</div><div class="meta"><div class="n">Little Ballerinas</div><div class="m">Ballet · Pearl · 3–5</div></div></div>
+            <div class="pcard"><div class="art">🏊</div><div class="meta"><div class="n">Splashers Club</div><div class="m">Swim · Aspire · 4–7</div></div></div>
+            <div class="pcard"><div class="art">🎹</div><div class="meta"><div class="n">Katara Piano Kids</div><div class="m">Music · Katara · 5+</div></div></div>
+            <div class="pcard"><div class="art">⚽</div><div class="meta"><div class="n">Little Lions Football</div><div class="m">Sport · Lusail · 4–8</div></div></div>
+            <div class="pcard"><div class="art">🧩</div><div class="meta"><div class="n">STEM Builders</div><div class="m">STEM · Ed. City · 6+</div></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="wt-caption">
+        <span class="wt-eyebrow">04 · Filter smart</span>
+        <h2>Filters with <span class="pop">live counts</span>.</h2>
+        <p>Age, area, category, price — every filter shows how many results remain before you click. Empty states tell you what to change, not just that you hit zero.</p>
+        <div class="wt-caption-ar">فلترة ذكية: العمر، المنطقة، الفئة، السعر — مع عدّادات لحظية لكل خيار.</div>
+      </div>
+    </div>
+
+    <!-- =========== SCENE 5 — detail =========== -->
+    <div class="wt-scene scene5" data-scene="5">
+      <div class="stage-art">
+        <div class="detail-wrap">
+          <div class="detail-main">
+            <div class="detail-hero">
+              🎨
+              <div class="save-fab">❤ Saved</div>
+            </div>
+            <div class="detail-body">
+              <div class="h1">Mini Picasso Pottery</div>
+              <div class="dek">Small-group art · Noura · West Bay · Saturdays</div>
+              <div class="chips">
+                <span class="chip">✓ Verified</span>
+                <span class="chip">🗣 EN/AR</span>
+                <span class="chip">👧 Ages 4–6</span>
+                <span class="chip">🕐 4 weeks</span>
+                <span class="chip">🪑 8 spots</span>
+              </div>
+              <p style="font-size:12.5px;color:var(--ink-soft);line-height:1.5">Noura has been teaching ceramics in Doha for 6 years. Tiny mess, big imagination — pieces are fired and delivered to your door.</p>
+            </div>
+          </div>
+          <div class="detail-side">
+            <div class="price">QAR 320<span> / 4 weeks</span></div>
+            <div class="slot">🗓 Sat 4 May · 4:30 PM</div>
+            <div class="book-btn">Book now</div>
+            <div style="font-size:11px;color:var(--ink-mute);text-align:center;">Secure checkout · MyFatoorah</div>
+          </div>
+        </div>
+      </div>
+      <div class="wt-caption">
+        <span class="wt-eyebrow">05 · Decide fast</span>
+        <h2>Everything parents <span class="pop">actually ask</span>.</h2>
+        <p>Age range, language, price, schedule, teacher background, what to bring. No digging. Favorites persist across sessions. Schema.org markup under the hood for search engines.</p>
+        <div class="wt-caption-ar">صفحة تفاصيل تجيب على كل الأسئلة: العمر، اللغة، السعر، الموعد، المعلّم.</div>
+      </div>
+    </div>
+
+    <!-- =========== SCENE 6 — checkout =========== -->
+    <div class="wt-scene scene6" data-scene="6">
+      <div class="stage-art">
+        <div class="co-card">
+          <div class="co-head">Checkout · Mini Picasso Pottery</div>
+          <div class="co-body">
+            <div class="co-row"><span class="k">Child</span><span class="v">Layla, 5</span></div>
+            <div class="co-row"><span class="k">Start</span><span class="v">Sat 4 May · 4:30 PM</span></div>
+            <div class="co-row"><span class="k">Duration</span><span class="v">4 weeks</span></div>
+            <div class="co-input">
+              <span class="card-emoji">💳</span>
+              <span>**** **** **** 4142</span>
+              <span class="cursor"></span>
+            </div>
+            <div class="co-total"><span>Total</span><span class="total-num">QAR 320</span></div>
+            <div class="co-pay-btn">Pay securely via MyFatoorah</div>
+          </div>
+        </div>
+      </div>
+      <div class="wt-caption">
+        <span class="wt-eyebrow">06 · One checkout</span>
+        <h2>Pay through <span class="pop">MyFatoorah</span>.</h2>
+        <p>Card, Apple Pay, or NAPS. One bilingual flow — English or Arabic. No cash deposits to strangers, no surprise fees, refund policy visible before you pay.</p>
+        <div class="wt-caption-ar">دفع آمن عبر ماي فاتورة — بطاقة أو آبل باي. سياسة استرداد واضحة قبل الدفع.</div>
+      </div>
+    </div>
+
+    <!-- =========== SCENE 7 — success =========== -->
+    <div class="wt-scene scene7" data-scene="7">
+      <div class="stage-art">
+        <div class="succ-card">
+          <div class="check">✅</div>
+          <h3>Booking confirmed 🎉</h3>
+          <p>Confirmation sent to your email. Layla is in — see you Saturday!</p>
+          <div class="succ-actions">
+            <div class="a">📅 Add to calendar</div>
+            <div class="a">📍 Directions</div>
+            <div class="a">📱 SMS reminder</div>
+            <div class="a">↗ Share</div>
+          </div>
+        </div>
+      </div>
+      <div class="wt-caption">
+        <span class="wt-eyebrow">07 · After booking</span>
+        <h2>Calendar file, directions, <span class="pop">one tap</span>.</h2>
+        <p>An .ics lands on your phone. Google Maps directions with accurate parking notes. SMS reminders. Share with your co-parent via Web Share — or email if they're a boomer.</p>
+        <div class="wt-caption-ar">ملف تقويم، اتجاهات، تذكير بالرسائل، مشاركة مع الشريك — بضغطة واحدة.</div>
+      </div>
+    </div>
+
+    <!-- =========== SCENE 8 — bilingual =========== -->
+    <div class="wt-scene scene8" data-scene="8">
+      <div class="stage-art">
+        <div class="bilang-pane">
+          <span class="tag">EN</span>
+          <h4>Find something playful <span class="pop">to do</span><br>with your kids this weekend.</h4>
+          <p>Art, sports, music, outdoor — curated by Qatar parents who've actually taken their kids.</p>
+          <span class="meta-chip">🇶🇦 Made in Qatar</span>
+        </div>
+        <div class="bilang-pane ar">
+          <span class="tag">AR</span>
+          <h4>اكتشف نشاطاً <span class="pop">ممتعاً</span><br>مع أطفالك هذا الأسبوع.</h4>
+          <p>فن، رياضة، موسيقى، أنشطة خارجية — اختارها أهالي قطر الذين جرّبوها فعلاً مع أطفالهم.</p>
+          <span class="meta-chip">🇶🇦 صُنع في قطر</span>
+        </div>
+      </div>
+      <div class="wt-caption">
+        <span class="wt-eyebrow">08 · Bilingual by design</span>
+        <h2>Arabic and English, <span class="pop">not a toggle</span>.</h2>
+        <p>Every page, every booking email, every receipt — RTL-aware from day one. Switch languages in one click. Currency, dates, and phone numbers localize.</p>
+        <div class="wt-caption-ar">مبنيّ ثنائي اللغة من البداية — كل صفحة، كل بريد، كل إيصال. التبديل بضغطة.</div>
+      </div>
+    </div>
+
+    <!-- =========== SCENE 9 — map =========== -->
+    <div class="wt-scene scene9" data-scene="9">
+      <div class="stage-art">
+        <div class="map-pin" style="top:40%;left:30%;"><span>🎨</span></div>
+        <div class="map-pin" style="top:30%;left:42%;"><span>🏊</span></div>
+        <div class="map-pin" style="top:45%;left:52%;"><span>⚽</span></div>
+        <div class="map-pin" style="top:55%;left:36%;"><span>🩰</span></div>
+        <div class="map-pin" style="top:38%;left:62%;"><span>🎹</span></div>
+        <div class="map-pin" style="top:62%;left:50%;"><span>📚</span></div>
+        <div class="map-pin" style="top:50%;left:22%;"><span>🧩</span></div>
+        <div class="map-pin" style="top:70%;left:44%;"><span>🎭</span></div>
+        <div class="map-pin" style="top:27%;left:55%;"><span>🏀</span></div>
+      </div>
+      <div class="wt-caption">
+        <span class="wt-eyebrow">09 · See the city</span>
+        <h2>A map of <span class="pop">every vetted place</span>.</h2>
+        <p>40+ places and growing. Filter pins by age, category, or area. Tap a pin to see hours, prices, and the real parking entrance — not the official one.</p>
+        <div class="wt-caption-ar">خريطة كل الأماكن الموثّقة. فلترة بالعمر والفئة والمنطقة.</div>
+      </div>
+    </div>
+
+    <!-- =========== SCENE 10 — CTA =========== -->
+    <div class="wt-scene scene10" data-scene="10">
+      <div class="stage-art">
+        <div class="cta-wrap">
+          <div class="eye">Coming soon to your weekend</div>
+          <h2>Yalla, let's <span class="pop">play</span>.</h2>
+          <p>40+ places. 60+ classes. Arabic &amp; English. Built from Doha, for Qatar families.</p>
+          <div class="cta-row">
+            <a href="yalla-kids-home-souq.html" class="primary">🏠 Explore the site</a>
+            <a href="yalla-kids-for-providers.html" class="outline">🎯 Become a provider</a>
+          </div>
+        </div>
+      </div>
+      <div class="wt-caption">
+        <span class="wt-eyebrow">10 · The ask</span>
+        <h2>Yalla, let's <span class="pop">play</span>.</h2>
+        <p>Explore the site, or — if you run a Qatar class or venue — apply to join the founding 100. Free Premium listing through June.</p>
+        <div class="wt-caption-ar">جرّب الموقع، أو انضم للمزوّدين المؤسسين — ملف مميّز مجاناً حتى يونيو.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wt-ctrls">
+    <button class="wt-btn primary" id="playBtn" type="button">⏸ Pause</button>
+    <button class="wt-btn" id="prevBtn" type="button">←</button>
+    <button class="wt-btn" id="nextBtn" type="button">→</button>
+    <span class="wt-scene-label" id="sceneLabel">Scene 1 / 10</span>
+    <div class="wt-dots" id="dots"></div>
+    <button class="wt-btn" id="restartBtn" type="button">⟲ Restart</button>
+  </div>
+
+  <p style="margin-top:22px;max-width:1080px;width:100%;text-align:center;color:var(--ink-mute);font-size:12px;">
+    Tip: press <kbd style="border:1.5px solid var(--ink);padding:1px 6px;border-radius:6px;background:#fff;font-family:inherit;">space</kbd> to pause,
+    <kbd style="border:1.5px solid var(--ink);padding:1px 6px;border-radius:6px;background:#fff;font-family:inherit;">←</kbd>/<kbd style="border:1.5px solid var(--ink);padding:1px 6px;border-radius:6px;background:#fff;font-family:inherit;">→</kbd>
+    to step through. A narrated video will ship alongside launch.
+  </p>
+
+  <script>
+    (function () {
+      var SCENE_MS = 5500;   // per-scene duration
+      var TICK_MS  = 80;
+      var scenes = document.querySelectorAll('.wt-scene');
+      var total = scenes.length;
+      var idx = 0;
+      var t = 0;
+      var playing = true;
+
+      var fill = document.getElementById('progFill');
+      var label = document.getElementById('sceneLabel');
+      var playBtn = document.getElementById('playBtn');
+      var prevBtn = document.getElementById('prevBtn');
+      var nextBtn = document.getElementById('nextBtn');
+      var restartBtn = document.getElementById('restartBtn');
+      var dotsWrap = document.getElementById('dots');
+
+      // Build dots
+      for (var i = 0; i < total; i++) {
+        (function (ii) {
+          var d = document.createElement('button');
+          d.type = 'button';
+          d.className = 'wt-dot' + (ii === 0 ? ' active' : '');
+          d.setAttribute('aria-label', 'Scene ' + (ii + 1));
+          d.addEventListener('click', function () { goto(ii); });
+          dotsWrap.appendChild(d);
+        })(i);
+      }
+      var dots = dotsWrap.querySelectorAll('.wt-dot');
+
+      function render() {
+        scenes.forEach(function (s, i) {
+          s.classList.toggle('active', i === idx);
+        });
+        dots.forEach(function (d, i) {
+          d.classList.toggle('active', i === idx);
+        });
+        label.textContent = 'Scene ' + (idx + 1) + ' / ' + total;
+      }
+
+      function goto(i) {
+        idx = (i + total) % total;
+        t = 0;
+        fill.style.width = '0%';
+        render();
+      }
+
+      function next() { goto(idx + 1); }
+      function prev() { goto(idx - 1); }
+
+      function togglePlay() {
+        playing = !playing;
+        playBtn.textContent = playing ? '⏸ Pause' : '▶ Play';
+      }
+
+      prevBtn.addEventListener('click', prev);
+      nextBtn.addEventListener('click', next);
+      playBtn.addEventListener('click', togglePlay);
+      restartBtn.addEventListener('click', function () {
+        playing = true;
+        playBtn.textContent = '⏸ Pause';
+        goto(0);
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+        if (e.key === 'ArrowRight') { e.preventDefault(); next(); }
+        else if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+        else if (e.key === ' ') { e.preventDefault(); togglePlay(); }
+      });
+
+      setInterval(function () {
+        if (!playing) return;
+        t += TICK_MS;
+        var pct = Math.min(100, (t / SCENE_MS) * 100);
+        fill.style.width = pct + '%';
+        if (t >= SCENE_MS) {
+          t = 0;
+          next();
+        }
+      }, TICK_MS);
+
+      render();
+    })();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+# Yalla Kids — robots.txt
+# https://yallakids.qa/
+
+User-agent: *
+Allow: /
+
+# Private / authenticated flows — not for indexing
+Disallow: /yalla-kids-checkout.html
+Disallow: /yalla-kids-checkout-success.html
+Disallow: /yalla-kids-parent-dashboard.html
+Disallow: /yalla-kids-provider-dashboard.html
+Disallow: /yalla-kids-manage-booking.html
+Disallow: /yalla-kids-messages.html
+Disallow: /yalla-kids-review.html
+Disallow: /yalla-kids-login.html
+Disallow: /yalla-kids-signup.html
+Disallow: /yalla-kids-class-builder.html
+Disallow: /yalla-kids-provider-onboarding.html
+
+# Placeholder / preview
+Disallow: /yalla-kids-placeholder.html
+Disallow: /yalla-kids-place-detail-olioli.html
+Disallow: /yalla-kids-place-detail-wonderworks.html
+
+# Disallow noisy param combos but allow the canonical query pattern
+# (search-engines handle ?slug= naturally via the sitemap)
+
+Sitemap: https://yallakids.qa/sitemap.xml

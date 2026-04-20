@@ -1,0 +1,877 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Yalla Kids — Full site tour</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,600&family=Inter:wght@400;500;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --maroon:#8A1538;--maroon-deep:#6E0F2C;
+  --gold:#F4B942;--cream:#FBF5ED;--butter:#FFE9B0;--butter-soft:#FFF4D3;
+  --mint:#C5E8D4;--mint-soft:#E3F2EA;--sky:#CFE3F3;--rose:#F6D4D9;
+  --ink:#1a1a1a;--ink-2:#3a3a3a;--mute:#6b6b6b;--mute-2:#9a9a9a;
+  --line:#E8DFD0;--line-2:#D9CEB8;--paper:#fff;
+  --wa:#25D366;--good:#2E7A4A;--good-bg:#DDEED4;
+  --shadow:4px 4px 0 var(--ink);--shadow-sm:2px 2px 0 var(--ink);
+  --radius:14px;--radius-lg:22px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--cream);color:var(--ink);line-height:1.45;-webkit-font-smoothing:antialiased}
+[dir="rtl"] body{font-family:'Tajawal','Inter',sans-serif}
+.serif{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-0.01em}
+.pop{font-family:'Fraunces',serif;font-style:italic;font-weight:600;position:relative;display:inline-block}
+.pop::after{content:"";position:absolute;left:-2px;right:-2px;bottom:-4px;height:8px;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10' preserveAspectRatio='none'><path d='M2,7 Q25,1 50,6 T98,4' stroke='%23F4B942' stroke-width='3' fill='none' stroke-linecap='round'/></svg>") no-repeat center/100% 100%}
+.en-only,.ar-only{display:inline}
+[dir="ltr"] .ar-only{display:none}
+[dir="rtl"] .en-only{display:none}
+button{font:inherit;cursor:pointer}
+a{color:inherit;text-decoration:none}
+
+/* ── nav ─────────────────────── */
+.nav{background:var(--paper);border-bottom:2px solid var(--ink);padding:14px 28px;display:flex;align-items:center;gap:18px;position:sticky;top:0;z-index:50}
+.logo{font-family:'Fraunces',serif;font-weight:700;font-size:24px;letter-spacing:-0.03em;color:var(--maroon);display:flex;align-items:center;gap:8px}
+.logo .dot{width:14px;height:14px;background:var(--gold);border:2px solid var(--ink);border-radius:50%;transform:translateY(-2px)}
+.nav-crumbs{font-size:13px;color:var(--mute);margin-left:12px}
+.nav-crumbs b{color:var(--ink);font-weight:600}
+.nav-spacer{flex:1}
+.lang-toggle{border:2px solid var(--ink);background:var(--paper);border-radius:10px;padding:6px 12px;font-weight:600;font-size:13px;box-shadow:var(--shadow-sm)}
+.lang-toggle:hover{transform:translate(-1px,-1px);box-shadow:3px 3px 0 var(--ink)}
+
+/* ── shell ─────────────────────── */
+.shell{max-width:1280px;margin:0 auto;padding:26px 28px 80px}
+
+/* ── hero ─────────────────────── */
+.hero{
+  background:linear-gradient(135deg,var(--butter-soft),var(--mint-soft));
+  border:2px solid var(--ink);border-radius:var(--radius-lg);
+  box-shadow:var(--shadow);padding:34px;margin-bottom:30px;
+  display:grid;grid-template-columns:1fr auto;gap:30px;align-items:end;
+}
+.hero .eyebrow{
+  display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.08em;color:var(--maroon);margin-bottom:10px;
+}
+.hero .eyebrow::before{content:"";width:8px;height:8px;background:var(--gold);border:2px solid var(--ink);border-radius:50%}
+.hero h1{font-family:'Fraunces',serif;font-weight:700;font-size:clamp(32px,4.2vw,52px);line-height:1.02;letter-spacing:-0.02em;margin:0 0 10px}
+.hero p{margin:0;font-size:16px;color:var(--ink-2);max-width:640px}
+.hero-stats{
+  display:flex;gap:10px;flex-direction:column;
+}
+.stat{
+  background:var(--paper);border:2px solid var(--ink);border-radius:12px;
+  padding:10px 14px;box-shadow:var(--shadow-sm);min-width:160px;
+}
+.stat .n{font-family:'Fraunces',serif;font-weight:700;font-size:28px;color:var(--maroon);line-height:1}
+.stat .l{font-size:12px;color:var(--mute);text-transform:uppercase;letter-spacing:.05em;font-weight:600}
+
+/* ── journey picker ─────────── */
+.picker{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:34px}
+.pick{
+  background:var(--paper);border:2px solid var(--ink);border-radius:var(--radius-lg);
+  box-shadow:var(--shadow);padding:18px;display:flex;gap:14px;align-items:flex-start;
+  cursor:pointer;transition:transform .08s,box-shadow .08s;
+}
+.pick:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.pick .ic{
+  width:56px;height:56px;border:2px solid var(--ink);border-radius:14px;
+  display:grid;place-items:center;font-size:28px;flex-shrink:0;
+}
+.pick.p-parent .ic{background:var(--butter)}
+.pick.p-provider .ic{background:var(--mint)}
+.pick.p-info .ic{background:var(--rose)}
+.pick h3{font-family:'Fraunces',serif;font-size:20px;margin:0 0 2px;font-weight:700}
+.pick p{margin:0 0 8px;font-size:13px;color:var(--mute)}
+.pick .steps{font-size:11px;font-weight:700;color:var(--maroon);text-transform:uppercase;letter-spacing:.05em}
+.pick .go{
+  margin-left:auto;align-self:center;width:32px;height:32px;border:2px solid var(--ink);
+  border-radius:10px;display:grid;place-items:center;background:var(--cream);font-weight:700;font-size:18px;
+}
+
+/* ── section headers ────────── */
+.sx{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin:40px 0 16px;border-bottom:2px dashed var(--line-2);padding-bottom:10px;flex-wrap:wrap}
+.sx h2{font-family:'Fraunces',serif;font-weight:700;font-size:28px;margin:0;letter-spacing:-0.01em;display:flex;align-items:baseline;gap:10px}
+.sx h2 .num{
+  font-family:'Fraunces',serif;font-style:italic;color:var(--maroon);font-weight:400;font-size:22px;
+  background:var(--butter);padding:2px 10px;border:2px solid var(--ink);border-radius:999px;
+}
+.sx .note{font-size:13px;color:var(--mute);max-width:480px;text-align:right}
+[dir="rtl"] .sx .note{text-align:left}
+
+/* ── journey flow ─────────── */
+.flow{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:16px;margin-bottom:16px;position:relative;
+}
+.step{
+  background:var(--paper);border:2px solid var(--ink);border-radius:var(--radius);
+  box-shadow:var(--shadow-sm);padding:14px;display:flex;flex-direction:column;gap:8px;
+  position:relative;transition:transform .08s,box-shadow .08s;min-height:210px;
+}
+.step:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--ink)}
+.step .st-num{
+  position:absolute;top:-10px;left:14px;background:var(--maroon);color:#fff;
+  width:24px;height:24px;border-radius:50%;border:2px solid var(--ink);
+  display:grid;place-items:center;font-weight:700;font-size:12px;
+}
+.step .thumb{
+  height:78px;border:2px solid var(--ink);border-radius:10px;
+  overflow:hidden;display:grid;place-items:center;position:relative;
+  background:var(--cream);
+}
+.step .thumb .emo{font-size:30px;filter:drop-shadow(0 1px 0 rgba(0,0,0,.12))}
+.step .thumb .kind{position:absolute;top:6px;left:6px;background:var(--paper);border:2px solid var(--ink);border-radius:6px;padding:2px 6px;font-size:9px;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+.step h4{margin:0;font-size:15px;font-weight:700;letter-spacing:-0.01em}
+.step .desc{font-size:12px;color:var(--mute);flex:1;line-height:1.35}
+.step .link{
+  display:inline-flex;align-items:center;gap:6px;color:var(--maroon);font-weight:600;font-size:12px;
+  margin-top:auto;
+}
+.step .link:hover{text-decoration:underline}
+.step .badge-row{display:flex;gap:4px;flex-wrap:wrap;margin-top:2px}
+.step .b{
+  border:2px solid var(--ink);border-radius:999px;padding:1px 7px;font-size:10px;font-weight:700;
+  background:var(--cream);
+}
+.step .b.hot{background:var(--butter)}
+.step .b.new{background:var(--mint)}
+.step .b.core{background:var(--rose)}
+
+/* thumb variants (CSS art) */
+.th-home{background:linear-gradient(180deg,#FFE9B0 0%,#FFE9B0 55%,#C5E8D4 55%,#C5E8D4 100%)}
+.th-home::after{content:"";position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:48%;height:8px;background:#8A1538;border-radius:3px}
+.th-search{background:linear-gradient(90deg,#CFE3F3 0%,#CFE3F3 70%,#FFF4D3 70%,#FFF4D3 100%)}
+.th-search::after{content:"🔍";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:28px}
+.th-class{background:linear-gradient(135deg,#FFD4A8,#E8A9C9)}
+.th-place{background:linear-gradient(135deg,#B8D4F0,#C5E8D4)}
+.th-checkout{background:linear-gradient(180deg,#fff 0%,#fff 60%,#FFE9B0 60%,#FFE9B0 100%)}
+.th-checkout::after{content:"";position:absolute;bottom:14px;left:20%;right:20%;height:28px;border:2px solid #1a1a1a;border-radius:6px;background:#FBF5ED}
+.th-success{background:radial-gradient(circle at 50% 40%,#C5E8D4 0%,#E3F2EA 80%)}
+.th-success::after{content:"🎉";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:32px}
+.th-dash{background:var(--butter-soft)}
+.th-dash::after{content:"";position:absolute;top:18px;left:14px;right:14px;height:10px;background:var(--butter);border:2px solid #1a1a1a;border-radius:4px}
+.th-dash::before{content:"";position:absolute;top:36px;left:14px;width:45%;height:20px;background:var(--mint);border:2px solid #1a1a1a;border-radius:4px}
+.th-msg{background:linear-gradient(180deg,#E3F2EA,#fff)}
+.th-msg::after{content:"";position:absolute;top:14px;left:14px;width:46%;height:12px;background:#8A1538;border:2px solid #1a1a1a;border-radius:4px 4px 4px 0}
+.th-msg::before{content:"";position:absolute;top:36px;right:14px;width:46%;height:12px;background:#25D366;border:2px solid #1a1a1a;border-radius:4px 4px 0 4px}
+.th-manage{background:linear-gradient(135deg,#F6D4D9,#FFF4D3)}
+.th-manage::after{content:"🔄";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:28px}
+.th-review{background:linear-gradient(135deg,#FFF4D3,#FFE9B0)}
+.th-review::after{content:"★★★★★";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:Fraunces,serif;font-size:20px;color:#F4B942;letter-spacing:2px}
+.th-onboard{background:linear-gradient(180deg,#fff,#C5E8D4)}
+.th-onboard::after{content:"";position:absolute;top:14px;left:14px;right:14px;height:6px;background:#8A1538;border:2px solid #1a1a1a;border-radius:3px}
+.th-onboard::before{content:"";position:absolute;top:14px;left:14px;width:60%;height:6px;background:#F4B942;border:2px solid #1a1a1a;border-radius:3px;z-index:1}
+.th-builder{background:linear-gradient(135deg,#CFE3F3,#FFF4D3)}
+.th-builder::after{content:"🛠️";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:28px}
+.th-provdash{background:var(--mint-soft)}
+.th-provdash::after{content:"";position:absolute;top:16px;left:14px;width:36%;height:22px;background:#C5E8D4;border:2px solid #1a1a1a;border-radius:5px}
+.th-provdash::before{content:"";position:absolute;top:16px;right:14px;width:36%;height:22px;background:#FFE9B0;border:2px solid #1a1a1a;border-radius:5px}
+.th-profile{background:linear-gradient(135deg,#FFE9B0,#F6D4D9)}
+.th-profile::after{content:"";position:absolute;top:16px;left:50%;transform:translateX(-50%);width:34px;height:34px;background:#8A1538;border:2px solid #1a1a1a;border-radius:50%}
+.th-providers{background:linear-gradient(135deg,#E3F2EA,#FFF4D3)}
+.th-providers::after{content:"💰";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:28px}
+.th-guide{background:linear-gradient(180deg,#FFF4D3,#fff)}
+.th-guide::after{content:"";position:absolute;top:14px;left:14px;right:14px;height:6px;background:#1a1a1a;border-radius:2px}
+.th-guide::before{content:"";position:absolute;top:28px;left:14px;width:70%;height:4px;background:var(--line-2);border-radius:2px;box-shadow:0 8px 0 var(--line-2), 0 16px 0 var(--line-2)}
+.th-map{background:linear-gradient(135deg,#CFE3F3 0%,#CFE3F3 55%,#FFF4D3 55%)}
+.th-map::after{content:"📍";position:absolute;top:30%;left:60%;font-size:24px}
+.th-areas{background:linear-gradient(135deg,#FBF5ED,#FFE9B0)}
+.th-areas::after{content:"🏙️";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:28px}
+.th-camps{background:linear-gradient(135deg,#C5E8D4,#FFE9B0)}
+.th-camps::after{content:"⛺";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:28px}
+.th-auth{background:linear-gradient(180deg,#fff,#FBF5ED)}
+.th-auth::after{content:"🔒";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:24px}
+.th-faq{background:linear-gradient(135deg,#F6D4D9,#FFF4D3)}
+.th-faq::after{content:"❓";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:28px}
+.th-about{background:linear-gradient(135deg,#FFE9B0,#C5E8D4)}
+.th-about::after{content:"👋";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:26px}
+.th-legal{background:#FBF5ED}
+.th-legal::after{content:"§";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:Fraunces,serif;font-size:42px;color:#1a1a1a}
+.th-contact{background:linear-gradient(135deg,#FFE9B0,#FFF4D3)}
+.th-contact::after{content:"✉️";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:28px}
+.th-how{background:linear-gradient(180deg,#E3F2EA,#FBF5ED)}
+.th-how::after{content:"1·2·3";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:Fraunces,serif;font-size:22px;color:#8A1538;font-weight:700;letter-spacing:2px}
+
+/* ── journey connector arrows ─── */
+.flow-wrap{position:relative}
+.legend-row{
+  display:flex;gap:10px;flex-wrap:wrap;font-size:12px;color:var(--mute);
+  margin:8px 0 16px;align-items:center;
+}
+.legend-row .lg{display:inline-flex;align-items:center;gap:5px}
+.legend-row .lg::before{content:"";width:10px;height:10px;border-radius:3px;border:2px solid var(--ink)}
+.legend-row .lg.hot::before{background:var(--butter)}
+.legend-row .lg.new::before{background:var(--mint)}
+.legend-row .lg.core::before{background:var(--rose)}
+.legend-row .lg.plain::before{background:var(--cream)}
+
+/* ── home variants row ──── */
+.variants{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:8px;
+}
+.variant{
+  background:var(--paper);border:2px solid var(--ink);border-radius:var(--radius);
+  box-shadow:var(--shadow-sm);overflow:hidden;
+}
+.variant .preview{height:120px;border-bottom:2px solid var(--ink);position:relative;display:grid;place-items:center}
+.variant.v-sunny .preview{background:linear-gradient(180deg,#FFF4D3 0%,#FFE9B0 45%,#F4B942 100%)}
+.variant.v-souq .preview{background:linear-gradient(135deg,#FBF5ED,#F6D4D9)}
+.variant.v-desert .preview{background:linear-gradient(180deg,#FFE4C4 0%,#E8A87C 50%,#C38D72 100%)}
+.variant.v-wire .preview{background:repeating-linear-gradient(45deg,#FBF5ED,#FBF5ED 8px,var(--cream) 8px,var(--cream) 14px);border-bottom-color:var(--line-2)}
+.variant .vbody{padding:14px}
+.variant h4{margin:0;font-family:'Fraunces',serif;font-size:17px;font-weight:700;display:flex;align-items:center;gap:8px}
+.variant h4 .stat{
+  border:2px solid var(--ink);border-radius:999px;padding:1px 8px;font-size:10px;font-weight:700;
+  background:var(--cream);font-family:'Inter',sans-serif;
+}
+.variant h4 .stat.canon{background:var(--maroon);color:#fff;border-color:var(--ink)}
+.variant p{margin:4px 0 8px;font-size:12px;color:var(--mute)}
+.variant a{font-size:12px;color:var(--maroon);font-weight:600}
+.variant a:hover{text-decoration:underline}
+
+/* ── full index ──── */
+.index-wrap{
+  background:var(--paper);border:2px solid var(--ink);border-radius:var(--radius-lg);
+  box-shadow:var(--shadow);padding:22px;margin-bottom:22px;
+}
+.index-wrap h2{font-family:'Fraunces',serif;font-size:24px;margin:0 0 4px;font-weight:700}
+.index-wrap .ix-sub{color:var(--mute);font-size:13px;margin:0 0 16px}
+.ix-filter{
+  display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;
+}
+.ix-filter button{
+  border:2px solid var(--ink);background:var(--paper);border-radius:999px;
+  padding:5px 12px;font-size:12px;font-weight:600;cursor:pointer;
+}
+.ix-filter button.on{background:var(--maroon);color:#fff}
+.ix-filter button:hover:not(.on){background:var(--butter-soft)}
+.ix-table{
+  width:100%;border-collapse:separate;border-spacing:0;font-size:13px;
+}
+.ix-table th{
+  text-align:left;padding:8px 10px;border-bottom:2px solid var(--ink);font-size:11px;
+  text-transform:uppercase;letter-spacing:.06em;color:var(--mute);font-weight:700;
+}
+[dir="rtl"] .ix-table th{text-align:right}
+.ix-table td{padding:10px;border-bottom:1px dashed var(--line-2);vertical-align:top}
+.ix-table tr:hover td{background:var(--butter-soft)}
+.ix-table .n{font-family:ui-monospace,menlo,monospace;font-size:12px;color:var(--ink-2);white-space:nowrap}
+.ix-table .n a{color:var(--maroon);font-weight:600}
+.ix-table .n a:hover{text-decoration:underline}
+.ix-table .role{
+  display:inline-block;border:2px solid var(--ink);border-radius:999px;padding:1px 8px;
+  font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;
+}
+.role.parent{background:var(--butter)}
+.role.provider{background:var(--mint)}
+.role.both{background:var(--sky)}
+.role.info{background:var(--rose)}
+.role.legal{background:var(--cream)}
+.st{
+  border:2px solid var(--ink);border-radius:6px;padding:1px 6px;font-size:10px;
+  font-weight:700;background:var(--cream);
+}
+.st.canon{background:var(--maroon);color:#fff}
+.st.alt{background:var(--butter)}
+.st.wip{background:var(--rose)}
+
+/* ── design system strip ──── */
+.ds{
+  background:linear-gradient(135deg,var(--mint-soft),var(--butter-soft));
+  border:2px solid var(--ink);border-radius:var(--radius-lg);
+  box-shadow:var(--shadow);padding:24px;margin-bottom:22px;
+}
+.ds h2{font-family:'Fraunces',serif;font-size:24px;margin:0 0 16px;font-weight:700}
+.ds-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px}
+.ds-swatch{background:var(--paper);border:2px solid var(--ink);border-radius:12px;padding:12px;box-shadow:var(--shadow-sm)}
+.ds-swatch .sw{height:40px;border:2px solid var(--ink);border-radius:8px;margin-bottom:8px}
+.ds-swatch .n{font-size:12px;font-weight:700}
+.ds-swatch .h{font-family:ui-monospace,menlo,monospace;font-size:11px;color:var(--mute)}
+
+/* ── user widget (fixed) ──── */
+.go-home{
+  position:fixed;bottom:18px;right:18px;z-index:40;
+  background:var(--maroon);color:#fff;border:2px solid var(--ink);border-radius:999px;
+  padding:10px 16px;font-weight:700;font-size:13px;box-shadow:var(--shadow);display:flex;gap:6px;align-items:center;
+}
+.go-home:hover{transform:translate(-1px,-1px);box-shadow:6px 6px 0 var(--ink)}
+
+/* ── footer ──── */
+.foot{
+  border-top:2px solid var(--ink);padding:22px 0 0;margin-top:30px;
+  display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;font-size:13px;color:var(--mute);
+}
+.foot a{color:var(--maroon);font-weight:600}
+.foot a:hover{text-decoration:underline}
+
+/* ── responsive ──── */
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr}
+  .hero-stats{flex-direction:row;flex-wrap:wrap}
+  .picker{grid-template-columns:1fr}
+  .sx{flex-direction:column;align-items:flex-start}
+  .sx .note{text-align:left}
+}
+@media (max-width:640px){
+  .shell{padding:18px 16px 80px}
+  .nav{padding:12px 16px}
+  .nav-crumbs{display:none}
+}
+
+.hidden{display:none !important}
+</style>
+  <link rel="stylesheet" href="yalla-kids-shared.css">
+</head>
+<body>
+  <nav class="nav">
+    <a class="logo" href="#"><span class="dot"></span><span class="en-only">Yalla Kids</span><span class="ar-only">يلا كيدز</span></a>
+    <span class="nav-crumbs"><span class="en-only">You are at <b>Site tour</b></span><span class="ar-only">أنتم في <b>جولة الموقع</b></span></span>
+    <div class="nav-spacer"></div>
+    <button class="lang-toggle" onclick="toggleLang()">
+      <span class="en-only">العربية</span><span class="ar-only">English</span>
+    </button>
+  </nav>
+
+  <div class="shell">
+    <!-- HERO -->
+    <section class="hero">
+      <div>
+        <div class="eyebrow"><span class="en-only">Internal navigator · Apr 2026</span><span class="ar-only">مستكشف داخلي · أبريل ٢٠٢٦</span></div>
+        <h1>
+          <span class="en-only">The whole <span class="pop">Yalla Kids</span> site, on one page.</span>
+          <span class="ar-only">كل موقع <span class="pop">يلا كيدز</span> في صفحة واحدة.</span>
+        </h1>
+        <p>
+          <span class="en-only">Two journeys, one design system. Follow a parent from discovering a class to writing the review, or follow a provider from the outreach email to their first payout. Every page lives here — click anything.</span>
+          <span class="ar-only">رحلتان ومنظومة تصميم واحدة. تابعوا الوالدين من اكتشاف الفصل إلى كتابة المراجعة، أو المزوّد من الرسالة الأولى إلى أول دفعة.</span>
+        </p>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="n">41</div><div class="l"><span class="en-only">HTML pages</span><span class="ar-only">صفحة HTML</span></div></div>
+        <div class="stat"><div class="n">2</div><div class="l"><span class="en-only">Complete journeys</span><span class="ar-only">رحلتان كاملتان</span></div></div>
+        <div class="stat"><div class="n">EN · AR</div><div class="l"><span class="en-only">Fully bilingual</span><span class="ar-only">ثنائية اللغة</span></div></div>
+      </div>
+    </section>
+
+    <!-- JOURNEY PICKER -->
+    <div class="picker">
+      <a class="pick p-parent" href="#parent-flow">
+        <div class="ic">👶</div>
+        <div>
+          <h3><span class="en-only">Parent journey</span><span class="ar-only">رحلة الوالدين</span></h3>
+          <p><span class="en-only">From the home bar to post-class review. Book, manage, review.</span>
+          <span class="ar-only">من شريط البحث إلى المراجعة بعد الفصل. احجزوا، عدّلوا، قيّموا.</span></p>
+          <div class="steps"><span class="en-only">10 steps · 18 pages</span><span class="ar-only">١٠ خطوات · ١٨ صفحة</span></div>
+        </div>
+        <div class="go">›</div>
+      </a>
+      <a class="pick p-provider" href="#provider-flow">
+        <div class="ic">🧑‍🏫</div>
+        <div>
+          <h3><span class="en-only">Provider journey</span><span class="ar-only">رحلة المزوّد</span></h3>
+          <p><span class="en-only">Marketing page → onboarding → class builder → dashboard → payouts.</span>
+          <span class="ar-only">صفحة تسويق → تسجيل → بناء الفصل → لوحة التحكم → الدفعات.</span></p>
+          <div class="steps"><span class="en-only">7 steps · 8 pages</span><span class="ar-only">٧ خطوات · ٨ صفحات</span></div>
+        </div>
+        <div class="go">›</div>
+      </a>
+      <a class="pick p-info" href="#info-flow">
+        <div class="ic">📚</div>
+        <div>
+          <h3><span class="en-only">Marketing &amp; support</span><span class="ar-only">التسويق والدعم</span></h3>
+          <p><span class="en-only">Home variants, landing pages, guides, legal. Everything not in a flow.</span>
+          <span class="ar-only">الصفحات التسويقية، الأدلة، القانونية. كل ما هو خارج الرحلات.</span></p>
+          <div class="steps"><span class="en-only">15 pages</span><span class="ar-only">١٥ صفحة</span></div>
+        </div>
+        <div class="go">›</div>
+      </a>
+    </div>
+
+    <!-- ───────── PARENT FLOW ───────── -->
+    <div id="parent-flow" class="sx">
+      <h2><span class="num">1</span><span class="en-only">Parent journey</span><span class="ar-only">رحلة الوالدين</span></h2>
+      <p class="note"><span class="en-only">Happy path: a parent browses the catalogue, books a real class for their child, manages the booking, and writes a review.</span>
+      <span class="ar-only">المسار السعيد: يتصفّح ولي الأمر الكتالوج، يحجز صفاً لطفله، يدير الحجز، ويكتب مراجعة.</span></p>
+    </div>
+    <div class="legend-row">
+      <span class="lg hot"><span class="en-only">High-use</span><span class="ar-only">كثير الاستخدام</span></span>
+      <span class="lg core"><span class="en-only">Core checkout</span><span class="ar-only">دفع أساسي</span></span>
+      <span class="lg new"><span class="en-only">New in this build</span><span class="ar-only">جديد</span></span>
+      <span class="lg plain"><span class="en-only">Supporting</span><span class="ar-only">داعمة</span></span>
+    </div>
+
+    <div class="flow-wrap">
+      <div class="flow">
+        <a class="step" href="yalla-kids-home-sunny.html">
+          <span class="st-num">1</span>
+          <div class="thumb th-home"><span class="kind"><span class="en-only">home</span><span class="ar-only">الرئيسية</span></span></div>
+          <h4><span class="en-only">Sunny Pop home</span><span class="ar-only">الصفحة الرئيسية</span></h4>
+          <div class="desc"><span class="en-only">Bright, bilingual home. Search bar, category strip, "classes for this weekend" rail.</span>
+          <span class="ar-only">صفحة رئيسية مشرقة. شريط بحث، تصنيفات، فصول لعطلة نهاية الأسبوع.</span></div>
+          <div class="badge-row"><span class="b hot">canon</span><span class="b">EN·AR</span></div>
+          <span class="link"><span class="en-only">Open →</span><span class="ar-only">فتح →</span></span>
+        </a>
+        <a class="step" href="yalla-kids-search.html">
+          <span class="st-num">2</span>
+          <div class="thumb th-search"><span class="kind"><span class="en-only">search</span><span class="ar-only">بحث</span></span></div>
+          <h4><span class="en-only">Search results</span><span class="ar-only">نتائج البحث</span></h4>
+          <div class="desc"><span class="en-only">Filter rail (age, price, area, badges), result grid + map view, no-results with suggested relaxations.</span>
+          <span class="ar-only">فلاتر (عمر، سعر، منطقة)، شبكة نتائج + خريطة، حالة "لا نتائج" باقتراحات.</span></div>
+          <div class="badge-row"><span class="b new">new</span><span class="b hot">hi-use</span></div>
+          <span class="link"><span class="en-only">Open →</span><span class="ar-only">فتح →</span></span>
+        </a>
+        <a class="step" href="yalla-kids-class-detail.html">
+          <span class="st-num">3</span>
+          <div class="thumb th-class"><span class="kind"><span class="en-only">class</span><span class="ar-only">فصل</span></span></div>
+          <h4><span class="en-only">Class detail</span><span class="ar-only">صفحة الفصل</span></h4>
+          <div class="desc"><span class="en-only">Full class page — schedule, gallery, teacher bio, FAQs, reviews, sticky booking card with sibling discount.</span>
+          <span class="ar-only">صفحة فصل كاملة — جدول، معرض صور، سيرة المعلّمة، أسئلة، مراجعات، كرت حجز لاصق.</span></div>
+          <div class="badge-row"><span class="b hot">hi-use</span></div>
+          <span class="link"><span class="en-only">Open →</span><span class="ar-only">فتح →</span></span>
+        </a>
+        <a class="step" href="yalla-kids-place-detail.html?slug=olioli-doha-children-s-play-museum">
+          <span class="st-num">3b</span>
+          <div class="thumb th-place"><span class="kind"><span class="en-only">place</span><span class="ar-only">مكان</span></span></div>
+          <h4><span class="en-only">Place detail (OliOli)</span><span class="ar-only">صفحة المكان</span></h4>
+          <div class="desc"><span class="en-only">Alternate branch: walk-in venue like a soft-play or museum. Hours, pricing tiers, map.</span>
+          <span class="ar-only">فرع بديل: مكان دخول حرّ مثل الألعاب أو متحف. ساعات، أسعار، خريطة.</span></div>
+          <div class="badge-row"><span class="b">alt-branch</span></div>
+          <span class="link"><span class="en-only">Open →</span><span class="ar-only">فتح →</span></span>
+        </a>
+        <a class="step" href="yalla-kids-checkout.html">
+          <span class="st-num">4</span>
+          <div class="thumb th-checkout"><span class="kind"><span class="en-only">checkout</span><span class="ar-only">الدفع</span></span></div>
+          <h4><span class="en-only">Checkout</span><span class="ar-only">الدفع</span></h4>
+          <div class="desc"><span class="en-only">Child selector, add-ons, contact, payment (Apple Pay default). Bilingual error handling.</span>
+          <span class="ar-only">اختيار الطفل، إضافات، التواصل، الدفع (Apple Pay). أخطاء ثنائية اللغة.</span></div>
+          <div class="badge-row"><span class="b core">core</span></div>
+          <span class="link"><span class="en-only">Open →</span><span class="ar-only">فتح →</span></span>
+        </a>
+        <a class="step" href="yalla-kids-checkout-success.html">
+          <span class="st-num">5</span>
+          <div class="thumb th-success"><span class="kind"><span class="en-only">success</span><span class="ar-only">نجاح</span></span></div>
+          <h4><span class="en-only">Booking success</span><span class="ar-only">تم الحجز</span></h4>
+          <div class="desc"><span class="en-only">Confirmation, add-to-calendar, cross-sell to siblings' recommendations, "Message Noura" CTA.</span>
+          <span class="ar-only">تأكيد، أضف للتقويم، اقتراحات للإخوة، زر "مراسلة نورة".</span></div>
+          <div class="badge-row"><span class="b">supporting</span></div>
+          <span class="link"><span class="en-only">Open →</span><span class="ar-only">فتح →</span></span>
+        </a>
+        <a class="step" href="yalla-kids-parent-dashboard.html">
+          <span class="st-num">6</span>
+          <div class="thumb th-dash"><span class="kind"><span class="en-only">dashboard</span><span class="ar-only">لوحة</span></span></div>
+          <h4><span class="en-only">Parent dashboard</span><span class="ar-only">لوحة الوالدين</span></h4>
+          <div class="desc"><span class="en-only">Home base for logged-in parents — upcoming sessions, kids' profiles, saved classes, wallet credit.</span>
+          <span class="ar-only">المنطلق للوالدين — جلسات قادمة، ملفات الأطفال، المحفوظ، رصيد المحفظة.</span></div>
+          <div class="badge-row"><span class="b hot">hub</span></div>
+          <span class="link"><span class="en-only">Open →</span><span class="ar-only">فتح →</span></span>
+        </a>
+        <a class="step" href="yalla-kids-messages.html">
+          <span class="st-num">7</span>
+          <div class="thumb th-msg"><span class="kind"><span class="en-only">messages</span><span class="ar-only">رسائل</span></span></div>
+          <h4><span class="en-only">Messages (hybrid)</span><span class="ar-only">الرسائل</span></h4>
+          <div class="desc"><span class="en-only">In-app pre-booking inbox that hands off to WhatsApp for ongoing chats. Policy-evidence audit log.</span>
+          <span class="ar-only">صندوق رسائل ما قبل الحجز مع تحويل لـWhatsApp. سجل دليل السياسة.</span></div>
+          <div class="badge-row"><span class="b new">new</span></div>
+          <span class="link"><span class="en-only">Open →</span><span class="ar-only">فتح →</span></span>
+        </a>
+        <a class="step" href="yalla-kids-manage-booking.html">
+          <span class="st-num">8</span>
+          <div class="thumb th-manage"><span class="kind"><span class="en-only">manage</span><span class="ar-only">إدارة</span></span></div>
+          <h4><span class="en-only">Manage booking</span><span class="ar-only">إدارة الحجز</span></h4>
+          <div class="desc"><span class="en-only">Reschedule (nudged default), credit +10%, cancel-for-refund with live QAR math. Sibling swap, pause spot.</span>
+          <span class="ar-only">تعديل (افتراضي)، رصيد +١٠٪، إلغاء واسترداد. تبديل الأخوة، إيقاف مؤقت.</span></div>
+          <div class="badge-row"><span class="b new">new</span><span class="b core">retention</span></div>
+          <span class="link"><span class="en-only">Open →</span><span class="ar-only">فتح →</span></span>
+        </a>
+        <a class="step" href="yalla-kids-review.html">
+          <span class="st-num">9</span>
+          <div class="thumb th-review"><span class="kind"><span class="en-only">review</span><span class="ar-only">مراجعة</span></span></div>
+          <h4><span class="en-only">Write review</span><span class="ar-only">اكتب مراجعة</span></h4>
+          <div class="desc"><span class="en-only">Post-class star rating, tag chips, bilingual text with auto-translate, photo upload, live preview.</span>
+          <span class="ar-only">تقييم بالنجوم، علامات، نص ثنائي اللغة مع ترجمة تلقائية، صور، معاينة حية.</span></div>
+          <div class="badge-row"><span class="b new">new</span></div>
+          <span class="link"><span class="en-only">Open →</span><span class="ar-only">فتح →</span></span>
+        </a>
+        <a class="step" href="yalla-kids-provider-profile.html">
+          <span class="st-num">10</span>
+          <div class="thumb th-profile"><span class="kind"><span class="en-only">profile</span><span class="ar-only">ملف</span></span></div>
+          <h4><span class="en-only">Provider profile (parent view)</span><span class="ar-only">ملف المزوّد</span></h4>
+          <div class="desc"><span class="en-only">Layla's review appears on Noura's profile — closes the loop. Rating distribution, Q&amp;A, other classes.</span>
+          <span class="ar-only">تظهر مراجعة ليلى في ملف نورة — تُغلق الدائرة.</span></div>
+          <div class="badge-row"><span class="b">close-loop</span></div>
+          <span class="link"><span class="en-only">Open →</span><span class="ar-only">فتح →</span></span>
+        </a>
+      </div>
+    </div>
+
+    <!-- ───────── PROVIDER FLOW ───────── -->
+    <div id="provider-flow" class="sx">
+      <h2><span class="num">2</span><span class="en-only">Provider journey</span><span class="ar-only">رحلة المزوّد</span></h2>
+      <p class="note"><span class="en-only">Happy path: a provider finds us via the outreach email, signs up, lists their first class, and fields their first booking.</span>
+      <span class="ar-only">المسار السعيد: يكتشفنا المزوّد، يسجّل، يدرج أول صف، ويستقبل أول حجز.</span></p>
+    </div>
+    <div class="flow-wrap">
+      <div class="flow">
+        <a class="step" href="yalla-kids-for-providers.html">
+          <span class="st-num">1</span>
+          <div class="thumb th-providers"><span class="kind"><span class="en-only">marketing</span><span class="ar-only">تسويق</span></span></div>
+          <h4><span class="en-only">For providers</span><span class="ar-only">للمزوّدين</span></h4>
+          <div class="desc"><span class="en-only">Pitch page — why list with us, 5% commission, WhatsApp-friendly tools, testimonials, claim page.</span>
+          <span class="ar-only">صفحة عرض — لماذا يلا كيدز، عمولة ٥٪، أدوات WhatsApp، شهادات.</span></div>
+          <div class="badge-row"><span class="b hot">acquisition</span></div>
+          <span class="link"><span class="en-only">Open →</span><span class="ar-only">فتح →</span></span>
+        </a>
+        <a class="step" href="yalla-kids-signup.html">
+          <span class="st-num">2</span>
+          <div class="thumb th-auth"><span class="kind"><span class="en-only">signup</span><span class="ar-only">تسجيل</span></span></div>
+          <h4><span class="en-only">Sign up</span><span class="ar-only">إنشاء حساب</span></h4>
+          <div class="desc"><span class="en-only">+974 phone first, SMS verify, role picker (parent or provider). Apple / Google / email alternatives.</span>
+          <span class="ar-only">هاتف +٩٧٤، التحقق SMS، اختيار الدور (والد أو مزوّد).</span></div>
+          <div class="badge-row"><span class="b core">core</span></div>
+          <span class="link"><span class="en-only">Open →</span><span class="ar-only">فتح →</span></span>
+        </a>
+        <a class="step" href="yalla-kids-provider-onboarding.html">
+          <span class="st-num">3</span>
+          <div class="thumb th-onboard"><span class="kind"><span class="en-only">onboard</span><span class="ar-only">إعداد</span></span></div>
+          <h4><span class="en-only">Onboarding wizard</span><span class="ar-only">معالج الإعداد</span></h4>
+          <div class="desc"><span class="en-only">8-step wizard: business basics, verification (QID + trade licence), branding, bank info, insurance attestation, policy pick.</span>
+          <span class="ar-only">معالج ٨ خطوات: أساسيات، التحقق، العلامة، الحساب البنكي، تأمين، سياسة.</span></div>
+          <div class="badge-row"><span class="b new">new</span></div>
+          <span class="link"><span class="en-only">Open →</span><span class="ar-only">فتح →</span></span>
+        </a>
+        <a class="step" href="yalla-kids-class-builder.html">
+          <span class="st-num">4</span>
+          <div class="thumb th-builder"><span class="kind"><span class="en-only">builder</span><span class="ar-only">بناء</span></span></div>
+          <h4><span class="en-only">Class builder</span><span class="ar-only">باني الفصل</span></h4>
+          <div class="desc"><span class="en-only">Create a listing — title, age range, schedule pattern, pricing (per-session, block, drop-in), photos, policies, bilingual copy.</span>
+          <span class="ar-only">إنشاء إعلان — عنوان، فئة عمرية، جدول، أسعار، صور، سياسات، نص ثنائي اللغة.</span></div>
+          <div class="badge-row"><span class="b new">new</span><span class="b core">critical</span></div>
+          <span class="link"><span class="en-only">Open →</span><span class="ar-only">فتح →</span></span>
+        </a>
+        <a class="step" href="yalla-kids-provider-dashboard.html">
+          <span class="st-num">5</span>
+          <div class="thumb th-provdash"><span class="kind"><span class="en-only">dashboard</span><span class="ar-only">لوحة</span></span></div>
+          <h4><span class="en-only">Provider dashboard</span><span class="ar-only">لوحة المزوّد</span></h4>
+          <div class="desc"><span class="en-only">Daily hub — today's roster, unread messages, pending approvals, listings status, this month's payout.</span>
+          <span class="ar-only">المنطلق اليومي — جدول اليوم، رسائل، موافقات، حالة الإعلانات، الدفعة الشهرية.</span></div>
+          <div class="badge-row"><span class="b hot">hub</span></div>
+          <span class="link"><span class="en-only">Open →</span><span class="ar-only">فتح →</span></span>
+        </a>
+        <a class="step" href="yalla-kids-messages.html">
+          <span class="st-num">6</span>
+          <div class="thumb th-msg"><span class="kind"><span class="en-only">messages</span><span class="ar-only">رسائل</span></span></div>
+          <h4><span class="en-only">Messages (provider-side)</span><span class="ar-only">رسائل المزوّد</span></h4>
+          <div class="desc"><span class="en-only">Same inbox, provider view: pre-booking inquiries, auto-context "Yara is in session 3/4", WhatsApp handoff.</span>
+          <span class="ar-only">نفس الصندوق من منظور المزوّد: استفسارات، سياق تلقائي، تحويل WhatsApp.</span></div>
+          <div class="badge-row"><span class="b new">new</span></div>
+          <span class="link"><span class="en-only">Open →</span><span class="ar-only">فتح →</span></span>
+        </a>
+        <a class="step" href="yalla-kids-provider-profile.html">
+          <span class="st-num">7</span>
+          <div class="thumb th-profile"><span class="kind"><span class="en-only">profile</span><span class="ar-only">ملف</span></span></div>
+          <h4><span class="en-only">Public profile</span><span class="ar-only">الملف العام</span></h4>
+          <div class="desc"><span class="en-only">How Noura looks to parents — classes, reviews, bio, Q&amp;A. Her share link for her own WhatsApp broadcasts.</span>
+          <span class="ar-only">كيف تظهر نورة للوالدين — فصول، مراجعات، سيرة، أسئلة.</span></div>
+          <div class="badge-row"><span class="b">shared</span></div>
+          <span class="link"><span class="en-only">Open →</span><span class="ar-only">فتح →</span></span>
+        </a>
+      </div>
+    </div>
+
+    <!-- ───────── INFO / MARKETING / LEGAL ───────── -->
+    <div id="info-flow" class="sx">
+      <h2><span class="num">3</span><span class="en-only">Landing, content, and legal pages</span><span class="ar-only">التسويق والمحتوى والقانونية</span></h2>
+      <p class="note"><span class="en-only">The supporting cast — discoverable pages, SEO landings, guides, and the legal basement.</span>
+      <span class="ar-only">الصفحات الداعمة — روابط SEO، أدلة، وصفحات قانونية.</span></p>
+    </div>
+    <div class="flow">
+      <a class="step" href="yalla-kids-map.html">
+        <div class="thumb th-map"><span class="kind">map</span></div>
+        <h4><span class="en-only">Full-page map</span><span class="ar-only">خريطة كاملة</span></h4>
+        <div class="desc"><span class="en-only">Doha-wide explorer with 200+ pins, cluster rollups, left-side result list.</span>
+        <span class="ar-only">مستكشف الدوحة بـ٢٠٠+ نقطة، مجموعات، قائمة جانبية.</span></div>
+        <span class="link"><span class="en-only">Open →</span><span class="ar-only">فتح →</span></span>
+      </a>
+      <a class="step" href="yalla-kids-classes-directory.html">
+        <div class="thumb th-class"><span class="kind">index</span></div>
+        <h4><span class="en-only">All classes directory</span><span class="ar-only">دليل الفصول</span></h4>
+        <div class="desc"><span class="en-only">Unfiltered classes grid — the fallback path if someone just clicks "Classes" in the nav.</span>
+        <span class="ar-only">شبكة فصول غير مفلترة — المسار الاحتياطي.</span></div>
+        <span class="link"><span class="en-only">Open →</span><span class="ar-only">فتح →</span></span>
+      </a>
+      <a class="step" href="yalla-kids-places-directory.html">
+        <div class="thumb th-place"><span class="kind">index</span></div>
+        <h4><span class="en-only">All places directory</span><span class="ar-only">دليل الأماكن</span></h4>
+        <div class="desc"><span class="en-only">Walk-in venues, museums, soft-plays. Tag filters for birthday, outdoor, free-indoor.</span>
+        <span class="ar-only">أماكن دخول حر، متاحف، ألعاب.</span></div>
+        <span class="link"><span class="en-only">Open →</span><span class="ar-only">فتح →</span></span>
+      </a>
+      <a class="step" href="yalla-kids-area-landing.html">
+        <div class="thumb th-areas"><span class="kind">landing</span></div>
+        <h4><span class="en-only">Area landing (West Bay)</span><span class="ar-only">الحي (الخليج الغربي)</span></h4>
+        <div class="desc"><span class="en-only">Neighborhood landing template — reusable for Lusail, Pearl, Al Sadd, Katara, Education City.</span>
+        <span class="ar-only">قالب هبوط لكل حي.</span></div>
+        <span class="link"><span class="en-only">Open →</span><span class="ar-only">فتح →</span></span>
+      </a>
+      <a class="step" href="yalla-kids-category-landing.html">
+        <div class="thumb th-class"><span class="kind">landing</span></div>
+        <h4><span class="en-only">Category landing (Art)</span><span class="ar-only">التصنيف (فنون)</span></h4>
+        <div class="desc"><span class="en-only">Vertical landing — editorial intro, featured providers, FAQs for the category.</span>
+        <span class="ar-only">هبوط تصنيف — مقدمة، مزوّدون مميزون، أسئلة.</span></div>
+        <span class="link"><span class="en-only">Open →</span><span class="ar-only">فتح →</span></span>
+      </a>
+      <a class="step" href="yalla-kids-collection-landing.html">
+        <div class="thumb th-guide"><span class="kind">landing</span></div>
+        <h4><span class="en-only">Collection landing</span><span class="ar-only">مجموعة</span></h4>
+        <div class="desc"><span class="en-only">Curator pick — "Best art classes for 4–6 year olds in West Bay."</span>
+        <span class="ar-only">اختيارات المحررين.</span></div>
+        <span class="link"><span class="en-only">Open →</span><span class="ar-only">فتح →</span></span>
+      </a>
+      <a class="step" href="yalla-kids-camps.html">
+        <div class="thumb th-camps"><span class="kind">camps</span></div>
+        <h4><span class="en-only">Camps (summer / spring)</span><span class="ar-only">المعسكرات</span></h4>
+        <div class="desc"><span class="en-only">Seasonal. Different filter set — full-day, half-day, multi-week, with bus service.</span>
+        <span class="ar-only">موسمي. فلاتر مختلفة — يوم كامل، نصف يوم، عدة أسابيع.</span></div>
+        <span class="link"><span class="en-only">Open →</span><span class="ar-only">فتح →</span></span>
+      </a>
+      <a class="step" href="yalla-kids-guides-hub.html">
+        <div class="thumb th-guide"><span class="kind">editorial</span></div>
+        <h4><span class="en-only">Guides hub</span><span class="ar-only">مركز الأدلة</span></h4>
+        <div class="desc"><span class="en-only">20-article editorial content — "Best indoor places for toddlers," "What to bring to swim class," etc.</span>
+        <span class="ar-only">محتوى تحريري — ٢٠ مقالة.</span></div>
+        <span class="link"><span class="en-only">Open →</span><span class="ar-only">فتح →</span></span>
+      </a>
+      <a class="step" href="yalla-kids-guide-article.html">
+        <div class="thumb th-guide"><span class="kind">article</span></div>
+        <h4><span class="en-only">Guide article</span><span class="ar-only">مقال</span></h4>
+        <div class="desc"><span class="en-only">Reference template — TOC, pull-quotes, in-line class/place cards, comments.</span>
+        <span class="ar-only">قالب مرجعي — فهرس، اقتباسات، بطاقات فصول.</span></div>
+        <span class="link"><span class="en-only">Open →</span><span class="ar-only">فتح →</span></span>
+      </a>
+      <a class="step" href="yalla-kids-how-it-works.html">
+        <div class="thumb th-how"><span class="kind">info</span></div>
+        <h4><span class="en-only">How it works</span><span class="ar-only">كيف يعمل</span></h4>
+        <div class="desc"><span class="en-only">Three-step explainer for new visitors. Safety, refund policy, trust.</span>
+        <span class="ar-only">شرح ثلاث خطوات للزوار الجدد.</span></div>
+        <span class="link"><span class="en-only">Open →</span><span class="ar-only">فتح →</span></span>
+      </a>
+      <a class="step" href="yalla-kids-about.html">
+        <div class="thumb th-about"><span class="kind">info</span></div>
+        <h4><span class="en-only">About</span><span class="ar-only">من نحن</span></h4>
+        <div class="desc"><span class="en-only">Story, team, values, open roles.</span><span class="ar-only">القصة، الفريق، القيم، الوظائف.</span></div>
+        <span class="link"><span class="en-only">Open →</span><span class="ar-only">فتح →</span></span>
+      </a>
+      <a class="step" href="yalla-kids-faq.html">
+        <div class="thumb th-faq"><span class="kind">support</span></div>
+        <h4><span class="en-only">FAQ</span><span class="ar-only">أسئلة شائعة</span></h4>
+        <div class="desc"><span class="en-only">Top 30 questions, accordion, search box. Refund policy section anchored for direct linking.</span>
+        <span class="ar-only">٣٠ سؤالًا أعلى، مربع بحث.</span></div>
+        <span class="link"><span class="en-only">Open →</span><span class="ar-only">فتح →</span></span>
+      </a>
+      <a class="step" href="yalla-kids-contact.html">
+        <div class="thumb th-contact"><span class="kind">support</span></div>
+        <h4><span class="en-only">Contact</span><span class="ar-only">اتصل بنا</span></h4>
+        <div class="desc"><span class="en-only">Short form, WhatsApp support number, office hours, embedded map.</span>
+        <span class="ar-only">نموذج، رقم دعم WhatsApp، ساعات.</span></div>
+        <span class="link"><span class="en-only">Open →</span><span class="ar-only">فتح →</span></span>
+      </a>
+      <a class="step" href="yalla-kids-privacy.html">
+        <div class="thumb th-legal"><span class="kind">legal</span></div>
+        <h4><span class="en-only">Privacy</span><span class="ar-only">الخصوصية</span></h4>
+        <div class="desc"><span class="en-only">Child data policy (Qatar PDPPL + COPPA-style minor protection), data residency note.</span>
+        <span class="ar-only">سياسة بيانات الأطفال (PDPPL).</span></div>
+        <span class="link"><span class="en-only">Open →</span><span class="ar-only">فتح →</span></span>
+      </a>
+      <a class="step" href="yalla-kids-terms.html">
+        <div class="thumb th-legal"><span class="kind">legal</span></div>
+        <h4><span class="en-only">Terms of service</span><span class="ar-only">الشروط</span></h4>
+        <div class="desc"><span class="en-only">User terms + separate Provider addendum (payout terms, insurance, content rights).</span>
+        <span class="ar-only">الشروط العامة + ملحق المزوّد.</span></div>
+        <span class="link"><span class="en-only">Open →</span><span class="ar-only">فتح →</span></span>
+      </a>
+      <a class="step" href="yalla-kids-login.html">
+        <div class="thumb th-auth"><span class="kind">auth</span></div>
+        <h4><span class="en-only">Login</span><span class="ar-only">تسجيل دخول</span></h4>
+        <div class="desc"><span class="en-only">Phone-first login, magic SMS code, social options, forgot-password flow.</span>
+        <span class="ar-only">تسجيل بالهاتف، رمز SMS.</span></div>
+        <span class="link"><span class="en-only">Open →</span><span class="ar-only">فتح →</span></span>
+      </a>
+    </div>
+
+    <!-- ───────── HOME VARIANTS ───────── -->
+    <div class="sx">
+      <h2><span class="num">4</span><span class="en-only">Home page variants</span><span class="ar-only">خيارات الصفحة الرئيسية</span></h2>
+      <p class="note"><span class="en-only">Three style explorations built during design. Sunny Pop is the canonical front door — the others document the visual range we considered.</span>
+      <span class="ar-only">ثلاثة استكشافات تصميمية. Sunny Pop هي الرسمية.</span></p>
+    </div>
+    <div class="variants">
+      <a class="variant v-sunny" href="yalla-kids-home-sunny.html">
+        <div class="preview"></div>
+        <div class="vbody">
+          <h4>Sunny Pop <span class="stat canon"><span class="en-only">Canonical</span><span class="ar-only">الرسمية</span></span></h4>
+          <p><span class="en-only">Bright, bilingual, neo-brutalist. The chosen home.</span>
+          <span class="ar-only">مشرقة، ثنائية اللغة، النيو-بروتاليست.</span></p>
+          <a>yalla-kids-home-sunny.html →</a>
+        </div>
+      </a>
+      <a class="variant v-souq" href="yalla-kids-home-souq.html">
+        <div class="preview"></div>
+        <div class="vbody">
+          <h4>Souq &amp; Stories <span class="stat"><span class="en-only">Explore</span><span class="ar-only">استكشاف</span></span></h4>
+          <p><span class="en-only">Editorial, magazine-style. More text, more hero storytelling.</span>
+          <span class="ar-only">تحريرية، أسلوب مجلة. نص أكثر.</span></p>
+          <a>yalla-kids-home-souq.html →</a>
+        </div>
+      </a>
+      <a class="variant v-desert" href="yalla-kids-home-desert.html">
+        <div class="preview"></div>
+        <div class="vbody">
+          <h4>Desert Modern <span class="stat"><span class="en-only">Explore</span><span class="ar-only">استكشاف</span></span></h4>
+          <p><span class="en-only">Warmer palette, terracotta and cream. More premium feel.</span>
+          <span class="ar-only">ألوان دافئة، أحمر طوبي وكريمي.</span></p>
+          <a>yalla-kids-home-desert.html →</a>
+        </div>
+      </a>
+      <a class="variant v-wire" href="yalla-kids-home-wireframe.html">
+        <div class="preview"></div>
+        <div class="vbody">
+          <h4>Wireframe <span class="stat"><span class="en-only">Reference</span><span class="ar-only">مرجع</span></span></h4>
+          <p><span class="en-only">Early structural layout. Still linked from older pages as the fallback.</span>
+          <span class="ar-only">التخطيط المبكر. المرجع للصفحات الأقدم.</span></p>
+          <a>yalla-kids-home-wireframe.html →</a>
+        </div>
+      </a>
+    </div>
+
+    <!-- ───────── FULL INDEX ───────── -->
+    <div class="sx" style="margin-top:40px">
+      <h2><span class="num">5</span><span class="en-only">Full page index</span><span class="ar-only">فهرس الصفحات</span></h2>
+      <p class="note"><span class="en-only">Every HTML file, grouped by role. Click any link to open.</span>
+      <span class="ar-only">كل ملف، مصنّف بالدور.</span></p>
+    </div>
+    <section class="index-wrap">
+      <div class="ix-filter">
+        <button class="on" data-f="all"><span class="en-only">All</span><span class="ar-only">الكل</span> · 41</button>
+        <button data-f="parent"><span class="en-only">Parent</span><span class="ar-only">والدين</span></button>
+        <button data-f="provider"><span class="en-only">Provider</span><span class="ar-only">مزوّد</span></button>
+        <button data-f="both"><span class="en-only">Shared</span><span class="ar-only">مشترك</span></button>
+        <button data-f="info"><span class="en-only">Info</span><span class="ar-only">معلومات</span></button>
+        <button data-f="legal"><span class="en-only">Legal</span><span class="ar-only">قانوني</span></button>
+      </div>
+      <table class="ix-table">
+        <thead>
+          <tr>
+            <th><span class="en-only">File</span><span class="ar-only">ملف</span></th>
+            <th><span class="en-only">Role</span><span class="ar-only">الدور</span></th>
+            <th><span class="en-only">Status</span><span class="ar-only">الحالة</span></th>
+            <th><span class="en-only">Description</span><span class="ar-only">الوصف</span></th>
+          </tr>
+        </thead>
+        <tbody id="ix-body">
+          <tr data-r="both"><td class="n"><a href="yalla-kids-sitemap.html">sitemap.html</a></td><td><span class="role both">shared</span></td><td><span class="st canon">you are here</span></td><td><span class="en-only">This page. Front door to the entire site.</span><span class="ar-only">هذه الصفحة. باب الموقع.</span></td></tr>
+          <tr data-r="both"><td class="n"><a href="yalla-kids-home-sunny.html">home-sunny.html</a></td><td><span class="role both">shared</span></td><td><span class="st canon">canon</span></td><td><span class="en-only">Canonical home page.</span><span class="ar-only">الرئيسية الرسمية.</span></td></tr>
+          <tr data-r="both"><td class="n"><a href="yalla-kids-home-souq.html">home-souq.html</a></td><td><span class="role both">shared</span></td><td><span class="st alt">variant</span></td><td><span class="en-only">Home variant — editorial magazine style.</span><span class="ar-only">أسلوب مجلة.</span></td></tr>
+          <tr data-r="both"><td class="n"><a href="yalla-kids-home-desert.html">home-desert.html</a></td><td><span class="role both">shared</span></td><td><span class="st alt">variant</span></td><td><span class="en-only">Home variant — terracotta desert modern.</span><span class="ar-only">أسلوب صحراوي.</span></td></tr>
+          <tr data-r="both"><td class="n"><a href="yalla-kids-home-wireframe.html">home-wireframe.html</a></td><td><span class="role both">shared</span></td><td><span class="st alt">reference</span></td><td><span class="en-only">Early wireframe. Linked as fallback from older pages.</span><span class="ar-only">تخطيط مبكر.</span></td></tr>
+          <tr data-r="parent"><td class="n"><a href="yalla-kids-search.html">search.html</a></td><td><span class="role parent">parent</span></td><td><span class="st canon">new</span></td><td><span class="en-only">Search results with filter rail, map/list toggle, no-results handling.</span><span class="ar-only">نتائج البحث + فلاتر + خريطة.</span></td></tr>
+          <tr data-r="parent"><td class="n"><a href="yalla-kids-classes-directory.html">classes-directory.html</a></td><td><span class="role parent">parent</span></td><td><span class="st">core</span></td><td><span class="en-only">Unfiltered classes list. "All classes" fallback.</span><span class="ar-only">قائمة الفصول.</span></td></tr>
+          <tr data-r="parent"><td class="n"><a href="yalla-kids-places-directory.html">places-directory.html</a></td><td><span class="role parent">parent</span></td><td><span class="st">core</span></td><td><span class="en-only">Unfiltered places list (walk-in venues).</span><span class="ar-only">قائمة الأماكن.</span></td></tr>
+          <tr data-r="parent"><td class="n"><a href="yalla-kids-class-detail.html">class-detail.html</a></td><td><span class="role parent">parent</span></td><td><span class="st">core</span></td><td><span class="en-only">Full class page with sticky booking card.</span><span class="ar-only">صفحة فصل كاملة.</span></td></tr>
+          <tr data-r="parent"><td class="n"><a href="yalla-kids-place-detail.html?slug=olioli-doha-children-s-play-museum">place-detail-olioli.html</a></td><td><span class="role parent">parent</span></td><td><span class="st">canon</span></td><td><span class="en-only">Place profile — OliOli (premium).</span><span class="ar-only">ملف مكان — OliOli.</span></td></tr>
+          <tr data-r="parent"><td class="n"><a href="yalla-kids-places-directory.html">place-detail-wonderworks.html</a></td><td><span class="role parent">parent</span></td><td><span class="st alt">variant</span></td><td><span class="en-only">Place profile variant — Wonder Works.</span><span class="ar-only">متغير — Wonder Works.</span></td></tr>
+          <tr data-r="parent"><td class="n"><a href="yalla-kids-checkout.html">checkout.html</a></td><td><span class="role parent">parent</span></td><td><span class="st">core</span></td><td><span class="en-only">Checkout form + payment.</span><span class="ar-only">الدفع.</span></td></tr>
+          <tr data-r="parent"><td class="n"><a href="yalla-kids-checkout-success.html">checkout-success.html</a></td><td><span class="role parent">parent</span></td><td><span class="st">core</span></td><td><span class="en-only">Post-purchase confirmation.</span><span class="ar-only">تأكيد بعد الشراء.</span></td></tr>
+          <tr data-r="parent"><td class="n"><a href="yalla-kids-parent-dashboard.html">parent-dashboard.html</a></td><td><span class="role parent">parent</span></td><td><span class="st">hub</span></td><td><span class="en-only">Logged-in parent hub.</span><span class="ar-only">مركز الوالدين.</span></td></tr>
+          <tr data-r="parent"><td class="n"><a href="yalla-kids-manage-booking.html">manage-booking.html</a></td><td><span class="role parent">parent</span></td><td><span class="st canon">new</span></td><td><span class="en-only">Reschedule / credit / cancel with policy math.</span><span class="ar-only">تعديل / رصيد / إلغاء.</span></td></tr>
+          <tr data-r="parent"><td class="n"><a href="yalla-kids-review.html">review.html</a></td><td><span class="role parent">parent</span></td><td><span class="st canon">new</span></td><td><span class="en-only">Post-class review submission, bilingual, photos.</span><span class="ar-only">مراجعة ما بعد الفصل.</span></td></tr>
+          <tr data-r="both"><td class="n"><a href="yalla-kids-messages.html">messages.html</a></td><td><span class="role both">shared</span></td><td><span class="st canon">new</span></td><td><span class="en-only">Inbox for parents + providers. WhatsApp-hybrid.</span><span class="ar-only">صندوق مشترك + WhatsApp.</span></td></tr>
+          <tr data-r="parent"><td class="n"><a href="yalla-kids-map.html">map.html</a></td><td><span class="role parent">parent</span></td><td><span class="st">canon</span></td><td><span class="en-only">Full-page Doha map explorer.</span><span class="ar-only">خريطة كاملة.</span></td></tr>
+          <tr data-r="parent"><td class="n"><a href="yalla-kids-area-landing.html">area-landing.html</a></td><td><span class="role parent">parent</span></td><td><span class="st">template</span></td><td><span class="en-only">Neighborhood landing (West Bay example).</span><span class="ar-only">قالب الحي.</span></td></tr>
+          <tr data-r="parent"><td class="n"><a href="yalla-kids-category-landing.html">category-landing.html</a></td><td><span class="role parent">parent</span></td><td><span class="st">template</span></td><td><span class="en-only">Vertical category landing (Art example).</span><span class="ar-only">قالب تصنيف.</span></td></tr>
+          <tr data-r="parent"><td class="n"><a href="yalla-kids-collection-landing.html">collection-landing.html</a></td><td><span class="role parent">parent</span></td><td><span class="st">template</span></td><td><span class="en-only">Editor-curated collection.</span><span class="ar-only">مجموعة تحريرية.</span></td></tr>
+          <tr data-r="parent"><td class="n"><a href="yalla-kids-camps.html">camps.html</a></td><td><span class="role parent">parent</span></td><td><span class="st">seasonal</span></td><td><span class="en-only">Camps (seasonal) — summer + spring.</span><span class="ar-only">معسكرات موسمية.</span></td></tr>
+          <tr data-r="provider"><td class="n"><a href="yalla-kids-for-providers.html">for-providers.html</a></td><td><span class="role provider">provider</span></td><td><span class="st">canon</span></td><td><span class="en-only">Marketing page for new providers.</span><span class="ar-only">صفحة للمزوّدين الجدد.</span></td></tr>
+          <tr data-r="provider"><td class="n"><a href="yalla-kids-provider-onboarding.html">provider-onboarding.html</a></td><td><span class="role provider">provider</span></td><td><span class="st canon">new</span></td><td><span class="en-only">8-step wizard to get a provider live.</span><span class="ar-only">معالج ٨ خطوات.</span></td></tr>
+          <tr data-r="provider"><td class="n"><a href="yalla-kids-class-builder.html">class-builder.html</a></td><td><span class="role provider">provider</span></td><td><span class="st canon">new</span></td><td><span class="en-only">Provider creates/edits a class listing.</span><span class="ar-only">إنشاء إعلان فصل.</span></td></tr>
+          <tr data-r="provider"><td class="n"><a href="yalla-kids-provider-dashboard.html">provider-dashboard.html</a></td><td><span class="role provider">provider</span></td><td><span class="st">hub</span></td><td><span class="en-only">Provider hub — roster, messages, payouts.</span><span class="ar-only">مركز المزوّد.</span></td></tr>
+          <tr data-r="both"><td class="n"><a href="yalla-kids-provider-profile.html">provider-profile.html</a></td><td><span class="role both">shared</span></td><td><span class="st">core</span></td><td><span class="en-only">Public provider profile (parent-facing view).</span><span class="ar-only">ملف المزوّد العام.</span></td></tr>
+          <tr data-r="info"><td class="n"><a href="yalla-kids-guides-hub.html">guides-hub.html</a></td><td><span class="role info">info</span></td><td><span class="st">canon</span></td><td><span class="en-only">Editorial guides directory.</span><span class="ar-only">دليل الأدلة.</span></td></tr>
+          <tr data-r="info"><td class="n"><a href="yalla-kids-guide-article.html">guide-article.html</a></td><td><span class="role info">info</span></td><td><span class="st">template</span></td><td><span class="en-only">Single article template.</span><span class="ar-only">قالب مقال.</span></td></tr>
+          <tr data-r="info"><td class="n"><a href="yalla-kids-how-it-works.html">how-it-works.html</a></td><td><span class="role info">info</span></td><td><span class="st">canon</span></td><td><span class="en-only">Three-step explainer.</span><span class="ar-only">شرح ثلاث خطوات.</span></td></tr>
+          <tr data-r="info"><td class="n"><a href="yalla-kids-about.html">about.html</a></td><td><span class="role info">info</span></td><td><span class="st">canon</span></td><td><span class="en-only">About / team / jobs.</span><span class="ar-only">من نحن.</span></td></tr>
+          <tr data-r="info"><td class="n"><a href="yalla-kids-faq.html">faq.html</a></td><td><span class="role info">info</span></td><td><span class="st">canon</span></td><td><span class="en-only">Frequently asked questions.</span><span class="ar-only">أسئلة شائعة.</span></td></tr>
+          <tr data-r="info"><td class="n"><a href="yalla-kids-contact.html">contact.html</a></td><td><span class="role info">info</span></td><td><span class="st">canon</span></td><td><span class="en-only">Contact form + WhatsApp support.</span><span class="ar-only">تواصل + WhatsApp.</span></td></tr>
+          <tr data-r="both"><td class="n"><a href="yalla-kids-login.html">login.html</a></td><td><span class="role both">shared</span></td><td><span class="st">core</span></td><td><span class="en-only">Phone-first login.</span><span class="ar-only">تسجيل دخول بالهاتف.</span></td></tr>
+          <tr data-r="both"><td class="n"><a href="yalla-kids-signup.html">signup.html</a></td><td><span class="role both">shared</span></td><td><span class="st">core</span></td><td><span class="en-only">Sign up with role picker.</span><span class="ar-only">تسجيل + اختيار دور.</span></td></tr>
+          <tr data-r="legal"><td class="n"><a href="yalla-kids-privacy.html">privacy.html</a></td><td><span class="role legal">legal</span></td><td><span class="st">canon</span></td><td><span class="en-only">Privacy (PDPPL-aware).</span><span class="ar-only">الخصوصية.</span></td></tr>
+          <tr data-r="legal"><td class="n"><a href="yalla-kids-terms.html">terms.html</a></td><td><span class="role legal">legal</span></td><td><span class="st">canon</span></td><td><span class="en-only">Terms + provider addendum.</span><span class="ar-only">الشروط.</span></td></tr>
+          <tr data-r="info"><td class="n"><a href="yalla-kids-placeholder.html">placeholder.html</a></td><td><span class="role info">info</span></td><td><span class="st wip">stub</span></td><td><span class="en-only">Reusable placeholder for unfinished links.</span><span class="ar-only">صفحة بديلة.</span></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ───────── DESIGN SYSTEM ───────── -->
+    <section class="ds">
+      <h2><span class="en-only">Design system at a glance</span><span class="ar-only">نظام التصميم</span></h2>
+      <div class="ds-grid">
+        <div class="ds-swatch"><div class="sw" style="background:#8A1538"></div><div class="n">Maroon</div><div class="h">#8A1538</div></div>
+        <div class="ds-swatch"><div class="sw" style="background:#F4B942"></div><div class="n">Gold</div><div class="h">#F4B942</div></div>
+        <div class="ds-swatch"><div class="sw" style="background:#FBF5ED"></div><div class="n">Cream</div><div class="h">#FBF5ED</div></div>
+        <div class="ds-swatch"><div class="sw" style="background:#FFE9B0"></div><div class="n">Butter</div><div class="h">#FFE9B0</div></div>
+        <div class="ds-swatch"><div class="sw" style="background:#C5E8D4"></div><div class="n">Mint</div><div class="h">#C5E8D4</div></div>
+        <div class="ds-swatch"><div class="sw" style="background:#F6D4D9"></div><div class="n">Rose</div><div class="h">#F6D4D9</div></div>
+        <div class="ds-swatch"><div class="sw" style="background:#CFE3F3"></div><div class="n">Sky</div><div class="h">#CFE3F3</div></div>
+        <div class="ds-swatch"><div class="sw" style="background:#25D366"></div><div class="n">WhatsApp</div><div class="h">#25D366</div></div>
+      </div>
+      <p style="font-size:13px;color:var(--ink-2);margin:14px 0 0"><span class="en-only"><b>Type:</b> Fraunces serif (display), Inter sans (UI), Tajawal (Arabic). <b>Rules:</b> 2px ink borders, 4px×4px hard shadows, 14-22px border-radius, bilingual via <code style="background:#fff;border:1px solid #ccc;padding:1px 4px;border-radius:4px">.en-only</code>/<code style="background:#fff;border:1px solid #ccc;padding:1px 4px;border-radius:4px">.ar-only</code>.</span>
+      <span class="ar-only"><b>الخطوط:</b> Fraunces و Inter و Tajawal. <b>القواعد:</b> حدود ٢ بكسل، ظلال صلبة.</span></p>
+    </section>
+
+    <!-- FOOTER -->
+    <div class="foot">
+      <div>
+        <span class="en-only">Last updated Apr 18, 2026 · Yalla Kids internal.</span>
+        <span class="ar-only">آخر تحديث ١٨ أبريل ٢٠٢٦ · داخلي.</span>
+      </div>
+      <div>
+        <a href="yalla-kids-home-sunny.html"><span class="en-only">Start with the home →</span><span class="ar-only">ابدأ من الرئيسية →</span></a>
+      </div>
+    </div>
+  </div>
+
+  <a class="go-home" href="yalla-kids-home-sunny.html">
+    <span class="en-only">Go to live site</span><span class="ar-only">للموقع المباشر</span> ›
+  </a>
+
+  <script>
+    function toggleLang(){
+      const h = document.documentElement;
+      const ltr = h.getAttribute('dir') === 'ltr';
+      h.setAttribute('dir', ltr ? 'rtl' : 'ltr');
+      h.setAttribute('lang', ltr ? 'ar' : 'en');
+    }
+
+    /* index filter */
+    const ixBtns = document.querySelectorAll('.ix-filter button');
+    const ixRows = document.querySelectorAll('#ix-body tr');
+    ixBtns.forEach(b=>{
+      b.addEventListener('click',()=>{
+        ixBtns.forEach(x=>x.classList.remove('on'));
+        b.classList.add('on');
+        const f = b.dataset.f;
+        ixRows.forEach(r=>{
+          if(f==='all' || r.dataset.r === f){
+            r.style.display='';
+          } else {
+            r.style.display='none';
+          }
+        });
+      });
+    });
+  </script>
+<script src="yalla-kids-shared.js"></script>
+</body>
+</html>

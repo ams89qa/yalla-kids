@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coming soon | Yalla Kids</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,600;1,9..144,700;1,9..144,800&family=Inter:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --maroon: #8A1538; --maroon-dark: #6B0F2B;
+    --gold: #F4B942; --gold-dark: #D99A1F;
+    --coral: #FF8A65; --coral-soft: #FFDCC9;
+    --lavender: #B388FF; --lavender-soft: #E8DCFF;
+    --teal: #4ECDC4; --teal-soft: #CEEDEB;
+    --lime: #9AC23C; --lime-soft: #E5F3C4;
+    --pink: #FF6B9D; --pink-soft: #FFD1E0;
+    --sky: #59C3F2; --sky-soft: #CDE8F7;
+    --mint: #5EE2A6; --mint-soft: #C7F0DC;
+    --peach: #FFB582; --peach-soft: #FFE4CC;
+    --butter: #FFD66B; --butter-soft: #FFF1C2;
+    --cream: #FFF6E8; --warm-white: #FFFCF6;
+    --parchment: #FDF1DC; --ink: #2A1810;
+    --ink-soft: #5A463A; --ink-mute: #8A7765;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Inter", -apple-system, sans-serif;
+    color: var(--ink); background: var(--warm-white);
+    background-image:
+      radial-gradient(circle at 8% 12%, var(--butter-soft) 0%, transparent 28%),
+      radial-gradient(circle at 92% 4%, var(--pink-soft) 0%, transparent 24%),
+      radial-gradient(circle at 96% 92%, var(--mint-soft) 0%, transparent 30%);
+    background-attachment: fixed;
+    line-height: 1.55; min-height: 100vh;
+    display: flex; flex-direction: column;
+  }
+  [dir="rtl"] body { font-family: "Tajawal", "Inter", sans-serif; }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3 { font-family: "Fraunces", Georgia, serif; letter-spacing: -0.02em; }
+  [dir="rtl"] h1, [dir="rtl"] h2 { font-family: "Tajawal", "Inter", sans-serif; }
+
+  header.site {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255, 252, 246, 0.94);
+    backdrop-filter: saturate(180%) blur(10px);
+    border-bottom: 2px solid var(--ink);
+  }
+  .nav-wrap { max-width: 1280px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; gap: 28px; }
+  .logo {
+    font-family: "Fraunces", Georgia, serif; font-weight: 800; font-size: 26px;
+    color: var(--maroon); letter-spacing: -0.02em;
+    display: inline-flex; align-items: center; gap: 4px;
+  }
+  .logo span { color: var(--gold-dark); }
+  .logo::after { content: "✨"; font-size: 14px; animation: twinkle 2.4s ease-in-out infinite; }
+  @keyframes twinkle { 0%, 100% { transform: scale(1) rotate(0); opacity: 0.85; } 50% { transform: scale(1.2) rotate(15deg); opacity: 1; } }
+  .nav-links { display: flex; gap: 26px; font-size: 14px; font-weight: 600; }
+  .nav-links a { color: var(--ink-soft); padding: 6px 2px; }
+  .nav-links a:hover { color: var(--maroon); }
+  .nav-actions { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+  [dir="rtl"] .nav-actions { margin-left: 0; margin-right: auto; }
+  .lang-toggle { border: 2px solid var(--ink); background: var(--butter-soft); padding: 7px 14px; border-radius: 999px; font-size: 13px; cursor: pointer; font-weight: 700; color: var(--ink); }
+  .btn { padding: 10px 20px; border-radius: 999px; font-size: 14px; font-weight: 700; cursor: pointer; border: 2px solid var(--ink); display: inline-flex; align-items: center; gap: 6px; font-family: inherit; transition: transform 0.12s, box-shadow 0.12s; }
+  .btn:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--ink); }
+  .btn-ghost { background: transparent; color: var(--ink); border-color: transparent; }
+  .btn-ghost:hover { background: var(--butter-soft); border-color: var(--ink); }
+  .btn-primary { background: var(--maroon); color: #fff; }
+  .btn-primary:hover { background: var(--maroon-dark); }
+  .btn-gold { background: var(--gold); color: #3a2c07; }
+  .btn-outline { background: #fff; color: var(--ink); }
+
+  main.hero-stub {
+    flex: 1;
+    display: flex; align-items: center; justify-content: center;
+    padding: 60px 24px;
+  }
+  .stub-card {
+    max-width: 640px; text-align: center;
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 28px;
+    padding: 56px 40px;
+    box-shadow: 8px 8px 0 var(--ink);
+    position: relative;
+  }
+  .stub-card::before {
+    content: "";
+    position: absolute; inset: -8px;
+    border: 2px dashed var(--gold);
+    border-radius: 36px;
+    z-index: -1;
+    opacity: 0.5;
+  }
+  .stub-emoji {
+    font-size: 72px; line-height: 1;
+    display: inline-block;
+    animation: wobble 3s ease-in-out infinite;
+  }
+  @keyframes wobble {
+    0%, 100% { transform: rotate(-6deg); }
+    50% { transform: rotate(6deg); }
+  }
+  .stub-eyebrow {
+    display: inline-block; margin: 18px 0 14px;
+    background: var(--butter-soft);
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    padding: 4px 14px;
+    font-size: 12px; font-weight: 800;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--ink);
+  }
+  .stub-h1 {
+    font-size: 48px; font-weight: 700; line-height: 1.1;
+    color: var(--ink); margin-bottom: 14px;
+  }
+  .stub-h1 .pop {
+    font-style: italic; color: var(--maroon); position: relative;
+  }
+  .stub-h1 .pop::after {
+    content: ""; position: absolute; left: -4px; right: -4px; bottom: -6px; height: 12px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'><path d='M2 8 Q 50 2, 100 6 T 198 6' stroke='%23F4B942' stroke-width='4' fill='none' stroke-linecap='round'/></svg>");
+    background-size: 100% 100%; z-index: -1;
+  }
+  .stub-desc { color: var(--ink-soft); font-size: 17px; margin-bottom: 28px; }
+  .stub-ctas { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .stub-ctas .btn { padding: 13px 22px; font-size: 15px; }
+  .crumb-back {
+    position: absolute; top: -16px; left: 24px;
+    background: var(--pink-soft); border: 2px solid var(--ink);
+    border-radius: 999px; padding: 5px 12px;
+    font-size: 11px; font-weight: 800;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--ink);
+  }
+  [dir="rtl"] .crumb-back { left: auto; right: 24px; }
+
+  footer.site {
+    background: var(--ink); color: #C9B89E;
+    padding: 28px 0; font-size: 13px;
+  }
+  footer.site .container {
+    max-width: 1280px; margin: 0 auto; padding: 0 24px;
+    display: flex; justify-content: space-between; align-items: center; gap: 20px;
+    flex-wrap: wrap;
+  }
+  footer.site a { color: var(--butter); font-weight: 600; }
+  footer.site a:hover { color: var(--gold); }
+
+  .ar-only { display: none; }
+  [dir="rtl"] .en-only { display: none; }
+  [dir="rtl"] .ar-only { display: block; }
+  [dir="rtl"] .ar-only.inline { display: inline; }
+
+  @media (max-width: 700px) {
+    .nav-links { display: none; }
+    .stub-card { padding: 40px 24px; border-radius: 22px; }
+    .stub-h1 { font-size: 32px; }
+    .stub-emoji { font-size: 56px; }
+  }
+</style>
+  <link rel="stylesheet" href="yalla-kids-shared.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="nav-wrap">
+    <a href="yalla-kids-home-wireframe.html" class="logo">
+      <span class="en-only">Yalla Kids<span>.</span></span>
+      <span class="ar-only">يلا كيدز<span>.</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="yalla-kids-classes-directory.html"><span class="en-only">Classes</span><span class="ar-only">الصفوف</span></a>
+      <a href="yalla-kids-places-directory.html"><span class="en-only">Places to go</span><span class="ar-only">أماكن للزيارة</span></a>
+      <a href="yalla-kids-placeholder.html?p=camps"><span class="en-only">Camps</span><span class="ar-only">المعسكرات</span></a>
+      <a href="yalla-kids-placeholder.html?p=guides"><span class="en-only">Guides</span><span class="ar-only">الأدلة</span></a>
+    </nav>
+    <div class="nav-actions">
+      <button class="lang-toggle" onclick="toggleLang()">
+        <span class="en-only">العربية</span>
+        <span class="ar-only">English</span>
+      </button>
+      <a href="yalla-kids-login.html" class="btn btn-ghost"><span class="en-only">Log in</span><span class="ar-only">تسجيل الدخول</span></a>
+      <a href="yalla-kids-signup.html" class="btn btn-primary"><span class="en-only">Sign up</span><span class="ar-only">إنشاء حساب</span></a>
+    </div>
+  </div>
+</header>
+
+<main class="hero-stub">
+  <div class="stub-card">
+    <span class="crumb-back">
+      <span class="en-only">Wireframe · Yalla Kids</span>
+      <span class="ar-only">واير فريم · يلا كيدز</span>
+    </span>
+    <div class="stub-emoji" id="stubEmoji">🚧</div>
+    <div class="stub-eyebrow" id="stubEyebrow">
+      <span class="en-only">Coming in MVP</span>
+      <span class="ar-only">قريباً في الإصدار الأول</span>
+    </div>
+    <h1 class="stub-h1" id="stubTitle">
+      <span class="en-only">This page is <span class="pop">on the way</span></span>
+      <span class="ar-only">هذه الصفحة <span class="pop">قيد التطوير</span></span>
+    </h1>
+    <p class="stub-desc" id="stubDesc">
+      <span class="en-only">You've landed on a wireframe placeholder. In the production build this would show full content and functionality.</span>
+      <span class="ar-only">لقد وصلت إلى صفحة مؤقتة ضمن النماذج الأولية. في النسخة النهائية ستحتوي على محتوى ووظائف كاملة.</span>
+    </p>
+    <div class="stub-ctas">
+      <a href="yalla-kids-home-wireframe.html" class="btn btn-primary">
+        <span class="en-only">← Back to home</span>
+        <span class="ar-only">← العودة للرئيسية</span>
+      </a>
+      <a href="yalla-kids-places-directory.html" class="btn btn-outline">
+        <span class="en-only">Browse places</span>
+        <span class="ar-only">تصفّح الأماكن</span>
+      </a>
+      <a href="yalla-kids-classes-directory.html" class="btn btn-gold">
+        <span class="en-only">Browse classes</span>
+        <span class="ar-only">تصفّح الصفوف</span>
+      </a>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="container">
+    <span>© 2026 Yalla Kids WLL · Doha, Qatar</span>
+    <span>
+      <a href="yalla-kids-home-wireframe.html"><span class="en-only">Home</span><span class="ar-only">الرئيسية</span></a>
+      · <a href="yalla-kids-placeholder.html?p=terms"><span class="en-only">Terms</span><span class="ar-only">الشروط</span></a>
+      · <a href="yalla-kids-placeholder.html?p=privacy"><span class="en-only">Privacy</span><span class="ar-only">الخصوصية</span></a>
+      · <a href="yalla-kids-placeholder.html?p=contact"><span class="en-only">Contact</span><span class="ar-only">تواصل</span></a>
+    </span>
+  </div>
+</footer>
+
+<script>
+  // Map ?p=<slug> to a title + emoji + description
+  const pageMap = {
+    "camps": { emoji: "🏕️", titleEn: "Summer & school-break <span class='pop'>camps</span>", titleAr: "معسكرات الصيف والعطلات", descEn: "Multi-day camps aggregated across Qatar — swim camps, sports camps, STEAM camps. Filterable by age and week.", descAr: "معسكرات لعدة أيام في أنحاء قطر — سباحة، رياضة، STEAM. قابلة للتصفية حسب العمر والأسبوع." },
+    "guides": { emoji: "📖", titleEn: "Editorial <span class='pop'>guides</span>", titleAr: "أدلة تحريرية", descEn: "The Yalla Kids editorial team curates deep-dive guides: 'Best rainy-day spots', 'Summer survival for toddlers', 'Free things to do in Doha'.", descAr: "فريق يلا كيدز يعدّ أدلة معمّقة: 'أفضل أماكن الأيام الماطرة'، 'النجاة في الصيف'، 'أنشطة مجانية في الدوحة'." },
+    "providers": { emoji: "🏢", titleEn: "For <span class='pop'>providers</span>", titleAr: "للموفرين", descEn: "Classes, camps, and venues — list your business, get bookings, and reach Qatar's parent community.", descAr: "الصفوف، المعسكرات، والأماكن — أدرج نشاطك، واستقبل الحجوزات، وتواصل مع الأهالي." },
+    "login": { emoji: "🔑", titleEn: "Log <span class='pop'>in</span>", titleAr: "تسجيل الدخول", descEn: "Sign in to your Yalla Kids parent account.", descAr: "سجّل الدخول إلى حسابك في يلا كيدز." },
+    "signup": { emoji: "✨", titleEn: "Join Yalla <span class='pop'>Kids</span>", titleAr: "انضم إلى يلا كيدز", descEn: "Create your free parent account — save favorites, get weekend picks, and book classes in one place.", descAr: "أنشئ حساباً مجانياً — احفظ المفضلات، استقبل توصيات نهاية الأسبوع، واحجز الصفوف في مكان واحد." },
+    "plan-visit": { emoji: "🗓️", titleEn: "Plan your <span class='pop'>visit</span>", titleAr: "خطّط لزيارتك", descEn: "Pick a date, time slot, and number of tickets. This is where booking happens in the MVP.", descAr: "اختر التاريخ، والوقت، وعدد التذاكر. هنا سيتم الحجز في الإصدار الأول." },
+    "claim": { emoji: "🪪", titleEn: "Claim this <span class='pop'>listing</span>", titleAr: "استلم هذا الملف", descEn: "Provider claim form — verify you manage the venue, then unlock Premium features and respond to parent inquiries.", descAr: "نموذج الاستلام — نتحقق من إدارتك للمكان، ثم تُفتح لك الميزات المميّزة والردود على استفسارات الأهالي." },
+    "birthday": { emoji: "🎂", titleEn: "Book a birthday <span class='pop'>party</span>", titleAr: "احجز حفلة عيد ميلاد", descEn: "Pick a package, date, and guest count. Yalla Kids takes a 10% platform fee and routes the inquiry to the venue for confirmation.", descAr: "اختر الباقة، التاريخ، وعدد الضيوف. يلا كيدز تأخذ عمولة 10٪ وتُحيل الطلب للمكان للتأكيد." },
+    "all-photos": { emoji: "📸", titleEn: "All <span class='pop'>photos</span>", titleAr: "كل الصور", descEn: "Full photo gallery — lightbox view with captions, ordered chronologically.", descAr: "معرض صور كامل بعرض مكبّر وتعليقات مرتّبة زمنياً." },
+    "all-reviews": { emoji: "⭐", titleEn: "All parent <span class='pop'>reviews</span>", titleAr: "كل آراء الأهالي", descEn: "Paginated reviews with filters by age band, visit type, and date.", descAr: "صفحات المراجعات مع فلاتر حسب الفئة العمرية ونوع الزيارة والتاريخ." },
+    "about": { emoji: "👋", titleEn: "About Yalla <span class='pop'>Kids</span>", titleAr: "عن يلا كيدز", descEn: "Our story — founded in Doha 2026 to make it easier for parents to find great classes and places for their kids.", descAr: "قصتنا — بدأنا في الدوحة 2026 لتسهيل عثور الأهالي على صفوف وأماكن رائعة لأطفالهم." },
+    "blog": { emoji: "✍️", titleEn: "The <span class='pop'>Blog</span>", titleAr: "المدونة", descEn: "Parenting-in-Doha articles, interviews with providers, and behind-the-scenes.", descAr: "مقالات عن الأبوّة في الدوحة، ومقابلات مع الموفرين، ومحتوى من وراء الكواليس." },
+    "contact": { emoji: "✉️", titleEn: "Contact <span class='pop'>us</span>", titleAr: "تواصل معنا", descEn: "Get in touch — support@yallakids.qa or WhatsApp us at +974 XXXX.", descAr: "تواصل معنا — support@yallakids.qa أو عبر واتساب +974 XXXX." },
+    "terms": { emoji: "📜", titleEn: "Terms of <span class='pop'>service</span>", titleAr: "الشروط والأحكام", descEn: "Full terms governing use of the platform for parents and providers.", descAr: "الشروط الكاملة لاستخدام المنصة من قبل الأهالي والموفرين." },
+    "privacy": { emoji: "🔒", titleEn: "Privacy <span class='pop'>policy</span>", titleAr: "سياسة الخصوصية", descEn: "How we handle your data, cookies, and children's information (minimal collection, parent-consented).", descAr: "كيفية تعاملنا مع بياناتك، ملفات تعريف الارتباط، ومعلومات الأطفال (جمع محدود بموافقة الأهل)." },
+    "refunds": { emoji: "↩️", titleEn: "Refund <span class='pop'>policy</span>", titleAr: "سياسة الاسترداد", descEn: "Standard 48-hour refund window for class bookings; birthday party bookings cancel up to 7 days ahead.", descAr: "نافذة استرداد 48 ساعة لحجوزات الصفوف؛ حفلات أعياد الميلاد تُلغى قبل 7 أيام." },
+    "jobs": { emoji: "💼", titleEn: "Jobs at Yalla <span class='pop'>Kids</span>", titleAr: "وظائف في يلا كيدز", descEn: "We hire in Doha — engineering, content, operations. Arabic + English required.", descAr: "نوظف في الدوحة — هندسة، محتوى، عمليات. العربية والإنجليزية مطلوبتان." },
+    "pricing": { emoji: "💸", titleEn: "Provider <span class='pop'>pricing</span>", titleAr: "أسعار الموفرين", descEn: "Basic QAR 0 · Premium QAR 199/mo · Featured QAR 399/mo. Booking commission: 10% for classes, 10% for birthday parties.", descAr: "الأساسية 0 ريال · المميّزة 199 ريال/شهرياً · المميّزة الكبرى 399 ريال/شهرياً. عمولة الحجز: 10٪." },
+    "success-stories": { emoji: "🏆", titleEn: "Provider <span class='pop'>stories</span>", titleAr: "قصص نجاح الموفرين", descEn: "How classes and venues have grown their bookings with Yalla Kids.", descAr: "كيف نجح الموفرون في نمو حجوزاتهم مع يلا كيدز." },
+    "place-profile": { emoji: "📍", titleEn: "Place <span class='pop'>profile</span>", titleAr: "ملف المكان", descEn: "Full profile for this venue — the canonical template is live for OliOli. All other venues will roll out with the same structure.", descAr: "ملف كامل لهذا المكان — قالب كامل متوفر لأولي أولي. بقية الأماكن ستتبع نفس البنية." },
+    "class-detail": { emoji: "🎨", titleEn: "Class <span class='pop'>detail</span>", titleAr: "تفاصيل الصف", descEn: "Full class profile with schedule, price, location, reviews, and booking.", descAr: "ملف كامل للصف مع الجدول والسعر والموقع والمراجعات والحجز." },
+    "guide-detail": { emoji: "📰", titleEn: "Guide <span class='pop'>article</span>", titleAr: "مقال الدليل", descEn: "Long-form editorial guide with photography, linked-in venues, and an 'add to trip' feature.", descAr: "مقال تحريري طويل مع صور وأماكن مرتبطة وميزة إضافة للرحلة." },
+    "birthday-parties": { emoji: "🎂", titleEn: "Birthday <span class='pop'>parties</span>", titleAr: "حفلات أعياد الميلاد", descEn: "Browse every Qatar venue that hosts birthday parties — filter by age, guest count, budget.", descAr: "تصفّح كل الأماكن التي تستضيف حفلات أعياد الميلاد في قطر — حسب العمر والعدد والميزانية." },
+    "category": { emoji: "🗂️", titleEn: "Category <span class='pop'>page</span>", titleAr: "صفحة الفئة", descEn: "Filter view of a single category — classes or places.", descAr: "عرض مُصفّى لفئة واحدة من الصفوف أو الأماكن." },
+    "area": { emoji: "📍", titleEn: "Area <span class='pop'>page</span>", titleAr: "صفحة المنطقة", descEn: "Everything for kids in this area — classes, places, parties, weekend events.", descAr: "كل ما يخص الأطفال في هذه المنطقة — صفوف، أماكن، حفلات، فعاليات نهاية الأسبوع." },
+    "age": { emoji: "🧒", titleEn: "Age <span class='pop'>browse</span>", titleAr: "تصفّح حسب العمر", descEn: "Filter the whole catalog by a single age band, mixing classes and places.", descAr: "تصفية الكتالوج بأكمله حسب فئة عمرية واحدة، مع دمج الصفوف والأماكن." },
+    "subscribe": { emoji: "📬", titleEn: "You're <span class='pop'>subscribed</span>!", titleAr: "تم اشتراكك!", descEn: "Thanks — every Thursday morning you'll get the weekend picks for Qatar families.", descAr: "شكراً — ستصلك كل يوم خميس توصيات نهاية الأسبوع للعائلات في قطر." },
+    "favorite": { emoji: "♡", titleEn: "Favorite <span class='pop'>saved</span>", titleAr: "تم الحفظ", descEn: "Log in to keep favorites across sessions and get notified on price changes.", descAr: "سجّل دخولك لتحفظ المفضلة وتصلك تنبيهات تغيّر السعر." },
+    "search-map": { emoji: "🗺️", titleEn: "Map <span class='pop'>search</span>", titleAr: "بحث على الخريطة", descEn: "Full-screen map view of all venues, colored by category and availability.", descAr: "خريطة بملء الشاشة لكل الأماكن، ملوّنة حسب الفئة والتوفر." },
+    "report": { emoji: "⚑", titleEn: "Report an <span class='pop'>issue</span>", titleAr: "الإبلاغ عن مشكلة", descEn: "Let us know if a listing is inaccurate, a price is wrong, or a venue has closed.", descAr: "أخبرنا إذا كانت المعلومات غير دقيقة، أو السعر خاطئ، أو أن المكان أُغلق." },
+    "share": { emoji: "⇪", titleEn: "Share <span class='pop'>this</span>", titleAr: "شارك", descEn: "Share via WhatsApp, link copy, or email. (No email or IM is sent in the wireframe.)", descAr: "شارك عبر واتساب أو الرابط أو البريد. (لا يتم إرسال شيء فعلياً في هذا النموذج.)" }
+  };
+
+  function paramFromUrl(name) {
+    const params = new URLSearchParams(window.location.search);
+    return params.get(name);
+  }
+
+  function applyContent() {
+    const slug = paramFromUrl("p");
+    if (slug && pageMap[slug]) {
+      const entry = pageMap[slug];
+      document.getElementById("stubEmoji").textContent = entry.emoji;
+      const titleEl = document.getElementById("stubTitle");
+      titleEl.innerHTML =
+        '<span class="en-only">' + entry.titleEn + '</span>' +
+        '<span class="ar-only">' + entry.titleAr + '</span>';
+      const descEl = document.getElementById("stubDesc");
+      descEl.innerHTML =
+        '<span class="en-only">' + entry.descEn + '</span>' +
+        '<span class="ar-only">' + entry.descAr + '</span>';
+      document.title =
+        entry.titleEn.replace(/<\/?span[^>]*>/g, "") + " | Yalla Kids";
+    } else {
+      // Also allow custom ?title= and ?emoji= and ?desc= override
+      const customTitle = paramFromUrl("title");
+      const customEmoji = paramFromUrl("emoji");
+      const customDesc = paramFromUrl("desc");
+      if (customEmoji) document.getElementById("stubEmoji").textContent = customEmoji;
+      if (customTitle) {
+        document.getElementById("stubTitle").innerHTML = customTitle;
+        document.title = customTitle.replace(/<\/?[^>]*>/g, "") + " | Yalla Kids";
+      }
+      if (customDesc) document.getElementById("stubDesc").innerHTML = customDesc;
+    }
+  }
+
+  function toggleLang() {
+    const html = document.documentElement;
+    const isRTL = html.getAttribute("dir") === "rtl";
+    html.setAttribute("dir", isRTL ? "ltr" : "rtl");
+    html.setAttribute("lang", isRTL ? "en" : "ar");
+  }
+
+  applyContent();
+</script>
+
+<script src="yalla-kids-shared.js"></script>
+</body>
+</html>

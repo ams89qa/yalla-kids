@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Place — Yalla Kids</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,600;1,9..144,700;1,9..144,800&family=Inter:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="yalla-kids-shared.css">
+<style>
+  body {
+    background-image:
+      radial-gradient(circle at 8% 12%, var(--butter-soft) 0%, transparent 25%),
+      radial-gradient(circle at 92% 4%, var(--pink-soft) 0%, transparent 22%);
+    background-attachment: fixed;
+  }
+  .crumb {
+    font-size: 13px; color: var(--ink-soft);
+    padding: 18px 0 10px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
+  }
+  .crumb a { color: var(--ink-soft); text-decoration: underline; text-decoration-color: var(--butter); }
+  .crumb a:hover { color: var(--maroon); }
+  .crumb .sep { color: var(--ink-mute); }
+
+  /* Hero */
+  .hero {
+    margin: 10px 0 0;
+    height: 340px;
+    border: 2px solid var(--ink);
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow-hard-lg);
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .hero .bg-layer { position: absolute; inset: 0; }
+  .hero .emoji-hero { font-size: 140px; filter: drop-shadow(0 4px 0 rgba(42,24,16,0.25)); position: relative; z-index: 2; }
+  .hero .pills {
+    position: absolute; bottom: 16px; left: 16px;
+    display: flex; gap: 8px; flex-wrap: wrap; z-index: 3;
+  }
+  .hero .pill {
+    background: #fff; border: 2px solid var(--ink); border-radius: 999px;
+    padding: 6px 12px; font-size: 12px; font-weight: 700;
+    box-shadow: 2px 2px 0 var(--ink);
+  }
+  .hero .pill.free { background: var(--mint-soft); }
+  .hero .pill.paid { background: var(--peach-soft); }
+  .hero .pill.age { background: var(--butter-soft); }
+
+  /* Title block */
+  .title-block { padding: 26px 0 0; }
+  h1.place-title {
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 46px; font-weight: 800; line-height: 1.08;
+    letter-spacing: -0.025em; color: var(--ink);
+  }
+  [dir="rtl"] h1.place-title { font-family: "Tajawal", sans-serif; }
+  .sub-row {
+    display: flex; flex-wrap: wrap; gap: 14px; margin-top: 14px;
+    font-size: 14px; color: var(--ink-soft); align-items: center;
+  }
+  .sub-row .chip {
+    background: var(--card-bg); border: 2px solid var(--ink); border-radius: 999px;
+    padding: 5px 12px; font-weight: 600; box-shadow: 2px 2px 0 var(--ink);
+  }
+
+  /* Two-column layout */
+  .layout {
+    display: grid; grid-template-columns: 2fr 1fr; gap: 28px;
+    margin: 28px 0 40px;
+  }
+  @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--card-bg);
+    border: 2px solid var(--ink); border-radius: var(--r);
+    box-shadow: var(--shadow-hard);
+    padding: 22px 24px; margin-bottom: 18px;
+  }
+  .card h3 {
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 22px; font-weight: 700; margin-bottom: 10px;
+  }
+  [dir="rtl"] .card h3 { font-family: "Tajawal", sans-serif; }
+  .card p { color: var(--ink-soft); font-size: 14px; line-height: 1.6; }
+
+  .quickfacts {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px 18px;
+    margin-top: 6px;
+  }
+  .quickfacts .f { display: flex; gap: 8px; align-items: flex-start; font-size: 14px; color: var(--ink); }
+  .quickfacts .f .lab { color: var(--ink-mute); min-width: 92px; font-weight: 600; }
+  .quickfacts .f .val { flex: 1; }
+
+  .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .tag-row .tag {
+    background: var(--butter-soft); border: 1.5px solid var(--ink);
+    border-radius: 999px; padding: 3px 10px; font-size: 12px; font-weight: 600;
+  }
+
+  /* Booking card (sticky right col) */
+  .booking {
+    position: sticky; top: 88px;
+    background: linear-gradient(180deg, var(--cream), var(--card-bg));
+    border: 2px solid var(--ink); border-radius: var(--r-lg);
+    box-shadow: var(--shadow-hard-lg);
+    padding: 22px 22px;
+  }
+  .booking .price-big {
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 34px; font-weight: 800; line-height: 1.1; color: var(--maroon);
+  }
+  [dir="rtl"] .booking .price-big { font-family: "Tajawal", sans-serif; }
+  .booking .price-sub { color: var(--ink-mute); font-size: 13px; margin-bottom: 14px; }
+  .booking .line { border-top: 1.5px dashed var(--border-strong); margin: 12px 0; }
+  .booking .b-cta { width: 100%; justify-content: center; display: flex; }
+  .booking .call-row { display: flex; gap: 8px; margin-top: 8px; }
+  .booking .call-row a { flex: 1; text-align: center; }
+
+  /* Related grid */
+  .related-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px; margin-top: 14px;
+  }
+  .place-card {
+    display: block; background: var(--card-bg);
+    border: 2px solid var(--ink); border-radius: var(--r);
+    box-shadow: var(--shadow-hard); overflow: hidden;
+    transition: transform 0.12s, box-shadow 0.12s;
+  }
+  .place-card:hover { transform: translate(-2px, -2px); box-shadow: var(--shadow-hard-lg); }
+  .place-card .place-media {
+    height: 130px; display: flex; align-items: center; justify-content: center;
+    font-size: 44px; border-bottom: 2px solid var(--ink);
+  }
+  .place-card .place-body { padding: 12px 14px 14px; }
+  .place-card .place-meta { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 6px; }
+  .place-card .badge {
+    background: var(--butter-soft); border: 1.5px solid var(--ink);
+    border-radius: 999px; padding: 2px 10px; font-size: 11px; font-weight: 700;
+  }
+  .place-card .badge.area { background: var(--sky-soft); }
+  .place-card .place-title {
+    font-family: "Fraunces", Georgia, serif; font-size: 17px; font-weight: 700;
+    line-height: 1.25; color: var(--ink); margin-bottom: 4px;
+  }
+  [dir="rtl"] .place-card .place-title { font-family: "Tajawal", sans-serif; }
+  .place-card .place-sub { font-size: 12px; color: var(--ink-mute); min-height: 14px; }
+  .place-card .place-foot { display: flex; justify-content: space-between; gap: 6px; margin-top: 10px; }
+  .place-card .age-chip, .place-card .price-chip {
+    font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 999px;
+    border: 1.5px solid var(--ink);
+  }
+  .place-card .age-chip { background: var(--lavender-soft); }
+  .place-card .price-chip { background: var(--mint-soft); }
+
+  .missing-warn {
+    background: var(--coral-soft); border: 2px solid var(--ink);
+    border-radius: var(--r); padding: 24px; margin: 40px 0;
+    text-align: center; box-shadow: var(--shadow-hard);
+  }
+  .missing-warn h2 { font-family: "Fraunces", Georgia, serif; margin-bottom: 8px; }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="nav-wrap container">
+    <a href="yalla-kids-home-wireframe.html" class="logo">
+      <span class="en-only inline">Yalla Kids</span>
+      <span class="ar-only inline">يلا كيدز</span>
+    </a>
+    <nav class="nav-links">
+      <a href="yalla-kids-classes-directory.html"><span class="en-only inline">Classes</span><span class="ar-only inline">الصفوف</span></a>
+      <a href="yalla-kids-places-directory.html" class="active"><span class="en-only inline">Places to go</span><span class="ar-only inline">أماكن للزيارة</span></a>
+      <a href="yalla-kids-camps.html"><span class="en-only inline">Camps</span><span class="ar-only inline">المعسكرات</span></a>
+      <a href="yalla-kids-guides-hub.html"><span class="en-only inline">Guides</span><span class="ar-only inline">الأدلة</span></a>
+      <a href="yalla-kids-for-providers.html"><span class="en-only inline">For providers</span><span class="ar-only inline">للموفرين</span></a>    </nav>
+    <div class="nav-actions">
+      <button class="lang-toggle" onclick="toggleLang()">
+        <span class="en-only inline">العربية</span>
+        <span class="ar-only inline">English</span>
+      </button>
+      <a href="yalla-kids-login.html" class="btn btn-ghost"><span class="en-only inline">Log in</span><span class="ar-only inline">تسجيل الدخول</span></a>
+      <a href="yalla-kids-signup.html" class="btn btn-primary"><span class="en-only inline">Sign up</span><span class="ar-only inline">إنشاء حساب</span></a>
+    </div>
+  </div>
+</header>
+
+<main id="detail-root" class="container">
+  <!-- populated by render -->
+</main>
+
+<footer class="site">
+  <div class="container">
+    <div class="foot-base" style="justify-content:center;">
+      <span>© 2026 Yalla Kids WLL · Doha, Qatar 🇶🇦</span>
+    </div>
+  </div>
+</footer>
+
+<script src="yalla-kids-data.js"></script>
+<script src="yalla-kids-shared.js"></script>
+<script>
+function toggleLang() {
+  var html = document.documentElement;
+  var isRTL = html.getAttribute('dir') === 'rtl';
+  html.setAttribute('dir', isRTL ? 'ltr' : 'rtl');
+  html.setAttribute('lang', isRTL ? 'en' : 'ar');
+}
+(function () {
+  var D = window.YALLA_DATA;
+  var root = document.getElementById('detail-root');
+  if (!D) return;
+
+  var slug = new URLSearchParams(location.search).get('slug') || '';
+  var it = D.bySlug[slug];
+
+  // Fallback: legacy olioli / wonderworks links without slug — find by filename convention
+  if (!it && location.pathname.indexOf('olioli') > -1) it = D.bySlug['olioli-qatar'];
+  if (!it && location.pathname.indexOf('wonderworks') > -1) it = D.bySlug['wonder-works-indoor'] || D.bySlug['wonderworks'];
+
+  if (!it || it.kind !== 'place') {
+    // Try to surface the first place if no slug matched
+    var suggestions = D.places.slice(0, 6).map(function (p) {
+      return '<a class="btn btn-outline" href="?slug=' + encodeURIComponent(p.slug) + '" style="margin:4px;">' + D.escapeHtml(p.name_en) + '</a>';
+    }).join('');
+    root.innerHTML =
+      '<div class="missing-warn">' +
+        '<h2>Place not found</h2>' +
+        '<p>We could not find that venue. Try one of these:</p>' +
+        '<div style="margin-top:16px;">' + suggestions + '</div>' +
+        '<p style="margin-top:16px;"><a class="btn btn-primary" href="yalla-kids-places-directory.html">Browse all places →</a></p>' +
+      '</div>';
+    return;
+  }
+  document.title = it.name_en + ' — ' + (it.category_label || 'Place') + ' · Yalla Kids';
+
+  // ---- Schema.org JSON-LD (LocalBusiness + WebPage) -------------------
+  (function emitJsonLd() {
+    try {
+      var canonical = location.origin + location.pathname + '?slug=' + encodeURIComponent(it.slug);
+      var ld = {
+        '@context': 'https://schema.org',
+        '@type': 'LocalBusiness',
+        '@id': canonical + '#place',
+        name: it.name_en,
+        description: it.highlights || (it.category_label + ' in ' + (it.area || 'Qatar')),
+        url: canonical,
+        image: D.ogImageUrl ? D.ogImageUrl(it.website) : undefined,
+        telephone: it.phone || undefined,
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: it.address || '',
+          addressLocality: it.area || 'Doha',
+          addressCountry: 'QA'
+        },
+        priceRange: it.is_free ? 'Free' : (it.price_label || undefined),
+        areaServed: { '@type': 'Country', name: 'Qatar' },
+        keywords: (it.tags || []).join(', '),
+        sameAs: it.website ? [it.website] : undefined
+      };
+      if (it.hours_or_schedule) ld.openingHours = it.hours_or_schedule;
+      // Strip undefined values
+      Object.keys(ld).forEach(function (k) { if (ld[k] === undefined) delete ld[k]; });
+      var s = document.createElement('script');
+      s.type = 'application/ld+json';
+      s.textContent = JSON.stringify(ld);
+      document.head.appendChild(s);
+    } catch (e) { /* ignore */ }
+  })();
+
+  var accentMap = {
+    'play-museum': '#FFE5A3', 'role-play': '#FFD1E0', 'theme-park': '#FFDCC9',
+    'indoor-park': '#CDE8F7', 'play-centre': '#E8DCFF', 'trampoline': '#C7F0DC',
+    library: '#CEEDEB', museum: '#FFD1E0', park: '#E5F3C4', zoo: '#E5F3C4', waterpark: '#CDE8F7'
+  };
+  var emojiMap = {
+    'play-museum': '🎨', 'role-play': '🏙️', 'theme-park': '🎢',
+    'indoor-park': '🌳', 'play-centre': '🎈', 'trampoline': '🦘',
+    library: '📚', museum: '🏛️', park: '🌳', zoo: '🦒', waterpark: '🏊'
+  };
+  var accent = accentMap[it.category] || '#FFE5A3';
+  var emoji = emojiMap[it.category] || '🎈';
+
+  var priceChip = it.is_free
+    ? '<span class="pill free">💚 Free entry</span>'
+    : '<span class="pill paid">💰 ' + D.escapeHtml(it.price_label || 'Paid') + '</span>';
+  var ageChip = '<span class="pill age">👶 Ages ' + D.escapeHtml(it.age_label || '') + '</span>';
+
+  var websiteHtml = it.website
+    ? '<a href="' + D.escapeHtml(it.website) + '" target="_blank" rel="noopener" class="btn btn-outline" style="width:100%;justify-content:center;">🌐 Website →</a>'
+    : '';
+  var callHtml = it.phone
+    ? '<a href="tel:' + D.escapeHtml(it.phone.replace(/[^+\d]/g, '')) + '" class="btn btn-gold">📞 ' + D.escapeHtml(it.phone) + '</a>'
+    : '';
+  var mapsHref = 'https://maps.google.com/?q=' + encodeURIComponent((it.name_en || '') + ' ' + (it.address || it.area || 'Doha Qatar'));
+
+  var tagsHtml = (it.tags || []).map(function (t) {
+    return '<span class="tag">' + D.escapeHtml(t) + '</span>';
+  }).join('');
+
+  var highlights = it.highlights
+    ? '<div class="card"><h3>Why kids love it</h3><p>' + D.escapeHtml(it.highlights) + '</p></div>'
+    : '';
+
+  // Related: same category, different slug
+  var related = D.places.filter(function (p) {
+    return p.category === it.category && p.slug !== it.slug;
+  }).slice(0, 4);
+  if (related.length < 4) {
+    var fill = D.places.filter(function (p) {
+      return p.area === it.area && p.slug !== it.slug && related.indexOf(p) === -1;
+    }).slice(0, 4 - related.length);
+    related = related.concat(fill);
+  }
+  var relatedHtml = related.map(function (p) { return D.cardHTML(p); }).join('');
+
+  // Related classes in same area
+  var sameAreaClasses = D.classes.filter(function (c) {
+    return c.area === it.area;
+  }).slice(0, 4);
+  var classCardsHtml = sameAreaClasses.length
+    ? '<div class="card"><h3>Classes near here</h3><div class="related-grid" style="margin-top:14px;">' +
+        sameAreaClasses.map(function (c) { return D.cardHTML(c); }).join('') +
+      '</div></div>'
+    : '';
+
+  root.innerHTML =
+    '<div class="crumb">' +
+      '<a href="yalla-kids-home-wireframe.html">Home</a>' +
+      '<span class="sep">›</span>' +
+      '<a href="yalla-kids-places-directory.html">Places to go</a>' +
+      '<span class="sep">›</span>' +
+      '<a href="yalla-kids-places-directory.html#cat-' + encodeURIComponent(it.category) + '">' + D.escapeHtml(it.category_label || '') + '</a>' +
+      '<span class="sep">›</span>' +
+      '<span>' + D.escapeHtml(it.name_en) + '</span>' +
+    '</div>' +
+    '<div class="hero pd-hero-media" style="background:' + accent + ';">' +
+      (it.website
+        ? '<img class="hero-img" src="' + D.escapeHtml(D.ogImageUrl(it.website)) + '" alt="" loading="eager" decoding="async" onerror="this.remove();" onload="this.classList.add(\'ready\'); this.closest(\'.pd-hero-media\').classList.add(\'has-img\');" />'
+        : '') +
+      '<span class="emoji-hero hero-emoji">' + emoji + '</span>' +
+      '<div class="hero-scrim"></div>' +
+      '<div class="pills">' + priceChip + ageChip +
+        (it.indoor_outdoor ? '<span class="pill">🏠 ' + D.escapeHtml(it.indoor_outdoor) + '</span>' : '') +
+        (it.bilingual ? '<span class="pill">🗣️ ' + D.escapeHtml(it.bilingual) + '</span>' : '') +
+      '</div>' +
+    '</div>' +
+    '<div class="title-block">' +
+      '<h1 class="place-title">' +
+        (it.website
+          ? '<img class="pd-hero-favicon" src="' + D.escapeHtml(D.faviconUrl(it.website, 128)) + '" alt="" loading="lazy" decoding="async" onerror="this.remove();" />'
+          : '') +
+        D.escapeHtml(it.name_en) +
+      '</h1>' +
+      '<div class="sub-row">' +
+        '<span class="chip">📍 ' + D.escapeHtml(it.area || 'Doha') + '</span>' +
+        '<span class="chip">🏷️ ' + D.escapeHtml(it.category_label || '') + '</span>' +
+        (it.last_verified ? '<span class="chip">✅ Verified ' + D.escapeHtml(it.last_verified) + '</span>' : '') +
+      '</div>' +
+    '</div>' +
+    '<div class="layout">' +
+      '<div class="main-col">' +
+        highlights +
+        '<div class="card">' +
+          '<h3>Quick facts</h3>' +
+          '<div class="quickfacts">' +
+            '<div class="f"><span class="lab">Area</span><span class="val">' + D.escapeHtml(it.area || '—') + '</span></div>' +
+            '<div class="f"><span class="lab">Address</span><span class="val">' + D.escapeHtml(it.address || '—') + '</span></div>' +
+            '<div class="f"><span class="lab">Ages</span><span class="val">' + D.escapeHtml(it.age_label) + '</span></div>' +
+            '<div class="f"><span class="lab">Price</span><span class="val">' + D.escapeHtml(it.price_label || '—') + '</span></div>' +
+            (it.hours_or_schedule ? '<div class="f"><span class="lab">Hours</span><span class="val">' + D.escapeHtml(it.hours_or_schedule) + '</span></div>' : '') +
+            (it.indoor_outdoor ? '<div class="f"><span class="lab">Setting</span><span class="val">' + D.escapeHtml(it.indoor_outdoor) + '</span></div>' : '') +
+            (it.bilingual ? '<div class="f"><span class="lab">Language</span><span class="val">' + D.escapeHtml(it.bilingual) + '</span></div>' : '') +
+            (it.booking ? '<div class="f"><span class="lab">Booking</span><span class="val">' + D.escapeHtml(it.booking) + '</span></div>' : '') +
+          '</div>' +
+          (tagsHtml ? '<div class="tag-row">' + tagsHtml + '</div>' : '') +
+        '</div>' +
+        classCardsHtml +
+        (related.length ? '<div class="card"><h3>Other ' + D.escapeHtml((it.category_label || 'places').toLowerCase()) + '</h3><div class="related-grid">' + relatedHtml + '</div></div>' : '') +
+      '</div>' +
+      '<aside>' +
+        '<div class="booking">' +
+          '<div class="price-big">' + D.escapeHtml(it.price_label || 'Free') + '</div>' +
+          '<div class="price-sub">' + (it.is_free ? 'No booking needed' : 'Check venue for latest rates') + '</div>' +
+          '<a href="' + mapsHref + '" target="_blank" rel="noopener" class="btn btn-primary btn-lg b-cta">📍 Get directions</a>' +
+          '<div class="line"></div>' +
+          (websiteHtml ? websiteHtml + '<div class="line"></div>' : '') +
+          (callHtml ? '<div class="call-row">' + callHtml + '</div>' : '') +
+          '<div style="margin-top:14px;font-size:12px;color:var(--ink-mute);">' +
+            'Last verified: ' + D.escapeHtml(it.last_verified || '—') +
+          '</div>' +
+        '</div>' +
+      '</aside>' +
+    '</div>' +
+    '<div class="yk-rail" id="recents-rail" style="display:none;"></div>';
+
+  // Record this visit AFTER render (so the rail excludes the current page)
+  if (D.recents) {
+    D.recents.record('place', it.slug);
+    var railEl = document.getElementById('recents-rail');
+    if (railEl) D.renderRecentsRail(railEl, {
+      excludeKey: 'place:' + it.slug,
+      titleEn: 'You also viewed',
+      titleAr: 'شاهدتها أيضاً'
+    });
+  }
+})();
+</script>
+</body>
+</html>

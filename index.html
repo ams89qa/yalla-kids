@@ -1,0 +1,2537 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yalla Kids — Qatar's kids' classes & places to go, one place to book</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;0,9..144,800;1,9..144,600;1,9..144,700&family=Inter:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  /* =========================================================
+     DESIGN TOKENS — playful Yalla Kids
+  ========================================================= */
+  :root {
+    /* Brand anchors */
+    --maroon: #8A1538;
+    --maroon-dark: #6B0F2B;
+    --gold: #F4B942;
+    --gold-dark: #D99A1F;
+
+    /* Playful pastels */
+    --coral: #FF8A65;     --coral-soft: #FFDCC9;
+    --lavender: #B388FF;  --lavender-soft: #E8DCFF;
+    --teal: #4ECDC4;      --teal-soft: #CEEDEB;
+    --lime: #9AC23C;      --lime-soft: #E5F3C4;
+    --pink: #FF6B9D;      --pink-soft: #FFD1E0;
+    --sky: #59C3F2;       --sky-soft: #CDE8F7;
+    --mint: #5EE2A6;      --mint-soft: #C7F0DC;
+    --peach: #FFB582;     --peach-soft: #FFE4CC;
+    --butter: #FFD66B;    --butter-soft: #FFF1C2;
+
+    /* Canvas + ink */
+    --cream: #FFF6E8;
+    --warm-white: #FFFCF6;
+    --parchment: #FDF1DC;
+    --card: #FFFFFF;
+
+    --ink: #2A1810;
+    --ink-soft: #5A4938;
+    --ink-mute: #8A7868;
+
+    --border: #EDE0C9;
+    --border-strong: #D9C9A9;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--ink);
+    background: var(--cream);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  [dir="rtl"] body { font-family: "Tajawal", "Inter", sans-serif; }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+
+  .display {
+    font-family: "Fraunces", Georgia, serif;
+    font-optical-sizing: auto;
+    letter-spacing: -0.01em;
+  }
+  [dir="rtl"] .display { font-family: "Tajawal", "Fraunces", sans-serif; }
+  .italic-accent {
+    font-family: "Fraunces", Georgia, serif;
+    font-style: italic;
+    font-weight: 700;
+  }
+  [dir="rtl"] .italic-accent { font-family: "Tajawal", "Fraunces", sans-serif; font-style: normal; }
+
+  /* =========================================================
+     ANNOUNCEMENT BAR
+  ========================================================= */
+  .announce {
+    background: var(--coral);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    padding: 9px 16px;
+    position: relative;
+  }
+  .announce .pill-inline {
+    display: inline-block;
+    background: rgba(255,255,255,0.22);
+    padding: 2px 10px;
+    border-radius: 999px;
+    margin-right: 6px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  [dir="rtl"] .announce .pill-inline { margin-right: 0; margin-left: 6px; }
+
+  /* =========================================================
+     HEADER
+  ========================================================= */
+  header.site {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255, 246, 232, 0.94);
+    backdrop-filter: saturate(180%) blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-wrap {
+    max-width: 1280px; margin: 0 auto; padding: 16px 24px;
+    display: flex; align-items: center; gap: 30px;
+  }
+  .logo {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 800;
+    font-size: 26px;
+    color: var(--maroon);
+    letter-spacing: -0.02em;
+    display: inline-flex; align-items: baseline; gap: 2px;
+  }
+  .logo .dot { color: var(--gold); }
+  .logo::after {
+    content: "✨";
+    font-size: 14px;
+    margin-left: 4px;
+  }
+  [dir="rtl"] .logo { font-family: "Tajawal", "Fraunces", sans-serif; font-weight: 800; }
+  [dir="rtl"] .logo::after { margin-left: 0; margin-right: 4px; }
+
+  .nav-links { display: flex; gap: 22px; font-size: 14px; font-weight: 500; }
+  .nav-links a {
+    color: var(--ink-soft);
+    padding: 6px 2px;
+    position: relative;
+    transition: color 0.15s;
+  }
+  .nav-links a:hover { color: var(--maroon); }
+  .nav-links a:hover::after {
+    content: ""; position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 3px; background: var(--gold);
+    border-radius: 999px;
+  }
+
+  .nav-actions { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+  [dir="rtl"] .nav-actions { margin-left: 0; margin-right: auto; }
+
+  .lang-toggle {
+    border: 1.5px solid var(--border-strong); background: var(--card);
+    padding: 7px 14px; border-radius: 999px;
+    font-size: 13px; font-weight: 700; cursor: pointer;
+    transition: all 0.15s;
+  }
+  .lang-toggle:hover { border-color: var(--maroon); color: var(--maroon); }
+
+  .btn {
+    padding: 10px 20px; border-radius: 999px;
+    font-size: 14px; font-weight: 700;
+    cursor: pointer; border: none;
+    transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+    font-family: inherit;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn:active { transform: translateY(0); }
+  .btn-ghost { background: transparent; color: var(--ink); }
+  .btn-ghost:hover { background: var(--butter-soft); }
+  .btn-primary { background: var(--maroon); color: #fff; box-shadow: 0 4px 0 var(--maroon-dark); }
+  .btn-primary:hover { background: var(--maroon-dark); box-shadow: 0 2px 0 var(--maroon-dark); }
+  .btn-gold { background: var(--gold); color: #3a2c07; box-shadow: 0 4px 0 var(--gold-dark); }
+  .btn-gold:hover { background: var(--gold-dark); color: #fff; box-shadow: 0 2px 0 var(--gold-dark); }
+  .btn-outline { background: var(--card); color: var(--ink); border: 1.5px solid var(--border-strong); }
+  .btn-outline:hover { border-color: var(--maroon); color: var(--maroon); }
+  .btn-lg { padding: 14px 26px; font-size: 15px; }
+
+  /* =========================================================
+     CONTAINER
+  ========================================================= */
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+  /* =========================================================
+     HERO
+  ========================================================= */
+  .hero {
+    position: relative;
+    padding: 56px 0 80px;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: ""; position: absolute;
+    top: -100px; right: -150px; width: 500px; height: 500px;
+    background: radial-gradient(circle, var(--butter-soft) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: 0;
+  }
+  .hero::after {
+    content: ""; position: absolute;
+    bottom: -80px; left: -100px; width: 400px; height: 400px;
+    background: radial-gradient(circle, var(--pink-soft) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: 0;
+  }
+  .hero-grid {
+    position: relative; z-index: 1;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 7px 14px;
+    background: var(--maroon);
+    color: #fff;
+    border-radius: 999px;
+    font-size: 12px; font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 20px;
+  }
+  .eyebrow::before { content: "👋"; }
+
+  .hero h1 {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 800;
+    font-size: clamp(40px, 5.5vw, 68px);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin-bottom: 18px;
+  }
+  [dir="rtl"] .hero h1 { font-family: "Tajawal", "Fraunces", sans-serif; }
+  .hero h1 .pop {
+    font-style: italic;
+    color: var(--maroon);
+    position: relative;
+    display: inline-block;
+    white-space: nowrap;
+  }
+  [dir="rtl"] .hero h1 .pop { font-style: normal; }
+  .hero h1 .pop::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: -4px; right: -4px;
+    height: 12px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'><path d='M2 8 Q 50 2, 100 6 T 198 6' stroke='%23F4B942' stroke-width='4' fill='none' stroke-linecap='round'/></svg>");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    z-index: -1;
+  }
+  .hero-sub {
+    font-size: 19px;
+    color: var(--ink-soft);
+    max-width: 540px;
+    margin-bottom: 30px;
+    line-height: 1.5;
+  }
+
+  .search-bar {
+    background: var(--card);
+    border: 2px solid var(--ink);
+    border-radius: 24px;
+    padding: 8px;
+    box-shadow: 6px 6px 0 var(--gold);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr auto;
+    gap: 4px;
+    max-width: 620px;
+    margin-bottom: 24px;
+  }
+  .search-field {
+    padding: 10px 16px;
+    border-radius: 18px;
+    transition: background 0.15s;
+  }
+  .search-field:hover { background: var(--butter-soft); }
+  .search-field .lbl {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    color: var(--ink-mute);
+    margin-bottom: 2px;
+  }
+  .search-field .val {
+    font-size: 14px; font-weight: 600; color: var(--ink);
+  }
+  .search-btn {
+    width: 52px;
+    background: var(--maroon);
+    color: #fff;
+    border: none;
+    border-radius: 18px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+  }
+  .search-btn:hover { background: var(--maroon-dark); }
+  .search-btn:active { transform: scale(0.96); }
+
+  /* Search-field popover trigger */
+  .search-field.has-popover {
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+  }
+  .search-field.has-popover::after {
+    content: "⌄";
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-70%);
+    font-size: 14px;
+    color: var(--ink-mute);
+    pointer-events: none;
+  }
+  [dir="rtl"] .search-field.has-popover::after { right: auto; left: 14px; }
+  .search-field.has-popover.open {
+    background: var(--butter-soft);
+    box-shadow: inset 0 0 0 2px var(--ink);
+  }
+
+  /* Age picker panel */
+  .age-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 380px;
+    max-width: calc(100vw - 32px);
+    background: var(--card);
+    border: 2px solid var(--ink);
+    border-radius: 20px;
+    box-shadow: 6px 6px 0 var(--ink);
+    padding: 20px 20px 0 20px;
+    z-index: 1000;
+    cursor: default;
+    max-height: calc(100vh - 40px);
+    display: flex;
+    flex-direction: column;
+  }
+  [dir="rtl"] .age-panel { box-shadow: -6px 6px 0 var(--ink); }
+  .age-panel[hidden] { display: none; }
+  .age-panel-body {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    padding-bottom: 16px;
+  }
+  .age-panel h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 10px 0;
+    color: var(--ink);
+  }
+  .age-panel h4:not(:first-child) { margin-top: 18px; }
+  .age-grid-mo {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .age-grid-yr {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+  }
+  .age-grid-yr .age-pill.wide { grid-column: span 3; }
+  .age-pill {
+    appearance: none;
+    background: var(--warm-white);
+    border: 1.5px solid var(--border-strong);
+    border-radius: 12px;
+    padding: 10px 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    cursor: pointer;
+    transition: all 0.12s;
+    text-align: center;
+    font-family: inherit;
+    line-height: 1.2;
+  }
+  .age-pill:hover {
+    border-color: var(--ink);
+    background: var(--butter-soft);
+  }
+  .age-pill.selected {
+    background: var(--sky);
+    border-color: #2b8fc9;
+    color: #fff;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.1);
+  }
+  .age-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 0;
+    margin: 0 -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-top: 1.5px solid var(--border-strong);
+    background: var(--card);
+    position: sticky;
+    bottom: 0;
+  }
+  .age-clear {
+    background: none;
+    border: none;
+    color: var(--ink);
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 6px 0;
+    font-family: inherit;
+  }
+  .age-clear:hover { color: var(--coral); }
+  .age-apply {
+    background: var(--coral);
+    color: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    padding: 9px 22px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 2px 2px 0 var(--ink);
+    transition: transform 0.1s, box-shadow 0.1s;
+    font-family: inherit;
+  }
+  .age-apply:hover { transform: translate(-1px, -1px); box-shadow: 3px 3px 0 var(--ink); }
+  .age-apply:active { transform: translate(1px, 1px); box-shadow: 0 0 0 var(--ink); }
+  @media (max-width: 640px) {
+    .age-panel { width: 320px; }
+    .age-grid-yr { grid-template-columns: repeat(5, 1fr); }
+    .age-grid-yr .age-pill.wide { grid-column: span 5; }
+  }
+
+  /* Generic list popover (Looking for, In) */
+  .list-panel {
+    position: fixed;
+    top: 0; left: 0;
+    width: 340px;
+    max-width: calc(100vw - 32px);
+    background: var(--card);
+    border: 2px solid var(--ink);
+    border-radius: 20px;
+    box-shadow: 6px 6px 0 var(--ink);
+    padding: 10px;
+    z-index: 1000;
+    cursor: default;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+  }
+  [dir="rtl"] .list-panel { box-shadow: -6px 6px 0 var(--ink); }
+  .list-panel[hidden] { display: none; }
+  .list-panel h5 {
+    font-family: inherit;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    color: var(--ink-mute);
+    margin: 14px 10px 4px 10px;
+  }
+  .list-panel h5:first-child { margin-top: 6px; }
+  .list-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 10px 12px;
+    border: none;
+    background: transparent;
+    border-radius: 12px;
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--ink);
+    font-weight: 600;
+    transition: background 0.1s, color 0.1s;
+  }
+  [dir="rtl"] .list-option { text-align: right; }
+  .list-option:hover { background: var(--butter-soft); }
+  .list-option.selected { background: var(--maroon); color: #fff; }
+  .list-option .ico {
+    font-size: 22px;
+    flex-shrink: 0;
+    line-height: 1;
+    width: 32px;
+    text-align: center;
+  }
+  .list-option .tx { flex: 1; min-width: 0; }
+  .list-option .sub {
+    display: block;
+    font-size: 12px;
+    color: var(--ink-mute);
+    margin-top: 2px;
+    font-weight: 400;
+  }
+  .list-option.selected .sub { color: rgba(255,255,255,0.85); }
+
+  .trust-row {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 20px;
+    color: var(--ink-soft);
+    font-size: 14px;
+  }
+  .trust-row .stars { color: var(--gold-dark); font-weight: 800; }
+  .trust-row strong { color: var(--ink); }
+  .trust-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 12px;
+    background: var(--mint-soft);
+    color: #0a5d2d;
+    border-radius: 999px;
+    font-size: 12px; font-weight: 700;
+  }
+
+  /* Hero collage */
+  .hero-art {
+    position: relative;
+    min-height: 480px;
+  }
+  .hero-photo {
+    position: absolute;
+    border-radius: 28px;
+    overflow: hidden;
+    border: 5px solid #fff;
+    box-shadow: 0 12px 40px rgba(42, 24, 16, 0.18);
+    background-size: cover; background-position: center;
+  }
+  .hp-1 {
+    width: 260px; height: 340px;
+    top: 20px; left: 0;
+    transform: rotate(-6deg);
+    background: var(--mint-soft);
+    display: flex; align-items: center; justify-content: center; font-size: 120px;
+    z-index: 3;
+  }
+  .hp-2 {
+    width: 240px; height: 300px;
+    top: 0; right: 20px;
+    transform: rotate(4deg);
+    background: var(--peach-soft);
+    display: flex; align-items: center; justify-content: center; font-size: 110px;
+    z-index: 2;
+  }
+  .hp-3 {
+    width: 200px; height: 240px;
+    bottom: 0; right: 100px;
+    transform: rotate(-3deg);
+    background: var(--butter-soft);
+    display: flex; align-items: center; justify-content: center; font-size: 96px;
+    z-index: 4;
+  }
+  .hero-badge {
+    position: absolute;
+    z-index: 5;
+    background: var(--card);
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    padding: 10px 18px;
+    font-size: 13px; font-weight: 700;
+    box-shadow: 4px 4px 0 var(--ink);
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .hero-badge.b1 { top: -10px; left: 140px; transform: rotate(-8deg); background: var(--mint); }
+  .hero-badge.b2 { bottom: 60px; left: 10px; transform: rotate(6deg); background: var(--butter); }
+  .hero-badge.b3 { top: 180px; right: -10px; transform: rotate(-4deg); background: var(--pink); color: #fff; border-color: var(--ink); }
+  .hero-badge .em { font-size: 16px; }
+
+  /* Scattered sparkles */
+  .sparkle { position: absolute; font-size: 24px; pointer-events: none; }
+  .sparkle.s1 { top: 40px; right: 80px; color: var(--gold); animation: twinkle 2s infinite; }
+  .sparkle.s2 { bottom: 100px; left: 40px; color: var(--coral); animation: twinkle 2.5s infinite 0.5s; }
+  .sparkle.s3 { top: 50%; right: 5px; color: var(--lavender); animation: twinkle 3s infinite 1s; }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.9; transform: scale(1) rotate(0); }
+    50% { opacity: 0.5; transform: scale(1.2) rotate(20deg); }
+  }
+
+  /* =========================================================
+     SCALLOP / WAVE DIVIDERS
+  ========================================================= */
+  .wave-divider {
+    position: relative;
+    height: 40px;
+    background: var(--warm-white);
+    margin-top: -1px;
+  }
+  .wave-divider svg { position: absolute; top: -1px; left: 0; right: 0; width: 100%; height: 40px; }
+  .wave-divider.flip svg { transform: rotate(180deg); }
+
+  /* =========================================================
+     SECTION GENERIC
+  ========================================================= */
+  section { position: relative; }
+  .section-head {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    gap: 20px; margin-bottom: 28px; flex-wrap: wrap;
+  }
+  .section-head h2 {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 800;
+    font-size: clamp(28px, 3.2vw, 42px);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  [dir="rtl"] .section-head h2 { font-family: "Tajawal", "Fraunces", sans-serif; }
+  .section-head h2 .pop {
+    font-style: italic;
+    color: var(--maroon);
+  }
+  [dir="rtl"] .section-head h2 .pop { font-style: normal; }
+  .section-head p {
+    color: var(--ink-soft); font-size: 16px; max-width: 520px; margin-top: 6px;
+  }
+  .section-head .see-all {
+    font-size: 14px; font-weight: 700; color: var(--maroon);
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 8px 14px; border-radius: 999px;
+    border: 1.5px solid var(--maroon);
+    transition: background 0.15s;
+  }
+  .section-head .see-all:hover { background: var(--maroon); color: #fff; }
+
+  /* =========================================================
+     CATEGORY GRID (colored tiles)
+  ========================================================= */
+  .cat-section {
+    padding: 70px 0;
+    background: var(--warm-white);
+    position: relative;
+  }
+  .cat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+  .cat-tile {
+    border-radius: 28px;
+    padding: 24px 20px 22px;
+    border: 2px solid var(--ink);
+    box-shadow: 6px 6px 0 var(--ink);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    display: flex; flex-direction: column;
+    min-height: 160px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cat-tile:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 8px 8px 0 var(--ink);
+  }
+  .cat-tile .cat-emoji {
+    font-size: 40px;
+    margin-bottom: 12px;
+    line-height: 1;
+  }
+  .cat-tile .cat-name {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+    margin-bottom: 2px;
+  }
+  [dir="rtl"] .cat-tile .cat-name { font-family: "Tajawal", sans-serif; }
+  .cat-tile .cat-count {
+    font-size: 13px;
+    color: var(--ink-soft);
+    font-weight: 600;
+  }
+  .cat-tile .cat-arrow {
+    margin-top: auto;
+    align-self: flex-end;
+    width: 36px; height: 36px;
+    background: var(--ink);
+    color: #fff;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  [dir="rtl"] .cat-tile .cat-arrow { transform: scaleX(-1); }
+  /* Color variants */
+  .cat-tile.c-art    { background: var(--peach); }
+  .cat-tile.c-music  { background: var(--lavender-soft); }
+  .cat-tile.c-swim   { background: var(--sky-soft); }
+  .cat-tile.c-sport  { background: var(--lime-soft); }
+  .cat-tile.c-dance  { background: var(--pink-soft); }
+  .cat-tile.c-code   { background: var(--mint-soft); }
+  .cat-tile.c-arabic { background: var(--butter-soft); }
+  .cat-tile.c-steam  { background: var(--coral-soft); }
+
+  /* =========================================================
+     RAIL (class / place cards)
+  ========================================================= */
+  .rail-section {
+    padding: 70px 0;
+    position: relative;
+  }
+  .rail-section.tinted { background: var(--parchment); }
+  .rail {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+  }
+
+  .class-card, .place-card {
+    background: var(--card);
+    border-radius: 24px;
+    overflow: hidden;
+    border: 2px solid var(--ink);
+    box-shadow: 5px 5px 0 var(--ink);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    display: flex; flex-direction: column;
+  }
+  .class-card:hover, .place-card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 7px 7px 0 var(--ink);
+  }
+  .card-img {
+    aspect-ratio: 4 / 3;
+    background-size: cover; background-position: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .card-img img { width: 100%; height: 100%; object-fit: cover; }
+  .card-age-chip {
+    position: absolute; top: 12px; left: 12px;
+    background: var(--card); color: var(--ink);
+    padding: 5px 12px; border-radius: 999px;
+    font-size: 12px; font-weight: 800;
+    border: 1.5px solid var(--ink);
+  }
+  [dir="rtl"] .card-age-chip { left: auto; right: 12px; }
+  .card-fav {
+    position: absolute; top: 12px; right: 12px;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--card);
+    border: 1.5px solid var(--ink);
+    color: var(--ink);
+    font-size: 16px;
+    cursor: pointer;
+  }
+  [dir="rtl"] .card-fav { right: auto; left: 12px; }
+  .card-fav:hover { background: var(--pink); color: #fff; border-color: var(--pink); }
+
+  .card-body { padding: 16px 18px 18px; }
+  .card-provider {
+    font-size: 11px;
+    color: var(--ink-mute);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+  }
+  .card-title {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+  [dir="rtl"] .card-title { font-family: "Tajawal", sans-serif; }
+  .card-meta {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 13px; color: var(--ink-soft);
+    margin-top: 10px;
+  }
+  .card-meta .price { font-weight: 800; color: var(--ink); font-size: 14px; }
+  .card-meta .free-tag {
+    background: var(--mint); color: #0a5d2d;
+    padding: 3px 10px; border-radius: 999px;
+    font-size: 11px; font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Place-specific tags */
+  .place-tag {
+    position: absolute; top: 12px; left: 12px;
+    padding: 5px 12px; border-radius: 999px;
+    font-size: 11px; font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border: 1.5px solid var(--ink);
+  }
+  [dir="rtl"] .place-tag { left: auto; right: 12px; }
+  .place-tag.free    { background: var(--mint); color: #0a5d2d; }
+  .place-tag.paid    { background: var(--peach); color: #6a2a0d; }
+  .place-tag.premium { background: var(--butter); color: #5c3f08; }
+
+  /* Category filter pills */
+  .cat-pill-row {
+    display: flex; gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+  .cat-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    border: 2px solid var(--ink);
+    background: var(--card);
+    font-size: 14px; font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.15s;
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+  .cat-pill:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--ink); }
+  .cat-pill.softplay { background: var(--peach-soft); }
+  .cat-pill.theme { background: var(--lavender-soft); }
+  .cat-pill.indoor { background: var(--mint-soft); }
+  .cat-pill.outdoor { background: var(--lime-soft); }
+  .cat-pill .count { color: var(--ink-mute); font-weight: 600; }
+
+  /* =========================================================
+     AGE ROW (circular)
+  ========================================================= */
+  .age-section {
+    padding: 70px 0;
+    background: var(--warm-white);
+  }
+  .age-row {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px;
+  }
+  .age-tile {
+    text-align: center;
+    padding: 22px 16px 20px;
+    border-radius: 24px;
+    background: var(--card);
+    border: 2px solid var(--ink);
+    box-shadow: 4px 4px 0 var(--ink);
+    transition: transform 0.2s;
+    cursor: pointer;
+  }
+  .age-tile:hover { transform: translateY(-3px) rotate(-1deg); }
+  .age-tile .circle {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 32px;
+    margin: 0 auto 12px;
+    border: 2px solid var(--ink);
+  }
+  .age-tile.a1 .circle { background: var(--peach-soft); }
+  .age-tile.a2 .circle { background: var(--butter-soft); }
+  .age-tile.a3 .circle { background: var(--mint-soft); }
+  .age-tile.a4 .circle { background: var(--sky-soft); }
+  .age-tile.a5 .circle { background: var(--lavender-soft); }
+  .age-tile .age-label {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 800; font-size: 18px;
+    letter-spacing: -0.01em;
+  }
+  [dir="rtl"] .age-tile .age-label { font-family: "Tajawal", sans-serif; }
+  .age-tile .age-sub {
+    font-size: 13px; color: var(--ink-soft); margin-top: 2px;
+  }
+
+  /* =========================================================
+     AREA ROW
+  ========================================================= */
+  .area-section {
+    padding: 70px 0;
+  }
+  .area-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+  }
+  .area-tile {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    border-radius: 28px;
+    overflow: hidden;
+    border: 2px solid var(--ink);
+    box-shadow: 5px 5px 0 var(--ink);
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  .area-tile:hover { transform: translate(-2px, -2px); }
+  .area-tile .area-img {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+  }
+  .area-tile::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(42,24,16,0) 40%, rgba(42,24,16,0.75) 100%);
+  }
+  .area-tile .area-info {
+    position: absolute; bottom: 18px; left: 18px; right: 18px;
+    z-index: 1;
+    color: #fff;
+  }
+  .area-tile .area-name {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 800;
+    font-size: 26px;
+    letter-spacing: -0.01em;
+    margin-bottom: 4px;
+  }
+  [dir="rtl"] .area-tile .area-name { font-family: "Tajawal", sans-serif; }
+  .area-tile .area-stats {
+    font-size: 13px; opacity: 0.92;
+    display: flex; gap: 10px;
+  }
+  .area-tile .area-stats span { display: inline-flex; align-items: center; gap: 4px; }
+
+  /* =========================================================
+     MAP TEASER
+  ========================================================= */
+  .map-teaser {
+    padding: 70px 0;
+  }
+  .map-card {
+    position: relative;
+    border-radius: 32px;
+    overflow: hidden;
+    border: 2px solid var(--ink);
+    box-shadow: 8px 8px 0 var(--ink);
+    background: linear-gradient(135deg, var(--teal-soft) 0%, var(--butter-soft) 100%);
+    padding: 50px 44px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: center;
+  }
+  .map-card .map-art {
+    position: relative;
+    min-height: 260px;
+  }
+  .map-card .map-bg {
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(45deg, transparent, transparent 12px,
+      rgba(255,255,255,0.3) 12px, rgba(255,255,255,0.3) 14px),
+      linear-gradient(135deg, var(--mint-soft), var(--sky-soft));
+    border-radius: 20px;
+    border: 2px dashed var(--ink);
+  }
+  .map-pin {
+    position: absolute;
+    background: var(--maroon); color: #fff;
+    padding: 6px 12px; border-radius: 999px;
+    font-size: 12px; font-weight: 700;
+    border: 2px solid #fff;
+    box-shadow: 2px 2px 0 var(--ink);
+  }
+  .map-pin::after {
+    content: ""; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+    border: 5px solid transparent; border-top-color: var(--maroon);
+  }
+  .mp-1 { top: 20%; left: 20%; }
+  .mp-2 { top: 45%; right: 25%; background: var(--coral); }
+  .mp-2::after { border-top-color: var(--coral); }
+  .mp-3 { bottom: 20%; left: 35%; background: var(--teal); color: var(--ink); }
+  .mp-3::after { border-top-color: var(--teal); }
+  .mp-4 { top: 30%; right: 10%; background: var(--gold); color: var(--ink); }
+  .mp-4::after { border-top-color: var(--gold); }
+
+  .map-copy h3 {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 800;
+    font-size: 38px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+  [dir="rtl"] .map-copy h3 { font-family: "Tajawal", sans-serif; }
+  .map-copy h3 .italic-accent { color: var(--maroon); }
+  .map-copy p {
+    font-size: 17px; color: var(--ink-soft); margin-bottom: 20px;
+  }
+
+  /* =========================================================
+     EDITORIAL GUIDES
+  ========================================================= */
+  .guides-section {
+    padding: 70px 0;
+    background: var(--warm-white);
+  }
+  .guides-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  }
+  .guide-card {
+    background: var(--card);
+    border: 2px solid var(--ink);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 5px 5px 0 var(--ink);
+    transition: transform 0.2s;
+    cursor: pointer;
+  }
+  .guide-card:hover { transform: translate(-2px, -2px); }
+  .guide-img {
+    aspect-ratio: 16/10;
+    background-size: cover; background-position: center;
+  }
+  .guide-body { padding: 22px 24px 24px; }
+  .guide-meta {
+    display: inline-block;
+    background: var(--butter);
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 11px; font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 10px;
+    border: 1.5px solid var(--ink);
+  }
+  .guide-title {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+    margin-bottom: 8px;
+  }
+  [dir="rtl"] .guide-title { font-family: "Tajawal", sans-serif; }
+  .guide-excerpt { font-size: 14px; color: var(--ink-soft); line-height: 1.5; }
+
+  /* =========================================================
+     FOR PROVIDERS BAND
+  ========================================================= */
+  .providers-band {
+    padding: 70px 0;
+  }
+  .providers-card {
+    background: var(--maroon);
+    color: #fff;
+    border-radius: 32px;
+    border: 2px solid var(--ink);
+    box-shadow: 8px 8px 0 var(--ink);
+    padding: 50px 48px;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 40px;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .providers-card::before {
+    content: "";
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 240px; height: 240px;
+    background: var(--gold);
+    border-radius: 50%;
+    opacity: 0.25;
+  }
+  .providers-card::after {
+    content: "🎨";
+    position: absolute;
+    top: 30px; right: 30px;
+    font-size: 60px;
+    opacity: 0.85;
+  }
+  .providers-card h3 {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 800;
+    font-size: 38px;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+  [dir="rtl"] .providers-card h3 { font-family: "Tajawal", sans-serif; }
+  .providers-card h3 .italic-accent {
+    color: var(--gold);
+  }
+  .providers-card p {
+    font-size: 16px;
+    line-height: 1.55;
+    opacity: 0.92;
+    margin-bottom: 22px;
+  }
+  .providers-card .p-stats {
+    display: flex; gap: 28px;
+    margin-top: 18px;
+  }
+  .providers-card .p-stats .stat {
+    display: block;
+  }
+  .providers-card .p-stats .num {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 800;
+    font-size: 30px;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .providers-card .p-stats .lbl {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.85;
+    margin-top: 2px;
+  }
+
+  /* =========================================================
+     TESTIMONIALS
+  ========================================================= */
+  .testis {
+    padding: 70px 0;
+    background: var(--parchment);
+  }
+  .testi-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px;
+  }
+  .testi {
+    background: var(--card);
+    border: 2px solid var(--ink);
+    border-radius: 24px;
+    padding: 26px 26px 22px;
+    box-shadow: 5px 5px 0 var(--ink);
+    position: relative;
+  }
+  .testi .quote-mark {
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 70px;
+    line-height: 0.8;
+    color: var(--gold);
+    margin-bottom: -10px;
+  }
+  .testi .body {
+    font-size: 16px;
+    color: var(--ink);
+    line-height: 1.5;
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 500;
+    margin-bottom: 18px;
+  }
+  [dir="rtl"] .testi .body { font-family: "Tajawal", sans-serif; }
+  .testi .author {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .testi .avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background-size: cover; background-position: center;
+    border: 2px solid var(--ink);
+  }
+  .testi .author .name { font-weight: 700; font-size: 14px; }
+  .testi .author .context { font-size: 12px; color: var(--ink-mute); }
+
+  /* =========================================================
+     NEWSLETTER
+  ========================================================= */
+  .newsletter {
+    padding: 70px 0;
+  }
+  .nl-card {
+    background: var(--butter);
+    border: 2px solid var(--ink);
+    border-radius: 32px;
+    padding: 50px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 8px 8px 0 var(--ink);
+  }
+  .nl-card h3 {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 800;
+    font-size: 36px;
+    letter-spacing: -0.02em;
+    margin-bottom: 10px;
+  }
+  [dir="rtl"] .nl-card h3 { font-family: "Tajawal", sans-serif; }
+  .nl-card p {
+    font-size: 16px; color: var(--ink-soft); margin-bottom: 24px;
+    max-width: 500px; margin-left: auto; margin-right: auto;
+  }
+  .nl-form {
+    display: flex; gap: 10px; max-width: 500px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 6px;
+    border-radius: 999px;
+    border: 2px solid var(--ink);
+  }
+  .nl-form input {
+    flex: 1;
+    padding: 10px 18px;
+    border: none; outline: none; background: transparent;
+    font-size: 15px; font-family: inherit;
+  }
+
+  /* =========================================================
+     WALKTHROUGH / DEMO
+  ========================================================= */
+  .walkthrough {
+    padding: 70px 0 30px;
+    background:
+      radial-gradient(circle at 10% 20%, var(--coral-soft) 0%, transparent 40%),
+      radial-gradient(circle at 90% 80%, var(--butter-soft) 0%, transparent 40%),
+      var(--cream);
+    border-top: 2px solid var(--ink);
+  }
+  .wt-head {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto 36px;
+  }
+  .wt-eyebrow {
+    display: inline-block;
+    font-family: "Fraunces", Georgia, serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--maroon);
+    background: var(--butter);
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    padding: 6px 16px;
+    box-shadow: 3px 3px 0 var(--ink);
+    margin-bottom: 18px;
+  }
+  .wt-head h2 {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 900;
+    font-size: 44px;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin-bottom: 12px;
+  }
+  [dir="rtl"] .wt-head h2 { font-family: "Tajawal", sans-serif; }
+  .wt-head h2 .italic-accent {
+    font-style: italic;
+    color: var(--maroon);
+  }
+  .wt-head p {
+    font-size: 17px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+  }
+  .wt-frame-wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .wt-frame-shell {
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 24px;
+    box-shadow: 12px 12px 0 var(--ink);
+    overflow: hidden;
+    position: relative;
+  }
+  .wt-frame-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 18px;
+    background: var(--ink);
+    color: var(--cream);
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 14px;
+  }
+  .wt-frame-bar .dots {
+    display: flex; gap: 6px; margin-right: 8px;
+  }
+  [dir="rtl"] .wt-frame-bar .dots { margin-right: 0; margin-left: 8px; }
+  .wt-frame-bar .dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--coral);
+  }
+  .wt-frame-bar .dot:nth-child(2) { background: var(--butter); }
+  .wt-frame-bar .dot:nth-child(3) { background: #6FCF97; }
+  .wt-frame-bar .url {
+    opacity: 0.8;
+    font-family: ui-monospace, Menlo, monospace;
+    font-size: 12px;
+  }
+  .wt-frame {
+    display: block;
+    width: 100%;
+    height: 640px;
+    border: 0;
+    background: var(--cream);
+  }
+  .wt-cta {
+    display: flex; gap: 14px; justify-content: center;
+    margin-top: 28px; flex-wrap: wrap;
+  }
+  .wt-cta .btn {
+    font-size: 15px;
+  }
+  @media (max-width: 720px) {
+    .wt-head h2 { font-size: 30px; }
+    .wt-frame { height: 480px; }
+    .wt-frame-shell { border-radius: 18px; box-shadow: 6px 6px 0 var(--ink); }
+  }
+
+  /* =========================================================
+     FOOTER
+  ========================================================= */
+  footer.site {
+    background: var(--ink);
+    color: #EAD8B9;
+    padding: 70px 0 30px;
+    margin-top: 40px;
+  }
+  .foot-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 30px; padding-bottom: 40px;
+  }
+  .foot-grid .logo {
+    color: var(--butter);
+    font-size: 28px;
+    margin-bottom: 14px;
+  }
+  .foot-grid .logo .dot { color: var(--coral); }
+  .foot-about {
+    font-size: 14px; color: #C4AE84;
+    line-height: 1.55;
+    max-width: 300px;
+  }
+  .foot-social { display: flex; gap: 10px; margin-top: 16px; }
+  .foot-social a {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.15s;
+    font-size: 16px;
+  }
+  .foot-social a:hover { background: var(--maroon); }
+  .foot-grid h5 {
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--butter);
+    margin-bottom: 14px;
+    font-weight: 700;
+  }
+  [dir="rtl"] .foot-grid h5 { font-family: "Tajawal", sans-serif; }
+  .foot-grid a {
+    display: block; font-size: 13px; color: #C4AE84;
+    padding: 4px 0;
+    transition: color 0.15s;
+  }
+  .foot-grid a:hover { color: var(--butter); }
+  .foot-base {
+    padding-top: 26px;
+    border-top: 1px solid rgba(196, 174, 132, 0.22);
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px; color: #A18D68;
+    flex-wrap: wrap; gap: 12px;
+  }
+
+  /* =========================================================
+     RESPONSIVE
+  ========================================================= */
+  @media (max-width: 980px) {
+    .container { padding: 0 18px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+    .hero { padding: 28px 0 48px; }
+    h1 { font-size: 44px; line-height: 1.08; }
+    .hero-sub { font-size: 16px; }
+    .hero-art { min-height: 340px; }
+    .search-bar {
+      grid-template-columns: 1fr 1fr auto;
+      gap: 6px;
+    }
+    .search-field.has-popover::after { right: 10px; }
+    .search-bar .search-field:nth-child(1) { grid-column: 1 / -1; }
+    .search-btn { height: 56px; width: 56px; grid-row: 2; }
+    .cat-grid, .rail, .guides-grid, .testi-grid, .area-grid { grid-template-columns: repeat(2, 1fr); }
+    .age-row { grid-template-columns: repeat(3, 1fr); }
+    .map-card { grid-template-columns: 1fr; padding: 36px 28px; }
+    .providers-card { grid-template-columns: 1fr; padding: 40px 32px; }
+    .trust-row { gap: 12px; font-size: 13px; }
+    .announce { font-size: 12px; padding: 7px 12px; }
+  }
+  @media (max-width: 640px) {
+    .container { padding: 0 14px; }
+    .hero { padding: 20px 0 40px; }
+    h1 { font-size: 34px; letter-spacing: -0.02em; }
+    h1 br { display: none; }
+    .hero-sub { font-size: 15px; line-height: 1.5; }
+    .eyebrow { font-size: 11px; padding: 6px 12px; margin-bottom: 14px; }
+    .search-bar {
+      grid-template-columns: 1fr;
+      padding: 6px;
+      gap: 2px;
+    }
+    .search-bar .search-field:nth-child(1) { grid-column: auto; }
+    .search-field { padding: 10px 14px; border-radius: 14px; }
+    .search-field + .search-field {
+      border-top: 1.5px dashed var(--border-strong);
+      border-radius: 0;
+      padding-top: 12px;
+    }
+    .search-field .lbl { font-size: 10px; }
+    .search-field .val { font-size: 15px; }
+    .search-btn {
+      width: 100%; height: 52px;
+      border-radius: 14px;
+      margin-top: 4px;
+      grid-row: auto;
+    }
+    .search-field.has-popover::after { right: 14px; }
+    .cat-grid, .rail, .guides-grid, .testi-grid, .area-grid { grid-template-columns: 1fr; gap: 14px; }
+    .age-row { grid-template-columns: repeat(2, 1fr); }
+    .hero-art { min-height: 280px; }
+    .hp-1, .hp-2, .hp-3 { width: 170px; height: 220px; }
+    .hp-1 { left: 0; top: 30px; }
+    .hp-2 { right: 0; top: 0; width: 150px; height: 190px; }
+    .hp-3 { display: none; }
+    .hero-badge { font-size: 11px; padding: 8px 12px; }
+    .hero-badge .em { font-size: 18px; }
+    .section-head h2 { font-size: 26px; }
+    .section-head p { font-size: 14px; }
+    .section-head {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .see-all { align-self: stretch; text-align: center; }
+    .cat-card, .card, .area-tile, .guide-card, .testi-card { border-radius: 20px; }
+    .card-img, .area-img { aspect-ratio: 16 / 10; }
+    .map-card, .providers-card { padding: 28px 20px; }
+    .providers-card h2, .map-card h2 { font-size: 24px; }
+    .trust-row { gap: 8px; font-size: 12px; flex-direction: column; align-items: flex-start; }
+    .trust-pill { font-size: 11px; padding: 5px 11px; }
+    .list-panel, .age-panel { width: calc(100vw - 24px); }
+    .age-panel { padding: 16px 16px 0; }
+    .age-grid-mo { grid-template-columns: repeat(3, 1fr); }
+    .list-option { padding: 12px 10px; font-size: 14px; }
+    .list-option .ico { font-size: 20px; width: 28px; }
+    .list-option .sub { font-size: 11px; }
+  }
+  @media (max-width: 420px) {
+    h1 { font-size: 28px; }
+    .hero { padding: 14px 0 30px; }
+    .hero-art { min-height: 220px; }
+    .hp-1, .hp-2 { width: 140px; height: 180px; }
+    .hero-badge { display: none; }
+    .section-head h2 { font-size: 22px; }
+  }
+
+  /* =========================================================
+     BILINGUAL
+  ========================================================= */
+  .ar-only { display: none; }
+  .ar-only.inline { display: none; }
+  [dir="rtl"] .en-only { display: none; }
+  [dir="rtl"] .ar-only { display: block; }
+  [dir="rtl"] .ar-only.inline { display: inline; }
+  [dir="rtl"] .en-only.inline { display: none; }
+</style>
+<link rel="stylesheet" href="yalla-kids-shared.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://yallakids.qa/#org","name":"Yalla Kids","url":"https://yallakids.qa/","logo":"https://yallakids.qa/og.png","description":"Every kids' class, camp and place to go in Qatar — bilingual, parent-curated.","areaServed":{"@type":"Country","name":"Qatar"},"sameAs":[]},{"@type":"WebSite","@id":"https://yallakids.qa/#site","url":"https://yallakids.qa/","name":"Yalla Kids","inLanguage":["en","ar"],"publisher":{"@id":"https://yallakids.qa/#org"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://yallakids.qa/yalla-kids-search.html?q={search_term_string}"},"query-input":"required name=search_term_string"}}]}</script>
+</head>
+<body>
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+<header class="site">
+  <div class="nav-wrap container">
+    <a href="yalla-kids-home-wireframe.html" class="logo">
+      <span class="en-only inline">Yalla Kids</span>
+      <span class="ar-only inline">يلا كيدز</span>
+    </a>
+    <nav class="nav-links">
+      <a href="yalla-kids-classes-directory.html"><span class="en-only inline">Classes</span><span class="ar-only inline">الصفوف</span></a>
+      <a href="yalla-kids-places-directory.html"><span class="en-only inline">Places to go</span><span class="ar-only inline">أماكن للزيارة</span></a>
+      <a href="yalla-kids-camps.html"><span class="en-only inline">Camps</span><span class="ar-only inline">المعسكرات</span></a>
+      <a href="yalla-kids-guides-hub.html"><span class="en-only inline">Guides</span><span class="ar-only inline">الأدلة</span></a>
+      <a href="yalla-kids-for-providers.html"><span class="en-only inline">For providers</span><span class="ar-only inline">للموفرين</span></a>    </nav>
+    <div class="nav-actions">
+      <button class="lang-toggle" onclick="toggleLang()">
+        <span class="en-only inline">العربية</span>
+        <span class="ar-only inline">English</span>
+      </button>
+      <a href="yalla-kids-login.html" class="btn btn-ghost"><span class="en-only inline">Log in</span><span class="ar-only inline">تسجيل الدخول</span></a>
+      <a href="yalla-kids-signup.html" class="btn btn-primary"><span class="en-only inline">Sign up</span><span class="ar-only inline">إنشاء حساب</span></a>
+    </div>
+  </div>
+</header>
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">
+          <span class="en-only inline">Hi Doha · 2,400+ families</span>
+          <span class="ar-only inline">مرحباً دوحة · 2,400+ عائلة</span>
+        </span>
+        <h1>
+          <span class="en-only inline">Find something <span class="pop">playful</span> to do with your kids<br>this weekend.</span>
+          <span class="ar-only inline">اكتشف نشاطاً <span class="pop">ممتعاً</span> لأطفالك<br>في عطلة الأسبوع.</span>
+        </h1>
+        <p class="hero-sub">
+          <span class="en-only inline">Every kids' class, camp and place to go in Qatar — from Arabic storytelling in Msheireb to KidZania, the Corniche playgrounds and a 40-exhibit play museum at Katara.</span>
+          <span class="ar-only inline">كل صفوف الأطفال والمعسكرات والأماكن للزيارة في قطر — من حكايا بالعربي في مشيرب إلى كيدزانيا وملاعب الكورنيش ومتحف أولي أولي في كتارا.</span>
+        </p>
+
+        <div class="search-bar">
+          <div class="search-field has-popover" id="typeField" onclick="toggleTypePanel(event)" tabindex="0" role="button" aria-haspopup="listbox" aria-expanded="false">
+            <div class="lbl"><span class="en-only inline">Looking for</span><span class="ar-only inline">تبحث عن</span></div>
+            <div class="val" id="typeLabel"><span class="en-only inline">Classes & places</span><span class="ar-only inline">صفوف وأماكن</span></div>
+            <div class="list-panel" id="typePanel" hidden onclick="event.stopPropagation()">
+              <h5><span class="en-only inline">Show me</span><span class="ar-only inline">اعرض لي</span></h5>
+              <button type="button" class="list-option selected" data-val="all" data-label-en="Classes & places" data-label-ar="صفوف وأماكن" onclick="selectListOption(this, 'typeLabel')">
+                <span class="ico">✨</span>
+                <span class="tx"><span class="en-only inline">Everything</span><span class="ar-only inline">كل شيء</span><span class="sub"><span class="en-only inline">Classes and places combined</span><span class="ar-only inline">صفوف وأماكن معاً</span></span></span>
+              </button>
+              <button type="button" class="list-option" data-val="classes" data-label-en="Classes & activities" data-label-ar="صفوف وأنشطة" onclick="selectListOption(this, 'typeLabel')">
+                <span class="ico">🎨</span>
+                <span class="tx"><span class="en-only inline">Classes &amp; activities</span><span class="ar-only inline">صفوف وأنشطة</span><span class="sub"><span class="en-only inline">Art, music, swim, sports, languages</span><span class="ar-only inline">فن، موسيقى، سباحة، رياضة، لغات</span></span></span>
+              </button>
+              <button type="button" class="list-option" data-val="places" data-label-en="Places to visit" data-label-ar="أماكن للزيارة" onclick="selectListOption(this, 'typeLabel')">
+                <span class="ico">🎡</span>
+                <span class="tx"><span class="en-only inline">Places to visit</span><span class="ar-only inline">أماكن للزيارة</span><span class="sub"><span class="en-only inline">Play centres, museums, parks</span><span class="ar-only inline">مراكز لعب، متاحف، حدائق</span></span></span>
+              </button>
+              <button type="button" class="list-option" data-val="camps" data-label-en="Camps & programs" data-label-ar="معسكرات وبرامج" onclick="selectListOption(this, 'typeLabel')">
+                <span class="ico">⛺</span>
+                <span class="tx"><span class="en-only inline">Camps &amp; programs</span><span class="ar-only inline">معسكرات وبرامج</span><span class="sub"><span class="en-only inline">Week-long and school-break programs</span><span class="ar-only inline">برامج أسبوعية وعطلات مدرسية</span></span></span>
+              </button>
+              <button type="button" class="list-option" data-val="parties" data-label-en="Birthday venues" data-label-ar="أماكن أعياد ميلاد" onclick="selectListOption(this, 'typeLabel')">
+                <span class="ico">🎉</span>
+                <span class="tx"><span class="en-only inline">Birthday venues</span><span class="ar-only inline">أماكن أعياد ميلاد</span><span class="sub"><span class="en-only inline">Hosted parties and party halls</span><span class="ar-only inline">حفلات وقاعات</span></span></span>
+              </button>
+              <button type="button" class="list-option" data-val="play" data-label-en="Open play & drop-ins" data-label-ar="لعب حر" onclick="selectListOption(this, 'typeLabel')">
+                <span class="ico">🧸</span>
+                <span class="tx"><span class="en-only inline">Open play &amp; drop-ins</span><span class="ar-only inline">لعب حر</span><span class="sub"><span class="en-only inline">Walk in, no booking needed</span><span class="ar-only inline">بدون حجز مسبق</span></span></span>
+              </button>
+            </div>
+          </div>
+          <div class="search-field has-popover" id="ageField" onclick="toggleAgePanel(event)" tabindex="0" role="button" aria-haspopup="dialog" aria-expanded="false">
+            <div class="lbl"><span class="en-only inline">Kid's age</span><span class="ar-only inline">عمر الطفل</span></div>
+            <div class="val" id="ageLabel"><span class="en-only inline">Any age</span><span class="ar-only inline">أي عمر</span></div>
+            <div class="age-panel" id="agePanel" hidden onclick="event.stopPropagation()">
+              <div class="age-panel-body">
+                <h4><span class="en-only inline">Babies &amp; toddlers</span><span class="ar-only inline">رضّع وصغار</span></h4>
+                <div class="age-grid-mo">
+                  <button type="button" class="age-pill" data-val="0-3mo" data-label-en="0–3 mo" data-label-ar="0–3 شهر" onclick="toggleAgeOption(this)">0–3 <span class="en-only inline">mo</span><span class="ar-only inline">شهر</span></button>
+                  <button type="button" class="age-pill" data-val="3-6mo" data-label-en="3–6 mo" data-label-ar="3–6 شهر" onclick="toggleAgeOption(this)">3–6 <span class="en-only inline">mo</span><span class="ar-only inline">شهر</span></button>
+                  <button type="button" class="age-pill" data-val="6-9mo" data-label-en="6–9 mo" data-label-ar="6–9 شهر" onclick="toggleAgeOption(this)">6–9 <span class="en-only inline">mo</span><span class="ar-only inline">شهر</span></button>
+                  <button type="button" class="age-pill" data-val="9-12mo" data-label-en="9–12 mo" data-label-ar="9–12 شهر" onclick="toggleAgeOption(this)">9–12 <span class="en-only inline">mo</span><span class="ar-only inline">شهر</span></button>
+                  <button type="button" class="age-pill" data-val="12-18mo" data-label-en="12–18 mo" data-label-ar="12–18 شهر" onclick="toggleAgeOption(this)">12–18 <span class="en-only inline">mo</span><span class="ar-only inline">شهر</span></button>
+                  <button type="button" class="age-pill" data-val="18-24mo" data-label-en="18–24 mo" data-label-ar="18–24 شهر" onclick="toggleAgeOption(this)">18–24 <span class="en-only inline">mo</span><span class="ar-only inline">شهر</span></button>
+                </div>
+                <h4><span class="en-only inline">Kids &amp; teens</span><span class="ar-only inline">أطفال ومراهقون</span></h4>
+                <div class="age-grid-yr">
+                  <button type="button" class="age-pill" data-val="2y" data-label-en="2" data-label-ar="2" onclick="toggleAgeOption(this)">2</button>
+                  <button type="button" class="age-pill" data-val="3y" data-label-en="3" data-label-ar="3" onclick="toggleAgeOption(this)">3</button>
+                  <button type="button" class="age-pill" data-val="4y" data-label-en="4" data-label-ar="4" onclick="toggleAgeOption(this)">4</button>
+                  <button type="button" class="age-pill" data-val="5y" data-label-en="5" data-label-ar="5" onclick="toggleAgeOption(this)">5</button>
+                  <button type="button" class="age-pill" data-val="6y" data-label-en="6" data-label-ar="6" onclick="toggleAgeOption(this)">6</button>
+                  <button type="button" class="age-pill" data-val="7y" data-label-en="7" data-label-ar="7" onclick="toggleAgeOption(this)">7</button>
+                  <button type="button" class="age-pill" data-val="8y" data-label-en="8" data-label-ar="8" onclick="toggleAgeOption(this)">8</button>
+                  <button type="button" class="age-pill" data-val="9y" data-label-en="9" data-label-ar="9" onclick="toggleAgeOption(this)">9</button>
+                  <button type="button" class="age-pill" data-val="10y" data-label-en="10" data-label-ar="10" onclick="toggleAgeOption(this)">10</button>
+                  <button type="button" class="age-pill" data-val="11y" data-label-en="11" data-label-ar="11" onclick="toggleAgeOption(this)">11</button>
+                  <button type="button" class="age-pill" data-val="12y" data-label-en="12" data-label-ar="12" onclick="toggleAgeOption(this)">12</button>
+                  <button type="button" class="age-pill" data-val="13y" data-label-en="13" data-label-ar="13" onclick="toggleAgeOption(this)">13</button>
+                  <button type="button" class="age-pill" data-val="14y" data-label-en="14" data-label-ar="14" onclick="toggleAgeOption(this)">14</button>
+                  <button type="button" class="age-pill" data-val="15y" data-label-en="15" data-label-ar="15" onclick="toggleAgeOption(this)">15</button>
+                  <button type="button" class="age-pill" data-val="16y" data-label-en="16" data-label-ar="16" onclick="toggleAgeOption(this)">16</button>
+                  <button type="button" class="age-pill" data-val="17y" data-label-en="17" data-label-ar="17" onclick="toggleAgeOption(this)">17</button>
+                  <button type="button" class="age-pill" data-val="18y" data-label-en="18" data-label-ar="18" onclick="toggleAgeOption(this)">18</button>
+                  <button type="button" class="age-pill wide" data-val="adult" data-label-en="Adult (18+)" data-label-ar="بالغ ‎+18" onclick="toggleAgeOption(this)"><span class="en-only inline">Adult (18+)</span><span class="ar-only inline">بالغ ‎+18</span></button>
+                </div>
+              </div>
+              <div class="age-actions">
+                <button type="button" class="age-clear" onclick="clearAge(event)"><span class="en-only inline">Clear</span><span class="ar-only inline">مسح</span></button>
+                <button type="button" class="age-apply" onclick="applyAge(event)"><span class="en-only inline">Apply</span><span class="ar-only inline">تطبيق</span></button>
+              </div>
+            </div>
+          </div>
+          <div class="search-field has-popover" id="areaField" onclick="toggleAreaPanel(event)" tabindex="0" role="button" aria-haspopup="listbox" aria-expanded="false">
+            <div class="lbl"><span class="en-only inline">In</span><span class="ar-only inline">في</span></div>
+            <div class="val" id="areaLabel"><span class="en-only inline">All of Doha</span><span class="ar-only inline">كل الدوحة</span></div>
+            <div class="list-panel" id="areaPanel" hidden onclick="event.stopPropagation()">
+              <button type="button" class="list-option selected" data-val="all" data-label-en="All of Doha" data-label-ar="كل الدوحة" onclick="selectListOption(this, 'areaLabel')">
+                <span class="ico">🇶🇦</span>
+                <span class="tx"><span class="en-only inline">All of Doha</span><span class="ar-only inline">كل الدوحة</span><span class="sub"><span class="en-only inline">Show everything in Qatar</span><span class="ar-only inline">اعرض الكل في قطر</span></span></span>
+              </button>
+              <h5><span class="en-only inline">Central Doha</span><span class="ar-only inline">وسط الدوحة</span></h5>
+              <button type="button" class="list-option" data-val="west-bay" data-label-en="West Bay" data-label-ar="الخليج الغربي" onclick="selectListOption(this, 'areaLabel')">
+                <span class="ico">🏙️</span>
+                <span class="tx"><span class="en-only inline">West Bay</span><span class="ar-only inline">الخليج الغربي</span></span>
+              </button>
+              <button type="button" class="list-option" data-val="msheireb" data-label-en="Msheireb" data-label-ar="مشيرب" onclick="selectListOption(this, 'areaLabel')">
+                <span class="ico">🏛️</span>
+                <span class="tx"><span class="en-only inline">Msheireb Downtown</span><span class="ar-only inline">مشيرب قلب الدوحة</span></span>
+              </button>
+              <button type="button" class="list-option" data-val="corniche" data-label-en="Corniche" data-label-ar="الكورنيش" onclick="selectListOption(this, 'areaLabel')">
+                <span class="ico">🌊</span>
+                <span class="tx"><span class="en-only inline">Corniche</span><span class="ar-only inline">الكورنيش</span></span>
+              </button>
+              <button type="button" class="list-option" data-val="al-sadd" data-label-en="Al Sadd" data-label-ar="السد" onclick="selectListOption(this, 'areaLabel')">
+                <span class="ico">🏘️</span>
+                <span class="tx"><span class="en-only inline">Al Sadd</span><span class="ar-only inline">السد</span></span>
+              </button>
+              <button type="button" class="list-option" data-val="old-airport" data-label-en="Old Airport" data-label-ar="المطار القديم" onclick="selectListOption(this, 'areaLabel')">
+                <span class="ico">✈️</span>
+                <span class="tx"><span class="en-only inline">Old Airport</span><span class="ar-only inline">المطار القديم</span></span>
+              </button>
+              <h5><span class="en-only inline">Cultural &amp; waterfront</span><span class="ar-only inline">ثقافة وواجهة بحرية</span></h5>
+              <button type="button" class="list-option" data-val="pearl" data-label-en="The Pearl-Qatar" data-label-ar="اللؤلؤة" onclick="selectListOption(this, 'areaLabel')">
+                <span class="ico">🏝️</span>
+                <span class="tx"><span class="en-only inline">The Pearl-Qatar</span><span class="ar-only inline">اللؤلؤة</span></span>
+              </button>
+              <button type="button" class="list-option" data-val="lusail" data-label-en="Lusail" data-label-ar="لوسيل" onclick="selectListOption(this, 'areaLabel')">
+                <span class="ico">🌆</span>
+                <span class="tx"><span class="en-only inline">Lusail</span><span class="ar-only inline">لوسيل</span></span>
+              </button>
+              <button type="button" class="list-option" data-val="katara" data-label-en="Katara" data-label-ar="كتارا" onclick="selectListOption(this, 'areaLabel')">
+                <span class="ico">🎭</span>
+                <span class="tx"><span class="en-only inline">Katara Cultural Village</span><span class="ar-only inline">الحي الثقافي كتارا</span></span>
+              </button>
+              <button type="button" class="list-option" data-val="aspire" data-label-en="Aspire Zone" data-label-ar="أسباير" onclick="selectListOption(this, 'areaLabel')">
+                <span class="ico">🏟️</span>
+                <span class="tx"><span class="en-only inline">Aspire Zone</span><span class="ar-only inline">منطقة أسباير</span></span>
+              </button>
+              <button type="button" class="list-option" data-val="education-city" data-label-en="Education City" data-label-ar="المدينة التعليمية" onclick="selectListOption(this, 'areaLabel')">
+                <span class="ico">🎓</span>
+                <span class="tx"><span class="en-only inline">Education City</span><span class="ar-only inline">المدينة التعليمية</span></span>
+              </button>
+              <h5><span class="en-only inline">Suburbs &amp; beyond</span><span class="ar-only inline">الضواحي وما حولها</span></h5>
+              <button type="button" class="list-option" data-val="al-waab" data-label-en="Al Waab" data-label-ar="الوعب" onclick="selectListOption(this, 'areaLabel')">
+                <span class="ico">🌳</span>
+                <span class="tx"><span class="en-only inline">Al Waab</span><span class="ar-only inline">الوعب</span></span>
+              </button>
+              <button type="button" class="list-option" data-val="al-rayyan" data-label-en="Al Rayyan" data-label-ar="الريان" onclick="selectListOption(this, 'areaLabel')">
+                <span class="ico">🌴</span>
+                <span class="tx"><span class="en-only inline">Al Rayyan</span><span class="ar-only inline">الريان</span></span>
+              </button>
+              <button type="button" class="list-option" data-val="duhail" data-label-en="Duhail" data-label-ar="الدحيل" onclick="selectListOption(this, 'areaLabel')">
+                <span class="ico">🏡</span>
+                <span class="tx"><span class="en-only inline">Duhail</span><span class="ar-only inline">الدحيل</span></span>
+              </button>
+              <button type="button" class="list-option" data-val="wakra" data-label-en="Al Wakra" data-label-ar="الوكرة" onclick="selectListOption(this, 'areaLabel')">
+                <span class="ico">⚓</span>
+                <span class="tx"><span class="en-only inline">Al Wakra</span><span class="ar-only inline">الوكرة</span></span>
+              </button>
+            </div>
+          </div>
+          <button class="search-btn" aria-label="Search" onclick="runSearch(event)">🔍</button>
+        </div>
+
+        <div class="trust-row">
+          <span><span class="stars">★★★★★</span> <strong>4.9</strong> · <span class="en-only inline">2,400+ bookings</span><span class="ar-only inline">2,400+ حجز</span></span>
+          <span class="trust-pill">✓ <span class="en-only inline">Verified providers</span><span class="ar-only inline">موفّرون موثّقون</span></span>
+          <span class="trust-pill" style="background: var(--butter-soft); color: #6B4A05;">🇶🇦 <span class="en-only inline">Built in Doha</span><span class="ar-only inline">من الدوحة</span></span>
+        </div>
+      </div>
+
+      <div class="hero-art">
+        <span class="sparkle s1">✦</span>
+        <span class="sparkle s2">✧</span>
+        <span class="sparkle s3">✦</span>
+        <div class="hero-photo hp-1">🎨</div>
+        <div class="hero-photo hp-2">🛝</div>
+        <div class="hero-photo hp-3">🦒</div>
+        <div class="hero-badge b1">
+          <span class="em">🎨</span>
+          <span><span class="en-only inline">Art · Katara · age 4+</span><span class="ar-only inline">فن · كتارا · +4</span></span>
+        </div>
+        <div class="hero-badge b2">
+          <span class="em">🏊‍♀️</span>
+          <span><span class="en-only inline">Swim · West Bay</span><span class="ar-only inline">سباحة · الخليج الغربي</span></span>
+        </div>
+        <div class="hero-badge b3">
+          <span class="em">🎡</span>
+          <span id="hero-places-stat"><span class="en-only inline">places to go</span><span class="ar-only inline">مكان للزيارة</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Scallop top for next section -->
+<div style="height:40px;background:var(--warm-white);position:relative;">
+  <svg viewBox="0 0 1440 40" preserveAspectRatio="none" style="position:absolute;top:-1px;left:0;right:0;width:100%;height:40px;" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,0 Q120,40 240,20 T480,20 T720,20 T960,20 T1200,20 T1440,20 L1440,40 L0,40 Z" fill="#FFFCF6"/>
+  </svg>
+</div>
+
+<!-- =========================================================
+     CATEGORIES
+========================================================= -->
+<section class="cat-section" id="classes">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <h2><span class="en-only inline">Browse by <span class="pop">what they love</span> 💫</span><span class="ar-only inline">تصفّح حسب <span class="pop">ما يحبّه</span> 💫</span></h2>
+        <p><span class="en-only inline">Weekly classes, camps and one-off workshops — art to Arabic, swim to STEM.</span><span class="ar-only inline">صفوف أسبوعية ومعسكرات وورش خاصة — من الفن للعربية، من السباحة للبرمجة.</span></p>
+      </div>
+      <a href="yalla-kids-classes-directory.html" class="see-all"><span class="en-only inline">All categories →</span><span class="ar-only inline">كل الفئات ←</span></a>
+    </div>
+
+    <div class="cat-grid">
+      <a href="yalla-kids-classes-directory.html?cat=art" class="cat-tile c-art">
+        <div class="cat-emoji">🎨</div>
+        <div class="cat-name"><span class="en-only inline">Art & crafts</span><span class="ar-only inline">فن وحِرَف</span></div>
+        <div class="cat-count"><span class="en-only inline">48 classes</span><span class="ar-only inline">48 صفاً</span></div>
+        <div class="cat-arrow">→</div>
+      </a>
+      <a href="yalla-kids-classes-directory.html?cat=music" class="cat-tile c-music">
+        <div class="cat-emoji">🎵</div>
+        <div class="cat-name"><span class="en-only inline">Music</span><span class="ar-only inline">موسيقى</span></div>
+        <div class="cat-count"><span class="en-only inline">31 classes</span><span class="ar-only inline">31 صفاً</span></div>
+        <div class="cat-arrow">→</div>
+      </a>
+      <a href="yalla-kids-classes-directory.html?cat=swimming" class="cat-tile c-swim">
+        <div class="cat-emoji">🏊‍♀️</div>
+        <div class="cat-name"><span class="en-only inline">Swimming</span><span class="ar-only inline">سباحة</span></div>
+        <div class="cat-count"><span class="en-only inline">22 classes</span><span class="ar-only inline">22 صفاً</span></div>
+        <div class="cat-arrow">→</div>
+      </a>
+      <a href="yalla-kids-classes-directory.html?cat=sports" class="cat-tile c-sport">
+        <div class="cat-emoji">⚽</div>
+        <div class="cat-name"><span class="en-only inline">Sports</span><span class="ar-only inline">رياضة</span></div>
+        <div class="cat-count"><span class="en-only inline">56 classes</span><span class="ar-only inline">56 صفاً</span></div>
+        <div class="cat-arrow">→</div>
+      </a>
+      <a href="yalla-kids-classes-directory.html?cat=dance" class="cat-tile c-dance">
+        <div class="cat-emoji">💃</div>
+        <div class="cat-name"><span class="en-only inline">Dance</span><span class="ar-only inline">رقص</span></div>
+        <div class="cat-count"><span class="en-only inline">19 classes</span><span class="ar-only inline">19 صفاً</span></div>
+        <div class="cat-arrow">→</div>
+      </a>
+      <a href="yalla-kids-classes-directory.html?cat=coding" class="cat-tile c-code">
+        <div class="cat-emoji">💻</div>
+        <div class="cat-name"><span class="en-only inline">Coding & robotics</span><span class="ar-only inline">برمجة وروبوتات</span></div>
+        <div class="cat-count"><span class="en-only inline">14 classes</span><span class="ar-only inline">14 صفاً</span></div>
+        <div class="cat-arrow">→</div>
+      </a>
+      <a href="yalla-kids-classes-directory.html?cat=arabic" class="cat-tile c-arabic">
+        <div class="cat-emoji">📚</div>
+        <div class="cat-name"><span class="en-only inline">Arabic & Quran</span><span class="ar-only inline">عربي وقرآن</span></div>
+        <div class="cat-count"><span class="en-only inline">27 classes</span><span class="ar-only inline">27 صفاً</span></div>
+        <div class="cat-arrow">→</div>
+      </a>
+      <a href="yalla-kids-classes-directory.html" class="cat-tile c-steam" style="background:var(--butter-soft);">
+        <div class="cat-emoji">✨</div>
+        <div class="cat-name"><span class="en-only inline">See 12 more</span><span class="ar-only inline">عرض 12 فئة إضافية</span></div>
+        <div class="cat-count"><span class="en-only inline">STEAM, cooking, yoga…</span><span class="ar-only inline">علوم، طبخ، يوغا…</span></div>
+        <div class="cat-arrow">→</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     POPULAR CLASSES RAIL
+========================================================= -->
+<section class="rail-section">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <h2><span class="en-only inline"><span class="pop">Popular</span> this week 🌟</span><span class="ar-only inline"><span class="pop">الأكثر حجزاً</span> هذا الأسبوع 🌟</span></h2>
+        <p><span class="en-only inline">What Doha parents are booking right now.</span><span class="ar-only inline">ما يحجزه أولياء الأمور هذا الأسبوع.</span></p>
+      </div>
+      <a href="yalla-kids-classes-directory.html" class="see-all"><span class="en-only inline">Browse all classes →</span><span class="ar-only inline">كل الصفوف ←</span></a>
+    </div>
+
+    <div class="rail" id="live-popular-classes"><!-- rendered from yalla-kids-data.js --></div>
+  </div>
+</section>
+
+<!-- =========================================================
+     PLACES TO GO
+========================================================= -->
+<section class="rail-section tinted">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <h2><span class="en-only inline"><span class="pop">Places to go</span> with kids 🎡</span><span class="ar-only inline"><span class="pop">أماكن للزيارة</span> مع الأطفال 🎡</span></h2>
+        <p id="places-section-dek"><span class="en-only inline">Soft plays, play museums, free parks and cultural spots — all in one map.</span><span class="ar-only inline">صالات لعب، متاحف أطفال، حدائق مجانية ومواقع ثقافية — في خريطة واحدة.</span></p>
+      </div>
+      <a href="yalla-kids-places-directory.html" class="see-all" id="places-see-all"><span class="en-only inline">See all places →</span><span class="ar-only inline">اعرض كل الأماكن ←</span></a>
+    </div>
+
+    <div class="cat-pill-row" id="live-place-cat-pills"><!-- rendered from yalla-kids-data.js --></div>
+
+    <div class="rail" id="live-popular-places"><!-- rendered from yalla-kids-data.js --></div>
+  </div>
+</section>
+
+<!-- =========================================================
+     AGE SECTION
+========================================================= -->
+<section class="age-section">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <h2><span class="en-only inline">Browse by <span class="pop">age</span> 🧒</span><span class="ar-only inline">تصفّح حسب <span class="pop">العمر</span> 🧒</span></h2>
+      </div>
+    </div>
+    <div class="age-row">
+      <a href="yalla-kids-classes-directory.html?age=0-2" class="age-tile a1">
+        <div class="circle">👶</div>
+        <div class="age-label">0–2</div>
+        <div class="age-sub"><span class="en-only inline">Baby & toddler</span><span class="ar-only inline">الرضع والصغار</span></div>
+      </a>
+      <a href="yalla-kids-classes-directory.html?age=3-5" class="age-tile a2">
+        <div class="circle">🧒</div>
+        <div class="age-label">3–5</div>
+        <div class="age-sub"><span class="en-only inline">Pre-school</span><span class="ar-only inline">ما قبل المدرسة</span></div>
+      </a>
+      <a href="yalla-kids-classes-directory.html?age=6-8" class="age-tile a3">
+        <div class="circle">🎒</div>
+        <div class="age-label">6–8</div>
+        <div class="age-sub"><span class="en-only inline">Early elementary</span><span class="ar-only inline">المرحلة الابتدائية</span></div>
+      </a>
+      <a href="yalla-kids-classes-directory.html?age=9-12" class="age-tile a4">
+        <div class="circle">📖</div>
+        <div class="age-label">9–12</div>
+        <div class="age-sub"><span class="en-only inline">Tweens</span><span class="ar-only inline">ما قبل المراهقة</span></div>
+      </a>
+      <a href="yalla-kids-classes-directory.html?age=13-plus" class="age-tile a5">
+        <div class="circle">🎧</div>
+        <div class="age-label">13+</div>
+        <div class="age-sub"><span class="en-only inline">Teens</span><span class="ar-only inline">المراهقون</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     MAP TEASER
+========================================================= -->
+<section class="map-teaser">
+  <div class="container">
+    <div class="map-card">
+      <div class="map-copy">
+        <h3><span class="en-only inline">Discover on <span class="italic-accent">the map</span> 🗺️</span><span class="ar-only inline">اكتشف على <span class="italic-accent">الخريطة</span> 🗺️</span></h3>
+        <p>
+          <span class="en-only inline">Plan a weekend in one view — classes, playgrounds, soft plays and free spots all on the same Doha map.</span>
+          <span class="ar-only inline">خطّط لعطلة الأسبوع كاملة في منظر واحد — الصفوف، الملاعب، صالات اللعب، والأماكن المجانية على خريطة واحدة.</span>
+        </p>
+        <a href="yalla-kids-map.html" class="btn btn-primary btn-lg" style="text-decoration:none;">
+          🗺️ <span class="en-only inline">Open the map</span><span class="ar-only inline">افتح الخريطة</span>
+        </a>
+      </div>
+      <div class="map-art">
+        <div class="map-bg"></div>
+        <div class="map-pin mp-1">🎨 <span class="en-only inline">Katara</span><span class="ar-only inline">كتارا</span></div>
+        <div class="map-pin mp-2">🎢 <span class="en-only inline">Aspire</span><span class="ar-only inline">أسباير</span></div>
+        <div class="map-pin mp-3">🌳 <span class="en-only inline">Corniche</span><span class="ar-only inline">الكورنيش</span></div>
+        <div class="map-pin mp-4">🛝 <span class="en-only inline">Lusail</span><span class="ar-only inline">لوسيل</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     EDITORIAL / GUIDES
+========================================================= -->
+<section class="guides-section">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <h2><span class="en-only inline">Fresh from our <span class="pop">guides</span> 📖</span><span class="ar-only inline">من <span class="pop">أدلتنا</span> 📖</span></h2>
+        <p><span class="en-only inline">Written and road-tested by Doha parents.</span><span class="ar-only inline">مكتوبة ومُجرّبة من قِبَل آباء وأمهات في الدوحة.</span></p>
+      </div>
+      <a href="yalla-kids-guides-hub.html" class="see-all"><span class="en-only inline">All guides →</span><span class="ar-only inline">كل الأدلة ←</span></a>
+    </div>
+    <div class="guides-grid">
+      <a href="yalla-kids-guide-article.html" class="guide-card">
+        <div class="guide-img" style="background: var(--mint-soft); display:flex; align-items:center; justify-content:center; font-size:88px;">🌿</div>
+        <div class="guide-body">
+          <span class="guide-meta"><span class="en-only inline">Free · 6 min read</span><span class="ar-only inline">مجاني · 6 د قراءة</span></span>
+          <div class="guide-title"><span class="en-only inline">Free things to do with kids in Qatar</span><span class="ar-only inline">أنشطة مجانية مع الأطفال في قطر</span></div>
+          <div class="guide-excerpt"><span class="en-only inline">Corniche to Aspire Park, Museum of Islamic Art to Bidda Park — the free playgrounds and indoor stops already in our directory.</span><span class="ar-only inline">من الكورنيش إلى أسباير، من متحف الفن إلى حديقة البدع.</span></div>
+        </div>
+      </a>
+      <a href="yalla-kids-camps.html" class="guide-card">
+        <div class="guide-img" style="background: var(--coral-soft); display:flex; align-items:center; justify-content:center; font-size:88px;">☀️</div>
+        <div class="guide-body">
+          <span class="guide-meta" style="background: var(--coral-soft);"><span class="en-only inline">Summer · Live listings</span><span class="ar-only inline">الصيف · قوائم حية</span></span>
+          <div class="guide-title"><span class="en-only inline">Summer camps in Doha</span><span class="ar-only inline">معسكرات الصيف في الدوحة</span></div>
+          <div class="guide-excerpt"><span class="en-only inline">Every camp currently listed — sorted by age, area and price. Updated as providers confirm schedules.</span><span class="ar-only inline">كل المعسكرات المدرجة حالياً — حسب العمر والمنطقة والسعر.</span></div>
+        </div>
+      </a>
+      <a href="yalla-kids-guide-article.html" class="guide-card">
+        <div class="guide-img" style="background: var(--butter-soft); display:flex; align-items:center; justify-content:center; font-size:88px;">🌙</div>
+        <div class="guide-body">
+          <span class="guide-meta" style="background: var(--mint-soft);"><span class="en-only inline">Ramadan · 5 min</span><span class="ar-only inline">رمضان · 5 د</span></span>
+          <div class="guide-title"><span class="en-only inline">Ramadan-friendly classes for kids</span><span class="ar-only inline">صفوف مناسبة لشهر رمضان</span></div>
+          <div class="guide-excerpt"><span class="en-only inline">Evening schedules, Arabic storytelling and calm-hour art — drawn from our live class directory.</span><span class="ar-only inline">جداول مسائية، قراءة عربية، وفن هادئ — من دليل الصفوف.</span></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     FOR PROVIDERS
+========================================================= -->
+<section class="providers-band">
+  <div class="container">
+    <div class="providers-card">
+      <div>
+        <h3><span class="en-only inline">Run a class? <br>Own a <span class="italic-accent">venue?</span></span><span class="ar-only inline">تدير صفاً؟ <br>تملك <span class="italic-accent">مكاناً؟</span></span></h3>
+        <p>
+          <span class="en-only inline">List your classes, camps or venue on Yalla Kids. MyFatoorah-backed payments with weekly payouts. 10% commission on classes, four-tier plans for venues. Founding providers onboarding now.</span>
+          <span class="ar-only inline">أدرج صفوفك أو معسكراتك أو مكانك على يلا كيدز. مدفوعات عبر ماي فاتورة بتحويل أسبوعي. عمولة 10% على الصفوف وباقات متعددة للأماكن. ندعو الموفرين المؤسسين للانضمام الآن.</span>
+        </p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <a class="btn btn-gold btn-lg" href="yalla-kids-provider-onboarding.html" style="text-decoration:none;"><span class="en-only inline">List a class →</span><span class="ar-only inline">أدرج صفاً ←</span></a>
+          <a class="btn btn-outline btn-lg" href="yalla-kids-for-providers.html" style="background:rgba(255,255,255,0.1);color:#fff;border-color:rgba(255,255,255,0.3);text-decoration:none;"><span class="en-only inline">Claim a venue</span><span class="ar-only inline">استلم مكاناً</span></a>
+        </div>
+        <div class="p-stats">
+          <div class="stat"><div class="num" id="stat-places">—</div><div class="lbl"><span class="en-only inline">Places listed</span><span class="ar-only inline">مكان مُدرج</span></div></div>
+          <div class="stat"><div class="num">90/10</div><div class="lbl"><span class="en-only inline">Revenue split</span><span class="ar-only inline">تقسيم الإيرادات</span></div></div>
+          <div class="stat"><div class="num">7 <span style="font-size:18px;"><span class="en-only inline">days</span><span class="ar-only inline">أيام</span></span></div><div class="lbl"><span class="en-only inline">Payout cycle</span><span class="ar-only inline">دورة التحويل</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     FOUNDER NOTE (replaces fake testimonials; no user quotes until we have real ones)
+========================================================= -->
+<section class="testis">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <h2><span class="en-only inline">We're just <span class="pop">getting started</span> 👋</span><span class="ar-only inline"><span class="pop">نحن في البداية</span> 👋</span></h2>
+      </div>
+    </div>
+    <div class="testi-grid" style="grid-template-columns: 1fr;">
+      <div class="testi" style="max-width:780px; margin:0 auto;">
+        <div class="quote-mark">💬</div>
+        <div class="body">
+          <span class="en-only inline">Yalla Kids is a new, Doha-based directory. Every place and class you see here is drawn from public sources — venue websites, Ministry listings, and on-the-ground visits — not paid placements. If a listing is wrong, stale, or missing, tell us and we'll fix it. We'll start publishing real parent reviews once we have bookings going through the site.</span>
+          <span class="ar-only inline">يلا كيدز دليل جديد من الدوحة. كل الأماكن والصفوف هنا مصدرها مواقع الموفرين والمصادر الرسمية والزيارات الميدانية — بدون رعايات مدفوعة. إذا لاحظت خطأً أو معلومة قديمة، أخبرنا وسنصحّح. سننشر آراء الأهالي الحقيقية عند بدء الحجوزات.</span>
+        </div>
+        <div class="author" style="border:0;">
+          <div style="text-align:center; width:100%;">
+            <a href="yalla-kids-contact.html" class="btn btn-outline"><span class="en-only inline">Report a listing →</span><span class="ar-only inline">أبلغ عن قائمة ←</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     NEWSLETTER
+========================================================= -->
+<section class="newsletter">
+  <div class="container">
+    <div class="nl-card">
+      <h3><span class="en-only inline">Weekend plans, every <span class="italic-accent">Wednesday</span> 💌</span><span class="ar-only inline">خطط عطلة الأسبوع كل <span class="italic-accent">أربعاء</span> 💌</span></h3>
+      <p><span class="en-only inline">One email. New classes, free events, the best weather-appropriate weekend spot. Bilingual.</span><span class="ar-only inline">رسالة واحدة. صفوف جديدة، فعاليات مجانية، أفضل مكان لعطلة الأسبوع. بالعربية والإنجليزية.</span></p>
+      <form class="nl-form" onsubmit="event.preventDefault();">
+        <input type="email" placeholder="parent@example.com">
+        <button class="btn btn-primary" type="submit"><span class="en-only inline">Subscribe</span><span class="ar-only inline">اشترك</span></button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<section class="container" id="recents-section" style="display:none;">
+  <div class="yk-rail" id="recents-rail"></div>
+</section>
+
+<!-- =========================================================
+     WALKTHROUGH / DEMO
+========================================================= -->
+<section class="walkthrough" id="walkthrough">
+  <div class="container">
+    <div class="wt-head">
+      <span class="wt-eyebrow">
+        <span class="en-only inline">60-second tour</span><span class="ar-only inline">جولة في ٦٠ ثانية</span>
+      </span>
+      <h2>
+        <span class="en-only inline">See how <span class="italic-accent">Yalla Kids</span> works</span>
+        <span class="ar-only inline">شاهد كيف تعمل <span class="italic-accent">يلا كيدز</span></span>
+      </h2>
+      <p>
+        <span class="en-only inline">A short walkthrough — from search to booking — in both English and Arabic. Plays automatically.</span>
+        <span class="ar-only inline">جولة قصيرة — من البحث إلى الحجز — بالإنجليزية والعربية. تُشغَّل تلقائياً.</span>
+      </p>
+    </div>
+
+    <div class="wt-frame-wrap">
+      <div class="wt-frame-shell">
+        <div class="wt-frame-bar">
+          <div class="dots">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          </div>
+          <span class="url">yallakids.qa / walkthrough</span>
+        </div>
+        <iframe
+          class="wt-frame"
+          src="yalla-kids-walkthrough.html"
+          title="Yalla Kids walkthrough"
+          loading="lazy"
+          allow="autoplay"
+        ></iframe>
+      </div>
+
+      <div class="wt-cta">
+        <a class="btn btn-primary" href="yalla-kids-walkthrough.html" target="_blank" rel="noopener">
+          <span class="en-only inline">Open fullscreen ↗</span><span class="ar-only inline">افتح بملء الشاشة ↗</span>
+        </a>
+        <a class="btn btn-ghost" href="yalla-kids-how-it-works.html">
+          <span class="en-only inline">How it works</span><span class="ar-only inline">كيف نعمل</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="logo">
+          <span class="en-only inline">Yalla Kids</span>
+          <span class="ar-only inline">يلا كيدز</span>
+        </div>
+        <p class="foot-about">
+          <span class="en-only inline">Qatar's kids' classes and places, one place to book. Bilingual, built in Doha.</span>
+          <span class="ar-only inline">صفوف وأماكن للأطفال في قطر في مكان واحد. بلغتين، صُنعت في الدوحة.</span>
+        </p>
+        <div class="foot-social">
+          <a href="#" aria-label="Instagram">📷</a>
+          <a href="#" aria-label="WhatsApp">💬</a>
+          <a href="#" aria-label="TikTok">🎵</a>
+          <a href="#" aria-label="Email">✉</a>
+        </div>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Classes</span><span class="ar-only inline">الصفوف</span></h5>
+        <a href="yalla-kids-classes-directory.html"><span class="en-only inline">All classes</span><span class="ar-only inline">كل الصفوف</span></a>
+        <a href="yalla-kids-classes-directory.html?cat=art"><span class="en-only inline">Art &amp; crafts</span><span class="ar-only inline">فن وحرف</span></a>
+        <a href="yalla-kids-classes-directory.html?cat=swimming"><span class="en-only inline">Swimming</span><span class="ar-only inline">سباحة</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Places</span><span class="ar-only inline">الأماكن</span></h5>
+        <a href="yalla-kids-places-directory.html"><span class="en-only inline">All places</span><span class="ar-only inline">كل الأماكن</span></a>
+        <a href="yalla-kids-places-directory.html#softplay"><span class="en-only inline">Soft plays</span><span class="ar-only inline">صالات اللعب</span></a>
+        <a href="yalla-kids-map.html"><span class="en-only inline">Map</span><span class="ar-only inline">خريطة</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">For providers</span><span class="ar-only inline">للموفرين</span></h5>
+        <a href="yalla-kids-for-providers.html"><span class="en-only inline">List a class</span><span class="ar-only inline">أدرج صفاً</span></a>
+        <a href="yalla-kids-how-it-works.html"><span class="en-only inline">How it works</span><span class="ar-only inline">كيف نعمل</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Company</span><span class="ar-only inline">الشركة</span></h5>
+        <a href="yalla-kids-about.html"><span class="en-only inline">About</span><span class="ar-only inline">من نحن</span></a>
+        <a href="yalla-kids-contact.html"><span class="en-only inline">Contact</span><span class="ar-only inline">تواصل</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Legal</span><span class="ar-only inline">قانوني</span></h5>
+        <a href="yalla-kids-terms.html"><span class="en-only inline">Terms</span><span class="ar-only inline">الشروط</span></a>
+        <a href="yalla-kids-privacy.html"><span class="en-only inline">Privacy</span><span class="ar-only inline">الخصوصية</span></a>
+        <a href="yalla-kids-faq.html"><span class="en-only inline">FAQ</span><span class="ar-only inline">الأسئلة الشائعة</span></a>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>© 2026 Yalla Kids WLL · Doha, Qatar · CR #XXXXXX 🇶🇦</span>
+      <span><span class="en-only inline">Made with 💛 for Doha families</span><span class="ar-only inline">صُنعت بـ 💛 لعائلات الدوحة</span></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleLang() {
+    const html = document.documentElement;
+    const isRTL = html.getAttribute("dir") === "rtl";
+    html.setAttribute("dir", isRTL ? "ltr" : "rtl");
+    html.setAttribute("lang", isRTL ? "en" : "ar");
+    document.title = isRTL
+      ? "Yalla Kids — Qatar's kids' classes & places to go, one place to book"
+      : "يلا كيدز — صفوف الأطفال وأماكن الزيارة في قطر، في مكان واحد";
+  }
+
+  /* ---------- Search-bar popovers (shared) ---------- */
+  const SEARCH_POPOVERS = [
+    { fieldId: "ageField",  panelId: "agePanel",  width: 380 },
+    { fieldId: "typeField", panelId: "typePanel", width: 340 },
+    { fieldId: "areaField", panelId: "areaPanel", width: 340 },
+  ];
+  function positionPanel(fieldId, panelId, maxWidth) {
+    const field = document.getElementById(fieldId);
+    const panel = document.getElementById(panelId);
+    if (!field || !panel) return;
+    const rect = field.getBoundingClientRect();
+    const isRTL = document.documentElement.getAttribute("dir") === "rtl";
+    const panelWidth = Math.min(maxWidth, window.innerWidth - 32);
+    const gap = 10;
+    let top = rect.bottom + gap;
+    const maxBelow = window.innerHeight - top - 16;
+    const needed = Math.min(panel.scrollHeight, window.innerHeight - 40);
+    if (maxBelow < 260 && rect.top > maxBelow) {
+      top = Math.max(16, rect.top - gap - needed);
+    }
+    let left = isRTL ? rect.right - panelWidth : rect.left;
+    left = Math.max(16, Math.min(left, window.innerWidth - panelWidth - 16));
+    panel.style.top = top + "px";
+    panel.style.left = left + "px";
+  }
+  function closeAllSearchPopovers(exceptPanelId) {
+    SEARCH_POPOVERS.forEach(p => {
+      if (p.panelId === exceptPanelId) return;
+      const field = document.getElementById(p.fieldId);
+      const panel = document.getElementById(p.panelId);
+      if (!field || !panel) return;
+      panel.setAttribute("hidden", "");
+      field.classList.remove("open");
+      field.setAttribute("aria-expanded", "false");
+    });
+  }
+  function openPanel(fieldId, panelId, width) {
+    closeAllSearchPopovers(panelId);
+    const field = document.getElementById(fieldId);
+    const panel = document.getElementById(panelId);
+    const isOpen = !panel.hasAttribute("hidden");
+    if (isOpen) {
+      panel.setAttribute("hidden", "");
+      field.classList.remove("open");
+      field.setAttribute("aria-expanded", "false");
+    } else {
+      panel.removeAttribute("hidden");
+      field.classList.add("open");
+      field.setAttribute("aria-expanded", "true");
+      positionPanel(fieldId, panelId, width);
+    }
+  }
+
+  /* ---------- Age-picker ---------- */
+  function toggleAgePanel(e) { e.stopPropagation(); openPanel("ageField", "agePanel", 380); }
+  function closeAgePanel() {
+    const field = document.getElementById("ageField");
+    const panel = document.getElementById("agePanel");
+    panel.setAttribute("hidden", "");
+    field.classList.remove("open");
+    field.setAttribute("aria-expanded", "false");
+  }
+
+  /* ---------- Looking-for picker ---------- */
+  function toggleTypePanel(e) { e.stopPropagation(); openPanel("typeField", "typePanel", 340); }
+
+  /* ---------- Area picker ---------- */
+  function toggleAreaPanel(e) { e.stopPropagation(); openPanel("areaField", "areaPanel", 340); }
+
+  /* ---------- Generic list-option select (for Looking-for + In) ---------- */
+  function selectListOption(btn, labelId) {
+    const panel = btn.closest(".list-panel");
+    if (!panel) return;
+    panel.querySelectorAll(".list-option.selected").forEach(b => b.classList.remove("selected"));
+    btn.classList.add("selected");
+    const label = document.getElementById(labelId);
+    if (label) {
+      const en = btn.dataset.labelEn || "";
+      const ar = btn.dataset.labelAr || en;
+      label.innerHTML =
+        '<span class="en-only inline">' + en + '</span>' +
+        '<span class="ar-only inline">' + ar + '</span>';
+    }
+    // Track the selected value on the parent field
+    const field = btn.closest(".search-field");
+    if (field) field.dataset.selected = btn.dataset.val || "";
+    closeAllSearchPopovers(null);
+  }
+
+  /* ---------- Search submit ---------- */
+  function getSelectedType() {
+    const field = document.getElementById("typeField");
+    const selected = field && field.querySelector(".list-option.selected");
+    return (selected && selected.dataset.val) || "all";
+  }
+  function getSelectedArea() {
+    const field = document.getElementById("areaField");
+    const selected = field && field.querySelector(".list-option.selected");
+    return (selected && selected.dataset.val) || "all";
+  }
+  function getSelectedAges() {
+    return Array.from(document.querySelectorAll("#agePanel .age-pill.selected"))
+      .map(b => b.dataset.val);
+  }
+  function runSearch(e) {
+    if (e) e.preventDefault();
+    const type = getSelectedType();
+    const area = getSelectedArea();
+    const ages = getSelectedAges();
+
+    // Route: camps → camps page; places/parties/play → places directory; classes/all → classes directory
+    const placesTypes = ["places", "parties", "play"];
+    let target;
+    if (type === "camps") {
+      target = "yalla-kids-camps.html";
+    } else if (placesTypes.indexOf(type) >= 0) {
+      target = "yalla-kids-places-directory.html";
+    } else {
+      target = "yalla-kids-classes-directory.html";
+    }
+
+    const params = new URLSearchParams();
+    if (type && type !== "all") params.set("type", type);
+    if (area && area !== "all") params.set("area", area);
+    if (ages.length) params.set("ages", ages.join(","));
+
+    const q = params.toString();
+    window.location.href = target + (q ? "?" + q : "");
+  }
+
+  /* Enter key on any search field triggers search */
+  ["typeField", "ageField", "areaField"].forEach(id => {
+    const f = document.getElementById(id);
+    if (!f) return;
+    f.addEventListener("keydown", function(e) {
+      if (e.key === "Enter") {
+        // If a popover is open on this field, Enter should close + search
+        e.preventDefault();
+        runSearch(e);
+      }
+    });
+  });
+
+  /* Reposition any open popover on scroll/resize */
+  function repositionOpenPopover() {
+    SEARCH_POPOVERS.forEach(p => {
+      const panel = document.getElementById(p.panelId);
+      if (panel && !panel.hasAttribute("hidden")) positionPanel(p.fieldId, p.panelId, p.width);
+    });
+  }
+  window.addEventListener("scroll", repositionOpenPopover, { passive: true });
+  window.addEventListener("resize", repositionOpenPopover);
+  function toggleAgeOption(btn) {
+    btn.classList.toggle("selected");
+  }
+  function clearAge(e) {
+    e.stopPropagation();
+    document.querySelectorAll("#agePanel .age-pill.selected")
+      .forEach(b => b.classList.remove("selected"));
+  }
+  function applyAge(e) {
+    e.stopPropagation();
+    const selected = Array.from(document.querySelectorAll("#agePanel .age-pill.selected"));
+    const label = document.getElementById("ageLabel");
+    if (selected.length === 0) {
+      label.innerHTML = '<span class="en-only inline">Any age</span><span class="ar-only inline">أي عمر</span>';
+    } else if (selected.length <= 2) {
+      const en = selected.map(b => b.dataset.labelEn).join(", ");
+      const ar = selected.map(b => b.dataset.labelAr).join("، ");
+      label.innerHTML =
+        '<span class="en-only inline">' + en + '</span>' +
+        '<span class="ar-only inline">' + ar + '</span>';
+    } else {
+      const firstEn = selected.slice(0, 2).map(b => b.dataset.labelEn).join(", ");
+      const firstAr = selected.slice(0, 2).map(b => b.dataset.labelAr).join("، ");
+      const more = selected.length - 2;
+      label.innerHTML =
+        '<span class="en-only inline">' + firstEn + ' +' + more + '</span>' +
+        '<span class="ar-only inline">' + firstAr + ' +' + more + '</span>';
+    }
+    closeAgePanel();
+  }
+  // Close when clicking outside any of the three fields
+  document.addEventListener("click", function(e) {
+    let insideAny = false;
+    SEARCH_POPOVERS.forEach(p => {
+      const field = document.getElementById(p.fieldId);
+      if (field && field.contains(e.target)) insideAny = true;
+    });
+    if (!insideAny) closeAllSearchPopovers(null);
+  });
+  // Close with Escape
+  document.addEventListener("keydown", function(e) {
+    if (e.key === "Escape") closeAllSearchPopovers(null);
+  });
+</script>
+
+<script src="yalla-kids-data.js"></script>
+<script>
+/* ============================================================
+   Live render — replaces every former hardcoded sample card.
+   Pulls from window.YALLA_DATA (40 places + 66 classes from the
+   directory spreadsheet). No more invented names or counts.
+   ============================================================ */
+(function () {
+  if (!window.YALLA_DATA) return;
+  var DATA = window.YALLA_DATA;
+  var PLACES = DATA.places || [];
+  var CLASSES = DATA.classes || [];
+
+  // ---- Helpers (mirror of D.* but scoped here so we never miss-fire if data.js
+  //      load order changes). ----
+  function escapeHtml(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+  function hostOf(url) {
+    if (!url) return '';
+    try { return new URL(url).hostname.replace(/^www\./i, ''); }
+    catch (e) {
+      var m = String(url).match(/^(?:https?:\/\/)?([^\/?#]+)/i);
+      return m ? m[1].replace(/^www\./i, '') : '';
+    }
+  }
+  function faviconUrl(site, size) {
+    var host = hostOf(site);
+    return host ? 'https://www.google.com/s2/favicons?domain=' +
+      encodeURIComponent(host) + '&sz=' + (size || 64) : '';
+  }
+  function ogImageUrl(site) {
+    return site ? 'https://api.microlink.io/?url=' + encodeURIComponent(site) +
+      '&embed=image.url&meta=false&palette=false' : '';
+  }
+  var CAT_ACCENT = {
+    'play-museum': '#FFE5A3', 'role-play': '#FFD1E0', 'theme-park': '#FFDCC9',
+    'indoor-park': '#CDE8F7', 'play-centre': '#E8DCFF', 'trampoline': '#C7F0DC',
+    library: '#CEEDEB', museum: '#FFD1E0', park: '#E5F3C4', zoo: '#E5F3C4',
+    waterpark: '#CDE8F7', sports: '#E5F3C4', swim: '#CDE8F7', dance: '#FFD1E0',
+    music: '#E8DCFF', art: '#FFDCC9', stem: '#CEEDEB', 'martial-arts': '#FFE4CC',
+    equestrian: '#FDF1DC', language: '#FFF1C2', drama: '#FFD1E0'
+  };
+  var CAT_EMOJI = {
+    'play-museum': '🎨', 'role-play': '🏙️', 'theme-park': '🎢',
+    'indoor-park': '🌳', 'play-centre': '🎈', 'trampoline': '🦘',
+    library: '📚', museum: '🏛️', park: '🌳', zoo: '🦒', waterpark: '🏊',
+    sports: '⚽', swim: '🏊', dance: '💃', music: '🎵', art: '🎨',
+    stem: '🤖', 'martial-arts': '🥋', equestrian: '🐎', language: '🗣️', drama: '🎭'
+  };
+  function accentFor(it) { return CAT_ACCENT[it && it.category] || '#FFE5A3'; }
+  function emojiFor(it)  { return CAT_EMOJI[it && it.category] || (it && it.kind === 'class' ? '🎯' : '🎈'); }
+
+  // Pricing badge (free / paid / premium) for place cards.
+  function priceBadge(p) {
+    if (p.is_free) return '<div class="place-tag free">Free</div>';
+    if ((p.price_min || 0) >= 150) return '<div class="place-tag premium">Premium</div>';
+    return '<div class="place-tag paid">Paid</div>';
+  }
+
+  // Build a real card matching the home page's existing .class-card / .place-card markup.
+  function cardHTML(it, opts) {
+    opts = opts || {};
+    var isClass = it.kind === 'class';
+    var href = 'yalla-kids-' + (isClass ? 'class' : 'place') + '-detail.html?slug=' +
+      encodeURIComponent(it.slug);
+    var accent = accentFor(it);
+    var emoji  = emojiFor(it);
+    var og     = ogImageUrl(it.website);
+    var fav    = faviconUrl(it.website, 64);
+
+    var imgLayer = og
+      ? '<img class="media-img" src="' + escapeHtml(og) + '" alt="" loading="lazy" decoding="async" ' +
+        'onerror="this.remove();" onload="this.classList.add(\'ready\');" />'
+      : '';
+    var favChip = fav
+      ? '<img class="card-favicon" src="' + escapeHtml(fav) + '" alt="" loading="lazy" decoding="async" ' +
+        'onerror="this.remove();" />'
+      : '';
+
+    var topChip = isClass
+      ? '<div class="card-age-chip">Ages ' + escapeHtml(it.age_label || '') + '</div>'
+      : priceBadge(it);
+
+    var providerLine = isClass
+      ? escapeHtml((it.category_label || '') + ' · ' + (it.area || ''))
+      : escapeHtml((it.category_label || '') + ' · ' + (it.area || ''));
+
+    var subText = (it.tags || []).slice(0, 2).join(' · ');
+    var price   = it.price_label || (it.is_free ? 'Free' : '—');
+
+    return (
+      '<a href="' + href + '" class="' + (isClass ? 'class-card' : 'place-card') + '">' +
+        '<div class="card-img" style="background:' + accent + '; display:flex; align-items:center; justify-content:center;">' +
+          '<span class="media-emoji" style="font-size:54px; position:relative; z-index:1;">' + emoji + '</span>' +
+          imgLayer +
+          topChip +
+          favChip +
+        '</div>' +
+        '<div class="card-body">' +
+          '<div class="card-provider">' + providerLine + '</div>' +
+          '<div class="card-title">' + escapeHtml(it.name_en) + '</div>' +
+          (subText ? '<div class="card-sub" style="font-size:13px; color:var(--ink-soft); margin-top:4px;">' + escapeHtml(subText) + '</div>' : '') +
+          '<div class="card-meta">' +
+            '<span>' + escapeHtml(isClass ? (it.age_label ? 'Ages ' + it.age_label : '') : (it.area || '')) + '</span>' +
+            (it.is_free
+              ? '<span class="free-tag">Free</span>'
+              : '<span class="price">' + escapeHtml(price) + '</span>') +
+          '</div>' +
+        '</div>' +
+      '</a>'
+    );
+  }
+
+  // ---- Inject scoped imagery CSS for home's .card-img layer ----
+  // (shared.css covers .place-card .place-media; home uses .card-img instead.)
+  var style = document.createElement('style');
+  style.textContent =
+    '.card-img { position: relative; overflow: hidden; }' +
+    '.card-img .media-img { position: absolute; inset: 0; width: 100%; height: 100%; ' +
+      'object-fit: cover; z-index: 2; opacity: 0; transition: opacity .35s ease; }' +
+    '.card-img .media-img.ready { opacity: 1; }' +
+    '.card-img .card-favicon { position: absolute; inset-block-end: 8px; inset-inline-end: 8px; ' +
+      'width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid var(--ink); ' +
+      'background: #fff; padding: 3px; z-index: 3; box-shadow: 2px 2px 0 var(--ink); object-fit: contain; }';
+  document.head.appendChild(style);
+
+  // ---- 1. Popular classes rail ----
+  var popularClasses = CLASSES.slice(0, 4);
+  var classesEl = document.getElementById('live-popular-classes');
+  if (classesEl) classesEl.innerHTML = popularClasses.map(function (c) { return cardHTML(c); }).join('');
+
+  // ---- 2. Popular places rail ----
+  // Lead with the most marquee venues we have (Olioli, KidzMondo, Angry Birds, Doha Quest)
+  var popularPlaces = PLACES.slice(0, 4);
+  var placesEl = document.getElementById('live-popular-places');
+  if (placesEl) placesEl.innerHTML = popularPlaces.map(function (p) { return cardHTML(p); }).join('');
+
+  // ---- 3. Place category pills (real counts from D.places) ----
+  var catCounts = {};
+  var catLabels = {};
+  PLACES.forEach(function (p) {
+    catCounts[p.category] = (catCounts[p.category] || 0) + 1;
+    catLabels[p.category] = p.category_label;
+  });
+  var topCats = Object.keys(catCounts)
+    .sort(function (a, b) { return catCounts[b] - catCounts[a]; })
+    .slice(0, 6);
+  var pillThemes = {
+    'play-centre': 'softplay', 'play-museum': 'softplay',
+    'theme-park': 'theme', 'role-play': 'theme', 'trampoline': 'theme',
+    museum: 'indoor', library: 'indoor', 'indoor-park': 'indoor',
+    park: 'outdoor', zoo: 'outdoor', waterpark: 'outdoor'
+  };
+  var catEmoji = {
+    'play-centre': '🎈', 'play-museum': '🎨', 'role-play': '🏙️',
+    'theme-park': '🎢', 'trampoline': '🦘', 'indoor-park': '🌳',
+    museum: '🏛️', library: '📚', park: '🌳', zoo: '🦒', waterpark: '🏊'
+  };
+  var pillsEl = document.getElementById('live-place-cat-pills');
+  if (pillsEl) {
+    pillsEl.innerHTML = topCats.map(function (cat) {
+      var theme = pillThemes[cat] || 'indoor';
+      var em = catEmoji[cat] || '🎈';
+      return '<button class="cat-pill ' + theme + '" type="button" ' +
+        'onclick="window.location=\'yalla-kids-places-directory.html?category=' + encodeURIComponent(cat) + '\'">' +
+        em + ' ' + escapeHtml(catLabels[cat]) +
+        ' <span class="count">' + catCounts[cat] + '</span></button>';
+    }).join('');
+  }
+
+  // ---- 4. Top areas grid (skip "Multi" — that's a citywide-franchise marker) ----
+  var areaCounts = {};
+  [].concat(PLACES, CLASSES).forEach(function (it) {
+    if (!it.area || it.area === 'Multi') return;
+    if (!areaCounts[it.area]) areaCounts[it.area] = { classes: 0, places: 0 };
+    if (it.kind === 'class') areaCounts[it.area].classes++;
+    else areaCounts[it.area].places++;
+  });
+  var topAreas = Object.keys(areaCounts)
+    .sort(function (a, b) {
+      var aT = areaCounts[a].classes + areaCounts[a].places;
+      var bT = areaCounts[b].classes + areaCounts[b].places;
+      return bT - aT;
+    })
+    .slice(0, 4);
+  var areaThemes = [
+    'linear-gradient(135deg,#A8D5BA,#7BC0A0)',  // mint
+    'linear-gradient(135deg,#FFD49A,#F4A988)',  // peach
+    'linear-gradient(135deg,#E8C8FF,#C9A0F2)',  // lavender
+    'linear-gradient(135deg,#FFE39A,#F2C57A)',  // butter
+    'linear-gradient(135deg,#FFC8C8,#F0998E)',  // pink
+    'linear-gradient(135deg,#B8E0E8,#8AC5D2)'   // sky
+  ];
+  var areasEl = document.getElementById('live-top-areas');
+  if (areasEl) {
+    areasEl.innerHTML = topAreas.map(function (area, i) {
+      var c = areaCounts[area];
+      return '<a href="yalla-kids-area-landing.html?area=' + encodeURIComponent(area) + '" class="area-tile">' +
+        '<div class="area-img" style="background:' + areaThemes[i % areaThemes.length] + ';"></div>' +
+        '<div class="area-info">' +
+          '<div class="area-name">' + escapeHtml(area) + '</div>' +
+          '<div class="area-stats">' +
+            (c.classes ? '<span>🎨 ' + c.classes + ' classes</span>' : '') +
+            (c.places ? '<span>🎡 ' + c.places + ' places</span>' : '') +
+          '</div>' +
+        '</div>' +
+      '</a>';
+    }).join('');
+  }
+
+  // ---- 5. Real counts in hero badge + stats band + see-all link ----
+  var heroStat = document.getElementById('hero-places-stat');
+  if (heroStat) {
+    heroStat.innerHTML =
+      '<span class="en-only inline">' + PLACES.length + ' places to go</span>' +
+      '<span class="ar-only inline">' + PLACES.length + ' مكان للزيارة</span>';
+  }
+  var statPlaces = document.getElementById('stat-places');
+  if (statPlaces) statPlaces.textContent = PLACES.length + '+';
+  var seeAll = document.getElementById('places-see-all');
+  if (seeAll) {
+    seeAll.innerHTML =
+      '<span class="en-only inline">See all ' + PLACES.length + ' places →</span>' +
+      '<span class="ar-only inline">اعرض كل الـ' + PLACES.length + ' مكان ←</span>';
+  }
+})();
+</script>
+
+<script src="yalla-kids-shared.js"></script>
+
+<script>
+/* Recently-viewed rail on home (only shows if user has viewed something). */
+(function () {
+  if (!window.YALLA_DATA || !window.YALLA_DATA.recents) return;
+  var section = document.getElementById('recents-section');
+  var rail = document.getElementById('recents-rail');
+  if (!section || !rail) return;
+  function maybeShow() {
+    var rendered = window.YALLA_DATA.renderRecentsRail(rail, {
+      titleEn: 'Pick up where you left off',
+      titleAr: 'تابع من حيث توقفت'
+    });
+    section.style.display = rendered ? '' : 'none';
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', maybeShow);
+  } else {
+    maybeShow();
+  }
+  window.addEventListener('yalla:recents', maybeShow);
+})();
+</script>
+
+</body>
+</html>

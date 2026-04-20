@@ -1,0 +1,1085 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
+<title>Yalla Kids · Messages</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,600&family=Inter:wght@400;500;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1a1613;
+    --paper:#fff9f2;
+    --cream:#fdf4e7;
+    --maroon:#8A1538;
+    --gold:#F4B942;
+    --butter:#ffe6a8;
+    --butter-soft:#fff3cf;
+    --mint:#c8e6d0;
+    --mint-soft:#e4f2e8;
+    --rose:#f7d4d9;
+    --sky:#d7e7f4;
+    --lilac:#e4dcf2;
+    --peach:#ffd5c2;
+    --wa:#25D366;
+    --wa-deep:#128C7E;
+    --line:#e5dcc9;
+    --muted:#6a5d4d;
+    --good:#2f7d4f;
+    --warn:#c9801e;
+    --bad:#b63131;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--paper);color:var(--ink);font-family:'Inter',system-ui,sans-serif;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  html[dir=rtl] body{font-family:'Tajawal','Inter',sans-serif}
+  .en-only{display:inline}.ar-only{display:none}
+  html[dir=rtl] .en-only{display:none}
+  html[dir=rtl] .ar-only{display:inline}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+  input,textarea{font-family:inherit;color:inherit}
+
+  /* NAV */
+  .nav{position:sticky;top:0;z-index:60;background:var(--paper);border-bottom:2px solid var(--ink)}
+  .nav-inner{max-width:1400px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;gap:20px}
+  .logo{display:flex;align-items:center;gap:8px;font-family:'Fraunces',serif;font-weight:700;font-size:22px;color:var(--maroon)}
+  .logo-mark{width:34px;height:34px;background:var(--maroon);border:2px solid var(--ink);border-radius:10px;display:grid;place-items:center;color:#fff;font-weight:700;box-shadow:3px 3px 0 var(--ink)}
+  .nav-spacer{flex:1}
+  .nav-right{display:flex;align-items:center;gap:10px}
+  .lang{border:2px solid var(--ink);border-radius:999px;background:#fff;padding:6px 12px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px;cursor:pointer}
+  .lang:hover{background:var(--butter-soft)}
+  .avatar-chip{display:flex;align-items:center;gap:8px;border:2px solid var(--ink);border-radius:999px;padding:4px 12px 4px 4px;background:#fff;font-size:13px;font-weight:600}
+  .avatar-chip .av{width:28px;height:28px;border-radius:50%;background:var(--rose);display:grid;place-items:center;font-family:'Fraunces',serif;font-weight:700;color:var(--maroon);border:2px solid var(--ink);font-size:13px}
+
+  /* HERO */
+  .hero{max-width:1400px;margin:0 auto;padding:24px 24px 10px}
+  .crumbs{font-size:12px;color:var(--muted);display:flex;gap:6px;align-items:center;font-weight:500;margin-bottom:8px}
+  .crumbs a{color:var(--maroon);font-weight:600}
+  .crumb-sep{opacity:.4}
+  .hero h1{font-family:'Fraunces',serif;font-weight:700;font-size:36px;line-height:1.05;letter-spacing:-.02em}
+  .hero h1 .pop{display:inline-block;position:relative;color:var(--maroon);font-style:italic}
+  .hero h1 .pop::after{content:"";position:absolute;left:-2px;right:-4px;bottom:2px;height:8px;background:var(--gold);z-index:-1;border-radius:4px;transform:skewX(-6deg)}
+  .hero p.sub{color:var(--muted);font-size:14.5px;margin-top:8px;max-width:640px}
+
+  /* TAB STRIP */
+  .tabs{max-width:1400px;margin:14px auto 0;padding:0 24px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .tab{border:2px solid var(--ink);border-radius:999px;background:#fff;padding:6px 14px;font-size:13px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+  .tab:hover{background:var(--butter-soft)}
+  .tab.on{background:var(--ink);color:#fff}
+  .tab .n{background:var(--butter);color:var(--ink);border-radius:999px;padding:0 7px;font-size:10px;font-weight:700;border:1.5px solid var(--ink)}
+  .tab.on .n{background:var(--gold)}
+
+  /* MAIN GRID */
+  .main{max-width:1400px;margin:0 auto;padding:18px 24px 40px;display:grid;grid-template-columns:360px 1fr;gap:20px;align-items:start}
+  @media (max-width:980px){.main{grid-template-columns:1fr}}
+
+  /* THREAD LIST */
+  .threads{background:#fff;border:2px solid var(--ink);border-radius:18px;box-shadow:4px 4px 0 var(--ink);overflow:hidden;min-height:680px;display:flex;flex-direction:column}
+  .t-search{padding:12px 14px;border-bottom:1.5px solid var(--line);display:flex;align-items:center;gap:8px;background:var(--cream)}
+  .t-search input{flex:1;border:none;background:transparent;outline:none;font-size:14px;font-weight:500}
+  .t-search .ic{color:var(--muted)}
+  .t-list{flex:1;overflow-y:auto;max-height:720px}
+  .t-list::-webkit-scrollbar{width:8px}
+  .t-list::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px}
+  .thread{padding:14px 16px;border-bottom:1.5px solid var(--line);cursor:pointer;display:grid;grid-template-columns:42px 1fr auto;gap:10px;align-items:flex-start}
+  .thread:hover{background:var(--butter-soft)}
+  .thread.active{background:var(--butter-soft);border-inline-start:3px solid var(--maroon);padding-inline-start:13px}
+  .thread .av{width:42px;height:42px;border-radius:50%;border:2px solid var(--ink);display:grid;place-items:center;font-family:'Fraunces',serif;font-weight:700;color:var(--maroon);font-size:15px;background:var(--butter);flex-shrink:0;position:relative}
+  .thread .av.m{background:var(--mint)}
+  .thread .av.s{background:var(--sky)}
+  .thread .av.l{background:var(--lilac)}
+  .thread .av.r{background:var(--rose)}
+  .thread .av .status{position:absolute;bottom:-2px;right:-2px;width:14px;height:14px;border-radius:50%;border:2px solid #fff;background:var(--good)}
+  .thread .av .status.wa{background:var(--wa)}
+  html[dir=rtl] .thread .av .status{right:auto;left:-2px}
+  .t-body{min-width:0}
+  .t-name{font-weight:700;font-size:14px;display:flex;align-items:center;gap:6px}
+  .t-class{font-size:11.5px;color:var(--muted);margin-top:1px;display:flex;align-items:center;gap:4px}
+  .t-class b{color:var(--ink);font-weight:600}
+  .t-snip{font-size:13px;color:var(--muted);margin-top:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .t-snip.unread{color:var(--ink);font-weight:600}
+  .t-right{text-align:end;min-width:50px}
+  .t-time{font-size:11px;color:var(--muted);white-space:nowrap}
+  .t-unread{display:inline-block;min-width:18px;height:18px;border-radius:999px;background:var(--maroon);color:#fff;font-size:10px;font-weight:700;padding:0 6px;line-height:18px;text-align:center;margin-top:6px}
+  .t-kind{font-size:9.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:1px 6px;border-radius:999px;border:1.5px solid var(--ink);background:#fff;display:inline-block}
+  .t-kind.inq{background:var(--butter);color:var(--ink)}
+  .t-kind.book{background:var(--mint);color:var(--ink)}
+  .t-kind.wa{background:var(--wa);color:#fff}
+  .t-kind.closed{background:var(--cream);color:var(--muted)}
+
+  /* CONVO */
+  .convo{background:#fff;border:2px solid var(--ink);border-radius:18px;box-shadow:4px 4px 0 var(--ink);overflow:hidden;display:flex;flex-direction:column;min-height:680px}
+
+  .c-head{padding:14px 18px;border-bottom:1.5px solid var(--line);display:flex;gap:12px;align-items:center}
+  .c-head .av{width:44px;height:44px;border-radius:50%;background:var(--mint);border:2px solid var(--ink);display:grid;place-items:center;font-family:'Fraunces',serif;font-weight:700;color:var(--ink);font-size:16px}
+  .c-head .c-name{font-family:'Fraunces',serif;font-weight:700;font-size:18px;line-height:1.1}
+  .c-head .c-sub{font-size:12px;color:var(--muted);margin-top:2px;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+  .c-head .c-sub .online{color:var(--good);font-weight:700;display:inline-flex;align-items:center;gap:4px}
+  .c-head .c-sub .online::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--good)}
+  .c-head .c-actions{margin-inline-start:auto;display:flex;gap:6px;align-items:center}
+  .ico-btn{width:36px;height:36px;background:#fff;border:2px solid var(--ink);border-radius:10px;cursor:pointer;box-shadow:2px 2px 0 var(--ink);display:grid;place-items:center;font-size:15px}
+  .ico-btn:hover{background:var(--butter-soft)}
+  .wa-btn{background:var(--wa);color:#fff;border:2px solid var(--ink);border-radius:999px;padding:8px 14px;font-weight:700;font-size:13px;cursor:pointer;box-shadow:2px 2px 0 var(--ink);display:inline-flex;align-items:center;gap:6px}
+  .wa-btn:hover{background:var(--wa-deep)}
+
+  /* Context card */
+  .c-context{padding:12px 18px;border-bottom:1.5px solid var(--line);background:var(--cream);display:flex;gap:10px;align-items:center}
+  .ctx-mini{width:48px;height:38px;border-radius:8px;border:2px solid var(--ink);background:linear-gradient(135deg,var(--rose),var(--peach));display:grid;place-items:center;font-size:20px;flex-shrink:0}
+  .ctx-body{font-size:12.5px;flex:1;min-width:0}
+  .ctx-body .ct-title{font-weight:700;font-family:'Fraunces',serif;font-size:14px}
+  .ctx-body .ct-meta{color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .c-context .btn-mini{background:#fff;border:2px solid var(--ink);border-radius:999px;padding:4px 10px;font-size:11px;font-weight:700;display:inline-flex;align-items:center;gap:4px;margin-inline-start:auto;flex-shrink:0}
+  .c-context .btn-mini:hover{background:var(--butter-soft)}
+
+  /* AI context banner */
+  .ai-banner{margin:12px 18px 0;background:linear-gradient(90deg,var(--butter-soft),var(--mint-soft));border:2px dashed var(--ink);border-radius:12px;padding:10px 12px;display:flex;gap:10px;align-items:flex-start;font-size:12.5px}
+  .ai-banner .e{font-size:18px;flex-shrink:0}
+  .ai-banner b{font-weight:700}
+  .ai-banner .ai-action{margin-inline-start:auto;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--maroon);text-decoration:underline;cursor:pointer;white-space:nowrap;flex-shrink:0}
+
+  /* Messages */
+  .c-msgs{flex:1;padding:18px;display:flex;flex-direction:column;gap:10px;overflow-y:auto;max-height:480px}
+  .c-msgs::-webkit-scrollbar{width:8px}
+  .c-msgs::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px}
+  .day-div{text-align:center;font-size:11px;color:var(--muted);font-weight:600;padding:6px 0;letter-spacing:.04em;text-transform:uppercase}
+  .day-div::before,.day-div::after{content:"— ";color:var(--line)}
+  .bubble{max-width:78%;padding:10px 14px;border-radius:16px;border:2px solid var(--ink);font-size:14px;line-height:1.5;word-wrap:break-word;position:relative}
+  .bubble.in{align-self:flex-start;background:#fff;border-bottom-left-radius:4px}
+  .bubble.out{align-self:flex-end;background:var(--butter-soft);border-bottom-right-radius:4px}
+  .bubble.sys{align-self:center;background:var(--cream);border:2px dashed var(--ink);font-size:12.5px;max-width:85%;text-align:center;border-radius:10px;padding:8px 14px;color:var(--muted)}
+  .bubble.sys b{color:var(--ink)}
+  .bubble.wa-sys{align-self:center;background:#dcf8c6;border:2px solid var(--wa-deep);max-width:85%;font-size:12.5px;border-radius:10px;padding:8px 14px;display:flex;align-items:center;gap:6px;justify-content:center}
+  .bubble.wa-sys b{color:var(--wa-deep)}
+  .bubble .meta{font-size:10.5px;color:var(--muted);margin-top:4px;display:flex;gap:6px;align-items:center}
+  .bubble.out .meta{justify-content:flex-end}
+  .bubble .meta .read{color:var(--good);font-weight:700}
+  .bubble-attach{margin-top:6px;padding:8px 10px;background:var(--cream);border:1.5px solid var(--line);border-radius:10px;font-size:12px;display:flex;align-items:center;gap:8px}
+  .bubble-attach .ic{font-size:18px}
+  .bubble-photo{margin-top:6px;width:150px;height:100px;border-radius:10px;border:1.5px solid var(--ink);background:linear-gradient(135deg,var(--rose),var(--peach))}
+
+  /* Suggested replies */
+  .sugg{padding:10px 18px 0;display:flex;gap:6px;flex-wrap:wrap}
+  .sugg-chip{background:var(--butter-soft);border:2px solid var(--ink);border-radius:999px;padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer}
+  .sugg-chip:hover{background:var(--butter)}
+  .sugg-chip .em{margin-inline-end:4px}
+
+  /* Composer */
+  .composer{padding:12px 16px;border-top:1.5px solid var(--line);background:var(--cream);display:flex;gap:8px;align-items:flex-end}
+  .comp-tools{display:flex;gap:4px;flex-direction:column}
+  .comp-btn{width:32px;height:32px;background:#fff;border:2px solid var(--ink);border-radius:8px;display:grid;place-items:center;cursor:pointer;font-size:14px}
+  .comp-btn:hover{background:var(--butter-soft)}
+  .comp-area{flex:1;display:flex;flex-direction:column;gap:6px}
+  .comp-textarea{border:2px solid var(--ink);border-radius:14px;background:#fff;padding:10px 12px;font-size:14px;outline:none;resize:none;min-height:44px;max-height:120px;font-family:inherit}
+  .comp-textarea:focus{box-shadow:0 0 0 2px var(--butter-soft)}
+  .comp-send{background:var(--maroon);color:#fff;border:2px solid var(--ink);border-radius:12px;padding:10px 16px;font-weight:700;font-size:14px;cursor:pointer;box-shadow:2px 2px 0 var(--ink);display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+  .comp-send:hover{transform:translate(-1px,-1px)}
+  .comp-bottom{display:flex;align-items:center;gap:8px;margin-top:6px;font-size:11.5px;color:var(--muted)}
+  .comp-bottom .also-wa{margin-inline-start:auto;display:flex;align-items:center;gap:6px;background:#fff;border:1.5px solid var(--ink);border-radius:999px;padding:3px 10px;font-weight:600;cursor:pointer}
+  .comp-bottom .also-wa .box{width:14px;height:14px;border:1.5px solid var(--ink);border-radius:4px;background:#fff;display:grid;place-items:center;font-size:10px;color:transparent}
+  .comp-bottom .also-wa.on .box{background:var(--wa);color:#fff}
+
+  /* RIGHT SIDE components section below main */
+  .extras{max-width:1400px;margin:0 auto;padding:10px 24px 60px;display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+  @media (max-width:980px){.extras{grid-template-columns:1fr}}
+  .section-title{font-family:'Fraunces',serif;font-weight:700;font-size:22px;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+  .section-title .badge{background:var(--butter);border:2px solid var(--ink);border-radius:999px;padding:1px 10px;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+  .section-sub{color:var(--muted);font-size:13.5px;margin-bottom:14px;max-width:480px}
+
+  /* LISTING CTA MOCK */
+  .listing-demo{background:#fff;border:2px solid var(--ink);border-radius:20px;box-shadow:4px 4px 0 var(--ink);overflow:hidden}
+  .ld-hero{aspect-ratio:16/8;background:linear-gradient(135deg,var(--rose),var(--peach));display:grid;place-items:center;font-size:60px;border-bottom:2px solid var(--ink)}
+  .ld-body{padding:18px 20px}
+  .ld-title{font-family:'Fraunces',serif;font-weight:700;font-size:20px;line-height:1.2}
+  .ld-meta{margin-top:6px;font-size:12.5px;color:var(--muted)}
+  .ld-meta b{color:var(--ink)}
+  .ld-rating{margin-top:8px;color:var(--gold);font-size:14px;font-weight:700}
+  .ld-rating .num{color:var(--ink)}
+  .ld-rating .cnt{color:var(--muted);font-weight:500;font-size:12px;margin-inline-start:4px}
+  .ld-price{margin-top:12px;font-family:'Fraunces',serif;font-weight:700;font-size:24px;color:var(--ink)}
+  .ld-price .per{font-family:'Inter',sans-serif;font-size:12px;color:var(--muted);font-weight:500}
+  .ld-ctas{margin-top:16px;display:grid;gap:10px}
+  .ld-ctas .row{display:flex;gap:8px}
+  .btn{border:2px solid var(--ink);border-radius:999px;padding:12px 18px;font-weight:700;font-size:14px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;transition:transform .12s;box-shadow:3px 3px 0 var(--ink);flex:1}
+  .btn:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--ink)}
+  .btn-book{background:var(--maroon);color:#fff}
+  .btn-wa{background:var(--wa);color:#fff}
+  .btn-ghost{background:#fff;color:var(--ink)}
+  .btn-ghost:hover{background:var(--butter-soft)}
+  .reply-note{margin-top:10px;font-size:11.5px;color:var(--muted);text-align:center}
+  .reply-note b{color:var(--ink)}
+
+  /* INQUIRY MODAL MOCK */
+  .modal-demo{background:#fff;border:2px solid var(--ink);border-radius:20px;box-shadow:4px 4px 0 var(--ink);overflow:hidden;position:relative}
+  .md-frame{background:rgba(0,0,0,0.04);padding:30px 20px}
+  .md-frame::before{content:"Preview — how it appears when a parent taps 'Ask a question'";position:absolute;top:8px;right:14px;font-size:10px;font-weight:700;color:var(--muted);letter-spacing:.03em;text-transform:uppercase}
+  html[dir=rtl] .md-frame::before{right:auto;left:14px}
+  .md-card{background:#fff;border:2px solid var(--ink);border-radius:20px;box-shadow:5px 5px 0 var(--ink);max-width:420px;margin:0 auto}
+  .md-head{padding:16px 18px 8px;border-bottom:1.5px solid var(--line)}
+  .md-head h4{font-family:'Fraunces',serif;font-weight:700;font-size:18px;display:flex;align-items:center;gap:8px}
+  .md-head .x{margin-inline-start:auto;width:28px;height:28px;border-radius:50%;background:var(--cream);border:1.5px solid var(--ink);display:grid;place-items:center;cursor:pointer;font-size:13px}
+  .md-head .hint{font-size:11.5px;color:var(--muted);margin-top:4px}
+  .md-who{padding:12px 18px;background:var(--cream);display:flex;gap:10px;align-items:center;font-size:12.5px}
+  .md-who .av{width:34px;height:34px;border-radius:50%;border:2px solid var(--ink);background:var(--mint);display:grid;place-items:center;font-family:'Fraunces',serif;font-weight:700}
+  .md-who b{font-weight:700}
+  .md-body{padding:14px 18px}
+  .md-label{font-size:10.5px;font-weight:700;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;margin-bottom:8px}
+  .md-qpick{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+  .qchip{border:2px solid var(--ink);background:#fff;border-radius:999px;padding:6px 11px;font-size:12px;font-weight:600;cursor:pointer}
+  .qchip:hover{background:var(--butter-soft)}
+  .qchip.on{background:var(--maroon);color:#fff}
+  .md-area{width:100%;min-height:80px;padding:10px 12px;border:2px solid var(--ink);border-radius:12px;background:var(--cream);font-size:14px;outline:none;resize:vertical;font-family:inherit}
+  .md-area:focus{background:#fff}
+  .md-about{margin-top:10px;padding:10px 12px;background:var(--mint-soft);border:1.5px solid var(--ink);border-radius:10px;font-size:12px;display:flex;align-items:center;gap:8px}
+  .md-about b{color:var(--ink)}
+  .md-about .toggle{margin-inline-start:auto;font-size:11px;color:var(--maroon);font-weight:700;text-decoration:underline;cursor:pointer}
+  .md-foot{padding:14px 18px;border-top:1.5px solid var(--line);display:grid;gap:8px}
+  .md-send-row{display:flex;gap:6px}
+  .md-send{flex:1;background:var(--maroon);color:#fff;border:2px solid var(--ink);border-radius:12px;padding:10px;font-weight:700;font-size:13px;cursor:pointer;box-shadow:2px 2px 0 var(--ink)}
+  .md-send-wa{flex:1;background:var(--wa);color:#fff;border:2px solid var(--ink);border-radius:12px;padding:10px;font-weight:700;font-size:13px;cursor:pointer;box-shadow:2px 2px 0 var(--ink);display:flex;align-items:center;justify-content:center;gap:6px}
+  .md-note{font-size:11px;color:var(--muted);text-align:center}
+
+  /* WA HANDOFF MODAL */
+  .wa-handoff{background:#fff;border:2px solid var(--ink);border-radius:20px;box-shadow:4px 4px 0 var(--ink);overflow:hidden;margin-top:20px}
+  .wa-handoff .title-strip{background:var(--wa);color:#fff;padding:12px 18px;border-bottom:2px solid var(--ink);display:flex;align-items:center;gap:10px;font-weight:700}
+  .wa-handoff .title-strip .e{font-size:20px}
+  .wa-preview{padding:20px}
+  .wa-preview h5{font-family:'Fraunces',serif;font-weight:700;font-size:16px;margin-bottom:10px}
+  .wa-preview p{font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.55}
+  .wa-msg{background:#dcf8c6;border:2px solid var(--wa-deep);border-radius:14px;padding:14px 16px;font-size:13.5px;line-height:1.5;position:relative;max-width:92%;margin-inline-start:auto}
+  .wa-msg::after{content:"✓✓";position:absolute;bottom:6px;right:10px;font-size:11px;color:var(--wa-deep);font-weight:700}
+  html[dir=rtl] .wa-msg::after{right:auto;left:10px}
+  .wa-msg b{color:var(--wa-deep)}
+  .wa-confirm{margin-top:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .wa-confirm .btn{flex:initial}
+
+  /* STRATEGY NOTES */
+  .notes{max-width:1400px;margin:20px auto 40px;padding:0 24px}
+  .notes-card{background:var(--cream);border:2px solid var(--ink);border-radius:20px;padding:24px}
+  .notes-card h3{font-family:'Fraunces',serif;font-weight:700;font-size:22px;margin-bottom:8px}
+  .notes-card > p{color:var(--muted);font-size:13.5px;margin-bottom:18px;max-width:720px;line-height:1.6}
+  .notes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media (max-width:820px){.notes-grid{grid-template-columns:1fr}}
+  .note{background:#fff;border:2px solid var(--ink);border-radius:14px;padding:16px 18px}
+  .note .emoji{font-size:22px;margin-bottom:6px;display:block}
+  .note h4{font-family:'Fraunces',serif;font-weight:700;font-size:15.5px;margin-bottom:6px}
+  .note p{font-size:13px;color:var(--muted);line-height:1.5}
+  .note p b{color:var(--ink)}
+
+  /* footer */
+  footer{background:var(--ink);color:var(--cream);padding:24px;text-align:center;font-size:12.5px}
+  footer .links{display:flex;justify-content:center;gap:18px;margin-bottom:8px;flex-wrap:wrap}
+  footer a{color:var(--butter);font-weight:500}
+
+  /* responsive */
+  @media (max-width:820px){
+    .hero h1{font-size:28px}
+    .main{padding:12px 18px 30px}
+    .c-msgs{max-height:360px}
+    .bubble{font-size:13.5px;max-width:85%}
+    .threads{min-height:auto;max-height:420px}
+    .ai-banner{flex-wrap:wrap}
+    .ai-banner .ai-action{margin-inline-start:0}
+    .extras,.notes{padding:10px 18px}
+  }
+  @media (max-width:480px){
+    .comp-textarea{font-size:16px}
+    .md-area{font-size:16px}
+    .thread{padding:12px 14px}
+  }
+</style>
+  <link rel="stylesheet" href="yalla-kids-shared.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="yalla-kids.html" class="logo">
+      <span class="logo-mark">Y</span>
+      <span class="en-only">Yalla Kids</span>
+      <span class="ar-only">يلا كيدز</span>
+    </a>
+    <div class="nav-spacer"></div>
+    <div class="nav-right">
+      <button class="lang" onclick="toggleLang()">
+        <span>🌐</span>
+        <span class="en-only">عربي</span>
+        <span class="ar-only">EN</span>
+      </button>
+      <div class="avatar-chip">
+        <span class="av">L</span>
+        <span class="en-only">Layla</span>
+        <span class="ar-only">ليلى</span>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="crumbs">
+    <a href="yalla-kids-parent-dashboard.html"><span class="en-only">Dashboard</span><span class="ar-only">لوحة التحكم</span></a>
+    <span class="crumb-sep">›</span>
+    <span><span class="en-only">Messages</span><span class="ar-only">الرسائل</span></span>
+  </div>
+  <h1>
+    <span class="en-only">Your <span class="pop">messages</span></span>
+    <span class="ar-only"><span class="pop">رسائلك</span></span>
+  </h1>
+  <p class="sub">
+    <span class="en-only">Ask pre-booking questions here. Once you're booked, most providers prefer to switch to WhatsApp — tap <b>"Move to WhatsApp"</b> any time. We'll keep a copy here for your records.</span>
+    <span class="ar-only">اسألي أسئلة ما قبل الحجز هنا. بعد الحجز، معظم الموفّرين يفضّلون الانتقال إلى واتساب — اضغطي <b>«الانتقال إلى واتساب»</b> في أي وقت. سنحتفظ بنسخة هنا لسجلّاتك.</span>
+  </p>
+  <!-- Honest preview banner -->
+  <div style="background:#FAF5EA;border:1px solid #E4DCC9;border-radius:8px;padding:8px 12px;margin:14px 0 0;font-size:13px;line-height:1.5;">
+    <b>Messages preview — sample threads.</b>
+    <span class="en-only">The conversation threads below use placeholder class names (e.g. "Mini Picasso") to show how the inbox, WhatsApp handoff, and booking confirmations look. Your real inbox starts empty until you message a provider.</span>
+    <span class="ar-only">المحادثات أدناه تستخدم أسماء صفوف توضيحية لعرض شكل البريد والتحويل إلى واتساب وتأكيدات الحجز. يبدأ بريدك الفعلي فارغاً حتى تراسلي مزوّداً.</span>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <button class="tab on">
+    <span class="en-only">All</span>
+    <span class="ar-only">الكل</span>
+    <span class="n">5</span>
+  </button>
+  <button class="tab">
+    <span class="en-only">Pre-booking</span>
+    <span class="ar-only">قبل الحجز</span>
+    <span class="n">3</span>
+  </button>
+  <button class="tab">
+    <span class="en-only">Active bookings</span>
+    <span class="ar-only">حجوزات نشطة</span>
+    <span class="n">1</span>
+  </button>
+  <button class="tab">
+    <span class="en-only">On WhatsApp</span>
+    <span class="ar-only">على واتساب</span>
+    <span class="n">2</span>
+  </button>
+  <button class="tab">
+    <span class="en-only">Past</span>
+    <span class="ar-only">سابق</span>
+    <span class="n">4</span>
+  </button>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- THREADS -->
+  <aside class="threads">
+    <div class="t-search">
+      <span class="ic">🔍</span>
+      <input type="text" placeholder="Search providers, classes, messages…" data-en-placeholder="Search providers, classes, messages…" data-ar-placeholder="ابحث عن المزوّدين أو الصفوف أو الرسائل…"/>
+    </div>
+    <div class="t-list" id="tList">
+
+      <div class="thread active" data-thread="noura">
+        <div class="av m">N<span class="status"></span></div>
+        <div class="t-body">
+          <div class="t-name">
+            <span class="en-only">Noura Al-Marri</span>
+            <span class="ar-only">نورة المري</span>
+            <span class="t-kind book">
+              <span class="en-only">Booked</span>
+              <span class="ar-only">محجوز</span>
+            </span>
+          </div>
+          <div class="t-class">🎨 <b><span class="en-only">Mini Picasso</span><span class="ar-only">ميني بيكاسو</span></b></div>
+          <div class="t-snip unread">
+            <span class="en-only">Lovely! Aprons are provided — just send her in comfy clothes 🎨</span>
+            <span class="ar-only">رائع! المرايل متوفّرة — فقط أرسليها بملابس مريحة</span>
+          </div>
+        </div>
+        <div class="t-right">
+          <div class="t-time">
+            <span class="en-only">11:42</span>
+            <span class="ar-only">١١:٤٢</span>
+          </div>
+          <span class="t-unread">2</span>
+        </div>
+      </div>
+
+      <div class="thread" data-thread="sketch">
+        <div class="av s">M<span class="status" style="background:var(--warn)"></span></div>
+        <div class="t-body">
+          <div class="t-name">
+            <span class="en-only">Maryam / Sketch Academy</span>
+            <span class="ar-only">مريم / أكاديمية الرسم</span>
+            <span class="t-kind inq">
+              <span class="en-only">Inquiry</span>
+              <span class="ar-only">استفسار</span>
+            </span>
+          </div>
+          <div class="t-class">🖍️ <b><span class="en-only">Sketch Academy Juniors · age 6+</span><span class="ar-only">أكاديمية الرسم · ٦+</span></b></div>
+          <div class="t-snip unread">
+            <span class="en-only">Hi Maryam, could my 5-year-old Yara join the 6+ Saturday class?</span>
+            <span class="ar-only">مرحباً مريم، هل يمكن لابنتي يارا (٥ سنوات) الانضمام لصف السبت ٦+؟</span>
+          </div>
+        </div>
+        <div class="t-right">
+          <div class="t-time">
+            <span class="en-only">Yesterday</span>
+            <span class="ar-only">أمس</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="thread" data-thread="rainbow">
+        <div class="av r">R<span class="status"></span></div>
+        <div class="t-body">
+          <div class="t-name">
+            <span class="en-only">Rainbow Brushes Studio</span>
+            <span class="ar-only">استوديو فرش قوس قزح</span>
+            <span class="t-kind inq">
+              <span class="en-only">Inquiry</span>
+              <span class="ar-only">استفسار</span>
+            </span>
+          </div>
+          <div class="t-class">🖌️ <b><span class="en-only">Rainbow Brushes · Sat 9am</span><span class="ar-only">فرش قوس قزح · سبت ٩ص</span></b></div>
+          <div class="t-snip">
+            <span class="en-only">Is there space next week for a drop-in trial?</span>
+            <span class="ar-only">هل يوجد مكان الأسبوع القادم لتجربة حرّة؟</span>
+          </div>
+        </div>
+        <div class="t-right">
+          <div class="t-time">
+            <span class="en-only">Mon</span>
+            <span class="ar-only">الاثنين</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="thread" data-thread="davinci">
+        <div class="av l">A<span class="status wa"></span></div>
+        <div class="t-body">
+          <div class="t-name">
+            <span class="en-only">Atelier Qatar</span>
+            <span class="ar-only">أتيليه قطر</span>
+            <span class="t-kind wa">
+              <span class="en-only">WhatsApp</span>
+              <span class="ar-only">واتساب</span>
+            </span>
+          </div>
+          <div class="t-class">✏️ <b><span class="en-only">Little Da Vincis — Katara</span><span class="ar-only">ليتل دافينشي — كتارا</span></b></div>
+          <div class="t-snip">
+            <span class="en-only">💬 Conversation moved to WhatsApp on Apr 12 · tap to reopen</span>
+            <span class="ar-only">💬 انتقلت المحادثة إلى واتساب ١٢ أبريل · اضغطي لفتحها</span>
+          </div>
+        </div>
+        <div class="t-right">
+          <div class="t-time">
+            <span class="en-only">Apr 12</span>
+            <span class="ar-only">١٢ أبريل</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="thread" data-thread="craft">
+        <div class="av">Y<span class="status" style="background:var(--muted)"></span></div>
+        <div class="t-body">
+          <div class="t-name">
+            <span class="en-only">Yalla Craft House</span>
+            <span class="ar-only">بيت الحرف يلا</span>
+            <span class="t-kind closed">
+              <span class="en-only">Closed</span>
+              <span class="ar-only">مغلق</span>
+            </span>
+          </div>
+          <div class="t-class">🏛️ <b><span class="en-only">Open studio visit</span><span class="ar-only">زيارة استوديو</span></b></div>
+          <div class="t-snip">
+            <span class="en-only">Thanks! See you Saturday ✨</span>
+            <span class="ar-only">شكراً! نراكم السبت ✨</span>
+          </div>
+        </div>
+        <div class="t-right">
+          <div class="t-time">
+            <span class="en-only">Apr 5</span>
+            <span class="ar-only">٥ أبريل</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- CONVO -->
+  <section class="convo">
+
+    <!-- HEAD -->
+    <div class="c-head">
+      <div class="av">N</div>
+      <div>
+        <div class="c-name">
+          <span class="en-only">Noura Al-Marri</span>
+          <span class="ar-only">نورة المري</span>
+        </div>
+        <div class="c-sub">
+          <span class="online">
+            <span class="en-only">Online</span>
+            <span class="ar-only">متصل</span>
+          </span>
+          <span>·</span>
+          <span>
+            <span class="en-only">Typically replies in ~2 hrs</span>
+            <span class="ar-only">يردّ خلال ~٢ ساعة</span>
+          </span>
+          <span>·</span>
+          <span style="color:var(--wa-deep);font-weight:700">WA +974 5••• •21</span>
+        </div>
+      </div>
+      <div class="c-actions">
+        <button class="ico-btn" title="Call">📞</button>
+        <button class="ico-btn" title="More">⋯</button>
+        <button class="wa-btn" onclick="handoffWA()">
+          <span>💬</span>
+          <span class="en-only">Move to WhatsApp</span>
+          <span class="ar-only">الانتقال إلى واتساب</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- CONTEXT -->
+    <div class="c-context">
+      <div class="ctx-mini">🎨</div>
+      <div class="ctx-body">
+        <div class="ct-title">
+          <span class="en-only">Mini Picasso — Pottery · 4-week block</span>
+          <span class="ar-only">ميني بيكاسو — فخّار · ٤ أسابيع</span>
+        </div>
+        <div class="ct-meta">
+          <span class="en-only">QAR 480 · Sat 10am · West Bay · <b>Booked Apr 11 for Yara (5)</b> · <b>3/4 sessions</b> complete</span>
+          <span class="ar-only">٤٨٠ ر.ق · سبت ١٠ص · الخليج الغربي · <b>محجوز ١١ أبريل ليارا (٥)</b> · <b>٣/٤ جلسات</b></span>
+        </div>
+      </div>
+      <a class="btn-mini" href="#">
+        <span class="en-only">View booking</span>
+        <span class="ar-only">عرض الحجز</span>
+        <span>→</span>
+      </a>
+    </div>
+
+    <!-- AI CONTEXT BANNER -->
+    <div class="ai-banner">
+      <span class="e">🪄</span>
+      <div style="flex:1;min-width:180px">
+        <b><span class="en-only">Quick context for Noura:</span><span class="ar-only">سياق سريع لنورة:</span></b>
+        <span class="en-only"> Yara is in session 3/4 · last check-in marked "warmed up nicely" · no active refund requests. Noura sees this when she opens your thread.</span>
+        <span class="ar-only"> يارا في الجلسة ٣/٤ · آخر ملاحظة «تأقلمت جيداً» · لا طلبات استرجاع. ترى نورة هذا عند فتح المحادثة.</span>
+      </div>
+      <button class="ai-action">
+        <span class="en-only">What's this?</span>
+        <span class="ar-only">ما هذا؟</span>
+      </button>
+    </div>
+
+    <!-- MESSAGES -->
+    <div class="c-msgs" id="msgs">
+      <div class="day-div">
+        <span class="en-only">Tuesday, April 7</span>
+        <span class="ar-only">الثلاثاء ٧ أبريل</span>
+      </div>
+
+      <div class="bubble sys">
+        <span class="en-only"><b>Layla booked Mini Picasso</b> for Yara (5) · 4-week block, QAR 480, starting Sat Apr 11.</span>
+        <span class="ar-only"><b>حجزت ليلى ميني بيكاسو</b> ليارا (٥) · ٤ أسابيع، ٤٨٠ ر.ق، بدءاً من السبت ١١ أبريل.</span>
+      </div>
+
+      <div class="bubble out">
+        <span class="en-only">Hi Noura, so excited to have Yara in your class! She's 5, a bit shy the first 10 minutes but warms up. Any allergies I should let you know about — also she's mildly dairy-sensitive. Is that an issue for clay?</span>
+        <span class="ar-only">مرحباً نورة، متحمسة جداً لانضمام يارا! عمرها ٥ سنوات، خجولة أول ١٠ دقائق ثم تتأقلم. هل هناك حساسيات أذكرها — ولديها حساسية خفيفة من الحليب. هل هذا يؤثّر على الطين؟</span>
+        <div class="meta">
+          <span class="en-only">10:12</span>
+          <span class="ar-only">١٠:١٢</span>
+          <span class="read">✓✓</span>
+        </div>
+      </div>
+
+      <div class="bubble in">
+        <span class="en-only">Hi Layla! Welcome 🌸 Clay is fully non-toxic and dairy-free — we use water-based ceramic clay from Germany. I've noted Yara's sensitivity just in case. As for the shyness, totally normal — I'll quietly pair her with another quiet kiddo for the first session so she has a buddy.</span>
+        <span class="ar-only">مرحباً ليلى! أهلاً 🌸 الطين غير سامّ وخالٍ من الحليب — نستخدم طيناً مائياً من ألمانيا. دوّنت الحساسية احتياطاً. أما الخجل فطبيعي تماماً — سأجلس يارا مع طفلة هادئة في الجلسة الأولى لتكوّن صديقة.</span>
+        <div class="meta">
+          <span class="en-only">10:38</span>
+          <span class="ar-only">١٠:٣٨</span>
+        </div>
+      </div>
+
+      <div class="day-div">
+        <span class="en-only">Saturday, April 11</span>
+        <span class="ar-only">السبت ١١ أبريل</span>
+      </div>
+
+      <div class="bubble wa-sys">
+        <span>💬</span>
+        <span>
+          <span class="en-only"><b>Noura suggested moving to WhatsApp</b> for session-day updates · Layla declined for now · in-app kept open</span>
+          <span class="ar-only"><b>اقترحت نورة الانتقال إلى واتساب</b> لتحديثات يوم الجلسة · رفضت ليلى حالياً · إبقاء في التطبيق</span>
+        </span>
+      </div>
+
+      <div class="bubble in">
+        <span class="en-only">Yara settled in beautifully — she made a tiny cat! Pickup at 11:15. Small thing: please bring an apron next week if you have one, paint can stain 🎨</span>
+        <span class="ar-only">استقرّت يارا بشكل جميل — صنعت قطّة صغيرة! الاستلام ١١:١٥. ملاحظة: أحضري مريلة الأسبوع القادم إن أمكن، الألوان قد تترك أثراً 🎨</span>
+        <div class="bubble-photo"></div>
+        <div class="meta">
+          <span class="en-only">11:04</span>
+          <span class="ar-only">١١:٠٤</span>
+        </div>
+      </div>
+
+      <div class="bubble out">
+        <span class="en-only">Oh my heart 😭 thank you! She already asked if she can skip school and come back tomorrow lol. Will bring an apron next week.</span>
+        <span class="ar-only">قلبي ❤️ شكراً جزيلاً! طلبت تتخلى عن المدرسة وتعود غداً 😄 سأحضر المريلة الأسبوع القادم.</span>
+        <div class="meta">
+          <span class="en-only">12:21</span>
+          <span class="ar-only">١٢:٢١</span>
+          <span class="read">✓✓</span>
+        </div>
+      </div>
+
+      <div class="day-div">
+        <span class="en-only">Today · Friday, April 17</span>
+        <span class="ar-only">اليوم · الجمعة ١٧ أبريل</span>
+      </div>
+
+      <div class="bubble out">
+        <span class="en-only">Morning Noura! Quick question — do we need to bring an apron tomorrow or are the studio ones enough? Also any chance of an aftercare hour if I get stuck in traffic?</span>
+        <span class="ar-only">صباح الخير نورة! سؤال سريع — هل نحتاج مريلة غداً أم تكفي مرايل الاستوديو؟ وهل يوجد ساعة رعاية بعد الصف لو تأخرت في الزحمة؟</span>
+        <div class="meta">
+          <span class="en-only">11:30</span>
+          <span class="ar-only">١١:٣٠</span>
+          <span class="read">✓✓</span>
+        </div>
+      </div>
+
+      <div class="bubble in">
+        <span class="en-only">Lovely! Aprons are provided — just send her in comfy clothes 🎨</span>
+        <span class="ar-only">رائع! المرايل متوفّرة — فقط أرسليها بملابس مريحة 🎨</span>
+        <div class="meta">
+          <span class="en-only">11:42</span>
+          <span class="ar-only">١١:٤٢</span>
+        </div>
+      </div>
+
+      <div class="bubble in">
+        <span class="en-only">And yes — if you're late, Mohra at the front desk can keep Yara in the quiet reading corner until 12:30 for free. Just WhatsApp me if that happens, easier to see than in-app.</span>
+        <span class="ar-only">وبالنسبة للتأخير — مهرة في الاستقبال يمكن أن تُبقي يارا في ركن القراءة الهادئ حتى ١٢:٣٠ مجاناً. راسليني على واتساب إذا صار هذا، أسرع من التطبيق.</span>
+        <div class="meta">
+          <span class="en-only">11:43</span>
+          <span class="ar-only">١١:٤٣</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUGGESTED REPLIES (parent-side prompts) -->
+    <div class="sugg">
+      <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);align-self:center">
+        <span class="en-only">Quick:</span>
+        <span class="ar-only">سريع:</span>
+      </span>
+      <button class="sugg-chip" onclick="fillComp('Perfect — see you Saturday at 10!')">
+        <span class="em">👍</span>
+        <span class="en-only">Perfect — see you Saturday!</span>
+        <span class="ar-only">ممتاز — نراكم السبت!</span>
+      </button>
+      <button class="sugg-chip" onclick="fillComp('Thank you! One more thing — ')">
+        <span class="em">💭</span>
+        <span class="en-only">Thanks — one more thing…</span>
+        <span class="ar-only">شكراً — سؤال آخر…</span>
+      </button>
+      <button class="sugg-chip" onclick="handoffWA()">
+        <span class="em">💬</span>
+        <span class="en-only">Switch to WhatsApp</span>
+        <span class="ar-only">التحويل لواتساب</span>
+      </button>
+    </div>
+
+    <!-- COMPOSER -->
+    <div class="composer">
+      <div class="comp-tools">
+        <button class="comp-btn" title="Attach">📎</button>
+        <button class="comp-btn" title="Photo">📷</button>
+      </div>
+      <div class="comp-area">
+        <textarea class="comp-textarea" id="compText" placeholder="Write a message…" data-en-placeholder="Write a message…" data-ar-placeholder="اكتب رسالة…"></textarea>
+        <div class="comp-bottom">
+          <span>
+            <span class="en-only">⏎ Enter to send, Shift+⏎ new line</span>
+            <span class="ar-only">⏎ إرسال، Shift+⏎ سطر جديد</span>
+          </span>
+          <button class="also-wa" id="alsoWa" onclick="toggleAlsoWa()">
+            <span class="box">✓</span>
+            <span class="en-only">Also send to WhatsApp</span>
+            <span class="ar-only">أرسلي إلى واتساب أيضاً</span>
+          </button>
+        </div>
+      </div>
+      <button class="comp-send">
+        <span class="en-only">Send</span>
+        <span class="ar-only">إرسال</span>
+        <span>→</span>
+      </button>
+    </div>
+  </section>
+</div>
+
+<!-- EXTRAS: INQUIRY MODAL + LISTING CTA DEMO -->
+<div class="extras">
+
+  <!-- LISTING CTA DEMO -->
+  <div>
+    <h2 class="section-title">
+      <span class="en-only">On the class page</span>
+      <span class="ar-only">على صفحة الصف</span>
+      <span class="badge">
+        <span class="en-only">WhatsApp-first</span>
+        <span class="ar-only">واتساب أولاً</span>
+      </span>
+    </h2>
+    <p class="section-sub">
+      <span class="en-only">Doha parents chat on WhatsApp. The primary CTA is green. The in-app fallback handles the cases where a parent doesn't want to share their number yet.</span>
+      <span class="ar-only">الأهل في الدوحة يتواصلون على واتساب. الزرّ الأساسي أخضر. الخيار داخل التطبيق للأهل الذين لا يرغبون بمشاركة رقمهم بعد.</span>
+    </p>
+    <div class="listing-demo">
+      <div class="ld-hero">🎨</div>
+      <div class="ld-body">
+        <div class="ld-title">
+          <span class="en-only">Mini Picasso — Pottery for little hands</span>
+          <span class="ar-only">ميني بيكاسو — فخّار لأيدٍ صغيرة</span>
+        </div>
+        <div class="ld-meta">
+          <span class="en-only">4-week block · <b>Saturdays 10 AM</b> · <b>West Bay</b> · ages 4-6 · max 8 kids</span>
+          <span class="ar-only">٤ أسابيع · <b>السبت ١٠ ص</b> · <b>الخليج الغربي</b> · ٤-٦ سنوات · حتى ٨ أطفال</span>
+        </div>
+        <div class="ld-rating">★★★★★ <span class="num">4.9</span><span class="cnt">(127)</span></div>
+        <div class="ld-price">QAR 480 <span class="per"><span class="en-only">block · QAR 120/session</span><span class="ar-only">باقة · ١٢٠/جلسة</span></span></div>
+
+        <div class="ld-ctas">
+          <button class="btn btn-book">
+            <span class="en-only">Book this class</span>
+            <span class="ar-only">احجزي هذا الصف</span>
+            <span>→</span>
+          </button>
+          <div class="row">
+            <button class="btn btn-wa" onclick="handoffWA()">
+              <span>💬</span>
+              <span class="en-only">Chat on WhatsApp</span>
+              <span class="ar-only">دردشة واتساب</span>
+            </button>
+            <button class="btn btn-ghost" onclick="scrollToInquiry()">
+              <span>?</span>
+              <span class="en-only">Ask a question</span>
+              <span class="ar-only">اسألي سؤالاً</span>
+            </button>
+          </div>
+          <div class="reply-note">
+            <span class="en-only"><b>Noura</b> typically replies <b>within 2 hours</b> · <b>96%</b> response rate</span>
+            <span class="ar-only">تردّ <b>نورة</b> عادةً <b>خلال ٢ ساعة</b> · معدل الردّ <b>٩٦٪</b></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INQUIRY MODAL DEMO -->
+  <div id="inquiryDemo">
+    <h2 class="section-title">
+      <span class="en-only">Pre-booking inquiry</span>
+      <span class="ar-only">استفسار ما قبل الحجز</span>
+      <span class="badge">
+        <span class="en-only">In-app</span>
+        <span class="ar-only">داخل التطبيق</span>
+      </span>
+    </h2>
+    <p class="section-sub">
+      <span class="en-only">Fast, focused. Auto-fills child's age and neighborhood. Dual send: just-here or also-WhatsApp. Most parents pick WhatsApp for fast replies.</span>
+      <span class="ar-only">سريع ومركّز. يملأ عمر الطفل والحي تلقائياً. إرسال مزدوج: هنا فقط أو واتساب أيضاً. معظم الأهل يختارون واتساب للردّ السريع.</span>
+    </p>
+
+    <div class="modal-demo">
+      <div class="md-frame">
+        <div class="md-card">
+          <div class="md-head" style="display:flex;align-items:flex-start">
+            <div>
+              <h4>
+                <span>❓</span>
+                <span class="en-only">Ask Maryam a question</span>
+                <span class="ar-only">اسألي مريم سؤالاً</span>
+              </h4>
+              <div class="hint">
+                <span class="en-only">Sketch Academy Juniors · age 6+ · Msheireb · Sat 10 AM</span>
+                <span class="ar-only">أكاديمية الرسم الصغرى · ٦+ · مشيرب · سبت ١٠ ص</span>
+              </div>
+            </div>
+            <button class="x">×</button>
+          </div>
+
+          <div class="md-who">
+            <div class="av">M</div>
+            <div>
+              <div><b>Maryam / Sketch Academy</b></div>
+              <div style="color:var(--muted);font-size:11.5px">
+                <span class="en-only">Usually replies in ~3 hrs · 4.9★ response rate</span>
+                <span class="ar-only">ترّد خلال ~٣ ساعات · ٤٫٩★ معدل الردّ</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="md-body">
+            <div class="md-label">
+              <span class="en-only">Common questions</span>
+              <span class="ar-only">أسئلة شائعة</span>
+            </div>
+            <div class="md-qpick">
+              <button class="qchip on" onclick="fillArea(this)"><span class="en-only">Can my 5-year-old join the 6+ class?</span><span class="ar-only">هل يمكن لطفلي (٥) الانضمام لصف ٦+؟</span></button>
+              <button class="qchip" onclick="fillArea(this)"><span class="en-only">Is there space next week?</span><span class="ar-only">هل يوجد مكان الأسبوع القادم؟</span></button>
+              <button class="qchip" onclick="fillArea(this)"><span class="en-only">Do you offer a free trial?</span><span class="ar-only">هل يوجد تجربة مجانية؟</span></button>
+              <button class="qchip" onclick="fillArea(this)"><span class="en-only">Are materials included?</span><span class="ar-only">هل المواد مشمولة؟</span></button>
+              <button class="qchip" onclick="fillArea(this)"><span class="en-only">Is the class in English or Arabic?</span><span class="ar-only">هل الصف بالإنجليزي أم العربي؟</span></button>
+            </div>
+
+            <textarea class="md-area" id="inqArea" placeholder="Or write your own question…" data-en-placeholder="Or write your own question…" data-ar-placeholder="أو اكتب سؤالك الخاص…">Hi Maryam! I'd love to book Yara into Sketch Academy but the listing says age 6+. She's 5 turning 6 in September and already loves drawing — she took a pottery block with Noura and settled in well. Any chance of a trial to see if she fits? Layla</textarea>
+
+            <div class="md-about">
+              <span>👧</span>
+              <div style="flex:1">
+                <b><span class="en-only">Send about:</span><span class="ar-only">بخصوص:</span></b>
+                <span class="en-only"> Yara · age 5 · West Bay · English/Arabic</span>
+                <span class="ar-only"> يارا · ٥ سنوات · الخليج الغربي · إنجليزي/عربي</span>
+              </div>
+              <a class="toggle" href="#" onclick="return false">
+                <span class="en-only">Edit</span>
+                <span class="ar-only">تعديل</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="md-foot">
+            <div class="md-send-row">
+              <button class="md-send">
+                <span class="en-only">Send in Yalla Kids</span>
+                <span class="ar-only">أرسلي داخل يلا كيدز</span>
+              </button>
+              <button class="md-send-wa" onclick="handoffWA()">
+                <span>💬</span>
+                <span class="en-only">Also on WhatsApp</span>
+                <span class="ar-only">وعلى واتساب</span>
+              </button>
+            </div>
+            <div class="md-note">
+              <span class="en-only">Maryam only sees your first name and child's age until she books — no phone number shared.</span>
+              <span class="ar-only">ترى مريم اسمك الأول وعمر الطفل فقط قبل الحجز — لا يُشارك رقم الهاتف.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WA HANDOFF -->
+    <div class="wa-handoff" id="waHandoff">
+      <div class="title-strip">
+        <span class="e">💬</span>
+        <span>
+          <span class="en-only">WhatsApp handoff — what gets sent</span>
+          <span class="ar-only">الانتقال إلى واتساب — ما يُرسل</span>
+        </span>
+      </div>
+      <div class="wa-preview">
+        <h5>
+          <span class="en-only">Opens WhatsApp with Noura's number and a pre-filled intro.</span>
+          <span class="ar-only">يُفتح واتساب مع رقم نورة ورسالة تعريف جاهزة.</span>
+        </h5>
+        <p>
+          <span class="en-only">We paste a short context block so Noura knows which class, which child, and why — so she can reply in one sentence instead of asking four. Parent can edit before sending.</span>
+          <span class="ar-only">نلصق سياقاً قصيراً لتعرف نورة عن أيّ صف، أي طفل، ولماذا — لتردّ بجملة واحدة بدلاً من أربعة أسئلة. يمكن التعديل قبل الإرسال.</span>
+        </p>
+        <div class="wa-msg">
+          <span class="en-only"><b>Hi Noura,</b> this is Layla from Yalla Kids — I booked Yara (5) into your Mini Picasso 4-week block starting Apr 11. Quick Q: do we need to bring an apron tomorrow? Also, any chance of aftercare if I hit traffic? Thanks! <br><br><i>— sent via Yalla Kids · <a href="#" style="color:var(--wa-deep);text-decoration:underline">class link</a></i></span>
+          <span class="ar-only"><b>مرحباً نورة،</b> أنا ليلى من يلا كيدز — حجزت يارا (٥) في صفّك ميني بيكاسو ٤ أسابيع، بدءاً من ١١ أبريل. سؤال سريع: هل نحتاج مريلة غداً؟ وهل هناك رعاية بعد الصف لو تأخرت في الزحمة؟ شكراً!<br><br><i>— عبر يلا كيدز · <a href="#" style="color:var(--wa-deep);text-decoration:underline">رابط الصف</a></i></span>
+        </div>
+        <div class="wa-confirm">
+          <button class="btn btn-wa" style="flex:initial">
+            <span>💬</span>
+            <span class="en-only">Open WhatsApp</span>
+            <span class="ar-only">افتحي واتساب</span>
+          </button>
+          <button class="btn btn-ghost" style="flex:initial">
+            <span class="en-only">Edit before sending</span>
+            <span class="ar-only">عدّلي قبل الإرسال</span>
+          </button>
+          <div style="font-size:11.5px;color:var(--muted);flex:1;min-width:180px">
+            <span class="en-only">We keep a pointer here so you can return to this thread any time.</span>
+            <span class="ar-only">نحتفظ بمرجع هنا لتعودي لهذه المحادثة في أي وقت.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STRATEGY NOTES -->
+<div class="notes">
+  <div class="notes-card">
+    <h3>
+      <span class="en-only">Why WhatsApp-first, not WhatsApp-only</span>
+      <span class="ar-only">لماذا «واتساب أولاً»، وليس «واتساب فقط»</span>
+    </h3>
+    <p>
+      <span class="en-only">In Qatar, parents already live on WhatsApp — forcing an in-app chat before booking kills conversion. But going WhatsApp-only gives up three things: pre-booking privacy, policy-evidence for refund disputes, and the context handoff that makes provider replies 4× faster. This hybrid routes the 80% case to WhatsApp and keeps a minimal in-app layer for the moments that need it.</span>
+      <span class="ar-only">في قطر، الأهل يعيشون على واتساب — إجبارهم على الدردشة داخل التطبيق قبل الحجز يقتل التحويل. لكن «واتساب فقط» يفقد ثلاثة أشياء: خصوصية ما قبل الحجز، وسجلّ سياسات للنزاعات، والسياق الذي يجعل ردود الموفّر أسرع ٤ أضعاف. هذا المزيج يوجّه ٨٠٪ من الحالات إلى واتساب ويحتفظ بطبقة صغيرة داخل التطبيق للحظات التي تحتاجها.</span>
+    </p>
+    <div class="notes-grid">
+      <div class="note">
+        <span class="emoji">🔒</span>
+        <h4>
+          <span class="en-only">Privacy before booking</span>
+          <span class="ar-only">الخصوصية قبل الحجز</span>
+        </h4>
+        <p>
+          <span class="en-only">Parents ask pre-booking questions without sharing their phone number. Provider only sees first name + child's age until money changes hands.</span>
+          <span class="ar-only">يسأل الأهل أسئلة ما قبل الحجز دون مشاركة الأرقام. يرى الموفّر الاسم الأول وعمر الطفل فقط حتى تتمّ الدفعة.</span>
+        </p>
+      </div>
+      <div class="note">
+        <span class="emoji">🧾</span>
+        <h4>
+          <span class="en-only">Policy evidence</span>
+          <span class="ar-only">سجلّ السياسة</span>
+        </h4>
+        <p>
+          <span class="en-only">Refund requests, policy disagreements, and safety reports need an auditable thread. We mirror key messages from WhatsApp webhooks where parents opt in.</span>
+          <span class="ar-only">طلبات الاسترجاع والنزاعات تحتاج سجلاً موثّقاً. ننسخ الرسائل الرئيسية من واتساب عبر webhook حين يوافق الأهل.</span>
+        </p>
+      </div>
+      <div class="note">
+        <span class="emoji">🪄</span>
+        <h4>
+          <span class="en-only">Context handoff</span>
+          <span class="ar-only">نقل السياق</span>
+        </h4>
+        <p>
+          <span class="en-only">The WhatsApp intro message pre-fills class, child's name and age, and a link back. Providers reply in one sentence instead of asking which class, which child, when.</span>
+          <span class="ar-only">رسالة التعريف في واتساب تحتوي على الصف، اسم الطفل وعمره، ورابط العودة. يردّ الموفّر بجملة واحدة بدل أربعة أسئلة.</span>
+        </p>
+      </div>
+      <div class="note">
+        <span class="emoji">📣</span>
+        <h4>
+          <span class="en-only">Broadcasts stay here</span>
+          <span class="ar-only">الإعلانات تبقى هنا</span>
+        </h4>
+        <p>
+          <span class="en-only">Session reminders, weather cancellations, schedule changes — sent through the in-app channel so providers aren't spammed asking "who is this?" when they hit WhatsApp.</span>
+          <span class="ar-only">تذكيرات الجلسات، إلغاءات الطقس، تغييرات الجدول — ترسل داخل التطبيق حتى لا يُسأل الموفّر «من أنت؟» على واتساب.</span>
+        </p>
+      </div>
+      <div class="note">
+        <span class="emoji">🌍</span>
+        <h4>
+          <span class="en-only">Bilingual by default</span>
+          <span class="ar-only">ثنائي اللغة افتراضياً</span>
+        </h4>
+        <p>
+          <span class="en-only">Every outgoing message has an "also translate" button. Providers can reply in Arabic or English — parents read in their language.</span>
+          <span class="ar-only">كل رسالة تحتوي زرّ ترجمة. الموفّرون يردّون بأي لغة، والأهل يقرؤون بلغتهم.</span>
+        </p>
+      </div>
+      <div class="note">
+        <span class="emoji">⚖️</span>
+        <h4>
+          <span class="en-only">Escalation path</span>
+          <span class="ar-only">مسار التصعيد</span>
+        </h4>
+        <p>
+          <span class="en-only">Any thread — in-app or WhatsApp — can be flagged to Yalla Kids support with one tap. Support sees the full mirrored history plus booking + payment context.</span>
+          <span class="ar-only">أيّ محادثة — داخل التطبيق أو واتساب — يمكن تصعيدها إلى دعم يلا كيدز بنقرة. يرى الدعم السجلّ الكامل مع بيانات الحجز والدفع.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="links">
+    <a href="#">About</a><a href="#">Safety</a><a href="#">For providers</a><a href="#">Help</a><a href="#">Privacy</a><a href="#">Terms</a>
+  </div>
+  <div>© 2026 Yalla Kids · Made in Doha · <span dir="rtl" style="font-family:'Tajawal',sans-serif">يلا كيدز</span></div>
+</footer>
+
+<script>
+  function toggleLang(){
+    const html = document.documentElement;
+    const isRtl = html.getAttribute('dir') === 'rtl';
+    html.setAttribute('dir', isRtl ? 'ltr' : 'rtl');
+    html.setAttribute('lang', isRtl ? 'en' : 'ar');
+  }
+
+  // tabs
+  document.querySelectorAll('.tab').forEach(t=>{
+    t.addEventListener('click', ()=>{
+      document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+      t.classList.add('on');
+    });
+  });
+
+  // threads swap header name (light-touch only; full swap out of scope for demo)
+  const threadCopy = {
+    noura:{name:'Noura Al-Marri',nameAr:'نورة المري',avClass:'m',av:'N'},
+    sketch:{name:'Maryam / Sketch Academy',nameAr:'مريم / أكاديمية الرسم',avClass:'s',av:'M'},
+    rainbow:{name:'Rainbow Brushes Studio',nameAr:'استوديو فرش قوس قزح',avClass:'r',av:'R'},
+    davinci:{name:'Atelier Qatar (on WhatsApp)',nameAr:'أتيليه قطر (على واتساب)',avClass:'l',av:'A'},
+    craft:{name:'Yalla Craft House',nameAr:'بيت الحرف يلا',avClass:'',av:'Y'}
+  };
+  document.querySelectorAll('.thread').forEach(t=>{
+    t.addEventListener('click', ()=>{
+      document.querySelectorAll('.thread').forEach(x=>x.classList.remove('active'));
+      t.classList.add('active');
+      const id = t.dataset.thread;
+      const data = threadCopy[id];
+      if(!data) return;
+      const name = document.querySelector('.c-head .c-name');
+      name.innerHTML = '<span class="en-only">'+data.name+'</span><span class="ar-only">'+data.nameAr+'</span>';
+      const av = document.querySelector('.c-head .av');
+      av.textContent = data.av;
+      av.className = 'av ' + (data.avClass || '');
+      // scroll to top of conversation for visibility
+      document.querySelector('.convo').scrollIntoView({behavior:'smooth',block:'start'});
+    });
+  });
+
+  function fillComp(text){
+    const ta = document.getElementById('compText');
+    ta.value = text;
+    ta.focus();
+  }
+  function fillArea(btn){
+    document.querySelectorAll('.qchip').forEach(c=>c.classList.remove('on'));
+    btn.classList.add('on');
+    const area = document.getElementById('inqArea');
+    area.value = btn.textContent.trim();
+    area.focus();
+  }
+  function toggleAlsoWa(){
+    document.getElementById('alsoWa').classList.toggle('on');
+  }
+  function handoffWA(){
+    const wh = document.getElementById('waHandoff');
+    wh.scrollIntoView({behavior:'smooth',block:'center'});
+    wh.style.boxShadow = '0 0 0 3px var(--wa), 4px 4px 0 var(--ink)';
+    setTimeout(()=>wh.style.boxShadow = '4px 4px 0 var(--ink)', 1400);
+  }
+  function scrollToInquiry(){
+    document.getElementById('inquiryDemo').scrollIntoView({behavior:'smooth',block:'center'});
+  }
+
+  // autoscroll messages to bottom
+  const m = document.getElementById('msgs');
+  if(m) m.scrollTop = m.scrollHeight;
+</script>
+<script src="yalla-kids-shared.js"></script>
+</body>
+</html>

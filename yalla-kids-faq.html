@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#8A1538">
+  <title>FAQ — Yalla Kids</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,800;1,9..144,700&family=Inter:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="yalla-kids-shared.css">
+<style>
+  .static-hero { max-width: 900px; margin: 48px auto 0; padding: 0 24px; text-align: center; }
+  .static-hero .eye { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--maroon); font-weight: 800; margin-bottom: 10px; }
+  .static-hero h1 { font-size: 46px; line-height: 1.05; margin-bottom: 16px; }
+  .static-hero .dek { font-size: 17px; color: var(--ink-soft); max-width: 580px; margin: 0 auto 24px; }
+
+  .faq-search { max-width: 540px; margin: 0 auto; display: flex; gap: 10px; }
+  .faq-search .input { flex: 1; }
+
+  .faq-layout { max-width: 1080px; margin: 48px auto 0; padding: 0 24px; display: grid; grid-template-columns: 220px 1fr; gap: 40px; align-items: start; }
+  .faq-nav { position: sticky; top: 96px; align-self: start; font-size: 14px; }
+  .faq-nav h5 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-mute); font-weight: 800; margin-bottom: 10px; }
+  .faq-nav a { display: block; padding: 8px 12px; color: var(--ink-soft); border-left: 2px solid var(--border-strong); }
+  .faq-nav a.active { color: var(--ink); font-weight: 700; border-left-color: var(--maroon); background: var(--butter-soft); border-radius: 0 8px 8px 0; }
+
+  .faq-section { margin-bottom: 36px; }
+  .faq-section h2 { font-size: 28px; margin-bottom: 14px; }
+  .faq-section details { border: 2px solid var(--ink); border-radius: var(--r); background: var(--card-bg); margin-bottom: 10px; box-shadow: var(--shadow-hard); overflow: hidden; }
+  .faq-section summary { padding: 14px 18px; font-weight: 700; font-family: "Fraunces", serif; font-size: 16px; cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+  .faq-section summary::after { content: "+"; color: var(--maroon); font-size: 22px; line-height: 1; }
+  .faq-section details[open] summary::after { content: "−"; }
+  .faq-section details[open] { background: var(--butter-soft); }
+  .faq-section .faq-body { padding: 0 18px 16px; font-size: 14px; color: var(--ink-soft); line-height: 1.65; }
+  .faq-section .faq-body p { margin-bottom: 10px; }
+
+  .contact-box { background: var(--pink-soft); border: 2px solid var(--ink); border-radius: var(--r); padding: 24px; margin-top: 40px; text-align: center; box-shadow: var(--shadow-hard); }
+  .contact-box h3 { font-family: "Fraunces", serif; font-size: 22px; margin-bottom: 8px; }
+  .contact-box p { font-size: 14px; color: var(--ink-soft); margin-bottom: 14px; }
+
+  @media (max-width: 980px) { .faq-layout { grid-template-columns: 1fr; } .faq-nav { position: static; display: none; } }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="nav-wrap container">
+    <a href="yalla-kids-home-wireframe.html" class="logo">
+      <span class="en-only inline">Yalla Kids</span>
+      <span class="ar-only inline">يلا كيدز</span>
+    </a>
+    <nav class="nav-links">
+      <a href="yalla-kids-classes-directory.html"><span class="en-only inline">Classes</span><span class="ar-only inline">الصفوف</span></a>
+      <a href="yalla-kids-places-directory.html"><span class="en-only inline">Places to go</span><span class="ar-only inline">أماكن للزيارة</span></a>
+      <a href="yalla-kids-camps.html"><span class="en-only inline">Camps</span><span class="ar-only inline">المعسكرات</span></a>
+      <a href="yalla-kids-guides-hub.html"><span class="en-only inline">Guides</span><span class="ar-only inline">الأدلة</span></a>
+      <a href="yalla-kids-for-providers.html"><span class="en-only inline">For providers</span><span class="ar-only inline">للموفرين</span></a>    </nav>
+    <div class="nav-actions">
+      <button class="lang-toggle" onclick="toggleLang()">
+        <span class="en-only inline">العربية</span>
+        <span class="ar-only inline">English</span>
+      </button>
+      <a href="yalla-kids-login.html" class="btn btn-ghost"><span class="en-only inline">Log in</span><span class="ar-only inline">تسجيل الدخول</span></a>
+      <a href="yalla-kids-signup.html" class="btn btn-primary"><span class="en-only inline">Sign up</span><span class="ar-only inline">إنشاء حساب</span></a>
+    </div>
+  </div>
+</header>
+
+<section class="static-hero">
+  <div class="eye">Help center</div>
+  <h1><span class="en-only">How can we <span class="pop">help?</span></span><span class="ar-only">كيف يمكننا <span class="pop">المساعدة؟</span></span></h1>
+  <p class="dek">Answers to the questions parents (and providers) ask us most. Can't find it? Email hello@yallakids.qa — a real human will reply.</p>
+  <div class="faq-search">
+    <input type="text" class="input" placeholder="Search: refund, Arabic, parking…" data-en-placeholder="Search: refund, Arabic, parking…" data-ar-placeholder="بحث: استرداد، عربي، موقف…">
+    <button class="btn primary">Search</button>
+  </div>
+</section>
+
+<div class="faq-layout">
+  <!-- Nav -->
+  <aside class="faq-nav">
+    <h5>Topics</h5>
+    <a href="#account" class="active">Account &amp; login</a>
+    <a href="#booking">Bookings &amp; classes</a>
+    <a href="#payment">Payment &amp; refunds</a>
+    <a href="#kids">Kids &amp; safety</a>
+    <a href="#arabic">Arabic &amp; language</a>
+    <a href="#providers">For providers</a>
+    <a href="#other">Other</a>
+  </aside>
+
+  <!-- FAQ content -->
+  <div>
+
+    <section class="faq-section" id="account">
+      <h2>Account &amp; login</h2>
+      <details open>
+        <summary>Do I need an account to browse?</summary>
+        <div class="faq-body">No — you can browse everything without an account. You only need one to book, save favorites, and leave reviews.</div>
+      </details>
+      <details>
+        <summary>How do I sign up?</summary>
+        <div class="faq-body">Email + password, or continue with Google / Apple. Takes under a minute. We never post anywhere on your behalf.</div>
+      </details>
+      <details>
+        <summary>I forgot my password.</summary>
+        <div class="faq-body">Click "Sign in → Forgot password" and we'll email you a reset link within a minute. Check spam if you don't see it.</div>
+      </details>
+      <details>
+        <summary>Can I add multiple kids to one account?</summary>
+        <div class="faq-body">Yes — add as many as you need from your dashboard. Each kid's age, allergies, and emergency contact are stored separately. Two parents can share one account.</div>
+      </details>
+    </section>
+
+    <section class="faq-section" id="booking">
+      <h2>Bookings &amp; classes</h2>
+      <details>
+        <summary>How far in advance can I book a class?</summary>
+        <div class="faq-body">Usually 6–8 weeks before term start. Popular classes fill up 2 weeks before. We'll email you when next-term bookings open for classes you've saved.</div>
+      </details>
+      <details>
+        <summary>Can I switch from one class to another mid-term?</summary>
+        <div class="faq-body">Most providers allow a switch with 48-hour notice, subject to availability. Message the provider directly via their profile page.</div>
+      </details>
+      <details>
+        <summary>What if my kid wants to drop out after the first class?</summary>
+        <div class="faq-body">If it's within 7 days of term start, full refund. After that, 50% up to 48h before the second class. After the second class, no refund (but we'll always try to find a make-up or credit).</div>
+      </details>
+      <details>
+        <summary>What if a class is cancelled by the provider?</summary>
+        <div class="faq-body">100% refund to your card, automatically, within 5 business days. No action needed from you.</div>
+      </details>
+    </section>
+
+    <section class="faq-section" id="payment">
+      <h2>Payment &amp; refunds</h2>
+      <details>
+        <summary>What payment methods do you accept?</summary>
+        <div class="faq-body">All major cards (Visa, Mastercard), Apple Pay, Google Pay, and NAPS — all via MyFatoorah. We don't accept cash deposits to providers.</div>
+      </details>
+      <details>
+        <summary>Is my card information stored?</summary>
+        <div class="faq-body">Not by Yalla Kids. MyFatoorah handles card tokenization securely. We never see your full card number.</div>
+      </details>
+      <details>
+        <summary>Will I be charged in QAR or my home currency?</summary>
+        <div class="faq-body">All prices on Yalla Kids are in QAR. If your card is in another currency, your bank will convert at its daily rate.</div>
+      </details>
+      <details>
+        <summary>How long do refunds take?</summary>
+        <div class="faq-body">Typically 3–5 business days to show in your account. Longer for international cards.</div>
+      </details>
+      <details>
+        <summary>Can I get an invoice for my employer?</summary>
+        <div class="faq-body">Yes — every receipt in your dashboard has a "Download invoice" button. Need custom invoice fields? Message hello@yallakids.qa.</div>
+      </details>
+    </section>
+
+    <section class="faq-section" id="kids">
+      <h2>Kids &amp; safety</h2>
+      <details>
+        <summary>How do you verify providers are safe?</summary>
+        <div class="faq-body">
+          <p>Before a provider can list, we check:</p>
+          <p>• Qatar commercial registration (CR) number<br>• Valid liability insurance<br>• Work permits for all staff<br>• Venue safety &amp; accessibility<br>• Reference checks from 2 prior clients</p>
+          <p>Providers with the ✓ Verified badge have completed this process. Featured and Premium providers undergo an annual re-check.</p>
+        </div>
+      </details>
+      <details>
+        <summary>What happens if something goes wrong during a class?</summary>
+        <div class="faq-body">Report the incident to us within 72 hours via your dashboard or email disputes@yallakids.qa. We investigate within 48 hours and, where appropriate, issue a full refund + escalate with the provider. Safety issues may result in the provider being removed from the platform.</div>
+      </details>
+      <details>
+        <summary>Can I request a female-only or male-only class?</summary>
+        <div class="faq-body">Yes. Many providers offer single-gender classes — filter by "Girls only" or "Boys only" on any listing page. Listings that are open to all are labeled "Mixed."</div>
+      </details>
+    </section>
+
+    <section class="faq-section" id="arabic">
+      <h2>Arabic &amp; language</h2>
+      <details>
+        <summary>Is Yalla Kids bilingual?</summary>
+        <div class="faq-body">Yes — Arabic and English throughout. Toggle any page in the top-right. Emails, SMS, and receipts also go in your chosen language.</div>
+      </details>
+      <details>
+        <summary>Are all providers bilingual?</summary>
+        <div class="faq-body">No — each class listing shows its teaching language clearly. Many are bilingual; some are AR-only or EN-only. Filter by language on any search page.</div>
+      </details>
+    </section>
+
+    <section class="faq-section" id="providers">
+      <h2>For providers</h2>
+      <details>
+        <summary>How do I list my business?</summary>
+        <div class="faq-body">Start at our <a href="yalla-kids-for-providers.html" style="color:var(--maroon);text-decoration:underline;">For Providers page</a> and fill out the application. Verification takes 1–3 business days.</div>
+      </details>
+      <details>
+        <summary>How much does it cost?</summary>
+        <div class="faq-body">Classes: 10% commission on bookings, no monthly fee. Places: free tier available, paid tiers from QAR 99/month. See <a href="yalla-kids-for-providers.html#pricing" style="color:var(--maroon);text-decoration:underline;">full pricing</a>.</div>
+      </details>
+      <details>
+        <summary>When do I get paid?</summary>
+        <div class="faq-body">Payouts twice monthly (1st and 15th) by bank transfer. Premium providers receive weekly payouts.</div>
+      </details>
+    </section>
+
+    <section class="faq-section" id="other">
+      <h2>Other</h2>
+      <details>
+        <summary>Is Yalla Kids available in other cities / countries?</summary>
+        <div class="faq-body">We're Doha-focused for now. Al Khor, Al Wakrah, and Lusail listings are live. Expansion to the UAE and KSA is on the roadmap for 2027.</div>
+      </details>
+      <details>
+        <summary>Do you have a mobile app?</summary>
+        <div class="faq-body">Our website is mobile-first and works great as a PWA — "Add to Home Screen" on Safari or Chrome. A native iOS &amp; Android app is coming in 2027.</div>
+      </details>
+      <details>
+        <summary>How can I suggest a place or provider?</summary>
+        <div class="faq-body">Email tips@yallakids.qa with the business name and a link. We aim to review every tip within 5 days. Thank you — the platform grows because of parents like you.</div>
+      </details>
+    </section>
+
+    <!-- Contact -->
+    <div class="contact-box">
+      <h3>Still stuck?</h3>
+      <p>Real humans at hello@yallakids.qa answer within 24 hours (Sat–Thu).</p>
+      <a href="yalla-kids-contact.html" class="btn primary">Contact support →</a>
+    </div>
+
+  </div>
+</div>
+
+<div style="height:60px;"></div>
+
+<footer class="site">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="logo">
+          <span class="en-only inline">Yalla Kids</span>
+          <span class="ar-only inline">يلا كيدز</span>
+        </div>
+        <p class="foot-about">
+          <span class="en-only inline">Qatar's kids' classes and places, one place to book. Bilingual, built in Doha.</span>
+          <span class="ar-only inline">صفوف وأماكن للأطفال في قطر في مكان واحد. بلغتين، صُنعت في الدوحة.</span>
+        </p>
+        <div class="foot-social">
+          <a href="#" aria-label="Instagram">📷</a>
+          <a href="#" aria-label="WhatsApp">💬</a>
+          <a href="#" aria-label="TikTok">🎵</a>
+          <a href="#" aria-label="Email">✉</a>
+        </div>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Classes</span><span class="ar-only inline">الصفوف</span></h5>
+        <a href="yalla-kids-classes-directory.html"><span class="en-only inline">All classes</span><span class="ar-only inline">كل الصفوف</span></a>
+        <a href="yalla-kids-classes-directory.html?cat=art"><span class="en-only inline">Art &amp; crafts</span><span class="ar-only inline">فن وحرف</span></a>
+        <a href="yalla-kids-classes-directory.html?cat=swimming"><span class="en-only inline">Swimming</span><span class="ar-only inline">سباحة</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Places</span><span class="ar-only inline">الأماكن</span></h5>
+        <a href="yalla-kids-places-directory.html"><span class="en-only inline">All places</span><span class="ar-only inline">كل الأماكن</span></a>
+        <a href="yalla-kids-places-directory.html#softplay"><span class="en-only inline">Soft plays</span><span class="ar-only inline">صالات اللعب</span></a>
+        <a href="yalla-kids-map.html"><span class="en-only inline">Map</span><span class="ar-only inline">خريطة</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">For providers</span><span class="ar-only inline">للموفرين</span></h5>
+        <a href="yalla-kids-for-providers.html"><span class="en-only inline">List a class</span><span class="ar-only inline">أدرج صفاً</span></a>
+        <a href="yalla-kids-how-it-works.html"><span class="en-only inline">How it works</span><span class="ar-only inline">كيف نعمل</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Company</span><span class="ar-only inline">الشركة</span></h5>
+        <a href="yalla-kids-about.html"><span class="en-only inline">About</span><span class="ar-only inline">من نحن</span></a>
+        <a href="yalla-kids-contact.html"><span class="en-only inline">Contact</span><span class="ar-only inline">تواصل</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Legal</span><span class="ar-only inline">قانوني</span></h5>
+        <a href="yalla-kids-terms.html"><span class="en-only inline">Terms</span><span class="ar-only inline">الشروط</span></a>
+        <a href="yalla-kids-privacy.html"><span class="en-only inline">Privacy</span><span class="ar-only inline">الخصوصية</span></a>
+        <a href="yalla-kids-faq.html"><span class="en-only inline">FAQ</span><span class="ar-only inline">الأسئلة الشائعة</span></a>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>© 2026 Yalla Kids WLL · Doha, Qatar · CR #XXXXXX 🇶🇦</span>
+      <span><span class="en-only inline">Made with 💛 for Doha families</span><span class="ar-only inline">صُنعت بـ 💛 لعائلات الدوحة</span></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleLang() { const html = document.documentElement; if (html.dir === 'rtl') { html.dir = 'ltr'; html.lang = 'en'; } else { html.dir = 'rtl'; html.lang = 'ar'; } }
+</script>
+<script src="yalla-kids-shared.js"></script>
+</body>
+</html>

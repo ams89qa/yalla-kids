@@ -1,0 +1,1120 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
+<title>Yalla Kids · Art classes in West Bay, Saturday mornings</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,600&family=Inter:wght@400;500;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1a1613;
+    --paper:#fff9f2;
+    --cream:#fdf4e7;
+    --maroon:#8A1538;
+    --maroon-deep:#6b0f2b;
+    --gold:#F4B942;
+    --butter:#ffe6a8;
+    --butter-soft:#fff3cf;
+    --mint:#c8e6d0;
+    --mint-soft:#e4f2e8;
+    --rose:#f7d4d9;
+    --sky:#d7e7f4;
+    --sky-soft:#ecf3fa;
+    --lilac:#e4dcf2;
+    --coral:#ff8a6e;
+    --peach:#ffd5c2;
+    --sand:#f2e7cd;
+    --line:#e5dcc9;
+    --muted:#6a5d4d;
+    --good:#2f7d4f;
+    --warn:#c9801e;
+    --bad:#b63131;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--paper);color:var(--ink);font-family:'Inter',system-ui,sans-serif;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  html[dir=rtl] body{font-family:'Tajawal','Inter',sans-serif}
+  .serif{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:-.01em}
+  .en-only{display:inline}
+  .ar-only{display:none}
+  html[dir=rtl] .en-only{display:none}
+  html[dir=rtl] .ar-only{display:inline}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+  input,select,textarea{font-family:inherit;color:inherit}
+
+  /* ---------- NAV ---------- */
+  .nav{position:sticky;top:0;z-index:60;background:var(--paper);border-bottom:2px solid var(--ink)}
+  .nav-inner{max-width:1400px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:16px}
+  .logo{display:flex;align-items:center;gap:8px;font-family:'Fraunces',serif;font-weight:700;font-size:22px;color:var(--maroon)}
+  .logo-mark{width:34px;height:34px;background:var(--maroon);border:2px solid var(--ink);border-radius:10px;display:grid;place-items:center;color:#fff;font-weight:700;box-shadow:3px 3px 0 var(--ink)}
+  .search-box{flex:1;max-width:820px;display:flex;align-items:center;border:2px solid var(--ink);border-radius:999px;background:#fff;box-shadow:3px 3px 0 var(--ink);height:48px;overflow:hidden}
+  .search-box:focus-within{box-shadow:4px 4px 0 var(--ink)}
+  .sb-seg{flex:1;display:flex;align-items:center;gap:10px;padding:0 16px;cursor:text;min-width:0;border-inline-end:1.5px solid var(--line)}
+  .sb-seg:last-child{border-inline-end:none}
+  .sb-seg .lab{font-size:10px;font-weight:700;letter-spacing:.06em;color:var(--muted);text-transform:uppercase}
+  .sb-seg .val{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .sb-seg input{border:none;outline:none;width:100%;font-size:14px;font-weight:600;background:transparent;padding:0}
+  .sb-seg.muted .val{color:var(--muted);font-weight:500}
+  .sb-go{width:44px;height:44px;margin:0 3px;background:var(--maroon);color:#fff;border:2px solid var(--ink);border-radius:999px;display:grid;place-items:center;font-size:18px;flex-shrink:0;box-shadow:2px 2px 0 var(--ink);cursor:pointer}
+  .sb-go:hover{transform:translate(-1px,-1px)}
+  .nav-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+  .lang{border:2px solid var(--ink);border-radius:999px;background:#fff;padding:6px 12px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px;cursor:pointer}
+  .lang:hover{background:var(--butter-soft)}
+  .avatar-chip{display:flex;align-items:center;gap:8px;border:2px solid var(--ink);border-radius:999px;padding:4px 12px 4px 4px;background:#fff;font-size:13px;font-weight:600;cursor:pointer}
+  .avatar-chip .av{width:28px;height:28px;border-radius:50%;background:var(--rose);display:grid;place-items:center;font-family:'Fraunces',serif;font-weight:700;color:var(--maroon);border:2px solid var(--ink);font-size:13px}
+
+  /* ---------- CATEGORY STRIP ---------- */
+  .cats{background:var(--paper);border-bottom:1.5px solid var(--line);overflow-x:auto;scrollbar-width:none}
+  .cats::-webkit-scrollbar{display:none}
+  .cats-inner{max-width:1400px;margin:0 auto;padding:12px 24px;display:flex;gap:8px;white-space:nowrap}
+  .catbtn{border:2px solid var(--ink);border-radius:999px;background:#fff;padding:6px 14px;font-size:13px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;flex-shrink:0}
+  .catbtn:hover{background:var(--butter-soft)}
+  .catbtn.on{background:var(--ink);color:#fff}
+  .catbtn .ic{font-size:15px}
+
+  /* ---------- ACTIVE FILTERS STRIP ---------- */
+  .filt-strip{background:var(--butter-soft);border-bottom:1.5px solid var(--line)}
+  .filt-strip-inner{max-width:1400px;margin:0 auto;padding:10px 24px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .filt-strip-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+  .filt-pill{display:inline-flex;align-items:center;gap:6px;background:#fff;border:2px solid var(--ink);border-radius:999px;padding:4px 10px 4px 12px;font-size:12px;font-weight:600;box-shadow:2px 2px 0 var(--ink)}
+  .filt-pill .x{width:18px;height:18px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:11px;cursor:pointer;border:none}
+  .filt-clear{margin-inline-start:auto;font-size:12px;font-weight:600;color:var(--maroon);text-decoration:underline;cursor:pointer}
+
+  /* ---------- MAIN ---------- */
+  .main{max-width:1400px;margin:0 auto;padding:22px 24px 60px;display:grid;grid-template-columns:280px 1fr;gap:28px;align-items:start}
+  @media (max-width:1040px){.main{grid-template-columns:1fr;gap:18px}}
+
+  /* ---------- FILTER RAIL ---------- */
+  .rail{position:sticky;top:140px;background:#fff;border:2px solid var(--ink);border-radius:18px;box-shadow:4px 4px 0 var(--ink);padding:4px 0;max-height:calc(100vh - 160px);overflow-y:auto}
+  @media (max-width:1040px){.rail{position:static;max-height:none}}
+  .rail::-webkit-scrollbar{width:8px}
+  .rail::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px}
+  .rail-head{padding:14px 18px 10px;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid var(--line)}
+  .rail-head h3{font-family:'Fraunces',serif;font-weight:700;font-size:17px;display:flex;align-items:center;gap:8px}
+  .rail-head .count{background:var(--maroon);color:#fff;border:2px solid var(--ink);border-radius:999px;padding:1px 8px;font-size:11px;font-weight:700}
+  .rail-clear{font-size:12px;color:var(--muted);text-decoration:underline;cursor:pointer}
+  .rail-clear:hover{color:var(--ink)}
+  .filt-group{border-bottom:1.5px solid var(--line);padding:14px 18px}
+  .filt-group:last-child{border-bottom:none}
+  .filt-h{font-size:13px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none}
+  .filt-h .caret{font-size:11px;color:var(--muted);transition:transform .15s}
+  .filt-h.closed .caret{transform:rotate(-90deg)}
+  html[dir=rtl] .filt-h.closed .caret{transform:rotate(90deg)}
+  .filt-body{display:block}
+  .filt-h.closed + .filt-body{display:none}
+
+  .check-list{display:grid;gap:8px}
+  .check-row{display:flex;align-items:center;gap:10px;font-size:13.5px;cursor:pointer;user-select:none}
+  .check-row:hover .cb{border-color:var(--ink)}
+  .cb{width:18px;height:18px;border:2px solid var(--line);border-radius:5px;background:#fff;display:grid;place-items:center;flex-shrink:0;font-size:11px;color:transparent;transition:all .12s}
+  .check-row.on .cb{background:var(--maroon);border-color:var(--ink);color:#fff}
+  .check-row .ic{color:var(--muted);width:16px;text-align:center}
+  .check-row .ct{margin-inline-start:auto;font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums;background:var(--cream);border-radius:999px;padding:1px 8px}
+  .check-row.on .ct{background:var(--butter-soft);color:var(--ink)}
+
+  .pill-list{display:flex;flex-wrap:wrap;gap:6px}
+  .fpill{border:2px solid var(--line);background:#fff;border-radius:999px;padding:5px 11px;font-size:12px;font-weight:600;cursor:pointer}
+  .fpill:hover{border-color:var(--ink);background:var(--butter-soft)}
+  .fpill.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+  /* range slider */
+  .range-box{padding:4px 2px 2px}
+  .range-values{display:flex;justify-content:space-between;font-size:12px;font-weight:600;margin-bottom:8px}
+  .range-values b{color:var(--maroon)}
+  .range-track{position:relative;height:6px;background:var(--cream);border:1.5px solid var(--ink);border-radius:999px}
+  .range-fill{position:absolute;height:100%;background:var(--gold);left:10%;right:20%;top:-1.5px;bottom:-1.5px;border-radius:999px}
+  .range-h{position:absolute;width:18px;height:18px;background:var(--maroon);border:2px solid var(--ink);border-radius:50%;top:50%;transform:translate(-50%,-50%);cursor:grab}
+  .range-h.rh1{left:10%}
+  .range-h.rh2{left:80%}
+  html[dir=rtl] .range-h{transform:translate(50%,-50%)}
+
+  .day-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+  .daybox{border:2px solid var(--line);background:#fff;border-radius:8px;padding:6px 0;text-align:center;font-size:11px;font-weight:700;cursor:pointer}
+  .daybox:hover{border-color:var(--ink)}
+  .daybox.on{background:var(--maroon);color:#fff;border-color:var(--ink)}
+
+  .time-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}
+  .timebox{border:2px solid var(--line);background:#fff;border-radius:10px;padding:8px;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px}
+  .timebox:hover{border-color:var(--ink)}
+  .timebox.on{background:var(--butter);border-color:var(--ink);box-shadow:2px 2px 0 var(--ink)}
+  .timebox .ic{font-size:14px}
+
+  .switch-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;font-size:13px;font-weight:600;cursor:pointer}
+  .switch-row:not(:last-child){border-bottom:1px dashed var(--line)}
+  .sw{width:40px;height:22px;background:#fff;border:2px solid var(--ink);border-radius:999px;position:relative;cursor:pointer;flex-shrink:0}
+  .sw::after{content:"";position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:var(--ink);transition:all .15s}
+  .sw.on{background:var(--maroon)}
+  .sw.on::after{left:20px;background:#fff}
+
+  /* ---------- RESULTS HEADER ---------- */
+  .res-head{display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+  .res-head h1{font-family:'Fraunces',serif;font-weight:700;font-size:30px;line-height:1.1}
+  .res-head h1 .pop{position:relative;color:var(--maroon);font-style:italic;display:inline-block}
+  .res-head h1 .pop::after{content:"";position:absolute;left:-2px;right:-4px;bottom:2px;height:8px;background:var(--gold);z-index:-1;border-radius:4px;transform:skewX(-6deg)}
+  .res-count{font-size:13px;color:var(--muted);margin-top:4px}
+  .res-count b{color:var(--ink)}
+  .res-tools{margin-inline-start:auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .sort-box{display:flex;align-items:center;gap:6px;background:#fff;border:2px solid var(--ink);border-radius:999px;padding:4px 14px 4px 12px;font-size:13px;font-weight:600;cursor:pointer;box-shadow:2px 2px 0 var(--ink)}
+  .sort-box:hover{background:var(--butter-soft)}
+  .sort-box .ic{opacity:.6}
+  .view-seg{display:inline-flex;background:#fff;border:2px solid var(--ink);border-radius:999px;padding:3px;gap:2px;box-shadow:2px 2px 0 var(--ink)}
+  .view-seg button{padding:6px 12px;font-size:13px;font-weight:600;border-radius:999px;display:inline-flex;align-items:center;gap:6px}
+  .view-seg button.on{background:var(--ink);color:#fff}
+
+  /* ---------- RESULTS GRID ---------- */
+  .res-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px}
+  @media (max-width:540px){.res-grid{grid-template-columns:1fr}}
+
+  .card{background:#fff;border:2px solid var(--ink);border-radius:18px;box-shadow:4px 4px 0 var(--ink);overflow:hidden;display:flex;flex-direction:column;transition:transform .12s}
+  .card:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+  .card-hero{aspect-ratio:4/3;background:linear-gradient(135deg,var(--rose),var(--peach));border-bottom:2px solid var(--ink);position:relative;display:grid;place-items:center;font-size:56px}
+  .card-hero.h1{background:linear-gradient(135deg,var(--rose),var(--peach))}
+  .card-hero.h2{background:linear-gradient(135deg,var(--mint),var(--sky))}
+  .card-hero.h3{background:linear-gradient(135deg,var(--butter),var(--peach))}
+  .card-hero.h4{background:linear-gradient(135deg,var(--lilac),var(--rose))}
+  .card-hero.h5{background:linear-gradient(135deg,var(--sky),var(--mint-soft))}
+  .card-hero.h6{background:linear-gradient(135deg,var(--sand),var(--butter))}
+  .card-hero.h7{background:linear-gradient(135deg,var(--mint),var(--butter-soft))}
+  .card-hero.h8{background:linear-gradient(135deg,var(--peach),var(--butter))}
+  .card-hero.h9{background:linear-gradient(135deg,var(--lilac),var(--sky))}
+  .card-badges{position:absolute;top:10px;left:10px;right:10px;display:flex;justify-content:space-between;gap:6px;flex-wrap:wrap}
+  .card-tag{background:#fff;border:2px solid var(--ink);border-radius:999px;padding:3px 8px;font-size:10.5px;font-weight:700;box-shadow:2px 2px 0 var(--ink);letter-spacing:.02em}
+  .card-tag.hot{background:var(--coral);color:#fff}
+  .card-tag.new{background:var(--mint)}
+  .card-tag.popular{background:var(--butter)}
+  .card-tag.trial{background:var(--sky)}
+  .card-fav{width:34px;height:34px;border-radius:50%;background:#fff;border:2px solid var(--ink);display:grid;place-items:center;font-size:14px;cursor:pointer;box-shadow:2px 2px 0 var(--ink);margin-inline-start:auto}
+  .card-fav:hover{background:var(--butter-soft)}
+  .card-fav.on{background:var(--maroon);color:#fff}
+  .card-fav.on::before{content:"♥"}
+  .card-fav::before{content:"♡"}
+
+  .card-body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:8px;flex:1}
+  .card-top-row{display:flex;align-items:flex-start;gap:8px}
+  .card-kind{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+  .card-stars{margin-inline-start:auto;font-size:12px;font-weight:700;display:flex;align-items:center;gap:3px;white-space:nowrap}
+  .card-stars .s{color:var(--gold)}
+  .card-stars .n{color:var(--muted);font-weight:500;font-size:11.5px}
+  .card-title{font-family:'Fraunces',serif;font-weight:700;font-size:18px;line-height:1.2}
+  .card-provider{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px}
+  .card-provider b{color:var(--ink)}
+  .card-meta-row{display:flex;flex-wrap:wrap;gap:6px;font-size:11.5px;color:var(--muted);margin-top:2px}
+  .meta-pill{background:var(--cream);border:1.5px solid var(--line);border-radius:999px;padding:2px 8px;display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
+  .meta-pill b{color:var(--ink);font-weight:600}
+  .card-foot{margin-top:auto;padding-top:10px;border-top:1.5px dashed var(--line);display:flex;align-items:center;gap:8px}
+  .card-price{font-family:'Fraunces',serif;font-weight:700;font-size:17px;color:var(--ink)}
+  .card-price .per{font-family:'Inter',sans-serif;font-size:11px;color:var(--muted);font-weight:500}
+  .card-cta{margin-inline-start:auto;background:var(--ink);color:#fff;border:2px solid var(--ink);border-radius:999px;padding:6px 12px;font-size:12px;font-weight:600;display:inline-flex;align-items:center;gap:4px;text-decoration:none}
+  .card-cta:hover{background:var(--maroon);border-color:var(--ink)}
+  .card-seats{font-size:10.5px;font-weight:700;color:var(--maroon);background:var(--butter-soft);border:1.5px solid var(--gold);border-radius:999px;padding:1px 8px;letter-spacing:.04em}
+  .card-seats.green{color:var(--good);background:var(--mint-soft);border-color:var(--mint)}
+
+  /* ---------- MAP VIEW ---------- */
+  .map-wrap{display:none;background:#fff;border:2px solid var(--ink);border-radius:18px;box-shadow:4px 4px 0 var(--ink);overflow:hidden;min-height:640px;position:relative}
+  .map-wrap.on{display:block}
+  .res-grid.hidden{display:none}
+
+  .map{position:relative;height:640px;background:linear-gradient(180deg,var(--sky-soft) 0%,#e8f0f7 40%,var(--sand) 41%,#f7ecd1 100%);overflow:hidden}
+  .map-water{position:absolute;inset:0 0 59% 0;background:linear-gradient(180deg,#c8dbe9 0%,#b4cde0 60%,#a6c1d8 100%)}
+  .map-water::after{content:"";position:absolute;inset:0;background:
+    radial-gradient(circle at 20% 30%, rgba(255,255,255,.2) 0%, transparent 40%),
+    radial-gradient(circle at 70% 50%, rgba(255,255,255,.15) 0%, transparent 40%);}
+  .map-land{position:absolute;top:30%;left:15%;right:10%;bottom:0;background:linear-gradient(180deg,#f4e9cb 0%,#efdfb3 100%);border-top:2px solid rgba(0,0,0,.15);border-radius:40% 55% 0 0 / 20% 25% 0 0}
+  .map-land::before{content:"";position:absolute;top:10%;left:-8%;width:22%;height:30%;background:#f4e9cb;border:2px solid rgba(0,0,0,.1);border-radius:60% 40% 30% 70%}
+  .map-label{position:absolute;font-family:'Fraunces',serif;font-weight:600;color:var(--muted);font-size:11px;letter-spacing:.1em;text-transform:uppercase;pointer-events:none;text-shadow:0 0 2px #fff, 0 0 2px #fff}
+  .map-label.big{font-size:14px;color:var(--ink)}
+
+  .pin{position:absolute;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center;cursor:pointer;z-index:2}
+  html[dir=rtl] .pin{transform:translate(50%,-100%)}
+  .pin-pill{background:#fff;border:2px solid var(--ink);border-radius:999px;padding:4px 10px;font-weight:700;font-size:13px;box-shadow:3px 3px 0 var(--ink);white-space:nowrap;display:flex;align-items:center;gap:6px}
+  .pin-pill .price{font-family:'Fraunces',serif;color:var(--maroon)}
+  .pin-pill.featured{background:var(--gold)}
+  .pin-pill.loved{background:var(--maroon);color:#fff}
+  .pin-pill.loved .price{color:var(--butter)}
+  .pin-stem{width:2px;height:10px;background:var(--ink);margin-top:-1px}
+  .pin-dot{width:10px;height:10px;border-radius:50%;background:var(--maroon);border:2px solid var(--ink);margin-top:-2px}
+  .pin:hover{z-index:5}
+  .pin:hover .pin-pill{transform:translateY(-2px);box-shadow:4px 4px 0 var(--ink)}
+
+  .pin-cluster{position:absolute;transform:translate(-50%,-50%);width:46px;height:46px;border-radius:50%;background:var(--maroon);color:#fff;border:3px solid var(--ink);display:grid;place-items:center;font-family:'Fraunces',serif;font-weight:700;font-size:17px;cursor:pointer;box-shadow:3px 3px 0 var(--ink);z-index:3}
+  .pin-cluster:hover{transform:translate(-50%,-50%) scale(1.05)}
+
+  .map-ctrl{position:absolute;right:16px;top:16px;display:flex;flex-direction:column;gap:8px;z-index:10}
+  .map-btn{width:38px;height:38px;background:#fff;border:2px solid var(--ink);border-radius:10px;font-size:18px;font-weight:700;cursor:pointer;box-shadow:2px 2px 0 var(--ink)}
+  .map-btn:hover{background:var(--butter-soft)}
+  .map-legend{position:absolute;bottom:16px;left:16px;background:#fff;border:2px solid var(--ink);border-radius:12px;box-shadow:3px 3px 0 var(--ink);padding:10px 12px;font-size:11.5px;display:flex;gap:14px;flex-wrap:wrap;z-index:10}
+  .legend-row{display:flex;align-items:center;gap:5px}
+  .legend-dot{width:12px;height:12px;border-radius:50%;border:1.5px solid var(--ink)}
+  .legend-dot.mar{background:var(--maroon)}
+  .legend-dot.gold{background:var(--gold)}
+  .legend-dot.mint{background:var(--mint)}
+  .map-card{position:absolute;left:16px;top:16px;width:260px;background:#fff;border:2px solid var(--ink);border-radius:14px;box-shadow:3px 3px 0 var(--ink);padding:14px;font-size:12.5px;z-index:10}
+  .map-card h4{font-family:'Fraunces',serif;font-weight:700;font-size:15px;margin-bottom:4px}
+  .map-card .mc-meta{color:var(--muted);margin-bottom:8px}
+  .map-card .mc-price{font-family:'Fraunces',serif;font-weight:700;font-size:16px;color:var(--maroon)}
+
+  /* ---------- NO RESULTS ---------- */
+  .nores{background:#fff;border:2px dashed var(--ink);border-radius:18px;padding:30px 28px;margin-top:20px;display:none}
+  .nores.on{display:block}
+  .nores-emoji{font-size:44px;margin-bottom:4px}
+  .nores h3{font-family:'Fraunces',serif;font-weight:700;font-size:22px;line-height:1.15;margin-bottom:6px}
+  .nores p{color:var(--muted);font-size:14px;max-width:500px;line-height:1.55}
+  .nores-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:18px}
+  .nores-card{background:var(--cream);border:2px solid var(--ink);border-radius:14px;padding:14px;cursor:pointer;transition:transform .12s}
+  .nores-card:hover{transform:translate(-1px,-1px);background:var(--butter-soft)}
+  .nores-card h5{font-family:'Fraunces',serif;font-weight:700;font-size:14.5px;margin-bottom:2px}
+  .nores-card p{font-size:12.5px;color:var(--muted);margin:0}
+
+  /* ---------- REFINE CARD (Save search) ---------- */
+  .save-card{margin-top:24px;background:linear-gradient(135deg,var(--butter-soft),var(--mint-soft));border:2px solid var(--ink);border-radius:18px;box-shadow:4px 4px 0 var(--ink);padding:20px 22px;display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+  .save-card .em{font-size:34px}
+  .save-card h4{font-family:'Fraunces',serif;font-weight:700;font-size:19px;line-height:1.15}
+  .save-card p{font-size:13px;color:var(--muted);margin-top:4px;max-width:500px}
+  .save-card .btn{margin-inline-start:auto}
+
+  /* ---------- REFINEMENT CHIPS ---------- */
+  .refine{margin-top:28px;padding:18px 20px;background:#fff;border:2px solid var(--ink);border-radius:18px}
+  .refine h4{font-family:'Fraunces',serif;font-weight:700;font-size:17px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+  .refine-grid{display:flex;flex-wrap:wrap;gap:8px}
+  .refine-chip{border:2px solid var(--ink);background:#fff;border-radius:999px;padding:6px 12px;font-size:12.5px;font-weight:600;cursor:pointer;box-shadow:2px 2px 0 var(--ink);display:inline-flex;align-items:center;gap:6px}
+  .refine-chip:hover{background:var(--butter-soft);transform:translate(-1px,-1px)}
+  .refine-chip .n{font-variant-numeric:tabular-nums;color:var(--muted)}
+
+  /* ---------- BUTTONS ---------- */
+  .btn{border:2px solid var(--ink);border-radius:999px;padding:10px 18px;font-weight:600;font-size:14px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;text-decoration:none;transition:transform .12s}
+  .btn:hover{transform:translate(-1px,-1px)}
+  .btn-primary{background:var(--maroon);color:#fff;box-shadow:3px 3px 0 var(--ink)}
+  .btn-ghost{background:#fff;color:var(--ink);box-shadow:3px 3px 0 var(--ink)}
+  .btn-ghost:hover{background:var(--butter-soft)}
+
+  /* ---------- PAGINATION ---------- */
+  .pagi{margin-top:26px;display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}
+  .pagi button{width:38px;height:38px;border:2px solid var(--ink);border-radius:10px;background:#fff;font-weight:700;cursor:pointer;box-shadow:2px 2px 0 var(--ink)}
+  .pagi button:hover{background:var(--butter-soft)}
+  .pagi button.on{background:var(--ink);color:#fff}
+  .pagi .gap{color:var(--muted)}
+
+  /* ---------- RECENTLY VIEWED ---------- */
+  .rv-wrap{max-width:1400px;margin:0 auto;padding:0 24px 50px}
+  .rv-head{display:flex;align-items:baseline;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+  .rv-head h2{font-family:'Fraunces',serif;font-weight:700;font-size:22px}
+  .rv-head a{color:var(--maroon);font-size:13px;font-weight:600;margin-inline-start:auto;text-decoration:underline}
+  .rv-scroll{display:flex;gap:14px;overflow-x:auto;padding-bottom:8px;scrollbar-width:thin}
+  .rv-scroll::-webkit-scrollbar{height:8px}
+  .rv-scroll::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px}
+  .rv-mini{flex-shrink:0;width:220px;background:#fff;border:2px solid var(--ink);border-radius:14px;overflow:hidden;box-shadow:3px 3px 0 var(--ink)}
+  .rv-mini .h{height:100px;background:linear-gradient(135deg,var(--rose),var(--peach));border-bottom:2px solid var(--ink);display:grid;place-items:center;font-size:32px}
+  .rv-mini .h.v2{background:linear-gradient(135deg,var(--mint),var(--sky))}
+  .rv-mini .h.v3{background:linear-gradient(135deg,var(--butter),var(--peach))}
+  .rv-mini .h.v4{background:linear-gradient(135deg,var(--lilac),var(--rose))}
+  .rv-mini .h.v5{background:linear-gradient(135deg,var(--sky),var(--mint-soft))}
+  .rv-mini .b{padding:10px 12px}
+  .rv-mini .t{font-family:'Fraunces',serif;font-weight:700;font-size:14px;line-height:1.2}
+  .rv-mini .m{font-size:11px;color:var(--muted);margin-top:4px}
+  .rv-mini .p{font-family:'Fraunces',serif;font-weight:700;font-size:14px;color:var(--maroon);margin-top:6px}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink);color:var(--cream);padding:24px;text-align:center;font-size:12.5px}
+  footer .links{display:flex;justify-content:center;gap:18px;margin-bottom:8px;flex-wrap:wrap}
+  footer a{color:var(--butter);text-decoration:none;font-weight:500}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:1040px){
+    .search-box{display:none}
+    .res-head h1{font-size:24px}
+  }
+  @media (max-width:820px){
+    .nav-inner{padding:12px 18px}
+    .main{padding:16px 18px 40px}
+    .res-head h1{font-size:22px}
+    .card-hero{font-size:46px}
+    .map{height:480px}
+    .map-card{width:220px}
+    .rail{padding:0}
+    .filt-group{padding:12px 14px}
+  }
+  @media (max-width:540px){
+    .rv-mini{width:170px}
+    .rv-mini .h{height:78px}
+  }
+
+  /* mobile search pill (shown below 1040) */
+  .m-search{display:none;max-width:1400px;margin:0 auto;padding:10px 18px 0}
+  .m-search-pill{display:flex;align-items:center;gap:10px;padding:10px 14px;background:#fff;border:2px solid var(--ink);border-radius:16px;box-shadow:3px 3px 0 var(--ink);font-size:13px;font-weight:600}
+  .m-search-pill .i{font-size:16px}
+  @media (max-width:1040px){.m-search{display:block}}
+
+  /* mobile filter fab */
+  .filter-fab{display:none;position:fixed;right:18px;bottom:18px;z-index:50;background:var(--maroon);color:#fff;border:2px solid var(--ink);border-radius:999px;padding:12px 18px;font-weight:700;font-size:14px;box-shadow:4px 4px 0 var(--ink);cursor:pointer;gap:6px;align-items:center}
+  @media (max-width:1040px){.filter-fab{display:inline-flex}}
+  html[dir=rtl] .filter-fab{right:auto;left:18px}
+</style>
+  <link rel="stylesheet" href="yalla-kids-shared.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="yalla-kids.html" class="logo">
+      <span class="logo-mark">Y</span>
+      <span class="en-only">Yalla Kids</span>
+      <span class="ar-only">يلا كيدز</span>
+    </a>
+    <div class="search-box">
+      <div class="sb-seg">
+        <div style="display:flex;flex-direction:column;min-width:0;flex:1">
+          <span class="lab"><span class="en-only">Search</span><span class="ar-only">بحث</span></span>
+          <input type="text" value="Art classes" placeholder="Pottery, ballet, piano…" data-en-placeholder="Pottery, ballet, piano…" data-ar-placeholder="فخار، باليه، بيانو…">
+        </div>
+      </div>
+      <div class="sb-seg">
+        <div style="display:flex;flex-direction:column;min-width:0;flex:1">
+          <span class="lab"><span class="en-only">For</span><span class="ar-only">لِـ</span></span>
+          <span class="val">Yara · age 5</span>
+        </div>
+      </div>
+      <div class="sb-seg">
+        <div style="display:flex;flex-direction:column;min-width:0;flex:1">
+          <span class="lab"><span class="en-only">Where</span><span class="ar-only">أين</span></span>
+          <span class="val">West Bay, Doha</span>
+        </div>
+      </div>
+      <div class="sb-seg">
+        <div style="display:flex;flex-direction:column;min-width:0;flex:1">
+          <span class="lab"><span class="en-only">When</span><span class="ar-only">متى</span></span>
+          <span class="val">Sat mornings</span>
+        </div>
+      </div>
+      <button class="sb-go" aria-label="Search">🔍</button>
+    </div>
+    <div class="nav-right">
+      <button class="lang" onclick="toggleLang()">
+        <span>🌐</span>
+        <span class="en-only">عربي</span>
+        <span class="ar-only">EN</span>
+      </button>
+      <div class="avatar-chip">
+        <span class="av">L</span>
+        <span class="en-only">Layla</span>
+        <span class="ar-only">ليلى</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- mobile search pill -->
+  <div class="m-search">
+    <div class="m-search-pill">
+      <span class="i">🔍</span>
+      <div style="flex:1;min-width:0">
+        <div style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">
+          <span class="en-only">Art classes · Yara (5) · West Bay · Sat AM</span>
+          <span class="ar-only">صفوف فنون · يارا (٥) · الخليج الغربي · سبت صباحاً</span>
+        </div>
+      </div>
+      <span style="font-size:18px">✏️</span>
+    </div>
+  </div>
+</nav>
+
+<!-- CATEGORY STRIP -->
+<div class="cats">
+  <div class="cats-inner">
+    <button class="catbtn on"><span class="ic">🎨</span><span class="en-only">Art & crafts</span><span class="ar-only">فنون وحرف</span></button>
+    <button class="catbtn"><span class="ic">🎵</span><span class="en-only">Music</span><span class="ar-only">موسيقى</span></button>
+    <button class="catbtn"><span class="ic">⚽</span><span class="en-only">Sports</span><span class="ar-only">رياضة</span></button>
+    <button class="catbtn"><span class="ic">🩰</span><span class="en-only">Dance</span><span class="ar-only">رقص</span></button>
+    <button class="catbtn"><span class="ic">🧪</span><span class="en-only">STEAM</span><span class="ar-only">ستيم</span></button>
+    <button class="catbtn"><span class="ic">📚</span><span class="en-only">Languages</span><span class="ar-only">لغات</span></button>
+    <button class="catbtn"><span class="ic">🕌</span><span class="en-only">Religion & culture</span><span class="ar-only">دين وثقافة</span></button>
+    <button class="catbtn"><span class="ic">🧑‍🍳</span><span class="en-only">Cooking</span><span class="ar-only">طبخ</span></button>
+    <button class="catbtn"><span class="ic">🏊</span><span class="en-only">Swim & water</span><span class="ar-only">سباحة</span></button>
+    <button class="catbtn"><span class="ic">🎭</span><span class="en-only">Drama</span><span class="ar-only">مسرح</span></button>
+    <button class="catbtn"><span class="ic">🏕️</span><span class="en-only">Camps</span><span class="ar-only">مخيمات</span></button>
+    <button class="catbtn"><span class="ic">🎂</span><span class="en-only">Parties</span><span class="ar-only">حفلات</span></button>
+    <button class="catbtn"><span class="ic">📍</span><span class="en-only">Places</span><span class="ar-only">أماكن</span></button>
+  </div>
+</div>
+
+<!-- ACTIVE FILTERS -->
+<div class="filt-strip">
+  <div class="filt-strip-inner">
+    <span class="filt-strip-label">
+      <span class="en-only">Filtering by</span>
+      <span class="ar-only">يتمّ التصفية حسب</span>
+    </span>
+    <span class="filt-pill">🎨 Art & crafts <button class="x" onclick="removeFilt(this)">×</button></span>
+    <span class="filt-pill">
+      <span class="en-only">Age 5</span>
+      <span class="ar-only">٥ سنوات</span>
+      <button class="x" onclick="removeFilt(this)">×</button>
+    </span>
+    <span class="filt-pill">
+      <span class="en-only">West Bay · Lusail · The Pearl</span>
+      <span class="ar-only">الخليج الغربي · لوسيل · اللؤلؤة</span>
+      <button class="x" onclick="removeFilt(this)">×</button>
+    </span>
+    <span class="filt-pill">
+      <span class="en-only">Saturday</span>
+      <span class="ar-only">السبت</span>
+      <button class="x" onclick="removeFilt(this)">×</button>
+    </span>
+    <span class="filt-pill">
+      <span class="en-only">Morning (8-12)</span>
+      <span class="ar-only">صباحاً (٨-١٢)</span>
+      <button class="x" onclick="removeFilt(this)">×</button>
+    </span>
+    <span class="filt-pill">
+      <span class="en-only">QAR 100 - 600</span>
+      <span class="ar-only">١٠٠-٦٠٠ ر.ق</span>
+      <button class="x" onclick="removeFilt(this)">×</button>
+    </span>
+    <a class="filt-clear" href="#" onclick="return false">
+      <span class="en-only">Clear all</span>
+      <span class="ar-only">مسح الكل</span>
+    </a>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- LEFT: FILTER RAIL -->
+  <aside class="rail">
+    <div class="rail-head">
+      <h3>
+        <span class="en-only">Refine</span>
+        <span class="ar-only">تصفية</span>
+        <span class="count">14</span>
+      </h3>
+      <a class="rail-clear" href="#" onclick="return false">
+        <span class="en-only">Reset</span>
+        <span class="ar-only">إعادة</span>
+      </a>
+    </div>
+
+    <!-- AGE -->
+    <div class="filt-group">
+      <div class="filt-h" onclick="toggleFG(this)">
+        <span><span class="en-only">Child's age</span><span class="ar-only">عمر الطفل</span></span>
+        <span class="caret">▼</span>
+      </div>
+      <div class="filt-body">
+        <div class="pill-list">
+          <button class="fpill"><span class="en-only">0-2</span><span class="ar-only">٠-٢</span></button>
+          <button class="fpill"><span class="en-only">2-4</span><span class="ar-only">٢-٤</span></button>
+          <button class="fpill on"><span class="en-only">4-6</span><span class="ar-only">٤-٦</span></button>
+          <button class="fpill"><span class="en-only">6-9</span><span class="ar-only">٦-٩</span></button>
+          <button class="fpill"><span class="en-only">9-12</span><span class="ar-only">٩-١٢</span></button>
+          <button class="fpill"><span class="en-only">13+</span><span class="ar-only">١٣+</span></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRICE -->
+    <div class="filt-group">
+      <div class="filt-h" onclick="toggleFG(this)">
+        <span><span class="en-only">Price per session</span><span class="ar-only">السعر للجلسة</span></span>
+        <span class="caret">▼</span>
+      </div>
+      <div class="filt-body">
+        <div class="range-box">
+          <div class="range-values">
+            <span><span class="en-only">QAR</span> <b>100</b></span>
+            <span><span class="en-only">QAR</span> <b>600+</b></span>
+          </div>
+          <div class="range-track">
+            <div class="range-fill"></div>
+            <div class="range-h rh1"></div>
+            <div class="range-h rh2"></div>
+          </div>
+        </div>
+        <div class="pill-list" style="margin-top:12px">
+          <button class="fpill"><span class="en-only">Free trial</span><span class="ar-only">تجربة مجانية</span></button>
+          <button class="fpill on"><span class="en-only">Sibling discount</span><span class="ar-only">خصم أخوة</span></button>
+          <button class="fpill"><span class="en-only">Block bundle</span><span class="ar-only">حزمة جلسات</span></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- WHEN -->
+    <div class="filt-group">
+      <div class="filt-h" onclick="toggleFG(this)">
+        <span><span class="en-only">When</span><span class="ar-only">متى</span></span>
+        <span class="caret">▼</span>
+      </div>
+      <div class="filt-body">
+        <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">
+          <span class="en-only">Day</span>
+          <span class="ar-only">اليوم</span>
+        </div>
+        <div class="day-grid">
+          <button class="daybox on"><span class="en-only">Sun</span><span class="ar-only">أ</span></button>
+          <button class="daybox"><span class="en-only">Mon</span><span class="ar-only">ن</span></button>
+          <button class="daybox"><span class="en-only">Tue</span><span class="ar-only">ث</span></button>
+          <button class="daybox"><span class="en-only">Wed</span><span class="ar-only">ر</span></button>
+          <button class="daybox"><span class="en-only">Thu</span><span class="ar-only">خ</span></button>
+          <button class="daybox"><span class="en-only">Fri</span><span class="ar-only">ج</span></button>
+          <button class="daybox on"><span class="en-only">Sat</span><span class="ar-only">س</span></button>
+        </div>
+        <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin:14px 0 6px">
+          <span class="en-only">Time of day</span>
+          <span class="ar-only">وقت اليوم</span>
+        </div>
+        <div class="time-grid">
+          <button class="timebox on"><span class="ic">🌅</span><span class="en-only">Morning</span><span class="ar-only">صباح</span></button>
+          <button class="timebox"><span class="ic">☀️</span><span class="en-only">Midday</span><span class="ar-only">ظهر</span></button>
+          <button class="timebox"><span class="ic">🌇</span><span class="en-only">Afternoon</span><span class="ar-only">عصر</span></button>
+          <button class="timebox"><span class="ic">🌙</span><span class="en-only">Evening</span><span class="ar-only">مساء</span></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- NEIGHBORHOOD -->
+    <div class="filt-group">
+      <div class="filt-h" onclick="toggleFG(this)">
+        <span><span class="en-only">Neighborhood</span><span class="ar-only">الحي / المنطقة</span></span>
+        <span class="caret">▼</span>
+      </div>
+      <div class="filt-body">
+        <div class="check-list">
+          <label class="check-row on"><span class="cb">✓</span><span><span class="en-only">West Bay</span><span class="ar-only">الخليج الغربي</span></span><span class="ct">24</span></label>
+          <label class="check-row on"><span class="cb">✓</span><span><span class="en-only">Lusail</span><span class="ar-only">لوسيل</span></span><span class="ct">18</span></label>
+          <label class="check-row on"><span class="cb">✓</span><span><span class="en-only">The Pearl</span><span class="ar-only">اللؤلؤة</span></span><span class="ct">22</span></label>
+          <label class="check-row"><span class="cb">✓</span><span><span class="en-only">Katara</span><span class="ar-only">كتارا</span></span><span class="ct">11</span></label>
+          <label class="check-row"><span class="cb">✓</span><span><span class="en-only">Al Sadd</span><span class="ar-only">السد</span></span><span class="ct">14</span></label>
+          <label class="check-row"><span class="cb">✓</span><span><span class="en-only">Education City</span><span class="ar-only">المدينة التعليمية</span></span><span class="ct">9</span></label>
+          <label class="check-row"><span class="cb">✓</span><span><span class="en-only">Aspire Zone</span><span class="ar-only">أسباير</span></span><span class="ct">7</span></label>
+          <label class="check-row"><span class="cb">✓</span><span><span class="en-only">Al Waab</span><span class="ar-only">الوعب</span></span><span class="ct">6</span></label>
+          <label class="check-row"><span class="cb">✓</span><span><span class="en-only">Msheireb</span><span class="ar-only">مشيرب</span></span><span class="ct">4</span></label>
+        </div>
+      </div>
+    </div>
+
+    <!-- LANGUAGE -->
+    <div class="filt-group">
+      <div class="filt-h" onclick="toggleFG(this)">
+        <span><span class="en-only">Language</span><span class="ar-only">اللغة</span></span>
+        <span class="caret">▼</span>
+      </div>
+      <div class="filt-body">
+        <div class="pill-list">
+          <button class="fpill on"><span class="en-only">English</span><span class="ar-only">إنجليزي</span></button>
+          <button class="fpill on"><span class="en-only">Arabic</span><span class="ar-only">عربي</span></button>
+          <button class="fpill on"><span class="en-only">Bilingual</span><span class="ar-only">ثنائي</span></button>
+          <button class="fpill"><span class="en-only">French</span><span class="ar-only">فرنسي</span></button>
+          <button class="fpill"><span class="en-only">Urdu</span><span class="ar-only">أردو</span></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROVIDER BADGES -->
+    <div class="filt-group">
+      <div class="filt-h" onclick="toggleFG(this)">
+        <span><span class="en-only">Provider badges</span><span class="ar-only">شارات المزوّد</span></span>
+        <span class="caret">▼</span>
+      </div>
+      <div class="filt-body">
+        <div class="check-list">
+          <label class="check-row on"><span class="cb">✓</span><span><span class="ic">🥘</span> <span class="en-only">Halal</span><span class="ar-only">حلال</span></span><span class="ct">52</span></label>
+          <label class="check-row on"><span class="cb">✓</span><span><span class="ic">🥜</span> <span class="en-only">Allergy-aware</span><span class="ar-only">مراعاة الحساسية</span></span><span class="ct">31</span></label>
+          <label class="check-row"><span class="cb">✓</span><span><span class="ic">🩺</span> <span class="en-only">First-aid certified</span><span class="ar-only">إسعافات أولية</span></span><span class="ct">44</span></label>
+          <label class="check-row"><span class="cb">✓</span><span><span class="ic">👶</span> <span class="en-only">Drop-off OK</span><span class="ar-only">بدون مرافق</span></span><span class="ct">27</span></label>
+          <label class="check-row"><span class="cb">✓</span><span><span class="ic">🧕</span> <span class="en-only">Modesty-friendly</span><span class="ar-only">ملابس محتشمة</span></span><span class="ct">38</span></label>
+          <label class="check-row"><span class="cb">✓</span><span><span class="ic">👩</span> <span class="en-only">Female-only instructors</span><span class="ar-only">مدرّبات فقط</span></span><span class="ct">19</span></label>
+          <label class="check-row"><span class="cb">✓</span><span><span class="ic">♿</span> <span class="en-only">Accessible venue</span><span class="ar-only">مكان متاح</span></span><span class="ct">15</span></label>
+          <label class="check-row"><span class="cb">✓</span><span><span class="ic">🚗</span> <span class="en-only">Free parking</span><span class="ar-only">موقف مجاني</span></span><span class="ct">41</span></label>
+        </div>
+      </div>
+    </div>
+
+    <!-- CLASS FORMAT -->
+    <div class="filt-group">
+      <div class="filt-h" onclick="toggleFG(this)">
+        <span><span class="en-only">Format</span><span class="ar-only">الشكل</span></span>
+        <span class="caret">▼</span>
+      </div>
+      <div class="filt-body">
+        <div class="check-list">
+          <label class="check-row on"><span class="cb">✓</span><span><span class="en-only">Weekly recurring</span><span class="ar-only">أسبوعي متكرر</span></span><span class="ct">48</span></label>
+          <label class="check-row on"><span class="cb">✓</span><span><span class="en-only">Block course</span><span class="ar-only">دورة متتابعة</span></span><span class="ct">26</span></label>
+          <label class="check-row"><span class="cb">✓</span><span><span class="en-only">One-time workshop</span><span class="ar-only">ورشة لمرة واحدة</span></span><span class="ct">17</span></label>
+          <label class="check-row"><span class="cb">✓</span><span><span class="en-only">Camp</span><span class="ar-only">مخيم</span></span><span class="ct">8</span></label>
+          <label class="check-row"><span class="cb">✓</span><span><span class="en-only">Drop-in</span><span class="ar-only">حضور حر</span></span><span class="ct">5</span></label>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXTRAS -->
+    <div class="filt-group">
+      <div class="filt-h" onclick="toggleFG(this)">
+        <span><span class="en-only">Extras</span><span class="ar-only">إضافات</span></span>
+        <span class="caret">▼</span>
+      </div>
+      <div class="filt-body">
+        <div class="switch-row" onclick="toggleSw(this.querySelector('.sw'))">
+          <span><span class="en-only">Free trial available</span><span class="ar-only">تجربة مجانية متاحة</span></span>
+          <span class="sw"></span>
+        </div>
+        <div class="switch-row" onclick="toggleSw(this.querySelector('.sw'))">
+          <span><span class="en-only">Siblings welcome</span><span class="ar-only">ترحيب بالأخوة</span></span>
+          <span class="sw on"></span>
+        </div>
+        <div class="switch-row" onclick="toggleSw(this.querySelector('.sw'))">
+          <span><span class="en-only">Open spots only</span><span class="ar-only">أماكن متاحة فقط</span></span>
+          <span class="sw on"></span>
+        </div>
+        <div class="switch-row" onclick="toggleSw(this.querySelector('.sw'))">
+          <span><span class="en-only">New in last 30 days</span><span class="ar-only">جديد آخر ٣٠ يوماً</span></span>
+          <span class="sw"></span>
+        </div>
+        <div class="switch-row" onclick="toggleSw(this.querySelector('.sw'))">
+          <span><span class="en-only">Ramadan-friendly hours</span><span class="ar-only">ساعات رمضان</span></span>
+          <span class="sw"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- APPLY BUTTON (mobile) -->
+    <div style="padding:14px 16px;border-top:1.5px solid var(--line);display:none" class="rail-apply">
+      <button class="btn btn-primary" style="width:100%;justify-content:center">
+        <span class="en-only">Show 14 results</span>
+        <span class="ar-only">عرض ١٤ نتيجة</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- RIGHT: RESULTS -->
+  <section>
+    <div class="res-head">
+      <div>
+        <h1>
+          <span class="en-only"><span class="pop">14 art classes</span> for Yara</span>
+          <span class="ar-only"><span class="pop">١٤ صفّ فنون</span> ليارا</span>
+        </h1>
+        <div class="res-count">
+          <span class="en-only"><b>Doha</b> · Saturday mornings · ages 4-6 · QAR 100-600 · showing 1-12 of 14</span>
+          <span class="ar-only"><b>الدوحة</b> · سبت صباحاً · ٤-٦ سنوات · ١٠٠-٦٠٠ ر.ق · عرض ١-١٢ من ١٤</span>
+        </div>
+      </div>
+      <div class="res-tools">
+        <button class="sort-box">
+          <span class="ic">⇅</span>
+          <span>
+            <span class="en-only">Best match</span>
+            <span class="ar-only">الأفضل تطابقاً</span>
+          </span>
+          <span class="ic">▾</span>
+        </button>
+        <div class="view-seg">
+          <button class="on" id="viewList" onclick="setView('list')">
+            <span>☷</span>
+            <span class="en-only">List</span>
+            <span class="ar-only">قائمة</span>
+          </button>
+          <button id="viewMap" onclick="setView('map')">
+            <span>📍</span>
+            <span class="en-only">Map</span>
+            <span class="ar-only">خريطة</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAP VIEW -->
+    <div class="map-wrap" id="mapWrap">
+      <div class="map">
+        <div class="map-water"></div>
+        <div class="map-land"></div>
+        <span class="map-label" style="top:4%;left:50%">ARABIAN GULF</span>
+        <span class="map-label" style="top:18%;left:50%">الخليج العربي</span>
+        <span class="map-label big" style="top:34%;left:36%">West Bay</span>
+        <span class="map-label big" style="top:26%;left:62%">Lusail</span>
+        <span class="map-label big" style="top:46%;left:68%">The Pearl</span>
+        <span class="map-label" style="top:58%;left:40%">Katara</span>
+        <span class="map-label" style="top:72%;left:28%">Al Sadd</span>
+        <span class="map-label" style="top:76%;left:70%">Al Waab</span>
+        <span class="map-label" style="top:88%;left:52%">Education City</span>
+
+        <!-- PINS -->
+        <div class="pin" style="left:36%;top:38%">
+          <div class="pin-pill featured">⭐ <span class="price">QAR 480</span></div>
+          <div class="pin-stem"></div>
+          <div class="pin-dot"></div>
+        </div>
+        <div class="pin" style="left:44%;top:36%">
+          <div class="pin-pill loved">♥ <span class="price">QAR 150</span></div>
+          <div class="pin-stem"></div>
+          <div class="pin-dot"></div>
+        </div>
+        <div class="pin" style="left:32%;top:44%">
+          <div class="pin-pill"><span class="price">QAR 220</span></div>
+          <div class="pin-stem"></div>
+          <div class="pin-dot"></div>
+        </div>
+        <div class="pin" style="left:58%;top:28%">
+          <div class="pin-pill"><span class="price">QAR 380</span></div>
+          <div class="pin-stem"></div>
+          <div class="pin-dot"></div>
+        </div>
+        <div class="pin-cluster" style="left:68%;top:48%">5</div>
+        <div class="pin" style="left:42%;top:62%">
+          <div class="pin-pill"><span class="price">QAR 120</span></div>
+          <div class="pin-stem"></div>
+          <div class="pin-dot"></div>
+        </div>
+        <div class="pin-cluster" style="left:28%;top:72%">3</div>
+        <div class="pin" style="left:66%;top:80%">
+          <div class="pin-pill"><span class="price">QAR 600</span></div>
+          <div class="pin-stem"></div>
+          <div class="pin-dot"></div>
+        </div>
+
+        <!-- Active pin card -->
+        <a href="yalla-kids-class-detail.html?slug=clay-encounters-pearl" class="map-card" style="text-decoration:none;color:inherit;display:block;">
+          <div style="display:flex;gap:10px">
+            <div style="width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--rose),var(--peach));border:2px solid var(--ink);display:grid;place-items:center;font-size:26px;flex-shrink:0">🎨</div>
+            <div style="flex:1;min-width:0">
+              <h4>
+                <span class="en-only">Clay Encounters — Pottery</span>
+                <span class="ar-only">كلاي إنكاونترز — فخّار</span>
+              </h4>
+              <div class="mc-meta">
+                <span class="en-only">The Pearl · verified Apr 2026</span>
+                <span class="ar-only">اللؤلؤة · محدّث إبريل ٢٠٢٦</span>
+              </div>
+              <div class="mc-price">
+                <span class="en-only">QAR 150–280 <span style="color:var(--muted);font-family:'Inter',sans-serif;font-size:11px;font-weight:500">/ session</span></span>
+                <span class="ar-only">١٥٠–٢٨٠ ر.ق <span style="color:var(--muted);font-family:'Inter',sans-serif;font-size:11px;font-weight:500">/ جلسة</span></span>
+              </div>
+            </div>
+          </div>
+          <span class="btn btn-primary" style="padding:6px 14px;font-size:12px;margin-top:10px;width:100%;justify-content:center;display:flex;">
+            <span class="en-only">View class</span>
+            <span class="ar-only">عرض الصف</span>
+            <span>→</span>
+          </span>
+        </a>
+
+        <!-- Controls -->
+        <div class="map-ctrl">
+          <button class="map-btn" title="Zoom in" data-en-title="Zoom in" data-ar-title="تكبير">＋</button>
+          <button class="map-btn" title="Zoom out" data-en-title="Zoom out" data-ar-title="تصغير">−</button>
+          <button class="map-btn" title="My location" data-en-title="My location" data-ar-title="موقعي" style="font-size:14px">📍</button>
+        </div>
+
+        <div class="map-legend">
+          <div class="legend-row"><span class="legend-dot mar"></span><span><span class="en-only">Class</span><span class="ar-only">صف</span></span></div>
+          <div class="legend-row"><span class="legend-dot gold"></span><span><span class="en-only">Featured</span><span class="ar-only">مميّز</span></span></div>
+          <div class="legend-row"><span class="legend-dot mint"></span><span><span class="en-only">Place</span><span class="ar-only">مكان</span></span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIST VIEW -->
+    <div class="res-grid" id="resGrid">
+
+      <!-- Live results — rendered from yalla-kids-data.js -->
+      </div>
+
+    <!-- NO RESULTS (hidden by default, toggleable) -->
+    <div class="nores" id="nores">
+      <div class="nores-emoji">🏜️</div>
+      <h3>
+        <span class="en-only">Nothing matches all your filters — yet</span>
+        <span class="ar-only">لا يوجد تطابق كامل — بعد</span>
+      </h3>
+      <p>
+        <span class="en-only">Try loosening one or two filters. We're also happy to <b>alert you on WhatsApp</b> the moment a new class matches.</span>
+        <span class="ar-only">جرّبي تخفيف فلتر أو اثنين. يسعدنا أيضاً <b>تنبيهك على واتساب</b> فور توفّر صف مطابق.</span>
+      </p>
+      <div class="nores-grid">
+        <div class="nores-card">
+          <h5>
+            <span class="en-only">🗓 Expand to Sunday too</span>
+            <span class="ar-only">🗓 توسّعي للأحد أيضاً</span>
+          </h5>
+          <p>
+            <span class="en-only">Opens up more weekend options</span>
+            <span class="ar-only">يفتح خيارات نهاية الأسبوع</span>
+          </p>
+        </div>
+        <div class="nores-card">
+          <h5>
+            <span class="en-only">💰 Raise price cap</span>
+            <span class="ar-only">💰 ارفعي السقف السعري</span>
+          </h5>
+          <p>
+            <span class="en-only">Include term-block pricing</span>
+            <span class="ar-only">تضمين أسعار الدورة</span>
+          </p>
+        </div>
+        <div class="nores-card">
+          <h5>
+            <span class="en-only">📍 Widen the map</span>
+            <span class="ar-only">📍 وسّعي الخريطة</span>
+          </h5>
+          <p>
+            <span class="en-only">Include Al Sadd &amp; Katara</span>
+            <span class="ar-only">تضمين السد وكتارا</span>
+          </p>
+        </div>
+        <div class="nores-card">
+          <h5>
+            <span class="en-only">🎨 Widen to all crafts</span>
+            <span class="ar-only">🎨 جميع الحرف</span>
+          </h5>
+          <p>
+            <span class="en-only">Pottery, print, mixed-media</span>
+            <span class="ar-only">فخّار، طباعة، متعدّد</span>
+          </p>
+        </div>
+      </div>
+      <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn btn-primary">
+          <span class="en-only">📱 Alert me on WhatsApp</span>
+          <span class="ar-only">📱 نبّهيني على واتساب</span>
+        </button>
+        <button class="btn btn-ghost" onclick="toggleNores()">
+          <span class="en-only">Reset filters</span>
+          <span class="ar-only">إعادة تعيين</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- PAGINATION -->
+    <div class="pagi">
+      <button>‹</button>
+      <button class="on">1</button>
+      <button>2</button>
+      <span class="gap">…</span>
+      <button>4</button>
+      <button>›</button>
+    </div>
+
+    <!-- SAVE SEARCH CARD -->
+    <div class="save-card">
+      <span class="em">🔔</span>
+      <div style="flex:1;min-width:220px">
+        <h4>
+          <span class="en-only">Save this search</span>
+          <span class="ar-only">احفظي هذا البحث</span>
+        </h4>
+        <p>
+          <span class="en-only">We'll ping you on WhatsApp the moment a new art class matches — West Bay / Lusail / Pearl, Saturday AM, age 4-6, under QAR 600.</span>
+          <span class="ar-only">نرسل لكِ على واتساب فور توفّر صف فنون جديد — الخليج الغربي / لوسيل / اللؤلؤة، سبت صباحاً، ٤-٦ سنوات، أقل من ٦٠٠ ر.ق.</span>
+        </p>
+      </div>
+      <button class="btn btn-primary">
+        <span class="en-only">Save + alert me</span>
+        <span class="ar-only">احفظي + نبّهيني</span>
+        <span>→</span>
+      </button>
+    </div>
+
+    <!-- REFINEMENT SUGGESTIONS -->
+    <div class="refine">
+      <h4>
+        <span>💡</span>
+        <span class="en-only">Narrow it down</span>
+        <span class="ar-only">حدّدي أكثر</span>
+      </h4>
+      <div class="refine-grid">
+        <button class="refine-chip">🎁 <span class="en-only">Offers a free trial</span><span class="ar-only">تجربة مجانية</span></button>
+        <button class="refine-chip">⏰ <span class="en-only">Under 60 minutes</span><span class="ar-only">أقل من ٦٠د</span></button>
+        <button class="refine-chip">👶 <span class="en-only">Drop-off OK</span><span class="ar-only">بدون مرافق</span></button>
+        <button class="refine-chip">🥜 <span class="en-only">Allergy-aware kitchen</span><span class="ar-only">مطبخ مراعٍ للحساسية</span></button>
+        <button class="refine-chip">🆕 <span class="en-only">New providers</span><span class="ar-only">موفّرون جدد</span></button>
+        <button class="refine-chip">💸 <span class="en-only">Under QAR 150/session</span><span class="ar-only">أقل من ١٥٠/جلسة</span></button>
+        <button class="refine-chip">🚗 <span class="en-only">Short drive</span><span class="ar-only">قصيرة بالسيارة</span></button>
+        <button class="refine-chip" onclick="toggleNores()">
+          <span>🏜️</span>
+          <span class="en-only">Demo empty state</span>
+          <span class="ar-only">عرض حالة فارغة</span>
+        </button>
+      </div>
+    </div>
+
+  </section>
+</div>
+
+<!-- MORE IN CATEGORY (live-rendered from real data) -->
+<div class="rv-wrap">
+  <div class="rv-head">
+    <h2>
+      <span class="en-only">More art classes in Doha</span>
+      <span class="ar-only">مزيد من صفوف الفنون في الدوحة</span>
+    </h2>
+    <a href="yalla-kids-classes-directory.html">
+      <span class="en-only">See all classes</span>
+      <span class="ar-only">اعرضي كل الصفوف</span>
+    </a>
+  </div>
+  <div class="rv-scroll" id="live-search-recent">
+    <!-- populated from window.YALLA_DATA.classes -->
+  </div>
+</div>
+
+<!-- mobile filter fab -->
+<button class="filter-fab" onclick="document.querySelector('.rail').scrollIntoView({behavior:'smooth'})">
+  <span>⚙</span>
+  <span class="en-only">14 filters</span>
+  <span class="ar-only">١٤ فلتر</span>
+</button>
+
+<footer>
+  <div class="links">
+    <a href="#">About</a><a href="#">Safety</a><a href="#">For providers</a><a href="#">Help</a><a href="#">Privacy</a><a href="#">Terms</a>
+  </div>
+  <div>© 2026 Yalla Kids · Made in Doha · <span dir="rtl" style="font-family:'Tajawal',sans-serif">يلا كيدز</span></div>
+</footer>
+
+<script>
+  function toggleLang(){
+    const html = document.documentElement;
+    const isRtl = html.getAttribute('dir') === 'rtl';
+    html.setAttribute('dir', isRtl ? 'ltr' : 'rtl');
+    html.setAttribute('lang', isRtl ? 'en' : 'ar');
+  }
+
+  function toggleFG(el){
+    el.classList.toggle('closed');
+  }
+
+  function toggleSw(el){
+    if(!el) return;
+    el.classList.toggle('on');
+  }
+
+  function removeFilt(btn){
+    const pill = btn.closest('.filt-pill');
+    pill.style.transform = 'scale(0.7)';
+    pill.style.opacity = '0';
+    pill.style.transition = 'all .15s';
+    setTimeout(()=>pill.remove(), 150);
+  }
+
+  // view toggle
+  function setView(v){
+    document.getElementById('viewList').classList.toggle('on', v==='list');
+    document.getElementById('viewMap').classList.toggle('on', v==='map');
+    document.getElementById('resGrid').classList.toggle('hidden', v==='map');
+    document.getElementById('mapWrap').classList.toggle('on', v==='map');
+    if(v==='map') document.getElementById('mapWrap').scrollIntoView({behavior:'smooth',block:'center'});
+  }
+
+  // favorite toggle on cards
+  document.querySelectorAll('.card-fav').forEach(b=>{
+    b.addEventListener('click', e=>{
+      e.stopPropagation();
+      e.preventDefault();
+      b.classList.toggle('on');
+    });
+  });
+
+  // category strip single-select
+  document.querySelectorAll('.catbtn').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      document.querySelectorAll('.catbtn').forEach(x=>x.classList.remove('on'));
+      b.classList.add('on');
+    });
+  });
+
+  // age / language pills
+  document.querySelectorAll('.fpill').forEach(p=>{
+    p.addEventListener('click', ()=>p.classList.toggle('on'));
+  });
+
+  // day boxes
+  document.querySelectorAll('.daybox').forEach(d=>{
+    d.addEventListener('click', ()=>d.classList.toggle('on'));
+  });
+
+  // time boxes
+  document.querySelectorAll('.timebox').forEach(d=>{
+    d.addEventListener('click', ()=>d.classList.toggle('on'));
+  });
+
+  // check rows
+  document.querySelectorAll('.check-row').forEach(r=>{
+    r.addEventListener('click', ()=>r.classList.toggle('on'));
+  });
+
+  // pin hover → swap card
+  document.querySelectorAll('.pin').forEach(p=>{
+    p.addEventListener('click', e=>{
+      document.querySelectorAll('.pin-pill').forEach(pp=>pp.classList.remove('loved'));
+      p.querySelector('.pin-pill').classList.add('loved');
+    });
+  });
+
+  // pagination clicks
+  document.querySelectorAll('.pagi button').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      const isNum = /^\d+$/.test(b.textContent.trim());
+      if(isNum){
+        document.querySelectorAll('.pagi button').forEach(x=>x.classList.remove('on'));
+        b.classList.add('on');
+      }
+    });
+  });
+
+  // demo "no results" state
+  function toggleNores(){
+    const nores = document.getElementById('nores');
+    const grid = document.getElementById('resGrid');
+    const on = !nores.classList.contains('on');
+    nores.classList.toggle('on', on);
+    grid.classList.toggle('hidden', on);
+    if(on) nores.scrollIntoView({behavior:'smooth',block:'center'});
+  }
+</script>
+
+<!-- LIVE DATA: render the "More art classes" rail from the real catalogue -->
+<script src="yalla-kids-data.js"></script>
+<script>
+(function () {
+  if (!window.YALLA_DATA) return;
+  var host = document.getElementById('live-search-recent');
+  if (!host) return;
+  var CLASSES = window.YALLA_DATA.classes || [];
+  var art = CLASSES.filter(function (c) { return c.category === 'art'; }).slice(0, 8);
+  if (!art.length) return;
+
+  var emojiFor = { art: '🎨', music: '🎵', sports: '⚽', swim: '🏊', stem: '🔬', dance: '💃', 'martial-arts': '🥋', language: '🗣️', drama: '🎭', equestrian: '🐴' };
+  var variants = ['', 'v2', 'v3', 'v4', 'v5'];
+
+  function escapeHtml(s) {
+    return String(s || '').replace(/[&<>"']/g, function (c) {
+      return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c];
+    });
+  }
+
+  host.innerHTML = art.map(function (c, i) {
+    var emoji = emojiFor[c.category] || '✨';
+    var variant = variants[i % variants.length];
+    var price = escapeHtml(c.price_label || '');
+    var area = escapeHtml(c.area || '');
+    var nameEn = escapeHtml(c.name_en || '');
+    var nameAr = escapeHtml(c.name_ar || c.name_en || '');
+    var slug = encodeURIComponent(c.slug || '');
+    return '' +
+      '<a class="rv-mini" href="yalla-kids-class-detail.html?slug=' + slug + '">' +
+        '<div class="h' + (variant ? ' ' + variant : '') + '">' + emoji + '</div>' +
+        '<div class="b">' +
+          '<div class="t">' +
+            '<span class="en-only">' + nameEn + '</span>' +
+            '<span class="ar-only">' + nameAr + '</span>' +
+          '</div>' +
+          '<div class="m">' + area + ' · <span class="en-only">verified Apr 2026</span><span class="ar-only">محدّث إبريل ٢٠٢٦</span></div>' +
+          '<div class="p">' + price + '</div>' +
+        '</div>' +
+      '</a>';
+  }).join('');
+})();
+</script>
+<script src="yalla-kids-shared.js"></script>
+</body>
+</html>

@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yalla Kids — Desert Modern preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Inter:wght@300;400;500;600;700&family=Noto+Kufi+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --limestone: #E8E0D2;
+    --limestone-light: #F2EBDE;
+    --limestone-deep: #D4C5A9;
+    --teal: #0C5560;
+    --teal-deep: #063944;
+    --brass: #B08F4C;
+    --brass-light: #D4B982;
+    --ink: #1A1410;
+    --ink-soft: #4A3E30;
+    --ink-mute: #8C7F6B;
+    --paper: #FBF8F1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.65;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    font-size: 16px;
+  }
+  [dir="rtl"] body { font-family: 'Noto Kufi Arabic', sans-serif; }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 400;
+    letter-spacing: -0.005em;
+  }
+  [dir="rtl"] h1, [dir="rtl"] h2, [dir="rtl"] h3 {
+    font-family: 'Noto Kufi Arabic', sans-serif;
+    font-weight: 300;
+  }
+
+  .en-only { display: inline; }
+  .ar-only { display: none; }
+  [dir="rtl"] .en-only { display: none; }
+  [dir="rtl"] .ar-only { display: inline; }
+
+  /* Dev preview ribbon */
+  .ribbon {
+    background: #1a1410; color: #fafafa;
+    font-family: ui-monospace, 'SF Mono', Consolas, monospace;
+    font-size: 11px; padding: 7px 20px;
+    display: flex; gap: 16px; align-items: center;
+    border-bottom: 1px solid #333;
+  }
+  .ribbon .label { opacity: 0.55; }
+  .ribbon a { color: #fafafa; opacity: 0.8; }
+  .ribbon a:hover { opacity: 1; text-decoration: underline; }
+  .ribbon a.active { background: #fafafa; color: #1a1410; padding: 2px 8px; border-radius: 4px; opacity: 1; }
+  .ribbon .sp { margin-left: auto; opacity: 0.5; }
+
+  /* Header */
+  .site-head {
+    background: var(--paper);
+    padding: 24px 40px;
+    border-bottom: 1px solid var(--limestone-deep);
+  }
+  .nav-wrap {
+    max-width: 1320px; margin: 0 auto;
+    display: flex; align-items: center; gap: 48px;
+  }
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 24px;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+  }
+  [dir="rtl"] .logo { font-family: 'Noto Kufi Arabic', sans-serif; }
+  .logo .mark {
+    color: var(--brass);
+    letter-spacing: 0;
+  }
+  .nav-links { display: flex; gap: 36px; margin-left: 28px; }
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    padding: 6px 0;
+    position: relative;
+  }
+  .nav-links a:hover { color: var(--teal); }
+  [dir="rtl"] .nav-links a { letter-spacing: 0; font-weight: 400; }
+  .nav-actions { margin-left: auto; display: flex; gap: 10px; align-items: center; }
+  [dir="rtl"] .nav-actions { margin-left: 0; margin-right: auto; }
+  .lang-toggle {
+    background: transparent;
+    border: 1px solid var(--limestone-deep);
+    color: var(--ink);
+    padding: 8px 14px;
+    border-radius: 4px;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .lang-toggle:hover { border-color: var(--ink); }
+  .btn {
+    padding: 10px 18px;
+    border-radius: 4px;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: inline-block;
+    border: 1px solid transparent;
+    font-family: inherit;
+  }
+  .btn-ghost { color: var(--ink); background: transparent; border-color: var(--limestone-deep); }
+  .btn-ghost:hover { border-color: var(--ink); }
+  .btn-primary { background: var(--teal); color: var(--paper); border-color: var(--teal); }
+  .btn-primary:hover { background: var(--teal-deep); border-color: var(--teal-deep); }
+
+  /* Hero */
+  .hero {
+    padding: 120px 40px 100px;
+    background: var(--paper);
+    position: relative;
+  }
+  .hero-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1.1fr 1fr; gap: 80px;
+    align-items: center;
+  }
+  .hero .eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--brass);
+    font-weight: 500;
+    margin-bottom: 28px;
+  }
+  [dir="rtl"] .hero .eyebrow { letter-spacing: 0; font-weight: 400; }
+  .hero h1 {
+    font-size: clamp(48px, 6vw, 84px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 32px;
+    font-weight: 400;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--teal);
+  }
+  .hero-sub {
+    font-size: 19px;
+    color: var(--ink-soft);
+    max-width: 520px;
+    line-height: 1.55;
+    font-weight: 300;
+    margin-bottom: 44px;
+  }
+  [dir="rtl"] .hero-sub { font-weight: 400; }
+
+  .search-bar {
+    display: flex;
+    border: 1px solid var(--limestone-deep);
+    background: var(--paper);
+    max-width: 560px;
+    margin-bottom: 36px;
+  }
+  .search-field {
+    flex: 1;
+    padding: 18px 22px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .search-field + .search-field { border-left: 1px solid var(--limestone-deep); }
+  [dir="rtl"] .search-field + .search-field { border-left: none; border-right: 1px solid var(--limestone-deep); }
+  .search-field:hover { background: var(--limestone-light); }
+  .search-field .lbl {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+  .search-field .val {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .search-btn {
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    padding: 0 28px;
+    font-family: inherit;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: 500;
+  }
+  .search-btn:hover { background: var(--teal); }
+
+  .trust-row {
+    display: flex; gap: 40px; align-items: center; flex-wrap: wrap;
+    font-size: 13px;
+    color: var(--ink-soft);
+    padding-top: 20px;
+    border-top: 1px solid var(--limestone-deep);
+    max-width: 560px;
+  }
+  .trust-row strong { color: var(--ink); font-weight: 600; }
+  .trust-row .sep { color: var(--brass); }
+
+  /* Hero image placeholder — architectural */
+  .hero-visual {
+    aspect-ratio: 4/5;
+    background:
+      linear-gradient(180deg, var(--limestone-light) 0%, var(--limestone-deep) 60%, var(--brass-light) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-visual::before {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 55%;
+    background:
+      repeating-linear-gradient(0deg, transparent 0 40px, rgba(26,20,16,0.08) 40px 41px),
+      repeating-linear-gradient(90deg, transparent 0 40px, rgba(26,20,16,0.12) 40px 41px),
+      linear-gradient(180deg, transparent 0%, rgba(26,20,16,0.25) 100%);
+  }
+  .hero-visual::after {
+    content: "";
+    position: absolute;
+    top: 18%; left: 20%;
+    width: 60%; height: 45%;
+    background:
+      linear-gradient(180deg, var(--brass) 0%, var(--brass-light) 40%, var(--limestone-deep) 100%);
+    clip-path: polygon(0 100%, 0 20%, 20% 0, 80% 0, 100% 20%, 100% 100%);
+    opacity: 0.75;
+  }
+  .hero-visual .hv-caption {
+    position: absolute;
+    bottom: 28px; left: 28px;
+    color: var(--paper);
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 500;
+    opacity: 0.85;
+  }
+  .hero-visual .hv-credit {
+    position: absolute;
+    top: 24px; right: 24px;
+    color: var(--ink);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    background: var(--paper);
+    padding: 6px 12px;
+    border: 1px solid var(--ink);
+  }
+
+  /* Sections */
+  .section {
+    padding: 120px 40px;
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+  .section-head {
+    margin-bottom: 72px;
+    max-width: 680px;
+  }
+  .section-head.centered { margin-left: auto; margin-right: auto; text-align: center; }
+  .section-head .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--brass);
+    font-weight: 500;
+    margin-bottom: 24px;
+  }
+  [dir="rtl"] .section-head .eyebrow { letter-spacing: 0; font-weight: 400; }
+  .section-head h2 {
+    font-size: clamp(36px, 4.2vw, 56px);
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+  .section-head h2 em { font-style: italic; color: var(--teal); }
+  .section-head p {
+    font-size: 17px;
+    color: var(--ink-soft);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+  [dir="rtl"] .section-head p { font-weight: 400; }
+
+  /* Categories — minimal list */
+  .cat-list {
+    border-top: 1px solid var(--limestone-deep);
+  }
+  .cat-row {
+    display: grid;
+    grid-template-columns: 40px 1fr 2fr 140px 20px;
+    gap: 32px;
+    align-items: center;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--limestone-deep);
+    transition: padding 0.2s, background 0.2s;
+    color: var(--ink);
+  }
+  .cat-row:hover {
+    padding-left: 16px;
+    background: linear-gradient(90deg, var(--limestone-light) 0%, transparent 30%);
+  }
+  [dir="rtl"] .cat-row:hover {
+    padding-left: 0; padding-right: 16px;
+    background: linear-gradient(270deg, var(--limestone-light) 0%, transparent 30%);
+  }
+  .cat-row .num {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 20px;
+    color: var(--brass);
+  }
+  [dir="rtl"] .cat-row .num { font-family: 'Noto Kufi Arabic', sans-serif; font-style: normal; }
+  .cat-row .name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    font-weight: 400;
+  }
+  [dir="rtl"] .cat-row .name { font-family: 'Noto Kufi Arabic', sans-serif; font-size: 24px; }
+  .cat-row .name em { font-style: italic; color: var(--teal); }
+  .cat-row .desc {
+    font-size: 14px;
+    color: var(--ink-soft);
+    font-weight: 300;
+  }
+  [dir="rtl"] .cat-row .desc { font-weight: 400; }
+  .cat-row .count {
+    font-size: 13px;
+    color: var(--ink-mute);
+    text-align: right;
+    letter-spacing: 0.05em;
+  }
+  .cat-row .arrow {
+    font-size: 18px;
+    color: var(--ink-mute);
+    transition: transform 0.2s, color 0.2s;
+  }
+  .cat-row:hover .arrow { color: var(--teal); transform: translateX(4px); }
+  [dir="rtl"] .cat-row:hover .arrow { transform: translateX(-4px); }
+
+  /* Featured — editorial */
+  .featured {
+    background: var(--limestone-light);
+    padding: 120px 40px;
+  }
+  .featured-wrap { max-width: 1320px; margin: 0 auto; }
+  .featured-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+  .class-card {
+    color: var(--ink);
+    transition: opacity 0.2s;
+  }
+  .class-card:hover { opacity: 0.85; }
+  .class-card .cover {
+    aspect-ratio: 4/5;
+    margin-bottom: 22px;
+    position: relative;
+    overflow: hidden;
+  }
+  .class-card .cover-1 {
+    background:
+      radial-gradient(ellipse at 30% 40%, var(--brass) 0%, transparent 50%),
+      linear-gradient(135deg, var(--teal-deep) 0%, var(--teal) 60%, var(--limestone-deep) 100%);
+  }
+  .class-card .cover-2 {
+    background:
+      linear-gradient(170deg, var(--limestone-deep) 0%, var(--brass-light) 50%, var(--brass) 100%);
+  }
+  .class-card .cover-3 {
+    background:
+      linear-gradient(180deg, var(--paper) 0%, var(--limestone-light) 40%, var(--teal) 100%);
+  }
+  .class-card .cover::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, transparent 55%, rgba(26,20,16,0.15) 100%);
+  }
+  .class-card .cover .shape {
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(0deg, transparent 0 80px, rgba(251,248,241,0.08) 80px 81px);
+  }
+  .class-card .cover .rect {
+    position: absolute;
+    left: 15%; right: 15%; bottom: 20%;
+    height: 40%;
+    background: rgba(26,20,16,0.35);
+    border: 1px solid rgba(251,248,241,0.4);
+  }
+  .class-card .cover .tri {
+    position: absolute;
+    top: 25%; left: 30%; right: 30%;
+    height: 30%;
+    background: var(--paper);
+    opacity: 0.15;
+    clip-path: polygon(50% 0, 0 100%, 100% 100%);
+  }
+  .class-card .kicker {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--brass);
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  .class-card h3 {
+    font-size: 28px;
+    line-height: 1.15;
+    margin-bottom: 10px;
+    font-weight: 400;
+  }
+  [dir="rtl"] .class-card h3 { font-size: 22px; font-weight: 400; }
+  .class-card .meta {
+    font-size: 14px;
+    color: var(--ink-mute);
+    font-weight: 300;
+    margin-bottom: 18px;
+  }
+  [dir="rtl"] .class-card .meta { font-weight: 400; }
+  .class-card .foot {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding-top: 18px;
+    border-top: 1px solid var(--limestone-deep);
+  }
+  .class-card .price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--teal);
+  }
+  [dir="rtl"] .class-card .price { font-family: 'Noto Kufi Arabic', sans-serif; }
+  .class-card .rating {
+    font-size: 13px;
+    color: var(--ink-mute);
+    letter-spacing: 0.04em;
+  }
+
+  /* Editorial quote */
+  .editorial {
+    padding: 140px 40px;
+    background: var(--paper);
+  }
+  .editorial-wrap {
+    max-width: 960px; margin: 0 auto;
+    text-align: center;
+  }
+  .editorial .mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 120px;
+    line-height: 0.5;
+    color: var(--brass);
+    margin-bottom: 40px;
+  }
+  [dir="rtl"] .editorial .mark { font-family: 'Noto Kufi Arabic', sans-serif; }
+  .editorial .quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(28px, 3.4vw, 44px);
+    line-height: 1.35;
+    color: var(--ink);
+    font-weight: 400;
+    margin-bottom: 40px;
+  }
+  [dir="rtl"] .editorial .quote { font-family: 'Noto Kufi Arabic', sans-serif; font-style: normal; font-weight: 300; }
+  .editorial .who {
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    font-weight: 500;
+  }
+  [dir="rtl"] .editorial .who { letter-spacing: 0; font-weight: 400; }
+  .editorial .who strong { color: var(--ink); font-weight: 600; }
+
+  /* Footer */
+  footer {
+    background: var(--ink);
+    color: var(--limestone);
+    padding: 100px 40px 32px;
+  }
+  .foot-wrap { max-width: 1320px; margin: 0 auto; }
+  .foot-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    gap: 48px;
+    padding-bottom: 60px;
+    border-bottom: 1px solid rgba(232,224,210,0.12);
+  }
+  .foot-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    color: var(--paper);
+    margin-bottom: 20px;
+  }
+  .foot-logo .mark { color: var(--brass-light); }
+  [dir="rtl"] .foot-logo { font-family: 'Noto Kufi Arabic', sans-serif; font-weight: 300; }
+  .foot-about {
+    font-size: 14px;
+    opacity: 0.6;
+    max-width: 340px;
+    line-height: 1.65;
+    font-weight: 300;
+  }
+  [dir="rtl"] .foot-about { font-weight: 400; }
+  .foot-grid h5 {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--brass-light);
+    margin-bottom: 22px;
+    font-weight: 500;
+  }
+  [dir="rtl"] .foot-grid h5 { letter-spacing: 0; font-weight: 400; }
+  .foot-grid a {
+    display: block;
+    font-size: 14px;
+    opacity: 0.7;
+    padding: 5px 0;
+    font-weight: 300;
+  }
+  [dir="rtl"] .foot-grid a { font-weight: 400; }
+  .foot-grid a:hover { opacity: 1; color: var(--brass-light); }
+  .foot-base {
+    padding-top: 28px;
+    display: flex; justify-content: space-between;
+    font-size: 12px;
+    opacity: 0.5;
+    letter-spacing: 0.05em;
+    flex-wrap: wrap; gap: 10px;
+  }
+
+  @media (max-width: 960px) {
+    .hero { padding: 60px 28px 80px; }
+    .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+    .hero-visual { aspect-ratio: 4/3; }
+    .cat-row { grid-template-columns: 30px 1fr 80px 20px; }
+    .cat-row .desc { display: none; }
+    .featured-grid { grid-template-columns: 1fr; gap: 48px; }
+    .foot-grid { grid-template-columns: 1fr 1fr; }
+    .section { padding: 80px 28px; }
+  }
+  @media (max-width: 560px) {
+    .nav-links { display: none; }
+    .search-bar { flex-direction: column; }
+    .search-field + .search-field { border-left: none; border-top: 1px solid var(--limestone-deep); }
+    [dir="rtl"] .search-field + .search-field { border-right: none; border-top: 1px solid var(--limestone-deep); }
+    .search-btn { padding: 18px; }
+    .foot-grid { grid-template-columns: 1fr; }
+  }
+</style>
+  <link rel="stylesheet" href="yalla-kids-shared.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://yallakids.qa/#org","name":"Yalla Kids","url":"https://yallakids.qa/","logo":"https://yallakids.qa/og.png","description":"Every kids' class, camp and place to go in Qatar — bilingual, parent-curated.","areaServed":{"@type":"Country","name":"Qatar"},"sameAs":[]},{"@type":"WebSite","@id":"https://yallakids.qa/#site","url":"https://yallakids.qa/","name":"Yalla Kids","inLanguage":["en","ar"],"publisher":{"@id":"https://yallakids.qa/#org"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://yallakids.qa/yalla-kids-search.html?q={search_term_string}"},"query-input":"required name=search_term_string"}}]}</script>
+</head>
+<body>
+
+<div class="ribbon">
+  <span class="label">IDENTITY PREVIEW:</span>
+  <a href="yalla-kids-home-wireframe.html">current</a>
+  <a href="yalla-kids-home-souq.html">A · souq &amp; stories</a>
+  <a href="yalla-kids-home-desert.html" class="active">B · desert modern</a>
+  <a href="yalla-kids-home-sunny.html">C · sunny pop</a>
+  <span class="sp">yalla-kids a/b</span>
+</div>
+
+<header class="site-head">
+  <div class="nav-wrap">
+    <a href="yalla-kids-home-desert.html" class="logo">
+      <span class="en-only">Yalla <span class="mark">·</span> Kids</span>
+      <span class="ar-only">يلا <span class="mark">·</span> كيدز</span>
+    </a>
+    <nav class="nav-links">
+      <a href="yalla-kids-classes-directory.html"><span class="en-only">Classes</span><span class="ar-only">الصفوف</span></a>
+      <a href="yalla-kids-places-directory.html"><span class="en-only">Places</span><span class="ar-only">الأماكن</span></a>
+      <a href="yalla-kids-camps.html"><span class="en-only">Camps</span><span class="ar-only">المعسكرات</span></a>
+      <a href="yalla-kids-guides-hub.html"><span class="en-only">Journal</span><span class="ar-only">المجلة</span></a>
+      <a href="yalla-kids-for-providers.html"><span class="en-only">For providers</span><span class="ar-only">للموفرين</span></a>
+    </nav>
+    <div class="nav-actions">
+      <button class="lang-toggle" onclick="toggleLang()">
+        <span class="en-only">العربية</span>
+        <span class="ar-only">English</span>
+      </button>
+      <a href="yalla-kids-login.html" class="btn btn-ghost"><span class="en-only">Log in</span><span class="ar-only">تسجيل الدخول</span></a>
+      <a href="yalla-kids-signup.html" class="btn btn-primary"><span class="en-only">Join</span><span class="ar-only">انضم</span></a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="eyebrow">
+        <span class="en-only">Qatar · est. 2026</span>
+        <span class="ar-only">قطر · تأسست 2026</span>
+      </div>
+      <h1>
+        <span class="en-only">Thoughtfully chosen classes and places <em>for families in Qatar</em>.</span>
+        <span class="ar-only">صفوف وأماكن مختارة بعناية <em>للعائلات في قطر</em>.</span>
+      </h1>
+      <p class="hero-sub">
+        <span class="en-only">A quiet, considered guide to the best kids' classes, camps and places to go across Doha — vetted by parents, reviewed by parents, bookable in English and Arabic.</span>
+        <span class="ar-only">دليل هادئ ومدروس لأفضل صفوف الأطفال ومعسكراتهم والأماكن التي يزورونها في الدوحة — يختاره الأهل، ويراجعه الأهل، بلغتين.</span>
+      </p>
+
+      <div class="search-bar">
+        <div class="search-field">
+          <div class="lbl"><span class="en-only">Search</span><span class="ar-only">بحث</span></div>
+          <div class="val"><span class="en-only">Classes &amp; places</span><span class="ar-only">صفوف وأماكن</span></div>
+        </div>
+        <div class="search-field">
+          <div class="lbl"><span class="en-only">Age</span><span class="ar-only">العمر</span></div>
+          <div class="val"><span class="en-only">All ages</span><span class="ar-only">كل الأعمار</span></div>
+        </div>
+        <div class="search-field">
+          <div class="lbl"><span class="en-only">Area</span><span class="ar-only">المنطقة</span></div>
+          <div class="val"><span class="en-only">All of Doha</span><span class="ar-only">كل الدوحة</span></div>
+        </div>
+        <button class="search-btn"><span class="en-only">Search</span><span class="ar-only">بحث</span></button>
+      </div>
+
+      <div class="trust-row">
+        <span><strong>180</strong> <span class="en-only">vetted providers</span><span class="ar-only">موفّراً موثّقاً</span></span>
+        <span class="sep">—</span>
+        <span><strong>2,400</strong> <span class="en-only">bookings</span><span class="ar-only">حجز</span></span>
+        <span class="sep">—</span>
+        <span><strong>4.9 ★</strong> <span class="en-only">parent rating</span><span class="ar-only">تقييم الأهل</span></span>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hv-credit"><span class="en-only">Msheireb, Doha</span><span class="ar-only">مشيرب، الدوحة</span></div>
+      <div class="hv-caption"><span class="en-only">Issue 01 · Spring in Doha</span><span class="ar-only">العدد 01 · الربيع في الدوحة</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <div class="eyebrow"><span class="en-only">The catalogue</span><span class="ar-only">الفهرس</span></div>
+    <h2>
+      <span class="en-only">Eight ways for your kid to <em>try something new</em>.</span>
+      <span class="ar-only">ثمانية طرق ليجرب طفلك <em>شيئاً جديداً</em>.</span>
+    </h2>
+    <p>
+      <span class="en-only">Each category is curated by local parents and visited by our team. We only list what we'd book for our own kids.</span>
+      <span class="ar-only">كل قسم يختاره أهل محليون ويزوره فريقنا. لا نُدرج إلا ما نحجزه لأطفالنا.</span>
+    </p>
+  </div>
+
+  <div class="cat-list" id="live-desert-cats"><!-- rendered from yalla-kids-data.js --></div>
+</section>
+
+<section class="featured">
+  <div class="featured-wrap">
+    <div class="section-head">
+      <div class="eyebrow"><span class="en-only">Editor's picks · spring term</span><span class="ar-only">اختيارات المحرّر · فصل الربيع</span></div>
+      <h2>
+        <span class="en-only">Three classes we'd <em>book this week</em>.</span>
+        <span class="ar-only">ثلاثة صفوف <em>سنحجزها هذا الأسبوع</em>.</span>
+      </h2>
+    </div>
+
+    <div class="featured-grid" id="live-desert-featured"><!-- rendered from yalla-kids-data.js --></div>
+  </div>
+</section>
+
+<section class="editorial">
+  <div class="editorial-wrap">
+    <div class="mark">“</div>
+    <p class="quote">
+      <span class="en-only">Every listing you&rsquo;ll see is a real Qatar venue or programme &mdash; compiled from public websites, MOH records, Doha school timetables, and the parents we&rsquo;ve built this with. No press clippings, no invented reviews. When we have real parent voices, we&rsquo;ll publish them here with names and consent.</span>
+      <span class="ar-only">كل ما تراه هنا مكان أو برنامج قطري حقيقي &mdash; مُجمَّع من المواقع العامة، سجلات وزارة الصحة، جداول المدارس، والأهالي الذين ساعدونا. لا اقتباسات مُختلقة. حين نجمع آراءً حقيقية من الأهالي، سننشرها بأسماء وبإذن.</span>
+    </p>
+    <p class="who">
+      <strong><span class="en-only">Yalla Kids editorial note</span><span class="ar-only">ملاحظة التحرير</span></strong>
+      — <span class="en-only">April 2026, Doha</span><span class="ar-only">أبريل 2026، الدوحة</span>
+    </p>
+  </div>
+</section>
+
+
+<section class="container" id="recents-section" style="display:none;">
+  <div class="yk-rail" id="recents-rail"></div>
+</section>
+
+<footer>
+  <div class="foot-wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-logo">
+          <span class="en-only">Yalla <span class="mark">·</span> Kids</span>
+          <span class="ar-only">يلا <span class="mark">·</span> كيدز</span>
+        </div>
+        <p class="foot-about">
+          <span class="en-only">A curated guide to kids' classes, camps and places in Qatar. Bilingual editorial, considered selection, direct booking.</span>
+          <span class="ar-only">دليل مختار لصفوف ومعسكرات وأماكن الأطفال في قطر. محرّر بلغتين، اختيار مدروس، حجز مباشر.</span>
+        </p>
+      </div>
+      <div>
+        <h5><span class="en-only">Discover</span><span class="ar-only">استكشف</span></h5>
+        <a href="yalla-kids-classes-directory.html"><span class="en-only">All classes</span><span class="ar-only">كل الصفوف</span></a>
+        <a href="yalla-kids-places-directory.html"><span class="en-only">Places</span><span class="ar-only">الأماكن</span></a>
+        <a href="yalla-kids-camps.html"><span class="en-only">Camps</span><span class="ar-only">المعسكرات</span></a>
+        <a href="yalla-kids-guides-hub.html"><span class="en-only">Journal</span><span class="ar-only">المجلة</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only">Providers</span><span class="ar-only">الموفرون</span></h5>
+        <a href="yalla-kids-for-providers.html"><span class="en-only">List a studio</span><span class="ar-only">أدرج استوديو</span></a>
+        <a href="yalla-kids-for-providers.html#claim"><span class="en-only">Claim a venue</span><span class="ar-only">استلم ملفاً</span></a>
+        <a href="yalla-kids-how-it-works.html"><span class="en-only">How it works</span><span class="ar-only">كيف نعمل</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only">Company</span><span class="ar-only">الشركة</span></h5>
+        <a href="yalla-kids-about.html"><span class="en-only">About</span><span class="ar-only">من نحن</span></a>
+        <a href="yalla-kids-contact.html"><span class="en-only">Contact</span><span class="ar-only">تواصل</span></a>
+        <a href="yalla-kids-about.html#jobs"><span class="en-only">Careers</span><span class="ar-only">وظائف</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only">Legal</span><span class="ar-only">قانوني</span></h5>
+        <a href="yalla-kids-terms.html"><span class="en-only">Terms</span><span class="ar-only">الشروط</span></a>
+        <a href="yalla-kids-privacy.html"><span class="en-only">Privacy</span><span class="ar-only">الخصوصية</span></a>
+        <a href="yalla-kids-faq.html"><span class="en-only">FAQ</span><span class="ar-only">الشائعة</span></a>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>© 2026 Yalla Kids WLL · Doha · CR #XXXXXX</span>
+      <span><span class="en-only">Made quietly in Msheireb</span><span class="ar-only">صُنعت بهدوء في مشيرب</span></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleLang() {
+    const html = document.documentElement;
+    const isRTL = html.getAttribute("dir") === "rtl";
+    html.setAttribute("dir", isRTL ? "ltr" : "rtl");
+    html.setAttribute("lang", isRTL ? "en" : "ar");
+  }
+</script>
+
+<script src="yalla-kids-data.js"></script>
+<script>
+/* Live render for Desert Modern home variant. Real catalogue, real editor's picks. */
+(function () {
+  if (!window.YALLA_DATA) return;
+  var CLASSES = window.YALLA_DATA.classes || [];
+
+  function escapeHtml(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+  function hostOf(url) {
+    if (!url) return '';
+    try { return new URL(url).hostname.replace(/^www\./i, ''); }
+    catch (e) {
+      var m = String(url).match(/^(?:https?:\/\/)?([^\/?#]+)/i);
+      return m ? m[1].replace(/^www\./i, '') : '';
+    }
+  }
+  function ogImageUrl(s) {
+    return s ? 'https://api.microlink.io/?url=' + encodeURIComponent(s) + '&embed=image.url&meta=false' : '';
+  }
+
+  // -------- The catalogue (8 top real categories) --------
+  var catCounts = {};
+  var catLabelsEN = {};
+  CLASSES.forEach(function (c) {
+    catCounts[c.category] = (catCounts[c.category] || 0) + 1;
+    catLabelsEN[c.category] = c.category_label;
+  });
+  // Editorial-voice name pairs (main + italicised tail) + bilingual desc
+  // Only real-data categories listed here.
+  var editorial = {
+    sports:         { nameEN: ['Sport', ' &amp; team'], nameAR: ['رياضة', ' وفرق'],
+                      descEN: 'Football, padel, gymnastics, fencing — clubs across Aspire Zone and Education City.',
+                      descAR: 'كرة قدم، بادل، جمباز، مبارزة — أندية في أسباير والمدينة التعليمية.',
+                      unitEN: 'clubs', unitAR: 'نادي' },
+    swim:           { nameEN: ['Water', ' &amp; swim'], nameAR: ['ماء', ' وسباحة'],
+                      descEN: 'Baby splash, stroke technique, team squads — Qatar-licensed pools only.',
+                      descAR: 'رضّع، تقنيات السباحة، فرق تدريبية — مسابح مرخصة في قطر.',
+                      unitEN: 'pools', unitAR: 'مسبح' },
+    stem:           { nameEN: ['Code', ' &amp; <em>make</em>'], nameAR: ['برمجة', ' <em>وصناعة</em>'],
+                      descEN: 'Scratch, Python, robotics and 3D printing — hosted at Qatar Science &amp; Technology Park and partner labs.',
+                      descAR: 'سكراتش، بايثون، روبوتات وطباعة ثلاثية الأبعاد — في حديقة قطر للعلوم والمختبرات الشريكة.',
+                      unitEN: 'studios', unitAR: 'استوديو' },
+    dance:          { nameEN: ['Dance', ' &amp; <em>movement</em>'], nameAR: ['رقص', ' <em>وحركة</em>'],
+                      descEN: 'Ballet, hip-hop, contemporary, traditional Khaleeji.',
+                      descAR: 'باليه، هيب هوب، معاصر، تقليدي خليجي.',
+                      unitEN: 'studios', unitAR: 'استوديو' },
+    art:            { nameEN: ['Art', ' &amp; <em>craft</em>'], nameAR: ['فن', ' <em>وحرف</em>'],
+                      descEN: 'Watercolour, pottery, calligraphy, mixed media — at Katara and independent studios.',
+                      descAR: 'ألوان مائية، فخار، خط، وسائط مختلطة — في كتارا واستوديوهات مستقلة.',
+                      unitEN: 'studios', unitAR: 'استوديو' },
+    'martial-arts': { nameEN: ['Martial', ' arts'], nameAR: ['فنون', ' قتالية'],
+                      descEN: 'BJJ, karate, taekwondo, judo — licensed clubs with structured belts.',
+                      descAR: 'جوجيتسو، كاراتيه، تايكواندو، جودو — أندية مرخصة بنظام أحزمة.',
+                      unitEN: 'clubs', unitAR: 'نادي' },
+    music:          { nameEN: ['Music', ' &amp; rhythm'], nameAR: ['موسيقى', ' وإيقاع'],
+                      descEN: 'Piano, oud, violin, kids&rsquo; choir, percussion.',
+                      descAR: 'بيانو، عود، كمان، جوقة، إيقاع.',
+                      unitEN: 'studios', unitAR: 'استوديو' },
+    language:       { nameEN: ['Arabic', ' &amp; <em>storytelling</em>'], nameAR: ['عربي', ' <em>وحكايا</em>'],
+                      descEN: 'MSA, spoken Khaleeji, poetry, and children&rsquo;s literature.',
+                      descAR: 'فصحى، خليجية محكية، شعر، وأدب أطفال.',
+                      unitEN: 'programmes', unitAR: 'برنامج' },
+    drama:          { nameEN: ['Stage', ' &amp; drama'], nameAR: ['مسرح', ' ودراما'],
+                      descEN: 'Youth theatre workshops and improv for big feelings.',
+                      descAR: 'ورش مسرح للشباب وارتجال للمشاعر الكبيرة.',
+                      unitEN: 'studios', unitAR: 'استوديو' },
+    equestrian:     { nameEN: ['Horse', ' &amp; ride'], nameAR: ['خيل', ' وفروسية'],
+                      descEN: 'Pony basics and beginner dressage at licensed stables.',
+                      descAR: 'فروسية مبتدئين في إسطبلات مرخصة.',
+                      unitEN: 'stables', unitAR: 'إسطبل' }
+  };
+  var topCats = Object.keys(catCounts)
+    .sort(function (a, b) { return catCounts[b] - catCounts[a]; })
+    .slice(0, 8);
+  var catsEl = document.getElementById('live-desert-cats');
+  if (catsEl) {
+    catsEl.innerHTML = topCats.map(function (cat, i) {
+      var e = editorial[cat] || {
+        nameEN: [catLabelsEN[cat] || cat, ''], nameAR: [catLabelsEN[cat] || cat, ''],
+        descEN: 'Real Qatar programmes compiled from public sources.',
+        descAR: 'برامج قطرية حقيقية من مصادر عامة.',
+        unitEN: 'listings', unitAR: 'إدراج'
+      };
+      var num = String(i + 1).padStart(2, '0');
+      return '<a href="yalla-kids-classes-directory.html?cat=' + encodeURIComponent(cat) + '" class="cat-row">' +
+        '<span class="num">' + num + '</span>' +
+        '<span class="name">' +
+          '<span class="en-only">' + e.nameEN[0] + '<em>' + e.nameEN[1].replace(/<\/?em>/g, '') + '</em></span>' +
+          '<span class="ar-only">' + e.nameAR[0] + '<em>' + e.nameAR[1].replace(/<\/?em>/g, '') + '</em></span>' +
+        '</span>' +
+        '<span class="desc">' +
+          '<span class="en-only">' + e.descEN + '</span>' +
+          '<span class="ar-only">' + e.descAR + '</span>' +
+        '</span>' +
+        '<span class="count">' +
+          '<span class="en-only">' + catCounts[cat] + ' ' + e.unitEN + '</span>' +
+          '<span class="ar-only">' + catCounts[cat] + ' ' + e.unitAR + '</span>' +
+        '</span>' +
+        '<span class="arrow">→</span>' +
+        '</a>';
+    }).join('');
+  }
+
+  // -------- Editor's picks (3 real, full-price classes preferred) --------
+  var picks = CLASSES.filter(function (c) { return !c.is_free; }).slice(0, 3);
+  if (picks.length < 3) picks = CLASSES.slice(0, 3);
+  var pEl = document.getElementById('live-desert-featured');
+  if (pEl) {
+    pEl.innerHTML = picks.map(function (c, i) {
+      var href = 'yalla-kids-class-detail.html?slug=' + encodeURIComponent(c.slug);
+      var og = ogImageUrl(c.website);
+      var sched = c.hours_or_schedule ? c.hours_or_schedule.split(';')[0].trim() : (c.category_label || '');
+      var priceBig = c.price_min != null ? 'QAR ' + c.price_min : (c.is_free ? 'Free' : '—');
+      var priceUnitEN = c.price_max && c.price_max !== c.price_min ? 'from' : 'session';
+      return (
+        '<a href="' + href + '" class="class-card">' +
+          '<div class="cover cover-' + ((i % 3) + 1) + '" style="position:relative;overflow:hidden;">' +
+            (og
+              ? '<img src="' + escapeHtml(og) + '" alt="" loading="lazy" decoding="async" ' +
+                'onerror="this.remove();" onload="this.style.opacity=1;" ' +
+                'style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .35s ease;z-index:0;" />'
+              : '') +
+            '<div class="shape" style="position:relative;z-index:1;"></div>' +
+            '<div class="rect" style="position:relative;z-index:1;"></div>' +
+          '</div>' +
+          '<div class="kicker">' +
+            '<span class="en-only">' + escapeHtml((c.category_label || '') + (c.area && c.area !== 'Multi' ? ' · ' + c.area : '')) + '</span>' +
+            '<span class="ar-only">' + escapeHtml((c.category_label || '') + (c.area && c.area !== 'Multi' ? ' · ' + c.area : '')) + '</span>' +
+          '</div>' +
+          '<h3>' +
+            '<span class="en-only">' + escapeHtml(c.name_en) + '</span>' +
+            '<span class="ar-only">' + escapeHtml(c.name_en) + '</span>' +
+          '</h3>' +
+          '<p class="meta">' +
+            '<span class="en-only">Ages ' + escapeHtml(c.age_label || '—') + ' · ' + escapeHtml(sched) + '</span>' +
+            '<span class="ar-only">' + escapeHtml(c.age_label || '—') + ' · ' + escapeHtml(sched) + '</span>' +
+          '</p>' +
+          '<div class="foot">' +
+            '<span class="price">' + escapeHtml(priceBig) + '<span style="font-size:13px;color:var(--ink-mute);font-style:italic;"> <span class="en-only">' + priceUnitEN + '</span><span class="ar-only">/' + (priceUnitEN === 'from' ? 'ابتداءً' : 'جلسة') + '</span></span></span>' +
+            '<span class="rating" title="Verified from public listing" data-en-title="Verified from public listing" data-ar-title="موثّق من قائمة عامة">✓ verified</span>' +
+          '</div>' +
+        '</a>'
+      );
+    }).join('');
+  }
+})();
+</script>
+
+<script src="yalla-kids-shared.js"></script>
+
+<script>
+/* Recently-viewed rail on home (only shows if user has viewed something). */
+(function () {
+  if (!window.YALLA_DATA || !window.YALLA_DATA.recents) return;
+  var section = document.getElementById('recents-section');
+  var rail = document.getElementById('recents-rail');
+  if (!section || !rail) return;
+  function maybeShow() {
+    var rendered = window.YALLA_DATA.renderRecentsRail(rail, {
+      titleEn: 'Pick up where you left off',
+      titleAr: 'تابع من حيث توقفت'
+    });
+    section.style.display = rendered ? '' : 'none';
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', maybeShow);
+  } else {
+    maybeShow();
+  }
+  window.addEventListener('yalla:recents', maybeShow);
+})();
+</script>
+
+</body>
+</html>

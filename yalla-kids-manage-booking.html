@@ -1,0 +1,1481 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Yalla Kids — Manage booking</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,600&family=Inter:wght@400;500;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --maroon:#8A1538;
+  --maroon-deep:#6E0F2C;
+  --gold:#F4B942;
+  --gold-deep:#C99227;
+  --cream:#FBF5ED;
+  --butter:#FFE9B0;
+  --butter-soft:#FFF4D3;
+  --mint:#C5E8D4;
+  --mint-soft:#E3F2EA;
+  --sky:#CFE3F3;
+  --rose:#F6D4D9;
+  --ink:#1a1a1a;
+  --ink-2:#3a3a3a;
+  --mute:#6b6b6b;
+  --mute-2:#9a9a9a;
+  --line:#E8DFD0;
+  --line-2:#D9CEB8;
+  --paper:#fff;
+  --wa:#25D366;
+  --wa-deep:#128C7E;
+  --warn:#C94545;
+  --warn-bg:#FBE3E3;
+  --good:#2E7A4A;
+  --good-bg:#DDEED4;
+  --shadow: 4px 4px 0 var(--ink);
+  --shadow-sm: 2px 2px 0 var(--ink);
+  --radius: 14px;
+  --radius-sm: 10px;
+  --radius-lg: 22px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:'Inter', system-ui, -apple-system, sans-serif;
+  background:var(--cream);
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+  line-height:1.45;
+}
+[dir="rtl"] body{font-family:'Tajawal','Inter',sans-serif}
+.serif{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-0.01em}
+.pop{font-family:'Fraunces',serif;font-style:italic;font-weight:600;position:relative;display:inline-block}
+.pop::after{
+  content:"";position:absolute;left:-2px;right:-2px;bottom:-4px;height:8px;
+  background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10' preserveAspectRatio='none'><path d='M2,7 Q25,1 50,6 T98,4' stroke='%23F4B942' stroke-width='3' fill='none' stroke-linecap='round'/></svg>") no-repeat center/100% 100%;
+  pointer-events:none;
+}
+.en-only,.ar-only{display:inline}
+[dir="ltr"] .ar-only{display:none}
+[dir="rtl"] .en-only{display:none}
+button{font:inherit;cursor:pointer}
+a{color:inherit}
+
+/* ── top nav ─────────────────────────────────── */
+.nav{
+  background:var(--paper);
+  border-bottom:2px solid var(--ink);
+  padding:14px 28px;
+  display:flex;align-items:center;gap:18px;
+  position:sticky;top:0;z-index:50;
+}
+.logo{
+  font-family:'Fraunces',serif;font-weight:700;font-size:24px;
+  letter-spacing:-0.03em;color:var(--maroon);
+  display:flex;align-items:center;gap:8px;
+}
+.logo .dot{width:14px;height:14px;background:var(--gold);border:2px solid var(--ink);border-radius:50%;transform:translateY(-2px)}
+.nav-links{display:flex;gap:4px;margin-left:20px}
+.nav-links a{
+  padding:8px 14px;border-radius:10px;text-decoration:none;color:var(--ink-2);
+  font-weight:500;font-size:14px;
+}
+.nav-links a.active{background:var(--butter);color:var(--ink)}
+.nav-links a:hover:not(.active){background:var(--cream)}
+.nav-spacer{flex:1}
+.lang-toggle,.icon-btn{
+  border:2px solid var(--ink);background:var(--paper);
+  border-radius:10px;padding:6px 12px;font-weight:600;font-size:13px;
+  box-shadow:var(--shadow-sm);transition:transform .08s;
+}
+.lang-toggle:hover,.icon-btn:hover{transform:translate(-1px,-1px);box-shadow:3px 3px 0 var(--ink)}
+.lang-toggle:active,.icon-btn:active{transform:translate(1px,1px);box-shadow:1px 1px 0 var(--ink)}
+.avatar{
+  width:36px;height:36px;border-radius:50%;
+  background:linear-gradient(135deg,var(--maroon),var(--gold));
+  border:2px solid var(--ink);color:#fff;font-weight:700;
+  display:grid;place-items:center;font-size:14px;
+}
+
+/* ── shell ─────────────────────────────── */
+.shell{max-width:1280px;margin:0 auto;padding:22px 28px 80px}
+.crumbs{
+  font-size:13px;color:var(--mute);margin-bottom:14px;
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+}
+.crumbs a{text-decoration:none;color:var(--mute)}
+.crumbs a:hover{color:var(--ink);text-decoration:underline}
+.crumbs .sep{color:var(--line-2)}
+.crumbs .here{color:var(--ink);font-weight:500}
+
+.hero-row{
+  display:flex;align-items:flex-end;justify-content:space-between;gap:24px;
+  margin-bottom:22px;flex-wrap:wrap;
+}
+h1.title{
+  font-family:'Fraunces',serif;font-weight:700;
+  font-size:clamp(28px,3.6vw,42px);
+  line-height:1.05;letter-spacing:-0.02em;margin:0;
+}
+.sub{color:var(--mute);max-width:580px;margin:6px 0 0;font-size:15px}
+.hero-badge{
+  background:var(--butter);border:2px solid var(--ink);border-radius:999px;
+  padding:6px 14px;font-size:12px;font-weight:600;box-shadow:var(--shadow-sm);
+  display:inline-flex;align-items:center;gap:6px;
+}
+.hero-badge .ping{
+  width:8px;height:8px;border-radius:50%;background:var(--good);
+  box-shadow:0 0 0 3px var(--good-bg);
+}
+
+/* ── booking summary card ───────────────── */
+.summary{
+  background:var(--paper);border:2px solid var(--ink);border-radius:var(--radius-lg);
+  box-shadow:var(--shadow);overflow:hidden;margin-bottom:26px;
+}
+.summary-top{
+  display:grid;grid-template-columns:280px 1fr auto;gap:24px;padding:22px;
+  border-bottom:2px solid var(--ink);background:linear-gradient(180deg,#fff,var(--cream));
+}
+.cover{
+  height:180px;border-radius:var(--radius);
+  background:linear-gradient(135deg,#FFD4A8,#E8A9C9 55%,#B8D4F0);
+  border:2px solid var(--ink);box-shadow:var(--shadow-sm);
+  display:grid;place-items:center;position:relative;overflow:hidden;
+}
+.cover .emoji{font-size:48px;filter:drop-shadow(0 2px 0 rgba(0,0,0,.12))}
+.cover .cover-tag{
+  position:absolute;top:10px;left:10px;
+  background:var(--paper);border:2px solid var(--ink);border-radius:6px;
+  padding:3px 8px;font-size:11px;font-weight:700;
+}
+.summary-meta h2{
+  font-family:'Fraunces',serif;font-weight:700;font-size:26px;margin:0 0 4px;
+  line-height:1.1;letter-spacing:-0.01em;
+}
+.provider-line{color:var(--mute);font-size:14px;margin-bottom:14px}
+.provider-line b{color:var(--ink);font-weight:600}
+.meta-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
+  padding-top:12px;border-top:1px dashed var(--line-2);
+}
+.meta-grid .label{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);margin-bottom:2px}
+.meta-grid .val{font-weight:600;font-size:14px}
+.meta-grid .val small{display:block;font-weight:400;color:var(--mute);font-size:12px}
+
+.summary-price{
+  text-align:right;min-width:180px;
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+.paid{
+  background:var(--butter-soft);border:2px solid var(--ink);border-radius:var(--radius);
+  padding:10px 14px;box-shadow:var(--shadow-sm);
+}
+.paid .lb{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--mute)}
+.paid .px{font-family:'Fraunces',serif;font-weight:700;font-size:28px;color:var(--maroon);line-height:1}
+.paid small{font-size:11px;color:var(--mute);display:block;margin-top:4px}
+
+.mini-actions{display:flex;flex-direction:column;gap:6px;margin-top:12px}
+.mini-actions a{
+  display:inline-flex;align-items:center;gap:6px;justify-content:flex-end;
+  text-decoration:none;font-size:13px;font-weight:500;color:var(--ink-2);
+}
+.mini-actions a:hover{color:var(--maroon);text-decoration:underline}
+
+/* ── sessions tracker ───────────────────── */
+.sessions{padding:18px 22px;background:var(--paper)}
+.sessions-head{
+  display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px;
+}
+.sessions-head h3{font-size:15px;margin:0;font-weight:700}
+.progress-line{font-size:13px;color:var(--mute)}
+.sess-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.sess{
+  border:2px solid var(--ink);border-radius:var(--radius-sm);padding:10px 12px;
+  background:var(--cream);position:relative;
+}
+.sess.done{background:var(--mint-soft);border-color:var(--ink)}
+.sess.today{background:var(--butter);box-shadow:var(--shadow-sm);transform:translateY(-1px)}
+.sess.upcoming{background:var(--paper)}
+.sess .n{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);font-weight:600}
+.sess .dt{font-weight:700;font-size:14px;margin-top:2px}
+.sess .tm{font-size:12px;color:var(--mute)}
+.sess .pill{
+  position:absolute;top:-10px;right:10px;
+  background:var(--paper);border:2px solid var(--ink);border-radius:999px;
+  font-size:10px;font-weight:700;padding:2px 8px;letter-spacing:.04em;
+}
+.sess.done .pill{background:var(--mint)}
+.sess.today .pill{background:var(--maroon);color:#fff}
+
+/* ── main grid ─────────────────────────── */
+.main-grid{
+  display:grid;grid-template-columns:1fr 340px;gap:26px;
+}
+
+/* ── action tiles ───────────────────────── */
+.section-lbl{
+  font-size:12px;text-transform:uppercase;letter-spacing:.08em;
+  color:var(--mute);font-weight:700;margin:2px 0 10px;
+}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:22px}
+.tile{
+  background:var(--paper);border:2px solid var(--ink);border-radius:var(--radius);
+  box-shadow:var(--shadow-sm);padding:16px;cursor:pointer;position:relative;
+  transition:transform .08s, box-shadow .08s;
+  display:flex;flex-direction:column;gap:8px;min-height:150px;
+}
+.tile:hover{transform:translate(-1px,-1px);box-shadow:3px 3px 0 var(--ink)}
+.tile.active{
+  background:var(--butter);box-shadow:var(--shadow);
+  transform:translate(-1px,-1px);
+}
+.tile .ti-top{display:flex;align-items:center;gap:10px}
+.tile .ic{
+  width:36px;height:36px;border-radius:10px;
+  border:2px solid var(--ink);display:grid;place-items:center;
+  font-size:18px;background:var(--cream);
+}
+.tile.t-resched .ic{background:var(--mint)}
+.tile.t-credit .ic{background:var(--butter)}
+.tile.t-cancel .ic{background:var(--rose)}
+.tile h4{margin:0;font-size:16px;font-weight:700;letter-spacing:-0.01em}
+.tile .desc{font-size:13px;color:var(--ink-2);line-height:1.4}
+.tile .rec{
+  position:absolute;top:-10px;right:12px;
+  background:var(--maroon);color:#fff;border:2px solid var(--ink);
+  border-radius:999px;padding:3px 9px;font-size:10px;font-weight:700;letter-spacing:.04em;
+}
+.tile .arrow{
+  position:absolute;bottom:12px;right:12px;width:26px;height:26px;border-radius:8px;
+  border:2px solid var(--ink);background:var(--paper);display:grid;place-items:center;
+  font-weight:700;
+}
+.tile.active .arrow{background:var(--maroon);color:#fff}
+
+/* ── panel ─────────────────────────────── */
+.panel{
+  background:var(--paper);border:2px solid var(--ink);border-radius:var(--radius-lg);
+  box-shadow:var(--shadow);padding:22px;margin-bottom:26px;
+}
+.panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:16px;flex-wrap:wrap}
+.panel-head h3{
+  font-family:'Fraunces',serif;font-weight:700;font-size:22px;
+  margin:0;letter-spacing:-0.01em;
+}
+.panel-head p{margin:4px 0 0;color:var(--mute);font-size:14px;max-width:520px}
+.tag-row{display:flex;gap:6px;flex-wrap:wrap}
+.tag{
+  background:var(--cream);border:2px solid var(--ink);border-radius:999px;
+  padding:3px 10px;font-size:11px;font-weight:600;
+}
+.tag.mint{background:var(--mint)}
+.tag.butter{background:var(--butter)}
+.tag.rose{background:var(--rose)}
+
+/* ── reschedule picker ──────────────────── */
+.step-strip{
+  display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;
+}
+.step-strip .s{
+  background:var(--cream);border:2px solid var(--ink);border-radius:999px;
+  padding:5px 10px;font-size:12px;font-weight:600;display:flex;align-items:center;gap:6px;
+}
+.step-strip .s .num{
+  width:16px;height:16px;border-radius:50%;background:var(--ink);color:#fff;
+  display:grid;place-items:center;font-size:10px;font-weight:700;
+}
+.step-strip .s.on{background:var(--butter)}
+.step-strip .s.on .num{background:var(--maroon)}
+
+.which-session{
+  background:var(--cream);border:2px solid var(--ink);border-radius:var(--radius);
+  padding:14px;margin-bottom:16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+}
+.which-session .q{font-weight:600;font-size:14px;min-width:180px}
+.pick-sess{display:flex;gap:8px;flex-wrap:wrap}
+.pick-sess .p{
+  border:2px solid var(--ink);background:var(--paper);border-radius:10px;
+  padding:8px 12px;font-size:13px;font-weight:600;cursor:pointer;
+  display:flex;flex-direction:column;align-items:flex-start;gap:2px;
+}
+.pick-sess .p small{font-size:11px;color:var(--mute);font-weight:500}
+.pick-sess .p.on{background:var(--maroon);color:#fff;box-shadow:var(--shadow-sm)}
+.pick-sess .p.on small{color:#ffd4e0}
+.pick-sess .p.done{opacity:.4;cursor:not-allowed}
+.pick-sess .p.done::after{content:"Used";font-size:10px;color:var(--mute);margin-top:2px}
+
+.cal-head{
+  display:flex;align-items:center;justify-content:space-between;margin:10px 0 10px;
+}
+.cal-head .mo{font-family:'Fraunces',serif;font-weight:700;font-size:20px}
+.nav-arrows{display:flex;gap:6px}
+.nav-arrows button{
+  width:34px;height:34px;border:2px solid var(--ink);background:var(--paper);
+  border-radius:10px;font-weight:700;box-shadow:var(--shadow-sm);
+}
+.cal{
+  display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:14px;
+  background:var(--cream);border:2px solid var(--ink);border-radius:var(--radius);
+  padding:12px;
+}
+.cal .dow{font-size:11px;color:var(--mute);font-weight:700;text-align:center;letter-spacing:.06em;padding:4px 0}
+.cal .d{
+  aspect-ratio:1/1;border:2px solid transparent;background:transparent;
+  border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-weight:600;font-size:14px;cursor:pointer;position:relative;
+}
+.cal .d.off{color:var(--mute-2);cursor:default}
+.cal .d:not(.off):not(.dis):hover{background:var(--paper);border-color:var(--ink)}
+.cal .d.has::after{
+  content:"";width:5px;height:5px;border-radius:50%;background:var(--maroon);margin-top:2px;
+}
+.cal .d.dis{color:var(--mute-2);cursor:not-allowed}
+.cal .d.dis::after{background:var(--mute-2)}
+.cal .d.today{background:var(--butter);border-color:var(--ink)}
+.cal .d.sel{background:var(--maroon);color:#fff;border-color:var(--ink);box-shadow:var(--shadow-sm)}
+.cal .d.sel::after{background:var(--gold)}
+
+.slot-row{margin-bottom:14px}
+.slot-row h5{font-size:13px;margin:0 0 8px;font-weight:700;color:var(--ink-2);display:flex;align-items:center;gap:10px}
+.slot-row h5 span{font-weight:400;color:var(--mute);font-size:12px}
+.slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px}
+.slot{
+  border:2px solid var(--ink);background:var(--paper);border-radius:10px;
+  padding:10px 12px;cursor:pointer;display:flex;flex-direction:column;gap:2px;
+  box-shadow:var(--shadow-sm);transition:transform .08s;
+}
+.slot:hover{transform:translate(-1px,-1px);box-shadow:3px 3px 0 var(--ink)}
+.slot .t{font-weight:700;font-size:14px}
+.slot .meta{font-size:12px;color:var(--mute)}
+.slot .seats{font-size:11px;font-weight:700;color:var(--good);margin-top:2px}
+.slot .seats.low{color:var(--warn)}
+.slot.sel{background:var(--maroon);color:#fff;transform:translate(-1px,-1px);box-shadow:3px 3px 0 var(--ink)}
+.slot.sel .meta,.slot.sel .seats{color:#ffd4e0}
+.slot.full{opacity:.55;cursor:not-allowed;background:var(--cream)}
+.slot.full::after{content:"Full — join waitlist";display:block;font-size:11px;color:var(--mute);margin-top:4px;font-weight:600}
+
+.diff-card{
+  background:var(--mint-soft);border:2px solid var(--ink);border-radius:var(--radius);
+  padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:14px;
+  margin-bottom:14px;flex-wrap:wrap;
+}
+.diff-card .lt{display:flex;align-items:center;gap:12px}
+.diff-card .mini-cal{
+  width:56px;height:56px;border:2px solid var(--ink);border-radius:10px;
+  background:var(--paper);display:flex;flex-direction:column;overflow:hidden;text-align:center;
+}
+.diff-card .mini-cal .m{background:var(--maroon);color:#fff;font-size:10px;font-weight:700;padding:2px 0;letter-spacing:.06em}
+.diff-card .mini-cal .dy{flex:1;display:grid;place-items:center;font-family:'Fraunces',serif;font-size:22px;font-weight:700}
+.diff-card .labels{font-size:13px}
+.diff-card .labels b{display:block;font-size:15px;font-weight:700}
+.diff-card .labels small{color:var(--mute)}
+.diff-card .arrow-big{font-size:22px;color:var(--maroon)}
+.diff-card .rt{text-align:right}
+.diff-card .rt b{display:block;font-size:15px;font-weight:700}
+
+.ctas{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btn{
+  border:2px solid var(--ink);border-radius:12px;padding:11px 18px;
+  font-weight:700;font-size:14px;box-shadow:var(--shadow-sm);
+  transition:transform .08s;text-decoration:none;display:inline-flex;align-items:center;gap:8px;
+}
+.btn:hover{transform:translate(-1px,-1px);box-shadow:3px 3px 0 var(--ink)}
+.btn:active{transform:translate(1px,1px);box-shadow:1px 1px 0 var(--ink)}
+.btn-primary{background:var(--maroon);color:#fff}
+.btn-ghost{background:var(--paper)}
+.btn-wa{background:var(--wa);color:#fff}
+.btn-warn{background:var(--warn);color:#fff}
+.btn sm{font-size:11px;font-weight:500;opacity:.8}
+.ctas .help{font-size:12px;color:var(--mute);margin-left:auto}
+
+/* ── credit panel ─────────────────────── */
+.credit-wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:16px;align-items:stretch}
+@media (max-width:760px){.credit-wrap{grid-template-columns:1fr}}
+.credit-illus{
+  border:2px solid var(--ink);border-radius:var(--radius);padding:18px;
+  background:linear-gradient(135deg,var(--butter),var(--mint));position:relative;overflow:hidden;
+}
+.credit-illus::before{
+  content:"";position:absolute;right:-40px;top:-40px;width:180px;height:180px;
+  border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.6),transparent 70%);
+}
+.credit-illus h4{font-family:'Fraunces',serif;font-size:22px;margin:0 0 8px;font-weight:700}
+.credit-illus .qar{
+  font-family:'Fraunces',serif;font-size:38px;font-weight:700;color:var(--maroon);
+  line-height:1;margin:10px 0 6px;
+}
+.credit-illus .qar .plus{font-size:14px;color:var(--good);background:var(--good-bg);padding:2px 8px;border-radius:999px;border:2px solid var(--good);margin-left:6px;vertical-align:middle;font-weight:700}
+.credit-illus small{color:var(--ink-2);font-size:13px}
+.credit-list{
+  background:var(--paper);border:2px solid var(--ink);border-radius:var(--radius);
+  padding:16px;display:flex;flex-direction:column;gap:10px;
+}
+.credit-list h5{margin:0;font-weight:700;font-size:14px}
+.credit-list ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+.credit-list li{font-size:13px;display:flex;gap:8px;align-items:flex-start}
+.credit-list li .ck{
+  width:18px;height:18px;border-radius:50%;background:var(--mint);border:2px solid var(--ink);
+  display:grid;place-items:center;font-size:10px;font-weight:700;flex-shrink:0;
+}
+.credit-list .apply-to{
+  border-top:1px dashed var(--line-2);padding-top:10px;margin-top:4px;
+  font-size:12px;color:var(--mute);
+}
+.credit-apply{
+  display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;
+}
+.credit-apply .class-chip{
+  border:2px solid var(--ink);border-radius:8px;padding:4px 8px;font-size:12px;font-weight:600;
+  background:var(--cream);display:flex;align-items:center;gap:6px;
+}
+.credit-apply .class-chip b{font-weight:700}
+
+/* ── cancel panel ─────────────────────── */
+.cancel-wrap{display:flex;flex-direction:column;gap:16px}
+.policy-strip{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:10px;
+}
+.policy-strip .p{
+  border:2px solid var(--ink);border-radius:var(--radius-sm);padding:10px 12px;
+  background:var(--cream);position:relative;
+}
+.policy-strip .p .rng{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--mute);font-weight:600}
+.policy-strip .p .amt{font-weight:700;font-family:'Fraunces',serif;font-size:18px;margin-top:2px}
+.policy-strip .p .lbl{font-size:12px;color:var(--ink-2);margin-top:2px}
+.policy-strip .p.here{background:var(--butter);box-shadow:var(--shadow-sm)}
+.policy-strip .p.here::after{
+  content:"You are here";position:absolute;top:-10px;right:8px;
+  background:var(--maroon);color:#fff;border:2px solid var(--ink);border-radius:999px;
+  font-size:10px;font-weight:700;padding:3px 8px;letter-spacing:.04em;
+}
+
+.reason-box{
+  border:2px solid var(--ink);border-radius:var(--radius);padding:16px;background:var(--cream);
+}
+.reason-box h5{margin:0 0 10px;font-size:14px;font-weight:700;display:flex;justify-content:space-between;align-items:center}
+.reason-box h5 small{color:var(--mute);font-weight:400;font-size:12px}
+.reason-chips{display:flex;flex-wrap:wrap;gap:8px}
+.rc{
+  border:2px solid var(--ink);background:var(--paper);border-radius:999px;
+  padding:6px 12px;font-size:13px;font-weight:500;cursor:pointer;
+}
+.rc:hover{background:var(--butter-soft)}
+.rc.sel{background:var(--maroon);color:#fff;font-weight:700}
+.reason-text{
+  width:100%;margin-top:10px;border:2px solid var(--ink);border-radius:10px;
+  padding:10px 12px;resize:vertical;min-height:72px;font:inherit;font-size:13px;background:var(--paper);
+}
+.reason-text:focus{outline:none;box-shadow:var(--shadow-sm)}
+.reason-foot{display:flex;justify-content:space-between;font-size:12px;color:var(--mute);margin-top:4px}
+
+.consent{
+  display:flex;align-items:flex-start;gap:10px;padding:12px;
+  background:var(--paper);border:2px solid var(--ink);border-radius:var(--radius);
+}
+.consent input{
+  width:22px;height:22px;accent-color:var(--maroon);margin-top:2px;flex-shrink:0;
+}
+.consent .ct{font-size:13px;color:var(--ink-2)}
+.consent .ct b{display:block;font-weight:700;color:var(--ink);margin-bottom:2px}
+
+/* ── sidebar ──────────────────────────── */
+.side{display:flex;flex-direction:column;gap:14px;position:sticky;top:90px;align-self:flex-start;max-height:calc(100vh - 110px);overflow:auto}
+.side::-webkit-scrollbar{display:none}
+.refund-card{
+  background:var(--paper);border:2px solid var(--ink);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:18px;
+}
+.refund-card h4{
+  font-family:'Fraunces',serif;font-weight:700;margin:0 0 4px;font-size:18px;
+  display:flex;align-items:center;gap:8px;
+}
+.refund-card .sub{color:var(--mute);font-size:12px;margin:0 0 12px}
+.ref-line{display:flex;justify-content:space-between;font-size:13px;padding:7px 0;border-bottom:1px dashed var(--line-2)}
+.ref-line.muted{color:var(--mute)}
+.ref-line.minus b{color:var(--warn)}
+.ref-line.plus b{color:var(--good)}
+.ref-line:last-of-type{border-bottom:none}
+.ref-total{
+  margin-top:8px;border-top:2px solid var(--ink);padding-top:12px;
+  display:flex;justify-content:space-between;align-items:baseline;
+}
+.ref-total .lbl{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);font-weight:700}
+.ref-total .v{font-family:'Fraunces',serif;font-weight:700;font-size:28px;color:var(--maroon);line-height:1}
+.ref-total small{font-size:11px;color:var(--mute);display:block;margin-top:2px}
+
+.methods{
+  margin-top:12px;border-top:1px dashed var(--line-2);padding-top:12px;
+  font-size:12px;color:var(--mute);display:flex;gap:8px;align-items:center;flex-wrap:wrap;
+}
+.methods .m-chip{
+  background:var(--cream);border:2px solid var(--ink);border-radius:6px;
+  padding:2px 8px;font-size:11px;font-weight:600;color:var(--ink);
+}
+
+.wa-escape{
+  background:linear-gradient(135deg,#E8F8EF,var(--mint-soft));
+  border:2px solid var(--ink);border-radius:var(--radius);padding:16px;
+}
+.wa-escape h5{
+  font-family:'Fraunces',serif;margin:0 0 4px;font-size:17px;font-weight:700;
+  display:flex;align-items:center;gap:8px;
+}
+.wa-escape h5 .wa-dot{
+  width:22px;height:22px;border-radius:50%;background:var(--wa);border:2px solid var(--ink);
+  display:grid;place-items:center;color:#fff;font-size:11px;font-weight:700;
+}
+.wa-escape p{margin:0 0 10px;font-size:13px;color:var(--ink-2)}
+.wa-escape .talkline{font-size:12px;color:var(--mute);margin-top:8px}
+.wa-escape .talkline b{color:var(--ink)}
+
+.policy-card{
+  background:var(--paper);border:2px solid var(--ink);border-radius:var(--radius);padding:14px;
+}
+.policy-card h5{margin:0 0 6px;font-size:14px;font-weight:700;display:flex;justify-content:space-between;align-items:center}
+.policy-card .expand{
+  border:2px solid var(--ink);border-radius:6px;background:var(--cream);
+  padding:3px 8px;font-size:11px;font-weight:600;
+}
+.policy-card ul{margin:6px 0 0;padding-left:18px;font-size:12px;color:var(--ink-2);display:flex;flex-direction:column;gap:5px}
+.policy-card ul li::marker{color:var(--maroon)}
+
+/* ── sibling & hold row ──────────────── */
+.alt-row{
+  display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:26px;
+}
+.alt{
+  background:var(--paper);border:2px solid var(--ink);border-radius:var(--radius);
+  box-shadow:var(--shadow-sm);padding:16px;display:flex;gap:14px;align-items:flex-start;
+}
+.alt .ic{
+  width:44px;height:44px;border-radius:10px;border:2px solid var(--ink);
+  display:grid;place-items:center;font-size:22px;flex-shrink:0;
+}
+.alt.a-sibling .ic{background:var(--rose)}
+.alt.a-hold .ic{background:var(--sky)}
+.alt h5{margin:0 0 2px;font-size:15px;font-weight:700}
+.alt p{margin:0 0 8px;font-size:13px;color:var(--mute)}
+.alt .link{font-weight:600;font-size:13px;color:var(--maroon);display:inline-flex;gap:4px;align-items:center}
+.alt .link:hover{text-decoration:underline}
+.child-row{display:flex;gap:6px;margin-top:8px}
+.child-chip{
+  border:2px solid var(--ink);border-radius:999px;padding:4px 10px;background:var(--cream);
+  font-size:12px;font-weight:600;display:flex;align-items:center;gap:6px;cursor:pointer;
+}
+.child-chip.sel{background:var(--maroon);color:#fff}
+.child-chip .age{font-size:10px;font-weight:500;opacity:.7}
+.child-chip .warn{color:var(--warn);font-size:11px;margin-left:2px}
+.child-chip.sel .warn{color:#ffd4e0}
+
+/* ── modal preview ─────────────────────── */
+.modal-wrap{
+  display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-bottom:26px;align-items:start;
+}
+.modal-preview{
+  background:var(--paper);border:2px solid var(--ink);border-radius:var(--radius-lg);
+  box-shadow:var(--shadow);overflow:hidden;
+}
+.modal-bar{
+  background:var(--maroon);color:#fff;padding:10px 14px;font-size:12px;font-weight:700;
+  letter-spacing:.04em;text-transform:uppercase;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.modal-bar .x{
+  width:22px;height:22px;border-radius:6px;background:rgba(255,255,255,.18);border:2px solid #fff;
+  display:grid;place-items:center;font-weight:700;font-size:13px;
+}
+.modal-body{padding:22px;display:flex;flex-direction:column;gap:16px;background:var(--cream)}
+.modal-body h3{font-family:'Fraunces',serif;margin:0;font-size:22px;font-weight:700;line-height:1.15}
+.modal-body .lead{font-size:14px;color:var(--ink-2);margin:0}
+.summary-rows{
+  background:var(--paper);border:2px solid var(--ink);border-radius:var(--radius);padding:12px 14px;
+}
+.summary-rows .r{display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px dashed var(--line-2)}
+.summary-rows .r:last-child{border-bottom:none}
+.summary-rows .r b{font-weight:700}
+.summary-rows .big{font-family:'Fraunces',serif;font-weight:700;font-size:20px;color:var(--maroon)}
+.modal-body .confirm-ctas{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+
+.modal-note{
+  border:2px solid var(--ink);border-radius:var(--radius);padding:16px;background:var(--paper);
+}
+.modal-note h5{margin:0 0 8px;font-size:14px;font-weight:700}
+.modal-note ol{margin:0;padding-left:18px;font-size:13px;color:var(--ink-2);display:flex;flex-direction:column;gap:6px}
+.modal-note code{
+  background:var(--cream);border:1px solid var(--line-2);border-radius:5px;padding:1px 5px;
+  font-family:ui-monospace,Menlo,monospace;font-size:12px;
+}
+
+/* ── past activity ─────────────────────── */
+.past{
+  background:var(--paper);border:2px solid var(--ink);border-radius:var(--radius-lg);
+  box-shadow:var(--shadow);padding:22px;margin-bottom:22px;
+}
+.past h3{font-family:'Fraunces',serif;margin:0 0 4px;font-size:20px;font-weight:700}
+.past .sub{color:var(--mute);margin:0 0 16px;font-size:13px}
+.timeline{position:relative;padding-left:28px}
+.timeline::before{content:"";position:absolute;left:10px;top:6px;bottom:6px;width:2px;background:var(--line-2)}
+.tl-item{position:relative;padding-bottom:18px}
+.tl-item::before{
+  content:"";position:absolute;left:-22px;top:3px;width:16px;height:16px;border-radius:50%;
+  background:var(--paper);border:2px solid var(--ink);
+}
+.tl-item.ok::before{background:var(--mint);border-color:var(--good)}
+.tl-item.warn::before{background:var(--warn-bg);border-color:var(--warn)}
+.tl-item.book::before{background:var(--butter)}
+.tl-time{font-size:11px;color:var(--mute);font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.tl-title{font-weight:700;font-size:14px;margin:2px 0 2px}
+.tl-body{font-size:13px;color:var(--ink-2)}
+.tl-body .chip{
+  display:inline-block;border:2px solid var(--ink);background:var(--cream);border-radius:999px;
+  padding:1px 8px;font-size:11px;font-weight:600;margin-left:4px;
+}
+
+/* ── strategy notes ─────────────────── */
+.notes{
+  border:2px solid var(--ink);border-radius:var(--radius-lg);padding:22px;
+  background:linear-gradient(135deg,var(--butter-soft),var(--mint-soft));box-shadow:var(--shadow);
+}
+.notes h3{font-family:'Fraunces',serif;font-size:22px;margin:0 0 14px;font-weight:700}
+.notes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.note{
+  background:var(--paper);border:2px solid var(--ink);border-radius:12px;padding:14px;
+}
+.note .n{
+  width:26px;height:26px;border-radius:7px;background:var(--maroon);color:#fff;
+  display:grid;place-items:center;font-weight:700;font-size:12px;
+  margin-bottom:8px;border:2px solid var(--ink);
+}
+.note h5{margin:0 0 4px;font-size:14px;font-weight:700}
+.note p{margin:0;color:var(--ink-2);font-size:13px;line-height:1.4}
+
+/* ── responsive ─────────────────────── */
+@media (max-width:1100px){
+  .main-grid{grid-template-columns:1fr}
+  .side{position:static;max-height:none;order:-1}
+  .summary-top{grid-template-columns:200px 1fr}
+  .summary-price{grid-column:1/-1;flex-direction:row;justify-content:space-between;align-items:center}
+  .modal-wrap{grid-template-columns:1fr}
+  .notes-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:720px){
+  .tiles,.alt-row,.notes-grid,.policy-strip,.sess-bar,.meta-grid{grid-template-columns:1fr 1fr}
+  .summary-top{grid-template-columns:1fr}
+  .cover{height:140px}
+  .nav{padding:12px 16px}
+  .nav-links{display:none}
+  .shell{padding:18px 16px 60px}
+}
+
+/* ── utility ─────────────────────────── */
+.hidden{display:none !important}
+.fade-in{animation:fi .18s ease-out}
+@keyframes fi{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.flash{animation:flash 1.2s ease}
+@keyframes flash{
+  0%{box-shadow:var(--shadow), 0 0 0 0 rgba(244,185,66,0);}
+  40%{box-shadow:var(--shadow), 0 0 0 10px rgba(244,185,66,.6);}
+  100%{box-shadow:var(--shadow), 0 0 0 0 rgba(244,185,66,0);}
+}
+
+/* RTL adjustments */
+[dir="rtl"] .cover-tag,[dir="rtl"] .rec,[dir="rtl"] .arrow,[dir="rtl"] .pill{left:auto;right:auto}
+[dir="rtl"] .crumbs .sep{transform:scaleX(-1);display:inline-block}
+[dir="rtl"] .arrow{transform:scaleX(-1)}
+[dir="rtl"] .policy-strip .p.here::after{left:-2px;right:auto}
+[dir="rtl"] .tile .rec{left:12px;right:auto}
+</style>
+  <link rel="stylesheet" href="yalla-kids-shared.css">
+</head>
+<body>
+  <!-- ───────────────────── NAV ───────────────────── -->
+  <nav class="nav">
+    <div class="logo"><span class="dot"></span><span class="en-only">Yalla Kids</span><span class="ar-only">يلا كيدز</span></div>
+    <div class="nav-links">
+      <a href="#"><span class="en-only">Explore</span><span class="ar-only">اكتشف</span></a>
+      <a href="#"><span class="en-only">Places</span><span class="ar-only">الأماكن</span></a>
+      <a href="#"><span class="en-only">Saved</span><span class="ar-only">المحفوظ</span></a>
+      <a href="#" class="active"><span class="en-only">Bookings</span><span class="ar-only">الحجوزات</span></a>
+      <a href="#"><span class="en-only">Messages</span><span class="ar-only">الرسائل</span></a>
+    </div>
+    <div class="nav-spacer"></div>
+    <button class="lang-toggle" onclick="toggleLang()">
+      <span class="en-only">العربية</span><span class="ar-only">English</span>
+    </button>
+    <button class="icon-btn" title="Help">?</button>
+    <div class="avatar">L</div>
+  </nav>
+
+  <div class="shell">
+    <!-- Honest preview banner -->
+    <div style="background:#FAF5EA;border:1px solid #E4DCC9;border-radius:8px;padding:8px 12px;margin:0 0 14px;font-size:13px;line-height:1.5;">
+      <b>Booking-management preview — sample data.</b>
+      <span class="en-only">"Mini Picasso" is a placeholder class used to demonstrate the manage-booking flow (reschedule, refund, waiver, policy). After a real booking, this page fills in with your actual class details.</span>
+      <span class="ar-only">"ميني بيكاسو" اسم توضيحي يُستخدم لعرض تدفّق إدارة الحجز (إعادة الجدولة، استرداد، تنازل، السياسة). بعد الحجز الفعلي، تظهر هنا تفاصيل صفّك الحقيقي.</span>
+    </div>
+    <!-- Crumbs -->
+    <div class="crumbs">
+      <a href="yalla-kids-parent-dashboard.html"><span class="en-only">Dashboard</span><span class="ar-only">الرئيسية</span></a>
+      <span class="sep">›</span>
+      <a href="yalla-kids-parent-dashboard.html"><span class="en-only">Bookings</span><span class="ar-only">الحجوزات</span></a>
+      <span class="sep">›</span>
+      <span class="here"><span class="en-only">Sample booking</span><span class="ar-only">حجز توضيحي</span></span>
+    </div>
+
+    <!-- Hero -->
+    <div class="hero-row">
+      <div>
+        <h1 class="title">
+          <span class="en-only">Need to <span class="pop">change plans</span> for Yara?</span>
+          <span class="ar-only">تحتاجين <span class="pop">تعديل خطة</span> يارا؟</span>
+        </h1>
+        <p class="sub">
+          <span class="en-only">No stress — reschedule is free, credit gives you 10% bonus, and cancel is fine too. Choose what works.</span>
+          <span class="ar-only">لا مشكلة — التعديل مجاني، الرصيد يمنحك مكافأة ١٠٪، والإلغاء متاح. اختاري ما يناسبك.</span>
+        </p>
+      </div>
+      <div class="hero-badge"><span class="ping"></span>
+        <span class="en-only">Booking is active · 2 sessions remaining</span>
+        <span class="ar-only">الحجز فعّال · جلستان متبقيتان</span>
+      </div>
+    </div>
+
+    <!-- Booking summary -->
+    <section class="summary">
+      <div class="summary-top">
+        <div class="cover">
+          <span class="cover-tag">
+            <span class="en-only">Block · 4 weeks</span>
+            <span class="ar-only">باقة · ٤ أسابيع</span>
+          </span>
+          <span class="emoji">🎨</span>
+        </div>
+        <div class="summary-meta">
+          <h2><span class="en-only">Mini Picasso — Saturday Art Atelier</span><span class="ar-only">ميني بيكاسو — ورشة فنون السبت</span></h2>
+          <div class="provider-line">
+            <span class="en-only">with <b>Noura Al-Marri</b> · Studio A, West Bay · ages 4–6</span>
+            <span class="ar-only">مع <b>نورة المري</b> · ستوديو A، الخليج الغربي · ٤–٦ سنوات</span>
+          </div>
+          <div class="meta-grid">
+            <div>
+              <div class="label"><span class="en-only">Child</span><span class="ar-only">الطفلة</span></div>
+              <div class="val">Yara <small>5 y · joined Apr 11</small></div>
+            </div>
+            <div>
+              <div class="label"><span class="en-only">Start</span><span class="ar-only">البداية</span></div>
+              <div class="val">Apr 11, 2026 <small>4 × Sat · 10:00</small></div>
+            </div>
+            <div>
+              <div class="label"><span class="en-only">Booking #</span><span class="ar-only">رقم الحجز</span></div>
+              <div class="val">YK-28471 <small><span class="en-only">Paid by Apple Pay</span><span class="ar-only">دفع Apple Pay</span></small></div>
+            </div>
+            <div>
+              <div class="label"><span class="en-only">Provider</span><span class="ar-only">المزوّد</span></div>
+              <div class="val">Noura A. <small><span class="en-only">★ 4.9 · 127 reviews</span><span class="ar-only">★ ٤.٩ · ١٢٧ تقييم</span></small></div>
+            </div>
+          </div>
+        </div>
+        <div class="summary-price">
+          <div class="paid">
+            <div class="lb"><span class="en-only">Total paid</span><span class="ar-only">المبلغ المدفوع</span></div>
+            <div class="px">QAR 480</div>
+            <small>
+              <span class="en-only">4 sessions × QAR 120</span>
+              <span class="ar-only">٤ جلسات × ١٢٠ ر.ق</span>
+            </small>
+          </div>
+          <div class="mini-actions">
+            <a href="#"><span class="en-only">View receipt ›</span><span class="ar-only">عرض الإيصال ›</span></a>
+            <a href="#"><span class="en-only">Class page ›</span><span class="ar-only">صفحة الفصل ›</span></a>
+            <a href="#"><span class="en-only">Message Noura ›</span><span class="ar-only">مراسلة نورة ›</span></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sessions strip -->
+      <div class="sessions">
+        <div class="sessions-head">
+          <h3><span class="en-only">Your sessions</span><span class="ar-only">الجلسات</span></h3>
+          <div class="progress-line">
+            <span class="en-only"><b>2 of 4 completed</b> · next on Sat Apr 18 · 2 sessions you can change</span>
+            <span class="ar-only"><b>٢ من ٤ مكتملة</b> · التالية السبت ١٨ أبريل · جلستان قابلتان للتعديل</span>
+          </div>
+        </div>
+        <div class="sess-bar">
+          <div class="sess done">
+            <span class="pill"><span class="en-only">Done</span><span class="ar-only">تمت</span></span>
+            <div class="n">Week 1</div>
+            <div class="dt">Sat · Apr 11</div>
+            <div class="tm">10:00 – 11:15</div>
+          </div>
+          <div class="sess done">
+            <span class="pill"><span class="en-only">Done</span><span class="ar-only">تمت</span></span>
+            <div class="n">Week 2</div>
+            <div class="dt">Sat · Apr 18</div>
+            <div class="tm">10:00 – 11:15</div>
+          </div>
+          <div class="sess today">
+            <span class="pill"><span class="en-only">Up next</span><span class="ar-only">القادمة</span></span>
+            <div class="n">Week 3</div>
+            <div class="dt">Sat · Apr 25</div>
+            <div class="tm">10:00 – 11:15</div>
+          </div>
+          <div class="sess upcoming">
+            <span class="pill"><span class="en-only">Upcoming</span><span class="ar-only">قادمة</span></span>
+            <div class="n">Week 4</div>
+            <div class="dt">Sat · May 2</div>
+            <div class="tm">10:00 – 11:15</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-lbl">
+      <span class="en-only">Choose an action</span>
+      <span class="ar-only">اختاري الإجراء</span>
+    </div>
+
+    <!-- Action tiles -->
+    <div class="tiles">
+      <div class="tile t-resched active" data-action="reschedule" onclick="setAction('reschedule',this)">
+        <span class="rec"><span class="en-only">Recommended</span><span class="ar-only">موصى به</span></span>
+        <div class="ti-top">
+          <div class="ic">🔄</div>
+          <h4><span class="en-only">Reschedule</span><span class="ar-only">إعادة جدولة</span></h4>
+        </div>
+        <div class="desc"><span class="en-only">Move Yara to a different Saturday or a weekday session. Free, same price.</span>
+        <span class="ar-only">نقل يارا إلى سبت آخر أو جلسة خلال الأسبوع. مجاني، بنفس السعر.</span></div>
+        <div class="arrow">›</div>
+      </div>
+      <div class="tile t-credit" data-action="credit" onclick="setAction('credit',this)">
+        <div class="ti-top">
+          <div class="ic">✨</div>
+          <h4><span class="en-only">Take credit</span><span class="ar-only">أخذ رصيد</span></h4>
+        </div>
+        <div class="desc"><span class="en-only">Skip the rest, get QAR 264 + 10% bonus (QAR 290) as Yalla credit — no expiry.</span>
+        <span class="ar-only">تخطّي الباقي، احصلي على ٢٦٤ + مكافأة ١٠٪ (٢٩٠) كرصيد يلا — لا تنتهي صلاحيته.</span></div>
+        <div class="arrow">›</div>
+      </div>
+      <div class="tile t-cancel" data-action="cancel" onclick="setAction('cancel',this)">
+        <div class="ti-top">
+          <div class="ic">✕</div>
+          <h4><span class="en-only">Cancel for refund</span><span class="ar-only">إلغاء واسترداد</span></h4>
+        </div>
+        <div class="desc"><span class="en-only">Stop the block now and refund remaining sessions to Apple Pay (QAR 216 today).</span>
+        <span class="ar-only">إيقاف الباقة الآن واسترداد الجلسات المتبقية (٢١٦ اليوم).</span></div>
+        <div class="arrow">›</div>
+      </div>
+    </div>
+
+    <div class="main-grid">
+      <div>
+        <!-- ────────── Reschedule panel ────────── -->
+        <section class="panel" id="panel-reschedule">
+          <div class="panel-head">
+            <div>
+              <h3><span class="en-only">Pick a new time for Yara</span><span class="ar-only">اختاري وقتًا جديدًا ليارا</span></h3>
+              <p><span class="en-only">Noura keeps one make-up slot per week plus a weekday Tuesday session. Everything below is free — your spot in the main Saturday block stays safe until you confirm.</span>
+              <span class="ar-only">تحتفظ نورة بمقعد تعويضي واحد أسبوعيًا وجلسة يوم الثلاثاء. كل الخيارات مجانية — مقعدك الأصلي محفوظ حتى التأكيد.</span></p>
+            </div>
+            <div class="tag-row">
+              <span class="tag mint"><span class="en-only">✓ Free change</span><span class="ar-only">✓ تعديل مجاني</span></span>
+              <span class="tag butter"><span class="en-only">Seat held 15 min</span><span class="ar-only">مقعد محفوظ ١٥ دق</span></span>
+            </div>
+          </div>
+
+          <div class="step-strip">
+            <span class="s on"><span class="num">1</span><span class="en-only">Which session?</span><span class="ar-only">أي جلسة؟</span></span>
+            <span class="s on"><span class="num">2</span><span class="en-only">New date</span><span class="ar-only">تاريخ جديد</span></span>
+            <span class="s on"><span class="num">3</span><span class="en-only">New time</span><span class="ar-only">وقت جديد</span></span>
+            <span class="s"><span class="num">4</span><span class="en-only">Confirm</span><span class="ar-only">تأكيد</span></span>
+          </div>
+
+          <!-- Which session -->
+          <div class="which-session">
+            <div class="q"><span class="en-only">Which session to move?</span><span class="ar-only">أي جلسة تريدين تعديلها؟</span></div>
+            <div class="pick-sess">
+              <button class="p done"><span>W1 · Apr 11</span><small>10:00</small></button>
+              <button class="p done"><span>W2 · Apr 18</span><small>10:00</small></button>
+              <button class="p on" data-pick="w3"><span>W3 · Apr 25</span><small>10:00</small></button>
+              <button class="p" data-pick="w4"><span>W4 · May 2</span><small>10:00</small></button>
+            </div>
+          </div>
+
+          <!-- Calendar -->
+          <div class="cal-head">
+            <div class="mo"><span class="en-only">April 2026</span><span class="ar-only">أبريل ٢٠٢٦</span></div>
+            <div class="nav-arrows">
+              <button title="Previous">‹</button>
+              <button title="Next">›</button>
+            </div>
+          </div>
+          <div class="cal">
+            <div class="dow">Sun</div><div class="dow">Mon</div><div class="dow">Tue</div><div class="dow">Wed</div><div class="dow">Thu</div><div class="dow">Fri</div><div class="dow">Sat</div>
+            <!-- row 1 (Mar 29 start of week) -->
+            <div class="d off">29</div><div class="d off">30</div><div class="d off">31</div>
+            <div class="d">1</div><div class="d">2</div><div class="d">3</div><div class="d">4</div>
+            <!-- row 2 -->
+            <div class="d">5</div><div class="d">6</div><div class="d has">7</div><div class="d">8</div><div class="d">9</div><div class="d">10</div><div class="d has dis">11</div>
+            <!-- row 3 -->
+            <div class="d">12</div><div class="d">13</div><div class="d has">14</div><div class="d">15</div><div class="d">16</div><div class="d">17</div><div class="d has dis">18</div>
+            <!-- row 4 — today-ish Apr 17 (today Fri 17) -->
+            <div class="d">19</div><div class="d">20</div><div class="d has">21</div><div class="d">22</div><div class="d">23</div><div class="d today">24</div><div class="d sel has">25</div>
+            <!-- row 5 -->
+            <div class="d">26</div><div class="d">27</div><div class="d has">28</div><div class="d">29</div><div class="d">30</div>
+            <div class="d off">1</div><div class="d off">2</div>
+          </div>
+
+          <!-- Slots -->
+          <div class="slot-row">
+            <h5>
+              <span class="en-only">Saturdays — her usual day</span>
+              <span class="ar-only">أيام السبت — اليوم المعتاد</span>
+              <span><span class="en-only">same class, same group, same teacher</span><span class="ar-only">نفس الفصل والمجموعة والمعلّمة</span></span>
+            </h5>
+            <div class="slots">
+              <div class="slot" onclick="pickSlot(this)">
+                <div class="t">Sat Apr 25 · 10:00</div>
+                <div class="meta">Studio A · West Bay</div>
+                <div class="seats"><span class="en-only">2 seats left</span><span class="ar-only">مقعدان متبقيان</span></div>
+              </div>
+              <div class="slot full">
+                <div class="t">Sat May 2 · 10:00</div>
+                <div class="meta">Studio A · West Bay</div>
+              </div>
+              <div class="slot" onclick="pickSlot(this)">
+                <div class="t">Sat May 9 · 10:00</div>
+                <div class="meta">Studio A · West Bay</div>
+                <div class="seats"><span class="en-only">4 seats left</span><span class="ar-only">٤ مقاعد متبقية</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="slot-row">
+            <h5>
+              <span class="en-only">Weekday make-up slots</span>
+              <span class="ar-only">جلسات تعويضية خلال الأسبوع</span>
+              <span><span class="en-only">same teacher, smaller group of 4</span><span class="ar-only">نفس المعلّمة، مجموعة أصغر (٤)</span></span>
+            </h5>
+            <div class="slots">
+              <div class="slot sel" onclick="pickSlot(this)">
+                <div class="t">Tue Apr 28 · 16:00</div>
+                <div class="meta">Studio A · West Bay</div>
+                <div class="seats low"><span class="en-only">1 seat left · just for you</span><span class="ar-only">مقعد واحد · خصّص لكِ</span></div>
+              </div>
+              <div class="slot" onclick="pickSlot(this)">
+                <div class="t">Wed Apr 29 · 17:00</div>
+                <div class="meta">Studio B · Lusail</div>
+                <div class="seats"><span class="en-only">3 seats left</span><span class="ar-only">٣ مقاعد</span></div>
+              </div>
+              <div class="slot" onclick="pickSlot(this)">
+                <div class="t">Thu Apr 30 · 16:00</div>
+                <div class="meta">Studio A · West Bay</div>
+                <div class="seats"><span class="en-only">5 seats left</span><span class="ar-only">٥ مقاعد</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Move summary -->
+          <div class="diff-card">
+            <div class="lt">
+              <div class="mini-cal"><div class="m">SAT</div><div class="dy">25</div></div>
+              <div class="labels">
+                <b><span class="en-only">From: Sat Apr 25 · 10:00</span><span class="ar-only">من: السبت ٢٥ أبريل · ١٠:٠٠</span></b>
+                <small><span class="en-only">Studio A · West Bay</span><span class="ar-only">ستوديو A · الخليج الغربي</span></small>
+              </div>
+              <div class="arrow-big">→</div>
+              <div class="mini-cal"><div class="m">TUE</div><div class="dy">28</div></div>
+              <div class="labels">
+                <b><span class="en-only">To: Tue Apr 28 · 16:00</span><span class="ar-only">إلى: الثلاثاء ٢٨ أبريل · ١٦:٠٠</span></b>
+                <small><span class="en-only">Studio A · West Bay</span><span class="ar-only">ستوديو A · الخليج الغربي</span></small>
+              </div>
+            </div>
+            <div class="rt">
+              <b><span class="en-only">No charge</span><span class="ar-only">بدون رسوم</span></b>
+              <small><span class="en-only">Spot confirmed instantly</span><span class="ar-only">يتأكد المقعد فورًا</span></small>
+            </div>
+          </div>
+
+          <div class="ctas">
+            <button class="btn btn-primary" onclick="flashRefund()">
+              <span class="en-only">Confirm reschedule</span><span class="ar-only">تأكيد التعديل</span>
+            </button>
+            <button class="btn btn-ghost">
+              <span class="en-only">Ask Noura first</span><span class="ar-only">اسألي نورة أولًا</span>
+            </button>
+            <div class="help">
+              <span class="en-only">Reschedules are automatic up to 6 hours before — after that, Noura approves.</span>
+              <span class="ar-only">التعديل تلقائي حتى ٦ ساعات قبل الجلسة — بعدها تحتاج موافقة نورة.</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ────────── Credit panel ────────── -->
+        <section class="panel hidden" id="panel-credit">
+          <div class="panel-head">
+            <div>
+              <h3><span class="en-only">Turn unused sessions into flexible credit</span><span class="ar-only">حوّلي الجلسات المتبقية إلى رصيد مرن</span></h3>
+              <p><span class="en-only">Keep the money in the family — use it on any class or place in Yalla Kids, for any child, whenever you want. We add a 10% thank-you bonus for going this route.</span>
+              <span class="ar-only">احتفظي بالمبلغ ضمن العائلة — استخدميه لأي فصل أو مكان، لأي طفل، متى شئتِ. مكافأة شكر ١٠٪ إضافية.</span></p>
+            </div>
+            <div class="tag-row">
+              <span class="tag butter"><span class="en-only">+10% bonus</span><span class="ar-only">مكافأة ١٠٪+</span></span>
+              <span class="tag mint"><span class="en-only">Never expires</span><span class="ar-only">لا تنتهي</span></span>
+            </div>
+          </div>
+          <div class="credit-wrap">
+            <div class="credit-illus">
+              <h4><span class="en-only">You'd receive</span><span class="ar-only">ستستلمين</span></h4>
+              <div class="qar">QAR 290<span class="plus">+QAR 26</span></div>
+              <small><span class="en-only">2 remaining sessions (QAR 264) + 10% bonus. Instantly added to your Yalla wallet.</span>
+              <span class="ar-only">جلستان متبقيتان (٢٦٤) + مكافأة ١٠٪. تضاف فورًا إلى محفظة يلا.</span></small>
+            </div>
+            <div class="credit-list">
+              <h5><span class="en-only">How it works</span><span class="ar-only">كيف تعمل</span></h5>
+              <ul>
+                <li><span class="ck">✓</span><span class="en-only">Use on any class or place in Qatar — not just Noura's.</span><span class="ar-only">استخدميه على أي فصل أو مكان — ليس فقط مع نورة.</span></li>
+                <li><span class="ck">✓</span><span class="en-only">Transferable to any child on your family profile.</span><span class="ar-only">قابل للتحويل لأي طفل في ملف العائلة.</span></li>
+                <li><span class="ck">✓</span><span class="en-only">Split across bookings — no minimum per class.</span><span class="ar-only">يمكن تقسيمه على عدة حجوزات.</span></li>
+                <li><span class="ck">✓</span><span class="en-only">No expiry. No clawbacks. No silly rules.</span><span class="ar-only">لا انتهاء صلاحية. لا شروط معقدة.</span></li>
+              </ul>
+              <div class="apply-to"><span class="en-only">Good candidates in your saved list:</span><span class="ar-only">اقتراحات من قائمتك المحفوظة:</span></div>
+              <div class="credit-apply">
+                <span class="class-chip">🎭 <b>Drama Ducks</b> · QAR 220</span>
+                <span class="class-chip">🏊 <b>Katara Splash</b> · QAR 180/mo</span>
+                <span class="class-chip">🎵 <b>Mini Maestros</b> · QAR 380 block</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ctas" style="margin-top:16px">
+            <button class="btn btn-primary" onclick="flashRefund()">
+              <span class="en-only">Add QAR 290 to my wallet</span><span class="ar-only">أضيفي ٢٩٠ إلى محفظتي</span>
+            </button>
+            <button class="btn btn-ghost" onclick="setAction('reschedule',document.querySelector('.tile.t-resched'))">
+              <span class="en-only">Actually, let me reschedule instead</span><span class="ar-only">لا، سأعدّل الموعد بدلًا من ذلك</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- ────────── Cancel panel ────────── -->
+        <section class="panel hidden" id="panel-cancel">
+          <div class="panel-head">
+            <div>
+              <h3><span class="en-only">Cancel the remaining 2 sessions</span><span class="ar-only">إلغاء الجلستين المتبقيتين</span></h3>
+              <p><span class="en-only">Refund goes back to the original payment method. The amount depends on how close you are to the next session.</span>
+              <span class="ar-only">يعاد المبلغ إلى وسيلة الدفع الأصلية. المبلغ يعتمد على قرب الجلسة التالية.</span></p>
+            </div>
+            <div class="tag-row">
+              <span class="tag rose"><span class="en-only">Ends the block</span><span class="ar-only">ينهي الباقة</span></span>
+              <span class="tag"><span class="en-only">3–5 business days</span><span class="ar-only">٣–٥ أيام عمل</span></span>
+            </div>
+          </div>
+
+          <div class="policy-strip" style="margin-bottom:14px">
+            <div class="p">
+              <div class="rng"><span class="en-only">7+ days before</span><span class="ar-only">٧+ أيام قبل</span></div>
+              <div class="amt">100%</div>
+              <div class="lbl"><span class="en-only">Full refund</span><span class="ar-only">استرداد كامل</span></div>
+            </div>
+            <div class="p here">
+              <div class="rng"><span class="en-only">3–6 days before</span><span class="ar-only">٣–٦ أيام قبل</span></div>
+              <div class="amt">100% → credit · 90% → card</div>
+              <div class="lbl"><span class="en-only">Your window — Apr 25 is 8 days away</span><span class="ar-only">نافذتك — السبت ٢٥ بعد ٨ أيام</span></div>
+            </div>
+            <div class="p">
+              <div class="rng"><span class="en-only">24h before</span><span class="ar-only">٢٤ ساعة قبل</span></div>
+              <div class="amt">50%</div>
+              <div class="lbl"><span class="en-only">Half refund or full credit</span><span class="ar-only">نصف استرداد أو رصيد كامل</span></div>
+            </div>
+            <div class="p">
+              <div class="rng"><span class="en-only">Same day · no-show</span><span class="ar-only">نفس اليوم · غياب</span></div>
+              <div class="amt">0%</div>
+              <div class="lbl"><span class="en-only">No refund (credit on request)</span><span class="ar-only">لا استرداد (رصيد عند الطلب)</span></div>
+            </div>
+          </div>
+
+          <div class="cancel-wrap">
+            <div class="reason-box">
+              <h5>
+                <span><span class="en-only">Help Noura get better — why are you leaving?</span><span class="ar-only">ساعدي نورة — لماذا تغادرين؟</span></span>
+                <small><span class="en-only">Optional · anonymized</span><span class="ar-only">اختياري · مجهول الهوية</span></small>
+              </h5>
+              <div class="reason-chips">
+                <button class="rc" onclick="toggleRC(this)"><span class="en-only">Scheduling conflict</span><span class="ar-only">تعارض في المواعيد</span></button>
+                <button class="rc sel" onclick="toggleRC(this)"><span class="en-only">Travel / out of Qatar</span><span class="ar-only">سفر خارج قطر</span></button>
+                <button class="rc" onclick="toggleRC(this)"><span class="en-only">Child didn't enjoy it</span><span class="ar-only">الطفلة لم تستمتع</span></button>
+                <button class="rc" onclick="toggleRC(this)"><span class="en-only">Too far / traffic</span><span class="ar-only">بعيد / زحمة</span></button>
+                <button class="rc" onclick="toggleRC(this)"><span class="en-only">Illness</span><span class="ar-only">مرض</span></button>
+                <button class="rc" onclick="toggleRC(this)"><span class="en-only">Too expensive</span><span class="ar-only">مرتفع السعر</span></button>
+                <button class="rc" onclick="toggleRC(this)"><span class="en-only">Something else</span><span class="ar-only">شيء آخر</span></button>
+              </div>
+              <textarea class="reason-text" maxlength="400" placeholder="If it helps Noura improve, add a short note (optional)." data-en-placeholder="If it helps Noura improve, add a short note (optional)." data-ar-placeholder="إذا كان ذلك يساعد نورة على التحسّن، أضف ملاحظة قصيرة (اختياري).">We're flying back to Amman on May 1 for Eid — Yara will miss the last two Saturdays. She absolutely loved the first two sessions, thank Noura for us!</textarea>
+              <div class="reason-foot">
+                <span><span class="en-only">Noura sees the category only — the note is kept private for our team.</span><span class="ar-only">ترى نورة الفئة فقط — الملاحظة تبقى خاصة بفريقنا.</span></span>
+                <span>182 / 400</span>
+              </div>
+            </div>
+
+            <div class="consent">
+              <input type="checkbox" id="ack" />
+              <label for="ack" class="ct">
+                <b><span class="en-only">I understand this ends Yara's block</span><span class="ar-only">أفهم أن هذا ينهي باقة يارا</span></b>
+                <span class="en-only">The last 2 sessions are cancelled and her seat opens to the waitlist. QAR 216 will be refunded to Apple Pay in 3–5 business days, or take QAR 240 as Yalla credit (+10%).</span>
+                <span class="ar-only">يتم إلغاء الجلستين الأخيرتين ويفتح المقعد لقائمة الانتظار. يسترد ٢١٦ إلى Apple Pay خلال ٣–٥ أيام، أو اختاري ٢٤٠ كرصيد يلا (+١٠٪).</span>
+              </label>
+            </div>
+
+            <div class="ctas">
+              <button class="btn btn-warn" onclick="flashRefund()">
+                <span class="en-only">Cancel & refund QAR 216</span><span class="ar-only">إلغاء واسترداد ٢١٦</span>
+              </button>
+              <button class="btn btn-ghost" onclick="setAction('credit',document.querySelector('.tile.t-credit'))">
+                <span class="en-only">Take QAR 240 credit instead</span><span class="ar-only">بدلًا: ٢٤٠ رصيد يلا</span>
+              </button>
+              <div class="help">
+                <span class="en-only">You can re-book Yara for the same block any time this season.</span>
+                <span class="ar-only">يمكنك إعادة حجز الباقة في أي وقت هذا الموسم.</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ────────── Alternatives row ────────── -->
+        <div class="section-lbl">
+          <span class="en-only">Other things you can do</span>
+          <span class="ar-only">خيارات أخرى</span>
+        </div>
+        <div class="alt-row">
+          <div class="alt a-sibling">
+            <div class="ic">👧🏻</div>
+            <div>
+              <h5><span class="en-only">Swap to another child</span><span class="ar-only">تبديل إلى طفل آخر</span></h5>
+              <p><span class="en-only">Transfer the remaining 2 sessions to a sibling without a refund cycle. Checked against age range (4–6).</span>
+              <span class="ar-only">نقل الجلستين لأخ أو أخت دون دورة استرداد. يتحقق من الفئة العمرية (٤–٦).</span></p>
+              <div class="child-row">
+                <button class="child-chip sel" onclick="pickChild(this)">Yara <span class="age">5</span></button>
+                <button class="child-chip" onclick="pickChild(this)">Zayd <span class="age">3</span> <span class="warn">✗ age</span></button>
+                <button class="child-chip" onclick="pickChild(this)">Kareem <span class="age">7</span> <span class="warn">✗ age</span></button>
+                <button class="child-chip" style="border-style:dashed">+ <span class="en-only">Add child</span><span class="ar-only">إضافة طفل</span></button>
+              </div>
+              <a href="#" class="link" style="margin-top:10px;display:inline-flex">
+                <span class="en-only">Continue swap →</span>
+                <span class="ar-only">متابعة التبديل →</span>
+              </a>
+            </div>
+          </div>
+          <div class="alt a-hold">
+            <div class="ic">⏸️</div>
+            <div>
+              <h5><span class="en-only">Pause &amp; hold the spot</span><span class="ar-only">إيقاف مؤقت مع حفظ المقعد</span></h5>
+              <p><span class="en-only">Hold Yara's seat for up to 3 weeks (e.g. for travel). You pay nothing now — we restart when you're back.</span>
+              <span class="ar-only">احتفظي بمقعد يارا حتى ٣ أسابيع (مثلًا للسفر). بدون دفع الآن — نستأنف عند عودتك.</span></p>
+              <a href="#" class="link"><span class="en-only">Hold for 3 weeks →</span><span class="ar-only">حفظ لمدة ٣ أسابيع →</span></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ────────── Modal preview + flow notes ────────── -->
+        <div class="section-lbl">
+          <span class="en-only">Before we hit submit</span>
+          <span class="ar-only">قبل الإرسال</span>
+        </div>
+        <div class="modal-wrap">
+          <div class="modal-preview">
+            <div class="modal-bar">
+              <span><span class="en-only">Confirm reschedule</span><span class="ar-only">تأكيد التعديل</span></span>
+              <span class="x">×</span>
+            </div>
+            <div class="modal-body">
+              <h3><span class="en-only">Quick check — does this look right?</span><span class="ar-only">لنتأكد — هل كل شيء صحيح؟</span></h3>
+              <p class="lead"><span class="en-only">We'll message Noura immediately and update Yara's class page. Nothing is charged.</span>
+              <span class="ar-only">سنراسل نورة فورًا ونحدّث صفحة فصل يارا. بدون أي خصم.</span></p>
+              <div class="summary-rows">
+                <div class="r"><span><span class="en-only">Child</span><span class="ar-only">الطفلة</span></span><b>Yara · 5y</b></div>
+                <div class="r"><span><span class="en-only">Class</span><span class="ar-only">الفصل</span></span><b>Mini Picasso · Week 3</b></div>
+                <div class="r"><span><span class="en-only">Was</span><span class="ar-only">الحالي</span></span><b>Sat Apr 25 · 10:00</b></div>
+                <div class="r"><span><span class="en-only">New</span><span class="ar-only">الجديد</span></span><b>Tue Apr 28 · 16:00</b></div>
+                <div class="r"><span><span class="en-only">Charge today</span><span class="ar-only">خصم اليوم</span></span><b class="big">QAR 0</b></div>
+              </div>
+              <div class="confirm-ctas">
+                <button class="btn btn-ghost"><span class="en-only">Go back</span><span class="ar-only">رجوع للخلف</span></button>
+                <button class="btn btn-primary"><span class="en-only">Yes, move it</span><span class="ar-only">نعم، عدّليه</span></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-note">
+            <h5><span class="en-only">What happens right after you confirm</span><span class="ar-only">ما يحدث فور التأكيد</span></h5>
+            <ol>
+              <li><span class="en-only">The calendar on Yara's booking updates in place — no new confirmation email unless you opt in.</span>
+              <span class="ar-only">يتحدّث تقويم الحجز مباشرة — بدون بريد جديد ما لم تطلبي ذلك.</span></li>
+              <li><span class="en-only">Noura gets a notification with the reason code <code>TRAVEL_EID</code> — not your private note.</span>
+              <span class="ar-only">تتلقى نورة إشعارًا بالفئة <code>TRAVEL_EID</code> — ليس ملاحظتك الخاصة.</span></li>
+              <li><span class="en-only">A WhatsApp template-message (EN + AR) with the new date is queued to Noura's number.</span>
+              <span class="ar-only">رسالة WhatsApp جاهزة (EN + AR) ترسَل لنورة بالتاريخ الجديد.</span></li>
+              <li><span class="en-only">If the move is within 6 hours we ask Noura to accept — her average response is 42 min.</span>
+              <span class="ar-only">خلال ٦ ساعات نطلب موافقة نورة — متوسط الرد ٤٢ دقيقة.</span></li>
+              <li><span class="en-only">If she can't accept, Yalla Kids auto-retries with the next best slot or falls back to credit + refund.</span>
+              <span class="ar-only">إذا تعذّر القبول، نعرض بديلًا أو نعود إلى رصيد + استرداد.</span></li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- ────────── Past activity ────────── -->
+        <section class="past">
+          <h3><span class="en-only">Everything that's happened with this booking</span><span class="ar-only">سجل هذا الحجز</span></h3>
+          <p class="sub"><span class="en-only">We keep the receipts — every reschedule, refund, or message is logged here, by design, so there are no surprises.</span>
+          <span class="ar-only">نحتفظ بالتفاصيل — كل تعديل أو استرداد أو رسالة مسجّل هنا، لتجنب أي مفاجأة.</span></p>
+          <div class="timeline">
+            <div class="tl-item ok">
+              <div class="tl-time">Sat · Apr 18 · 11:20</div>
+              <div class="tl-title"><span class="en-only">Session 2 marked complete</span><span class="ar-only">الجلسة ٢ اكتملت</span></div>
+              <div class="tl-body">
+                <span class="en-only">Noura checked Yara in at 10:02 and out at 11:17. <span class="chip">on-time</span><span class="chip">photo attached</span></span>
+                <span class="ar-only">سجّلت نورة حضور يارا ١٠:٠٢ وخروجها ١١:١٧. <span class="chip">في الوقت</span><span class="chip">صورة مرفقة</span></span>
+              </div>
+            </div>
+            <div class="tl-item book">
+              <div class="tl-time">Thu · Apr 16 · 09:41</div>
+              <div class="tl-title"><span class="en-only">Noura replied to your question about aprons</span><span class="ar-only">ردّت نورة على سؤال المريلة</span></div>
+              <div class="tl-body">
+                <span class="en-only">"We provide aprons — Yara can come in any clothes, we'll cover her up." Thread linked to booking. <span class="chip">via WhatsApp mirror</span></span>
+                <span class="ar-only">"نوفر المرايل — تأتي يارا بأي ملابس ونغطّيها." الرسالة مربوطة بالحجز. <span class="chip">عبر WhatsApp</span></span>
+              </div>
+            </div>
+            <div class="tl-item ok">
+              <div class="tl-time">Sat · Apr 11 · 11:25</div>
+              <div class="tl-title"><span class="en-only">Session 1 marked complete</span><span class="ar-only">الجلسة ١ اكتملت</span></div>
+              <div class="tl-body">
+                <span class="en-only">First-session report: "warmed up nicely — made a paper-plate lion." <span class="chip">report shared</span></span>
+                <span class="ar-only">"تأقلمت جيدًا — صنعت أسدًا من الورق." <span class="chip">تقرير</span></span>
+              </div>
+            </div>
+            <div class="tl-item book">
+              <div class="tl-time">Thu · Apr 9 · 18:02</div>
+              <div class="tl-title"><span class="en-only">Booking confirmed &amp; paid</span><span class="ar-only">تم التأكيد والدفع</span></div>
+              <div class="tl-body">
+                <span class="en-only">QAR 480 via Apple Pay · Early-bird sibling discount -QAR 20 applied. <span class="chip">receipt #YK-28471</span></span>
+                <span class="ar-only">٤٨٠ ر.ق عبر Apple Pay · خصم الأخوات ٢٠-. <span class="chip">إيصال #YK-28471</span></span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ────────── Strategy notes ────────── -->
+        <section class="notes">
+          <h3><span class="en-only">Design notes for the team</span><span class="ar-only">ملاحظات تصميم للفريق</span></h3>
+          <div class="notes-grid">
+            <div class="note">
+              <div class="n">01</div>
+              <h5><span class="en-only">Reschedule before refund, always</span><span class="ar-only">التعديل قبل الاسترداد دائمًا</span></h5>
+              <p><span class="en-only">The default tile is reschedule, with a "Recommended" chip. Most leavers actually just have a logistics problem — a working weekday slot retains the revenue and the relationship.</span>
+              <span class="ar-only">البلاط الافتراضي هو التعديل مع شارة "موصى به". معظم المغادرين لديهم مشكلة جدولة فقط.</span></p>
+            </div>
+            <div class="note">
+              <div class="n">02</div>
+              <h5><span class="en-only">Credit beats refund when you frame it</span><span class="ar-only">الرصيد أفضل عند التأطير</span></h5>
+              <p><span class="en-only">+10% bonus + "never expires" + apply-to suggestions taken from the saved list turns cash refund into wallet credit about half the time in our tests.</span>
+              <span class="ar-only">مكافأة ١٠٪+ + عدم انتهاء الصلاحية + اقتراحات من المحفوظات تحوّل الاسترداد إلى رصيد في ~٥٠٪ من الحالات.</span></p>
+            </div>
+            <div class="note">
+              <div class="n">03</div>
+              <h5><span class="en-only">Show the full policy visually</span><span class="ar-only">اعرض السياسة بصريًا</span></h5>
+              <p><span class="en-only">The 4-step timeline strip (100% → 90% → 50% → 0%) with "you are here" makes the math feel fair and removes support tickets.</span>
+              <span class="ar-only">شريط الزمن بأربع خطوات يجعل الحساب واضحًا ويقلل تذاكر الدعم.</span></p>
+            </div>
+            <div class="note">
+              <div class="n">04</div>
+              <h5><span class="en-only">Sibling swap is a quiet retention weapon</span><span class="ar-only">تبديل الأخوة سلاح احتفاظ هادئ</span></h5>
+              <p><span class="en-only">Age-range validation runs on the chip (green check or red × inline) so we never take money for an ineligible child and don't force parents into a support chat.</span>
+              <span class="ar-only">نتحقق من العمر على الشريحة مباشرة — لا حجز غير مؤهل ولا دعم إضافي.</span></p>
+            </div>
+            <div class="note">
+              <div class="n">05</div>
+              <h5><span class="en-only">Reason codes, private notes</span><span class="ar-only">فئات علنية، ملاحظات خاصة</span></h5>
+              <p><span class="en-only">The provider sees the category only — the free-text note goes to our ops team. Noura gets an aggregate "top reasons" view on her dashboard, not individual parents' grievances.</span>
+              <span class="ar-only">يرى المزوّد الفئة فقط — الملاحظة الحرّة تذهب لفريقنا فقط.</span></p>
+            </div>
+            <div class="note">
+              <div class="n">06</div>
+              <h5><span class="en-only">Every action, on one audit log</span><span class="ar-only">كل إجراء على سجل واحد</span></h5>
+              <p><span class="en-only">The past-activity timeline is not a nice-to-have — it's the policy-evidence artifact that kills refund disputes. Every WhatsApp-mirror and reschedule shows here, timestamped.</span>
+              <span class="ar-only">سجل النشاط ليس ميزة تجميلية — هو دليل السياسة الذي يحسم النزاعات، مع توقيت كل تعديل.</span></p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ────────── SIDEBAR ────────── -->
+      <aside class="side">
+        <div class="refund-card" id="refundCard">
+          <h4>
+            <span class="en-only">Refund preview</span><span class="ar-only">معاينة الاسترداد</span>
+            <span class="tag mint" style="margin-inline-start:auto">
+              <span class="en-only">Reschedule</span><span class="ar-only">تعديل</span>
+            </span>
+          </h4>
+          <div class="sub" id="refundCtx">
+            <span class="en-only">For: move Week 3 from Sat Apr 25 → Tue Apr 28</span>
+            <span class="ar-only">لـ: نقل الأسبوع ٣ من ٢٥ إلى ٢٨ أبريل</span>
+          </div>
+          <div class="ref-line"><span><span class="en-only">Block price</span><span class="ar-only">سعر الباقة</span></span><b>QAR 480</b></div>
+          <div class="ref-line muted"><span><span class="en-only">Sessions used (2)</span><span class="ar-only">الجلسات المستخدمة (٢)</span></span><b>–QAR 216</b></div>
+          <div class="ref-line"><span><span class="en-only">Remaining (2)</span><span class="ar-only">المتبقية (٢)</span></span><b>QAR 264</b></div>
+          <div class="ref-line muted"><span><span class="en-only">Reschedule fee</span><span class="ar-only">رسوم التعديل</span></span><b>QAR 0</b></div>
+          <div class="ref-line plus"><span><span class="en-only">Adjustment</span><span class="ar-only">تسوية</span></span><b>+QAR 0</b></div>
+          <div class="ref-total" id="refundTotal">
+            <div>
+              <div class="lbl"><span class="en-only">Today you pay</span><span class="ar-only">تدفعين اليوم</span></div>
+              <small><span class="en-only">Same block, new dates</span><span class="ar-only">نفس الباقة، تواريخ جديدة</span></small>
+            </div>
+            <div class="v">QAR 0</div>
+          </div>
+          <div class="methods">
+            <span><span class="en-only">Paid with</span><span class="ar-only">مدفوع بـ</span></span>
+            <span class="m-chip">Apple Pay</span>
+            <span class="m-chip">•• 4721</span>
+          </div>
+        </div>
+
+        <div class="wa-escape">
+          <h5>
+            <span class="wa-dot">W</span>
+            <span class="en-only">Before you cancel — talk to Noura?</span>
+            <span class="ar-only">قبل الإلغاء — تحدّثي مع نورة؟</span>
+          </h5>
+          <p><span class="en-only">Most parents who reach for cancel actually had a traffic or scheduling issue Noura would gladly fix. She replies in ~42 min.</span>
+          <span class="ar-only">كثير من الإلغاءات سببها جدولة تحلها نورة بسهولة. تردّ خلال ~٤٢ دقيقة.</span></p>
+          <button class="btn btn-wa" style="width:100%">
+            <span class="en-only">Open WhatsApp with Noura</span>
+            <span class="ar-only">فتح WhatsApp مع نورة</span>
+          </button>
+          <div class="talkline">
+            <span class="en-only"><b>Pre-filled:</b> "Hi Noura — Yara's block, week 3. Quick Q before we look at rescheduling..."</span>
+            <span class="ar-only"><b>نص جاهز:</b> "مرحبًا نورة — باقة يارا، الأسبوع ٣. سؤال سريع قبل التعديل..."</span>
+          </div>
+        </div>
+
+        <div class="policy-card">
+          <h5>
+            <span class="en-only">Mini Picasso's policy</span><span class="ar-only">سياسة ميني بيكاسو</span>
+            <button class="expand">✎</button>
+          </h5>
+          <ul>
+            <li><span class="en-only">Reschedule: free up to 6h before, provider-approved after.</span><span class="ar-only">تعديل: مجاني حتى ٦ ساعات قبل، بموافقة المزوّد بعدها.</span></li>
+            <li><span class="en-only">Credit: any time, +10% bonus, no expiry.</span><span class="ar-only">رصيد: في أي وقت، مكافأة ١٠٪+، لا تنتهي صلاحيته.</span></li>
+            <li><span class="en-only">Refund: sliding scale by proximity — see the 4-step strip.</span><span class="ar-only">استرداد: متدرّج حسب القرب — راجعي الشريط.</span></li>
+            <li><span class="en-only">Medical: full credit with doctor's note, any time.</span><span class="ar-only">طبي: رصيد كامل بشهادة طبية، في أي وقت.</span></li>
+            <li><span class="en-only">Weather / safety: Yalla Kids covers 100% if we cancel.</span><span class="ar-only">طقس/سلامة: يتحمّل يلا كيدز ١٠٠٪ عند الإلغاء من طرفنا.</span></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    /* ────── language toggle ────── */
+    function toggleLang(){
+      const html = document.documentElement;
+      const ltr = html.getAttribute('dir') === 'ltr';
+      html.setAttribute('dir', ltr ? 'rtl' : 'ltr');
+      html.setAttribute('lang', ltr ? 'ar' : 'en');
+    }
+
+    /* ────── panel switch ────── */
+    const panels = {
+      reschedule: document.getElementById('panel-reschedule'),
+      credit: document.getElementById('panel-credit'),
+      cancel: document.getElementById('panel-cancel'),
+    };
+    const refundCtx = document.getElementById('refundCtx');
+    const refundTotalV = document.querySelector('#refundTotal .v');
+    const refundTag = document.querySelector('#refundCard .tag');
+
+    function setAction(which, tile){
+      document.querySelectorAll('.tile').forEach(t=>t.classList.remove('active'));
+      tile.classList.add('active');
+      Object.keys(panels).forEach(k=>{
+        panels[k].classList.toggle('hidden', k!==which);
+        if(k===which) panels[k].classList.add('fade-in');
+      });
+      // swap refund card
+      if(which==='reschedule'){
+        refundTag.innerHTML='<span class="en-only">Reschedule</span><span class="ar-only">تعديل</span>';
+        refundTag.className='tag mint';
+        refundCtx.innerHTML='<span class="en-only">For: move Week 3 from Sat Apr 25 → Tue Apr 28</span><span class="ar-only">لـ: نقل الأسبوع ٣ من ٢٥ إلى ٢٨ أبريل</span>';
+        refundTotalV.textContent='QAR 0';
+      } else if(which==='credit'){
+        refundTag.innerHTML='<span class="en-only">Credit + 10%</span><span class="ar-only">رصيد + ١٠٪</span>';
+        refundTag.className='tag butter';
+        refundCtx.innerHTML='<span class="en-only">For: convert 2 remaining sessions to wallet credit</span><span class="ar-only">لـ: تحويل الجلستين إلى رصيد محفظة</span>';
+        refundTotalV.textContent='+QAR 290';
+      } else {
+        refundTag.innerHTML='<span class="en-only">Cancel & refund</span><span class="ar-only">إلغاء واسترداد</span>';
+        refundTag.className='tag rose';
+        refundCtx.innerHTML='<span class="en-only">For: cancel 2 remaining sessions, refund original payment</span><span class="ar-only">لـ: إلغاء الجلستين واسترداد على نفس الوسيلة</span>';
+        refundTotalV.textContent='QAR 216';
+      }
+      refundCtx.parentElement.classList.add('fade-in');
+      setTimeout(()=>refundCtx.parentElement.classList.remove('fade-in'), 250);
+    }
+
+    /* ────── slot pick ────── */
+    function pickSlot(el){
+      if(el.classList.contains('full')) return;
+      document.querySelectorAll('.slot').forEach(s=>s.classList.remove('sel'));
+      el.classList.add('sel');
+    }
+
+    /* ────── session pick ────── */
+    document.querySelectorAll('.pick-sess .p').forEach(b=>{
+      if(b.classList.contains('done')) return;
+      b.addEventListener('click',()=>{
+        document.querySelectorAll('.pick-sess .p').forEach(x=>{
+          if(!x.classList.contains('done')) x.classList.remove('on');
+        });
+        b.classList.add('on');
+      });
+    });
+
+    /* ────── calendar pick ────── */
+    document.querySelectorAll('.cal .d').forEach(d=>{
+      if(d.classList.contains('off')||d.classList.contains('dis')) return;
+      d.addEventListener('click',()=>{
+        document.querySelectorAll('.cal .d').forEach(x=>x.classList.remove('sel'));
+        d.classList.add('sel');
+      });
+    });
+
+    /* ────── reason chips ────── */
+    function toggleRC(el){
+      document.querySelectorAll('.reason-chips .rc').forEach(r=>r.classList.remove('sel'));
+      el.classList.add('sel');
+    }
+
+    /* ────── child swap ────── */
+    function pickChild(el){
+      if(el.querySelector('.warn')) return;
+      document.querySelectorAll('.child-chip').forEach(c=>c.classList.remove('sel'));
+      el.classList.add('sel');
+    }
+
+    /* ────── submit flash ────── */
+    function flashRefund(){
+      document.getElementById('refundCard').classList.add('flash');
+      setTimeout(()=>document.getElementById('refundCard').classList.remove('flash'), 1300);
+    }
+
+    /* ────── live char counter ────── */
+    const rt = document.querySelector('.reason-text');
+    const rf = document.querySelector('.reason-foot span:last-child');
+    if(rt && rf){
+      const update = ()=>{ rf.textContent = rt.value.length + ' / 400'; };
+      rt.addEventListener('input', update); update();
+    }
+  </script>
+<script src="yalla-kids-shared.js"></script>
+</body>
+</html>

@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#8A1538">
+  <title>Art classes for kids in Qatar — Yalla Kids</title>
+<meta name="description" content="Every art class for kids in Qatar: painting, drawing, clay, and mixed media. 28 providers vetted by Yalla Kids.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,600;1,9..144,700&family=Inter:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="yalla-kids-shared.css">
+<style>
+  .cat-hero {
+    max-width: 1280px;
+    margin: 24px auto 0;
+    padding: 56px 36px;
+    background:
+      radial-gradient(circle at 15% 30%, var(--pink-soft) 0%, transparent 55%),
+      radial-gradient(circle at 85% 70%, var(--coral-soft) 0%, transparent 55%),
+      var(--butter-soft);
+    border: 2px solid var(--ink);
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow-hard-lg);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cat-hero::before {
+    content: "🎨";
+    position: absolute;
+    top: 24px; left: 30px;
+    font-size: 56px;
+    transform: rotate(-12deg);
+    opacity: 0.5;
+  }
+  .cat-hero::after {
+    content: "🖌️";
+    position: absolute;
+    bottom: 24px; right: 36px;
+    font-size: 52px;
+    transform: rotate(10deg);
+    opacity: 0.5;
+  }
+  .cat-hero h1 {
+    font-size: 56px;
+    line-height: 1.05;
+    margin-bottom: 14px;
+  }
+  .cat-hero .dek {
+    font-size: 18px;
+    color: var(--ink-soft);
+    max-width: 680px;
+    margin: 0 auto 18px;
+  }
+  .cat-stats {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .cat-stat {
+    padding: 8px 18px;
+    border: 2px solid var(--ink);
+    border-radius: 99px;
+    background: var(--card-bg);
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  /* Sub-categories */
+  .subcats {
+    max-width: 1280px;
+    margin: 48px auto 0;
+    padding: 0 24px;
+  }
+  .subcats h2 { font-size: 32px; margin-bottom: 18px; }
+  .subcat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .subcat-card {
+    border: 2px solid var(--ink);
+    border-radius: var(--r);
+    padding: 20px 16px;
+    text-align: center;
+    box-shadow: var(--shadow-hard);
+    transition: transform 0.15s ease;
+    display: block;
+  }
+  .subcat-card:hover { transform: translate(-2px, -2px); }
+  .subcat-card .em { font-size: 42px; display: block; margin-bottom: 8px; }
+  .subcat-card h3 { font-family: "Fraunces", serif; font-size: 17px; margin-bottom: 4px; }
+  .subcat-card .n { font-size: 12px; color: var(--ink-soft); }
+
+  /* Providers section */
+  .sect {
+    max-width: 1280px;
+    margin: 60px auto 0;
+    padding: 0 24px;
+  }
+  .sect-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 20px;
+  }
+  .sect-head h2 { font-size: 32px; }
+  .view-switch {
+    display: flex;
+    border: 2px solid var(--ink);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+  .view-switch span, .view-switch a {
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    color: inherit;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .view-switch a:hover { background: var(--butter-soft); }
+  .view-switch span.active, .view-switch a.active { background: var(--maroon); color: #fff; }
+
+  .prov-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  .prov-card {
+    background: var(--card-bg);
+    border: 2px solid var(--ink);
+    border-radius: var(--r);
+    box-shadow: var(--shadow-hard);
+    overflow: hidden;
+    display: block;
+  }
+  .prov-cover {
+    height: 140px;
+    border-bottom: 2px solid var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 52px;
+    position: relative;
+  }
+  .prov-cover .chip {
+    position: absolute;
+    top: 10px; left: 10px;
+    font-size: 11px;
+    padding: 3px 10px;
+  }
+  .prov-body { padding: 16px 18px; }
+  .prov-body h3 { font-size: 18px; margin-bottom: 4px; font-family: "Fraunces", serif; }
+  .prov-meta { font-size: 13px; color: var(--ink-soft); margin-bottom: 8px; }
+  .prov-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+  .prov-tags .tag { font-size: 11px; padding: 2px 8px; background: var(--butter-soft); border: 1.5px solid var(--ink); border-radius: 99px; }
+  .prov-price {
+    color: var(--maroon); font-weight: 700; font-size: 14px;
+    display: flex; justify-content: space-between;
+    padding-top: 10px; border-top: 1.5px solid var(--border-strong);
+  }
+  .prov-price span { color: var(--ink-mute); font-weight: 500; font-size: 12px; }
+
+  /* Sort and filter bar */
+  .filter-bar {
+    max-width: 1280px;
+    margin: 24px auto 0;
+    padding: 0 24px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .filter-bar .count {
+    font-weight: 700;
+    margin-right: auto;
+    font-size: 14px;
+  }
+  .filter-bar select {
+    border: 2px solid var(--ink);
+    border-radius: 99px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 700;
+    background: var(--card-bg);
+    font-family: "Inter", sans-serif;
+  }
+
+  /* Editorial */
+  .why-block {
+    max-width: 1280px;
+    margin: 60px auto 0;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  .why-tile {
+    padding: 24px;
+    border: 2px solid var(--ink);
+    border-radius: var(--r);
+    box-shadow: var(--shadow-hard);
+  }
+  .why-tile.c1 { background: var(--coral-soft); }
+  .why-tile.c2 { background: var(--teal-soft); }
+  .why-tile.c3 { background: var(--butter-soft); }
+  .why-tile h3 { font-family: "Fraunces", serif; font-size: 20px; margin-bottom: 8px; }
+  .why-tile p { font-size: 14px; color: var(--ink-soft); line-height: 1.55; }
+  .why-tile .em { font-size: 32px; margin-bottom: 10px; }
+
+  /* Age finder */
+  .age-finder {
+    max-width: 1280px;
+    margin: 60px auto 0;
+    padding: 32px;
+    background: var(--sky-soft);
+    border: 2px solid var(--ink);
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow-hard-lg);
+    text-align: center;
+  }
+  .age-finder h2 { font-size: 30px; margin-bottom: 10px; }
+  .age-finder p { color: var(--ink-soft); margin-bottom: 18px; }
+  .age-buttons { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+  .age-btn {
+    padding: 10px 20px;
+    border: 2px solid var(--ink);
+    border-radius: 99px;
+    background: var(--card-bg);
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: var(--shadow-hard);
+  }
+
+  /* FAQ */
+  .faq-cat {
+    max-width: 860px;
+    margin: 60px auto 0;
+    padding: 0 24px;
+  }
+  .faq-cat h2 { font-size: 30px; margin-bottom: 16px; text-align: center; }
+  .faq-cat details {
+    border: 2px solid var(--ink);
+    border-radius: var(--r);
+    background: var(--card-bg);
+    margin-bottom: 10px;
+    box-shadow: var(--shadow-hard);
+    overflow: hidden;
+  }
+  .faq-cat summary {
+    padding: 14px 18px;
+    font-weight: 700;
+    font-family: "Fraunces", serif;
+    font-size: 16px;
+    cursor: pointer;
+    list-style: none;
+    display: flex; justify-content: space-between;
+  }
+  .faq-cat summary::after { content: "+"; color: var(--maroon); font-size: 22px; }
+  .faq-cat details[open] summary::after { content: "−"; }
+  .faq-cat details[open] { background: var(--butter-soft); }
+  .faq-cat .faq-body { padding: 0 18px 14px; font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+
+  @media (max-width: 980px) {
+    .cat-hero h1 { font-size: 38px; }
+    .subcat-grid { grid-template-columns: repeat(2, 1fr); }
+    .prov-grid { grid-template-columns: repeat(2, 1fr); }
+    .why-block { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    .prov-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site">
+  <div class="nav-wrap container">
+    <a href="yalla-kids-home-wireframe.html" class="logo">
+      <span class="en-only inline">Yalla Kids</span>
+      <span class="ar-only inline">يلا كيدز</span>
+    </a>
+    <nav class="nav-links">
+      <a href="yalla-kids-classes-directory.html" class="active"><span class="en-only inline">Classes</span><span class="ar-only inline">الصفوف</span></a>
+      <a href="yalla-kids-places-directory.html"><span class="en-only inline">Places to go</span><span class="ar-only inline">أماكن للزيارة</span></a>
+      <a href="yalla-kids-camps.html"><span class="en-only inline">Camps</span><span class="ar-only inline">المعسكرات</span></a>
+      <a href="yalla-kids-guides-hub.html"><span class="en-only inline">Guides</span><span class="ar-only inline">الأدلة</span></a>
+      <a href="yalla-kids-for-providers.html"><span class="en-only inline">For providers</span><span class="ar-only inline">للموفرين</span></a>    </nav>
+    <div class="nav-actions">
+      <button class="lang-toggle" onclick="toggleLang()">
+        <span class="en-only inline">العربية</span>
+        <span class="ar-only inline">English</span>
+      </button>
+      <a href="yalla-kids-login.html" class="btn btn-ghost"><span class="en-only inline">Log in</span><span class="ar-only inline">تسجيل الدخول</span></a>
+      <a href="yalla-kids-signup.html" class="btn btn-primary"><span class="en-only inline">Sign up</span><span class="ar-only inline">إنشاء حساب</span></a>
+    </div>
+  </div>
+</header>
+
+<!-- Breadcrumb -->
+<div style="max-width:1280px;margin:0 auto;padding:16px 24px 0;">
+  <nav style="font-size:13px;color:var(--ink-mute);">
+    <a href="yalla-kids-home-wireframe.html">Home</a> ›
+    <a href="yalla-kids-classes-directory.html">Classes</a> ›
+    <strong style="color:var(--ink);">Art</strong>
+  </nav>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="cat-hero">
+  <div style="font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:var(--maroon);font-weight:800;margin-bottom:8px;">Class category</div>
+  <h1>
+    <span class="en-only">Art <span class="pop">classes</span> for kids in Qatar</span>
+    <span class="ar-only">دروس <span class="pop">الفنون</span> للأطفال في قطر</span>
+  </h1>
+  <p class="dek">From watercolor for 4-year-olds to manga for tweens — every vetted kids' art class in Doha, updated weekly. Found 28 providers.</p>
+  <div class="cat-stats">
+    <span class="cat-stat">👨‍🎨 28 providers</span>
+    <span class="cat-stat">📍 7 areas</span>
+    <span class="cat-stat">👶 Ages 3–17</span>
+    <span class="cat-stat">💰 From QAR 280 / term</span>
+  </div>
+</section>
+
+<!-- ============ SUBCATEGORIES ============ -->
+<section class="subcats">
+  <h2><span class="en-only">Browse by <span class="pop">medium</span></span><span class="ar-only">تصفّح حسب <span class="pop">الوسيلة</span></span></h2>
+  <div class="subcat-grid">
+    <a href="yalla-kids-search.html" class="subcat-card" style="background:var(--coral-soft);">
+      <span class="em">🎨</span>
+      <h3>Painting</h3>
+      <div class="n">14 providers</div>
+    </a>
+    <a href="yalla-kids-search.html" class="subcat-card" style="background:var(--butter-soft);">
+      <span class="em">✏️</span>
+      <h3>Drawing</h3>
+      <div class="n">11 providers</div>
+    </a>
+    <a href="yalla-kids-search.html" class="subcat-card" style="background:var(--teal-soft);">
+      <span class="em">🏺</span>
+      <h3>Clay &amp; sculpture</h3>
+      <div class="n">7 providers</div>
+    </a>
+    <a href="yalla-kids-search.html" class="subcat-card" style="background:var(--pink-soft);">
+      <span class="em">🖌️</span>
+      <h3>Mixed media</h3>
+      <div class="n">9 providers</div>
+    </a>
+    <a href="yalla-kids-search.html" class="subcat-card" style="background:var(--lavender-soft);">
+      <span class="em">📚</span>
+      <h3>Manga &amp; comics</h3>
+      <div class="n">4 providers</div>
+    </a>
+    <a href="yalla-kids-search.html" class="subcat-card" style="background:var(--lime-soft);">
+      <span class="em">🌿</span>
+      <h3>Calligraphy (AR)</h3>
+      <div class="n">3 providers</div>
+    </a>
+    <a href="yalla-kids-search.html" class="subcat-card" style="background:var(--sky-soft);">
+      <span class="em">💻</span>
+      <h3>Digital art</h3>
+      <div class="n">5 providers</div>
+    </a>
+    <a href="yalla-kids-search.html" class="subcat-card" style="background:var(--mint-soft);">
+      <span class="em">🎭</span>
+      <h3>Theatre &amp; acting</h3>
+      <div class="n">6 providers</div>
+    </a>
+  </div>
+</section>
+
+<!-- ============ AGE FINDER ============ -->
+<section class="age-finder">
+  <h2><span class="en-only">What's your <span class="pop">kid's age?</span></span><span class="ar-only">ما <span class="pop">عمر طفلك؟</span></span></h2>
+  <p>We'll show only classes that accept their age group.</p>
+  <div class="age-buttons">
+    <button class="age-btn">3–4 years</button>
+    <button class="age-btn">5–6 years</button>
+    <button class="age-btn">7–8 years</button>
+    <button class="age-btn">9–10 years</button>
+    <button class="age-btn">11–12 years</button>
+    <button class="age-btn">13+ years</button>
+  </div>
+</section>
+
+<!-- ============ FILTER BAR ============ -->
+<div class="filter-bar">
+  <div class="count">28 art providers in Qatar</div>
+  <select>
+    <option>Sort: Recommended</option>
+    <option>Price: Low to high</option>
+    <option>Price: High to low</option>
+    <option>Rating</option>
+    <option>Newest</option>
+  </select>
+  <select>
+    <option>All areas</option>
+    <option>West Bay</option>
+    <option>The Pearl</option>
+    <option>Lusail</option>
+  </select>
+  <select>
+    <option>Any day</option>
+    <option>Weekdays</option>
+    <option>Weekends</option>
+  </select>
+  <div class="view-switch">
+    <span class="active">🔳 Grid</span>
+    <a href="yalla-kids-map.html">🗺 Map</a>
+  </div>
+</div>
+
+<!-- ============ PROVIDERS ============ -->
+<section class="sect">
+  <div class="prov-grid" id="cat-providers"></div>
+  <div style="text-align:center;margin-top:28px;">
+    <a href="yalla-kids-search.html" class="btn outline lg">Show 22 more providers →</a>
+  </div>
+</section>
+
+<!-- ============ WHY SECTION ============ -->
+<section class="why-block">
+  <div class="why-tile c1">
+    <div class="em">🎯</div>
+    <h3>All providers vetted</h3>
+    <p>Every art studio on Yalla Kids has been reviewed for safety, staff credentials, and insurance. Verified providers display a ✓ badge.</p>
+  </div>
+  <div class="why-tile c2">
+    <div class="em">💳</div>
+    <h3>Secure payments</h3>
+    <p>Pay only through MyFatoorah. No cash deposits to strangers, no surprise fees. Full refund up to 7 days before term starts.</p>
+  </div>
+  <div class="why-tile c3">
+    <div class="em">🗣</div>
+    <h3>Bilingual support</h3>
+    <p>Every listing flags class languages clearly. Many providers teach in EN, AR, or both — look for the 🗣 icon on each card.</p>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="faq-cat">
+  <h2><span class="en-only"><span class="pop">FAQs</span> about art classes in Qatar</span><span class="ar-only"><span class="pop">أسئلة شائعة</span> عن صفوف الفنون في قطر</span></h2>
+  <details open>
+    <summary>What's the youngest age for an art class in Qatar?</summary>
+    <div class="faq-body">A few studios in our directory accept kids from age 3 — check each listing's age range. Earlier than that is typically sensory play, not structured art.</div>
+  </details>
+  <details>
+    <summary>How much does a term cost?</summary>
+    <div class="faq-body">Most 8-week terms run QAR 400–800. Materials are sometimes separate (QAR 30–80). Calligraphy and digital art can run higher.</div>
+  </details>
+  <details>
+    <summary>Are classes taught in English or Arabic?</summary>
+    <div class="faq-body">Most studios offer both English and Arabic instruction. A handful of calligraphy-focused studios teach in Arabic only. Every listing shows its teaching language clearly.</div>
+  </details>
+  <details>
+    <summary>Can I try a class before enrolling?</summary>
+    <div class="faq-body">Most providers offer a paid trial (QAR 80–150). Ask via the provider profile page.</div>
+  </details>
+  <details>
+    <summary>What's your cancellation policy?</summary>
+    <div class="faq-body">Full refund up to 7 days before term starts. 50% up to 48 hours before. No refund after the first session. Always check each provider's policy — some are more flexible.</div>
+  </details>
+</section>
+
+<!-- ============ RELATED CATEGORIES ============ -->
+<section style="max-width:1280px;margin:60px auto 0;padding:0 24px;">
+  <h2 style="font-size:28px;margin-bottom:18px;"><span class="en-only">Related <span class="pop">categories</span></span><span class="ar-only">فئات <span class="pop">مشابهة</span></span></h2>
+  <div class="mini-rail">
+    <a href="yalla-kids-category-landing.html" class="mini-card">
+      <div class="mini-thumb" style="background:var(--teal-soft);">🎹</div>
+      <div class="mini-body"><h4>Music classes</h4><div class="mini-meta">19 providers</div></div>
+    </a>
+    <a href="yalla-kids-category-landing.html" class="mini-card">
+      <div class="mini-thumb" style="background:var(--pink-soft);">💃</div>
+      <div class="mini-body"><h4>Dance</h4><div class="mini-meta">14 providers</div></div>
+    </a>
+    <a href="yalla-kids-category-landing.html" class="mini-card">
+      <div class="mini-thumb" style="background:var(--mint-soft);">🎭</div>
+      <div class="mini-body"><h4>Theatre</h4><div class="mini-meta">6 providers</div></div>
+    </a>
+    <a href="yalla-kids-category-landing.html" class="mini-card">
+      <div class="mini-thumb" style="background:var(--sky-soft);">🔬</div>
+      <div class="mini-body"><h4>STEM</h4><div class="mini-meta">11 providers</div></div>
+    </a>
+  </div>
+</section>
+
+<div style="height:60px;"></div>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="logo">
+          <span class="en-only inline">Yalla Kids</span>
+          <span class="ar-only inline">يلا كيدز</span>
+        </div>
+        <p class="foot-about">
+          <span class="en-only inline">Qatar's kids' classes and places, one place to book. Bilingual, built in Doha.</span>
+          <span class="ar-only inline">صفوف وأماكن للأطفال في قطر في مكان واحد. بلغتين، صُنعت في الدوحة.</span>
+        </p>
+        <div class="foot-social">
+          <a href="#" aria-label="Instagram">📷</a>
+          <a href="#" aria-label="WhatsApp">💬</a>
+          <a href="#" aria-label="TikTok">🎵</a>
+          <a href="#" aria-label="Email">✉</a>
+        </div>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Classes</span><span class="ar-only inline">الصفوف</span></h5>
+        <a href="yalla-kids-classes-directory.html"><span class="en-only inline">All classes</span><span class="ar-only inline">كل الصفوف</span></a>
+        <a href="yalla-kids-classes-directory.html?cat=art"><span class="en-only inline">Art &amp; crafts</span><span class="ar-only inline">فن وحرف</span></a>
+        <a href="yalla-kids-classes-directory.html?cat=swimming"><span class="en-only inline">Swimming</span><span class="ar-only inline">سباحة</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Places</span><span class="ar-only inline">الأماكن</span></h5>
+        <a href="yalla-kids-places-directory.html"><span class="en-only inline">All places</span><span class="ar-only inline">كل الأماكن</span></a>
+        <a href="yalla-kids-places-directory.html#softplay"><span class="en-only inline">Soft plays</span><span class="ar-only inline">صالات اللعب</span></a>
+        <a href="yalla-kids-map.html"><span class="en-only inline">Map</span><span class="ar-only inline">خريطة</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">For providers</span><span class="ar-only inline">للموفرين</span></h5>
+        <a href="yalla-kids-for-providers.html"><span class="en-only inline">List a class</span><span class="ar-only inline">أدرج صفاً</span></a>
+        <a href="yalla-kids-how-it-works.html"><span class="en-only inline">How it works</span><span class="ar-only inline">كيف نعمل</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Company</span><span class="ar-only inline">الشركة</span></h5>
+        <a href="yalla-kids-about.html"><span class="en-only inline">About</span><span class="ar-only inline">من نحن</span></a>
+        <a href="yalla-kids-contact.html"><span class="en-only inline">Contact</span><span class="ar-only inline">تواصل</span></a>
+      </div>
+      <div>
+        <h5><span class="en-only inline">Legal</span><span class="ar-only inline">قانوني</span></h5>
+        <a href="yalla-kids-terms.html"><span class="en-only inline">Terms</span><span class="ar-only inline">الشروط</span></a>
+        <a href="yalla-kids-privacy.html"><span class="en-only inline">Privacy</span><span class="ar-only inline">الخصوصية</span></a>
+        <a href="yalla-kids-faq.html"><span class="en-only inline">FAQ</span><span class="ar-only inline">الأسئلة الشائعة</span></a>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>© 2026 Yalla Kids WLL · Doha, Qatar · CR #XXXXXX 🇶🇦</span>
+      <span><span class="en-only inline">Made with 💛 for Doha families</span><span class="ar-only inline">صُنعت بـ 💛 لعائلات الدوحة</span></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleLang() {
+    const html = document.documentElement;
+    if (html.dir === 'rtl') { html.dir = 'ltr'; html.lang = 'en'; }
+    else { html.dir = 'rtl'; html.lang = 'ar'; }
+  }
+  document.querySelectorAll('.view-switch span').forEach(s => {
+    s.addEventListener('click', () => {
+      document.querySelectorAll('.view-switch span').forEach(x => x.classList.remove('active'));
+      s.classList.add('active');
+    });
+  });
+</script>
+<script src="yalla-kids-shared.js"></script>
+
+<script src="yalla-kids-data.js"></script>
+<script>
+(function () {
+  var D = window.YALLA_DATA;
+  if (!D) return;
+  var params = new URLSearchParams(location.search);
+  var cat = params.get('cat') || 'art';
+
+  // Style: reuse place-card look
+  var items = D.classes.filter(function (c) { return c.category === cat; });
+  if (items.length < 3) items = D.classes.slice(0, 9);
+  items = items.slice(0, 9);
+
+  var root = document.getElementById('cat-providers');
+  if (!root) return;
+
+  // Custom prov-card style for this page — simple grid of real classes
+  root.innerHTML = items.map(function (it) {
+    var accent = ({
+      sports:'var(--lime-soft)', swim:'var(--sky-soft)', dance:'var(--pink-soft)',
+      music:'var(--lavender-soft)', art:'var(--coral-soft)', stem:'var(--teal-soft)',
+      'martial-arts':'var(--peach-soft)', equestrian:'var(--butter-soft)',
+      language:'var(--butter-soft)', drama:'var(--pink-soft)'
+    })[it.category] || 'var(--butter-soft)';
+    var emoji = ({
+      sports:'⚽', swim:'🏊', dance:'💃', music:'🎵', art:'🎨',
+      stem:'🤖', 'martial-arts':'🥋', equestrian:'🐎', language:'🗣️', drama:'🎭'
+    })[it.category] || '🎯';
+    var href = 'yalla-kids-class-detail.html?slug=' + encodeURIComponent(it.slug);
+    var tags = (it.tags || []).slice(0, 3).map(function (t) {
+      return '<span class="tag">' + D.escapeHtml(t) + '</span>';
+    }).join('');
+    var ogSrc = it.website ? D.ogImageUrl(it.website) : '';
+    var favSrc = it.website ? D.faviconUrl(it.website, 64) : '';
+    var ogImg = ogSrc
+      ? '<img src="' + D.escapeHtml(ogSrc) + '" alt="" loading="lazy" decoding="async" onerror="this.remove();" onload="this.style.opacity=1;" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .35s ease;z-index:1;" />'
+      : '';
+    var favChip = favSrc
+      ? '<img src="' + D.escapeHtml(favSrc) + '" alt="" loading="lazy" decoding="async" onerror="this.remove();" style="position:absolute;bottom:8px;right:8px;width:28px;height:28px;border-radius:50%;border:2px solid var(--ink);background:#fff;padding:3px;z-index:3;box-shadow:2px 2px 0 var(--ink);object-fit:contain;" />'
+      : '';
+    return '<a href="' + href + '" class="prov-card">' +
+      '<div class="prov-cover" style="background:' + accent + ';position:relative;overflow:hidden;">' +
+        ogImg +
+        '<span style="position:relative;z-index:2;">' + emoji + '</span>' +
+        favChip +
+      '</div>' +
+      '<div class="prov-body">' +
+        '<h3>' + D.escapeHtml(it.name_en) + '</h3>' +
+        '<div class="prov-meta">' + D.escapeHtml(it.area || 'Doha') + ' · Ages ' + D.escapeHtml(it.age_label || '') + '</div>' +
+        '<div class="prov-tags">' + tags + '</div>' +
+        '<div class="prov-price">' + D.escapeHtml(it.price_label || '—') + '<span>' + D.escapeHtml(it.category_label || '') + '</span></div>' +
+      '</div>' +
+    '</a>';
+  }).join('');
+
+  // Update subcat links to search the classes directory filtered by category
+  document.querySelectorAll('.subcat-card').forEach(function (a) {
+    a.href = 'yalla-kids-classes-directory.html?cat=' + encodeURIComponent(cat);
+  });
+
+  // Hero count + title
+  var label = (D.class_categories[cat] || cat).toString();
+  document.title = label + ' classes for kids in Qatar — Yalla Kids';
+  var h1Pop = document.querySelector('h1 .pop');
+  if (h1Pop) h1Pop.textContent = label;
+  var dek = document.querySelector('.dek');
+  if (dek) dek.textContent = 'Every vetted ' + label.toLowerCase() + ' program for kids across Doha, updated weekly. Found ' + D.classes.filter(function(c){return c.category===cat;}).length + ' providers.';
+  var stats = document.querySelectorAll('.cat-stat');
+  if (stats.length >= 4) {
+    var arr = D.classes.filter(function (c) { return c.category === cat; });
+    stats[0].textContent = '👨‍🎓 ' + arr.length + ' programs';
+    var areas = {}; arr.forEach(function (c) { if (c.area) areas[c.area] = 1; });
+    stats[1].textContent = '📍 ' + Object.keys(areas).length + ' areas';
+    var amins = arr.map(function (c) { return c.age_min; }); var amaxs = arr.map(function (c) { return c.age_max; });
+    stats[2].textContent = '👶 Ages ' + Math.min.apply(null, amins) + '–' + Math.max.apply(null, amaxs);
+    var mins = arr.map(function (c) { return c.price_min; }).filter(function (v) { return v != null; });
+    if (mins.length) stats[3].textContent = '💰 From QAR ' + Math.min.apply(null, mins);
+  }
+})();
+</script>
+
+</body>
+</html>

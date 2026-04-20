@@ -666,10 +666,24 @@
 
 
 <script src="yalla-kids-data.js"></script>
+<script src="yalla-supabase.js"></script>
 <script>
-(function () {
+(async function () {
   var D = window.YALLA_DATA;
   if (!D) { console.warn('YALLA_DATA not loaded'); return; }
+
+  // Session 1: pull live places from Supabase. Falls back to the static
+  // seed in yalla-kids-data.js if the network fetch fails, so the page
+  // always renders something.
+  if (window.YallaDB && window.YallaDB.fetchPlaces) {
+    try {
+      var live = await window.YallaDB.fetchPlaces();
+      D.places = live;
+      console.log('[yalla] loaded ' + live.length + ' places from Supabase');
+    } catch (e) {
+      console.warn('[yalla] Supabase fetch failed, using static data:', e);
+    }
+  }
 
   var grid = document.getElementById('places-grid');
   var empty = document.getElementById('empty-state');
